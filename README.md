@@ -29,8 +29,9 @@ def prompt_worker(q, server):
 
 ```
 
-
 5. Restart comfyui
+
+6. Run comfyui with enable-cors-header `python main.py --enable-cors-header` or (mac)`python main.py --force-fp16 --enable-cors-header`
 
 # Development
 
