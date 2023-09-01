@@ -55,7 +55,7 @@ For each changes, simply refresh the comfyui page to see the changes.
 
 p.s. For tailwind autocomplete, add the following to your vscode settings.json.
 
-```
+```json
 {
     "tailwindCSS.experimental.classRegex": [
         ["class\\s?:\\s?([\\s\\S]*)", "(?:\"|')([^\"']*)(?:\"|')"]
