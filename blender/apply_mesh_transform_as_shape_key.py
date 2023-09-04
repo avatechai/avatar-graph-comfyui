@@ -27,7 +27,7 @@ class ApplyMeshTransformAsShapeKey:
                 "origin_offset_y": ("FLOAT", {"default": 0, "min": -10.0, "max": 10.0, "step": 0.01, "display": "number"}),
 
                 "transform_radius": ("FLOAT", {"default": 1.0, "min": 0, "max": 1, "step": 0.01, "display": "number"}),
-                "falloff": ("FLOAT", {"default": 0.2, "min": -10.0, "max": 10.0, "step": 0.01, "display": "number"}),
+                "falloff": ("FLOAT", {"default": 0, "min": -10.0, "max": 10.0, "step": 0.01, "display": "number"}),
             },
         }
 
