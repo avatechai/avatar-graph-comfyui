@@ -3,21 +3,21 @@ class VECTOR3D:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "x": ("INT", {
+                "x": ("FLOAT", {
                     "default": 0, 
                     "min": -1024,
                     "max": 1024,
                     "step": 1,
                     "display": "number"
                 }),
-                "y": ("INT", {
+                "y": ("FLOAT", {
                     "default": 0, 
                     "min": -1024,
                     "max": 1024,
                     "step": 1,
                     "display": "number"
                 }),
-                "z": ("INT", {
+                "z": ("FLOAT", {
                     "default": 0, 
                     "min": -1024,
                     "max": 1024,
