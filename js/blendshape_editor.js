@@ -45,7 +45,7 @@ app.registerExtension({
         button(
           {
             class: () =>
-              'absolute left-0 top-0 z-[100] pointer-events-auto ' + (showEditor.val ? '' : 'hidden'),
+              'px-4 py-2 rounded-md absolute left-0 top-0 z-[100] pointer-events-auto ' + (showEditor.val ? '' : 'hidden'),
             onclick: () => {
               console.log('close');
               showEditor.val = false;
@@ -72,7 +72,7 @@ app.registerExtension({
     if (nodeData.name === 'ExportGLTF') {
       addMenuHandler(nodeType, function (_, options) {
         const output = app.nodeOutputs[this.id + ""];
-        if (!output.gltfFilename) return;
+        if (!output || !output.gltfFilename) return;
 
         const gltfFilename = window.location.protocol + '//' + api.api_host + api.api_base + (`/view?filename=${output.gltfFilename[0]}`) 
 
