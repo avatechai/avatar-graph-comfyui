@@ -36,11 +36,11 @@ class Plane:
         mesh.from_pydata(coords,[],[(0,1,3,2)])
 
         # Create a new object with the mesh
-        object = bpy.data.objects.new(name="PlaneObject", object_data=mesh)
+        object_a = bpy.data.objects.new(name="PlaneObject", object_data=mesh)
         bpy.ops.object.select_all(action='DESELECT')
-        bpy.context.collection.objects.link(object)
-        bpy.context.view_layer.objects.active = object
-        object.select_set(True)
+        bpy.context.collection.objects.link(object_a)
+        bpy.context.view_layer.objects.active = object_a
+        object_a.select_set(True)
 
         # Invert the Y axis of the UV to fix the vertical inversion
         bpy.ops.transform.resize(value=(-1, -1, 1))
@@ -61,7 +61,9 @@ class Plane:
             bpy.ops.mesh.subdivide(number_cuts=division)
             bpy.ops.object.mode_set(mode=original_mode)
 
-        return ([object],)
+        sk_basis = object_a.shape_key_add(name='Basis')
+
+        return ([object_a],)
 
 NODE_CLASS_MAPPINGS = {
     "Plane": Plane
