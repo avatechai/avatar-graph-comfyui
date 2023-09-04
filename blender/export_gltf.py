@@ -36,15 +36,11 @@ class ExportGLTF():
         
         # deselect all objects
         override = bpy.context.copy()
-        # print(override)
-        # override["selected_objects"] = list(bpy.context.scene.objects)
-        print(bpy_objects)
         override["selected_objects"] = list(bpy_objects)
-        # override["active_object"] = list(context.scene.objects)[0]
         override["active_object"] = list(bpy_objects)[0]
-        # override["active_object"] = None
-        # override["window"] = {}
-        # set count to the file count
+
+        for obj in bpy_objects:
+            obj.select_set(True)
 
         filepath = self.output_dir + "/" + filename + '.' + ("glb" if model_type == "GLB" else "gltf")
 
@@ -57,7 +53,7 @@ class ExportGLTF():
             filepath = self.output_dir + "/" + filename + '_' + str(count) + '.' + ("glb" if model_type == "GLB" else "gltf")
         
         with bpy.context.temp_override(**override):
-            bpy.ops.export_scene.gltf(filepath=filepath, export_format=model_type)
+            bpy.ops.export_scene.gltf(filepath=filepath, export_format=model_type, use_selection=True)
             print(filepath)
 
         return { "ui" : { "gltfFilename": { filepath.replace(f"{self.output_dir}/", "") } } }
