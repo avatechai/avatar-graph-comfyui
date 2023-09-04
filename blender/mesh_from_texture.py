@@ -7,8 +7,6 @@ class MeshFromTexture:
         return {
             "required": {
                 "image": ("IMAGE",),
-                # "min_threshold": ("INT", {"default": 50, "min": 0, "max": 1024}),
-                # "max_threshold": ("INT", {"default": 150, "min": 0, "max": 1024}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}), # For disabling cache
             },
         }
@@ -17,8 +15,6 @@ class MeshFromTexture:
     RETURN_NAMES = ("image","bpy_objs")
 
     FUNCTION = "process"
-
-    #OUTPUT_NODE = False
 
     CATEGORY = "mesh"
 
@@ -64,8 +60,6 @@ class MeshFromTexture:
             face = list(range(len(ordered_vertices)))  # Create a face from the vertices
 
             mesh.from_pydata(ordered_vertices, [], [face])  # Create the mesh from the vertices and face
-
-
 
             # Create a default shape key for the mesh
             sk_basis = obj.shape_key_add(name='Basis')
