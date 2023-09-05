@@ -17,13 +17,8 @@ class GroupObject():
     CATEGORY = "mesh"
 
     def process(self, bpy_objs_target, bpy_objs_target_2):
-        import global_bpy
-        bpy = global_bpy.get_bpy()
-
-        target_object = bpy_objs_target[0]
-        target_object2 = bpy_objs_target_2[0]
-
-        return ([target_object],)
+        combined_list = bpy_objs_target + bpy_objs_target_2
+        return (combined_list,)
 
 
 NODE_CLASS_MAPPINGS = {
