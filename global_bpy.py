@@ -12,7 +12,8 @@ def reset_bpy():
     # global_bpy.ops.wm.read_factory_settings(use_empty=True)
 
     # enter object mode
-    bpy.ops.object.mode_set(mode='OBJECT')
+    if bpy.context.mode != 'OBJECT':
+        bpy.ops.object.mode_set(mode='OBJECT')
 
     # Delete all objects
     bpy.ops.object.select_all(action='DESELECT')
