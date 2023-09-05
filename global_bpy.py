@@ -11,6 +11,10 @@ def reset_bpy():
     # not using this cause this cause seg fault frequently
     # global_bpy.ops.wm.read_factory_settings(use_empty=True)
 
+    # check if there's no object, return
+    if len(bpy.data.objects) == 0:
+        return
+
     # enter object mode
     if bpy.context.mode != 'OBJECT':
         bpy.ops.object.mode_set(mode='OBJECT')
