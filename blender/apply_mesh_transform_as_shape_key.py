@@ -102,8 +102,8 @@ class ApplyMeshTransformAsShapeKey:
             vec.y *= scale_y + (abs(scale_y - 1) * weight)
 
             # # Offset vector
-            vec.x += offset_x * weight
-            vec.y += offset_y * weight
+            vec.x += offset_x + (abs(scale_x - 1) * weight)
+            vec.y += offset_y + (abs(scale_y - 1) * weight)
 
             # Rotate vector
             # rotate_right_rad = math.radians(rotate_right)
