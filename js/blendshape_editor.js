@@ -80,7 +80,7 @@ app.registerExtension({
           content: 'Save file',
           callback: () => {
             const a = document.createElement('a');
-            let url = new URL(this.gltfFilename);
+            let url = new URL(gltfFilename);
             url.searchParams.delete('preview');
             a.href = url;
             a.setAttribute(
