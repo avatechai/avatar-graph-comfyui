@@ -4,7 +4,11 @@ class Texture:
         return {
             "required": {
                 "bpy_objs": ("BPY_OBJS",),
-                "texture": ("IMAGE",)
+                "texture": ("IMAGE",),
+                "texture_name": ("STRING", {
+                    "multiline": False,
+                    "default": "my_image"
+                }),
             },
         }
 
@@ -17,7 +21,7 @@ class Texture:
 
     CATEGORY = "mesh"
 
-    def process(self, bpy_objs, texture):
+    def process(self, bpy_objs, texture, texture_name):
         import numpy as np
         import global_bpy
         bpy = global_bpy.get_bpy()
@@ -29,7 +33,7 @@ class Texture:
         texture = np.flipud(texture)
         
         # Create an image with the required dimensions
-        img = bpy.data.images.new('my_image', width=texture.shape[1], height=texture.shape[0])
+        img = bpy.data.images.new(texture_name, width=texture.shape[1], height=texture.shape[0])
 
         # If there is no alpha channel, append one full of 1's
         if texture.shape[2] == 3:
