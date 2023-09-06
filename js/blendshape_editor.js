@@ -34,6 +34,23 @@ app.registerExtension({
   init(app) {},
 
   async setup() {
+
+    const graphCanvas = document.getElementById('graph-canvas');
+    graphCanvas.addEventListener('keydown', (event) => {
+      if (event.key === 'b') {
+        const currentGraph = app.graph.list_of_graphcanvas[0] 
+        if (currentGraph.selected_nodes.length !== 1) {
+          Object.values(currentGraph.selected_nodes).forEach(targetNode => {
+            if (targetNode.mode === 4) targetNode.mode = 0; else targetNode.mode = 4;
+          });
+        } else {
+          const targetNode = currentGraph.current_node
+          if (targetNode.mode === 4) targetNode.mode = 0; else targetNode.mode = 4;
+        }
+        app.graph.change();
+      }
+    });
+
     const { button, iframe, div } = van.tags;
 
     const AvatarEditor = () => {
