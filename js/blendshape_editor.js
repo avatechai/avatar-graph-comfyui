@@ -1,16 +1,15 @@
-
 /** @typedef {import('../../../web/types/comfy.js').ComfyExtension} ComfyExtension*/
 /** @typedef {import('../../../web/scripts/app.js').ComfyApp} ComfyApp*/
-/** @typedef {import('../../../web/scripts/api.js').ComfyApi} API*/
+/** @typedef {import('../../../web/scripts/api.js').api} API*/
 
-import { app } from '../../scripts/app.js';
-import { api } from '../../scripts/api.js';
+import { app as _app } from '../../scripts/app.js';
+import { api as _api } from '../../scripts/api.js';
 
 /** @type {ComfyApp} */
-const app = app
+const app = _app
 
 /** @type {API} */
-const api = api
+const api = _api
 
 import * as _van from 'https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.1.3.min.js';
 /** @type {import('./van-1.1.3.min.js').Van} */
