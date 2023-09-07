@@ -10,10 +10,10 @@ class SAM_Predict:
             "required": {
                 "image": ("IMAGE",),
                 "embeddings": ("EMBEDDINGS",),
-                "predictor": ("SAMPREDICTOR",)
+                "predictor": ("SAMPREDICTOR",),
+                "prompt": ("SAM_PROMPT", )
             },
             "optional": {
-                "point_1": ("VECTOR3D",),
                 "mask": ("IMAGE",),
             }
         }
@@ -25,7 +25,7 @@ class SAM_Predict:
 
     CATEGORY = "image"
 
-    def segment(self, image, embeddings, predictor, point_1=None, mask=None):
+    def segment(self, image, embeddings, predictor, prompt, mask=None):
         image_embedding_list = embeddings['image_embedding']
         shape = tuple(embeddings['shape'])
         input_size = tuple(embeddings['input_size'])
@@ -44,15 +44,26 @@ class SAM_Predict:
         predictor.is_image_set = True
         predictor.original_size = image[0].shape[:2]
 
-        if point_1 != None:
-            x, y, z = point_1
-            point_coords = np.array([[x, y]])
-            point_labels = np.array([1])
-            masks, iou_predictions, low_res_masks = predictor.predict(
-                point_coords=point_coords,
-                point_labels=point_labels,
-            )
-        elif mask != None:
+        # prompt = [{"x":364,"y":153,"label":1},{"x":296,"y":189,"label":1},{"x":277,"y":246,"label":1}]
+
+        # if point_1 != None:
+            # x, y, z = point_1
+
+        # point_coords = np.array([[x, y]])
+        # point_labels = np.array([1])
+
+        if prompt == None or len(prompt) == 0:
+            return (image, image, None)
+
+        point_coords = np.array([[p['x'], p['y']] for p in prompt])
+        point_labels = np.array([p['label'] for p in prompt])
+
+        masks, iou_predictions, low_res_masks = predictor.predict(
+            point_coords=point_coords,
+            point_labels=point_labels,
+        )
+
+        if mask != None:
             # scale the mask to 256x256
             cv2_mask = cv2.resize(np.array(mask[0]), (256, 256))
             cv2_mask = cv2_mask[np.newaxis, :, :]
