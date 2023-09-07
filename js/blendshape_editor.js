@@ -6,10 +6,10 @@ import { app as _app } from '../../scripts/app.js';
 import { api as _api } from '../../scripts/api.js';
 
 /** @type {ComfyApp} */
-const app = _app
+const app = _app;
 
 /** @type {API} */
-const api = _api
+const api = _api;
 
 import * as _van from 'https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.1.3.min.js';
 /** @type {import('./van-1.1.3.min.js').Van} */
@@ -18,15 +18,6 @@ const van = _van.default;
 function addMenuHandler(nodeType, cb) {
   const getOpts = nodeType.prototype.getExtraMenuOptions;
   nodeType.prototype.getExtraMenuOptions = function () {
-    const r = getOpts.apply(this, arguments);
-    cb.apply(this, arguments);
-    return r;
-  };
-}
-
-function addExtraButton(nodeType, cb) {
-  const getOpts = nodeType.prototype.createWidget;
-  nodeType.prototype.createWidget = function () {
     const r = getOpts.apply(this, arguments);
     cb.apply(this, arguments);
     return r;
@@ -70,7 +61,22 @@ function openInAvatechEditor(url, fileName) {
   );
 }
 
-app.registerExtension({
+/** @type {ComfyExtension} */
+const ext = {
+  getCustomWidgets(app) {
+    return {
+      SAM_PROMPTS(node, inputName, inputData, app) {
+        const btn = node.addWidget('button', 'Edit prompt','', () => {
+          showMyImageEditor(node);
+        });
+        btn.serialize = false;
+
+        return {
+          widget: btn,
+        };
+      },
+    };
+  },
   name: 'Avatech.Avatar.BlendshapeEditor',
   init(app) {},
 
@@ -105,6 +111,8 @@ app.registerExtension({
         event.preventDefault();
         document.getElementById('queue-button').click();
       }
+    }, {
+      capture: true,
     });
 
     const { button, iframe, div, img } = van.tags;
@@ -326,32 +334,35 @@ app.registerExtension({
         });
       });
     } else if (nodeData.name === 'SAM_Prompt_Image') {
+      nodeData.input.required.sam = ['SAM_PROMPTS'];
       nodeData.input.required.upload = ['IMAGEUPLOAD'];
       // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
-      addExtraButton(nodeType, function () {
-
-      });
       addMenuHandler(nodeType, function (_, options) {
         options.unshift({
           content: 'Open In Points Editor (Local)',
           callback: () => {
-            showImageEditor.val = true;
-
-            imagePrompts.val = JSON.parse(
-              this.widgets.find((x) => x.name === 'image_prompts_json').value,
-            );
-            imageUrl.val = api.apiURL(
-              `/view?filename=${encodeURIComponent(
-                this.widgets.find((x) => x.name === 'image').value,
-              )}&type=input&subfolder=`,
-            );
-            targetWidget = this;
-            console.log(imageUrl.val, api.api_base);
-
-            console.log(this);
+            showMyImageEditor(this)
           },
         });
       });
     }
   },
-});
+};
+
+function showMyImageEditor(node) {
+  showImageEditor.val = true;
+
+  imagePrompts.val = JSON.parse(
+    node.widgets.find((x) => x.name === 'image_prompts_json').value,
+  );
+  imageUrl.val = api.apiURL(
+    `/view?filename=${encodeURIComponent(
+      node.widgets.find((x) => x.name === 'image').value,
+    )}&type=input&subfolder=`,
+  );
+  targetWidget = node;
+  // console.log(imageUrl.val, api.api_base);
+  // console.log(this);
+}
+
+app.registerExtension(ext);
