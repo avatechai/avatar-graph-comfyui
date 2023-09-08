@@ -5,6 +5,7 @@
 @description: Include nodes for sam + bpy operation, that allows workflow creations for generative 2d character rig.
 """
 
+import inspect
 import os
 import sys
 import importlib
@@ -51,9 +52,20 @@ for path in paths:
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
 
+import blender_node
+base_class = blender_node.ObjectOps
+
 # Import all the modules and append their mappings
 for file in files:
     module = importlib.import_module(file)
+
+    for name, obj in inspect.getmembers(module):
+        if inspect.isclass(obj):
+            if issubclass(obj, base_class) and obj != base_class:
+                NODE_CLASS_MAPPINGS.update(obj.NODE_CLASS_MAPPINGS())
+                NODE_DISPLAY_NAME_MAPPINGS.update(
+                    obj.NODE_DISPLAY_NAME_MAPPINGS())
+
     if hasattr(module, 'NODE_CLASS_MAPPINGS'):
         NODE_CLASS_MAPPINGS.update(module.NODE_CLASS_MAPPINGS)
     if hasattr(module, 'NODE_DISPLAY_NAME_MAPPINGS'):
