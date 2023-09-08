@@ -9,6 +9,7 @@ import os
 import sys
 import importlib
 import subprocess
+from folder_paths import add_model_folder_path
 
 ag_path = os.path.join(os.path.dirname(__file__))
 
@@ -31,6 +32,13 @@ def get_python_files(path):
 def append_to_sys_path(path):
     if path not in sys.path:
         sys.path.append(path)
+
+def create_sam_model_dir():
+    model_dir = os.path.join(ag_path, "../../models/sam")
+    if not os.path.isdir(model_dir):
+        os.makedirs(model_dir)
+    add_model_folder_path('sam', model_dir)
+create_sam_model_dir()
 
 paths = ['blender', 'sam', 'common']
 files = []
