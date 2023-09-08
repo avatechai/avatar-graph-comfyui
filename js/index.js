@@ -40,6 +40,20 @@ function openInAvatechEditor(url, fileName) {
   );
 }
 
+function showMyImageEditor(node) {
+  showImageEditor.val = true;
+
+  imagePrompts.val = JSON.parse(
+    node.widgets.find((x) => x.name === 'image_prompts_json').value,
+  );
+  imageUrl.val = api.apiURL(
+    `/view?filename=${encodeURIComponent(
+      node.widgets.find((x) => x.name === 'image').value,
+    )}&type=input&subfolder=`,
+  );
+  targetNode.val = node;
+}
+
 /** @typedef {import('../../../web/types/comfy.js').ComfyExtension} ComfyExtension*/
 /** @type {ComfyExtension} */
 const ext = {
@@ -57,7 +71,7 @@ const ext = {
       },
     };
   },
-  
+
   name: 'Avatech.Avatar.BlendshapeEditor',
 
   init(app) {},
@@ -163,21 +177,5 @@ const ext = {
     }
   },
 };
-
-function showMyImageEditor(node) {
-  showImageEditor.val = true;
-
-  imagePrompts.val = JSON.parse(
-    node.widgets.find((x) => x.name === 'image_prompts_json').value,
-  );
-  imageUrl.val = api.apiURL(
-    `/view?filename=${encodeURIComponent(
-      node.widgets.find((x) => x.name === 'image').value,
-    )}&type=input&subfolder=`,
-  );
-  targetNode.val = node;
-  // console.log(imageUrl.val, api.api_base);
-  // console.log(this);
-}
 
 app.registerExtension(ext);
