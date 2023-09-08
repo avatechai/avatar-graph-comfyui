@@ -1,18 +1,19 @@
 class MeshFromTexture:
     def __init__(self):
         pass
-    
+
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "image": ("IMAGE",),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}), # For disabling cache
+                # For disabling cache
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
         }
 
-    RETURN_TYPES = ("IMAGE","BPY_OBJS")
-    RETURN_NAMES = ("image","bpy_objs")
+    RETURN_TYPES = ("IMAGE", "BPY_OBJS")
+    RETURN_NAMES = ("image", "bpy_objs")
 
     FUNCTION = "process"
 
@@ -29,10 +30,17 @@ class MeshFromTexture:
 
         gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
         gray = (gray * 255).astype(np.uint8)
-        # edges = cv2.Canny(gray, min_threshold, max_threshold)
 
         # Find contours
-        contours, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(
+            gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        # Get the largest contour
+        areas = [cv2.contourArea(contour) for contour in contours]
+
+        max_area_index = areas.index(max(areas))
+        largest_contour = contours[max_area_index]
+        contours = [largest_contour]
 
         def normalize_vertices(vertices, max_value):
             return vertices / float(max_value) * 2 - 1
@@ -45,42 +53,43 @@ class MeshFromTexture:
         for contour in contours:
             normalized_contour = []
             for vertex in contour:
-                normalized_vertex = [normalize_vertices(vertex[0][0], width), normalize_vertices(vertex[0][1], height) * -1]
+                normalized_vertex = [normalize_vertices(
+                    vertex[0][0], width), normalize_vertices(vertex[0][1], height) * -1]
                 normalized_contour.append(normalized_vertex)
-            normalized_contours.append(np.array(normalized_contour, dtype=np.float32))
+            normalized_contours.append(
+                np.array(normalized_contour, dtype=np.float32))
 
         meshes = []
         # print(len(normalized_contours))
         for i, contour in enumerate(normalized_contours):
-            mesh = bpy.data.meshes.new(name=f"NewMesh{i}")  # Create a new mesh for each contour
-            obj = bpy.data.objects.new(f"NewObject{i}", mesh)  # Create a new object for each mesh
-            bpy.context.collection.objects.link(obj)  # Link the object to the current collection
+            # Create a new mesh for each contour
+            mesh = bpy.data.meshes.new(name=f"NewMesh{i}")
+            # Create a new object for each mesh
+            obj = bpy.data.objects.new(f"NewObject{i}", mesh)
+            # Link the object to the current collection
+            bpy.context.collection.objects.link(obj)
 
-            ordered_vertices = [(*vertex, 0) for vertex in contour]  # Add a z coordinate to each vertex
-            face = list(range(len(ordered_vertices)))  # Create a face from the vertices
+            # Add a z coordinate to each vertex
+            ordered_vertices = [(*vertex, 0) for vertex in contour]
+            # Create a face from the vertices
+            face = list(range(len(ordered_vertices)))
 
-            mesh.from_pydata(ordered_vertices, [], [face])  # Create the mesh from the vertices and face
+            # Create the mesh from the vertices and face
+            mesh.from_pydata(ordered_vertices, [], [face])
 
             # Create a default shape key for the mesh
             sk_basis = obj.shape_key_add(name='Basis')
 
             meshes.append(obj)  # Add the object to the list of meshes
 
-        # Convert edges back to an image
-        # image_from_edges = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)
-        # image_from_edges = image_from_edges.astype(np.float32)
-        # image_from_edges = [torch.from_numpy(image_from_edges)]
-
         # Draw contours on the original image
         if not image.flags['C_CONTIGUOUS']:
             image = np.ascontiguousarray(image)
         cv2.drawContours(image, contours, -1, (0, 255, 0), 3)
 
-        # print(image, meshes)
-
         # Convert image back to tensor
         image = [torch.from_numpy(image)]
-        return (image,meshes)
+        return (image, meshes)
 
 
 # A dictionary that contains all nodes you want to export with their names
