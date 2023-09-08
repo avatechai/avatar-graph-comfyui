@@ -8,7 +8,7 @@ This introduce a custom workflow on top of comfyui built for avatar-graph.
 
 2. `git clone https://github.com/avatechgg/avatar-graph-comfyui.git`
 
-3. Install deps `python -m pip install -r requirements.txt`
+3. Install deps `cd avatar-graph-comfyui && python -m pip install -r requirements.txt`
 
 4. Navigate to in your comfyui installation folder, open `comfyui/main.py` and add the following lines:
 ```py
