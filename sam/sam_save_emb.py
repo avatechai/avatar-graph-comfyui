@@ -33,6 +33,7 @@ class SAM_Save_Embedding:
 
     def process(self, embeddings, filename, write_mode):
         import json
+        import numpy as np
 
         filepath = self.output_dir + "/" + filename + '.json'
 
@@ -45,7 +46,8 @@ class SAM_Save_Embedding:
             filepath = self.output_dir + "/" + filename + '_' + str(count) + '.json'
 
         # print(embeddings)
-        embeddings['image_embedding'] = embeddings['image_embedding'].tolist()
+        if isinstance(embeddings['image_embedding'], np.ndarray):
+            embeddings['image_embedding'] = embeddings['image_embedding'].tolist()
         with open(filepath, 'w') as f:
             json.dump(embeddings, f)
         
