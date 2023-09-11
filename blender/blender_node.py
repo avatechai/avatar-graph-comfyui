@@ -91,25 +91,24 @@ class EditOps(ObjectOps):
 
 
 def map_args(bpy, func):
-    print(func, type(func))
+    # print(func, type(func))
 
-    if str(type(func)) == "<class 'bpy_func'>":
-        func = func.__init__
-        print(func)
-        print(dir(func))
+    # bpy.context.object.vertex_groups.new
+    # if str(type(func)) == "<class 'bpy_func'>":
+    #     func = func.__init__
+    #     print(func)
+    #     print(dir(func))
 
-        if callable(func):
-            sig = inspect.signature(func)
-            print(sig)
-            args_dict = {
-                name: param.default
-                for name, param in sig.parameters.items()
-                if param.default is not inspect.Parameter.empty
-            }
-            print(args_dict)
-            return args_dict
-
-    
+    #     if callable(func):
+    #         sig = inspect.signature(func)
+    #         print(sig)
+    #         args_dict = {
+    #             name: param.default
+    #             for name, param in sig.parameters.items()
+    #             if param.default is not inspect.Parameter.empty
+    #         }
+    #         print(args_dict)
+    #         return args_dict
 
     # if isinstance(func, bpy.types.Function):
     #     print('is class')
@@ -179,7 +178,7 @@ def print_blender_functions(path):
 def create_ops_class(cls, path, name=None):
     node_name = snake_to_camel(
         name if name is not None else path.split('.')[-1])
-    print(node_name)
+    # print(node_name)
     return type(
         node_name, (cls, object),
         {
