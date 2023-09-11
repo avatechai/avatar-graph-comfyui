@@ -1,7 +1,7 @@
 import blender_node
 
 
-class CreateVertexGroup(blender_node.EditOps):
+class VertexGroupNewWithName(blender_node.EditOps):
     EXTRA_INPUT_TYPES = {
         "name": ("STRING", {
             "multiline": False,

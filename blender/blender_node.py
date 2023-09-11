@@ -26,15 +26,13 @@ class ObjectOps:
     def INPUT_TYPES(cls):
         import global_bpy
         bpy = global_bpy.get_bpy()
-        # print(cls.BASE_INPUT_TYPES)
-        # print(cls.EXTRA_INPUT_TYPES)
         result = {
-            "required": {
+            "required": {},
+            "optional": {
                 **cls.get_base_input_types(bpy),
                 **cls.get_extra_input_types(bpy)
             }
         }
-        # print(result)
         return result
 
     @classmethod
@@ -61,7 +59,10 @@ class ObjectOps:
         results = self.blender_process(bpy, **props)
 
         if results is None:
-            return (props["BPY_OBJ"], )
+            if props.get("BPY_OBJ" is not None):
+                return (props["BPY_OBJ"], )
+            else:
+                return (bpy.context.view_layer.objects.active, )
 
         return results
 
@@ -92,38 +93,22 @@ class EditOps(ObjectOps):
 
 def map_args(bpy, func):
     # print(func, type(func))
-
-    # bpy.context.object.vertex_groups.new
-    # if str(type(func)) == "<class 'bpy_func'>":
-    #     func = func.__init__
-    #     print(func)
-    #     print(dir(func))
-
-    #     if callable(func):
-    #         sig = inspect.signature(func)
-    #         print(sig)
-    #         args_dict = {
-    #             name: param.default
-    #             for name, param in sig.parameters.items()
-    #             if param.default is not inspect.Parameter.empty
-    #         }
-    #         print(args_dict)
-    #         return args_dict
-
-    # if isinstance(func, bpy.types.Function):
-    #     print('is class')
-    #     func = func.__init__
-
     rna_type = func.get_rna_type()
     args_dict = {}
     for prop in rna_type.properties:
         if prop.is_readonly:
             continue
         prop_type = str(prop.type)
+        # print(prop.identifier, prop_type, prop, )
         prop_dict = {}
         if prop_type in ["INT", "FLOAT"]:
-            prop_dict.update(
-                {"min": prop.hard_min, "max": prop.hard_max, "default": prop.default})
+            if not prop.is_array:
+                prop_dict.update(
+                    {"min": prop.hard_min, "max": prop.hard_max, "default": prop.default})
+            else:
+                prop_type = "B_VECTOR" + str(prop.array_length)
+                # prop_dict.update(
+                #     {"default": prop.default_array})
         elif prop_type == "BOOLEAN":
             prop_dict.update({"default": prop.default})
         elif prop_type == "STRING":
@@ -187,6 +172,26 @@ def create_ops_class(cls, path, name=None):
                     **map_args(bpy, get_nested_attr(bpy, path))}
             ),
             'blender_process': lambda self, bpy, BPY_OBJ, **props:
-                (get_nested_attr(bpy, path)(**props), None)[1]
+                (None, get_nested_attr(bpy, path)(**props))[0]
+        }
+    )
+
+
+def create_primitive_shape_class(cls, path, name=None):
+    node_name = snake_to_camel(
+        name if name is not None else path.split('.')[-1])
+    # print(node_name)
+    return type(
+        node_name, (cls, object),
+        {
+            'BASE_INPUT_TYPES': {
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+            },
+            'get_extra_input_types': classmethod(
+                lambda cls, bpy: {
+                    **map_args(bpy, get_nested_attr(bpy, path))}
+            ),
+            'blender_process': lambda self, bpy, **props:
+                (print(props), get_nested_attr(bpy, path)(), None)[2]
         }
     )
