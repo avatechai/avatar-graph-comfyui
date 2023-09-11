@@ -27,18 +27,23 @@ ag_path = os.path.join(os.path.dirname(__file__))
 
 # ensure_pip_packages()
 
+
 def get_python_files(path):
     return [f[:-3] for f in os.listdir(path) if f.endswith('.py')]
+
 
 def append_to_sys_path(path):
     if path not in sys.path:
         sys.path.append(path)
+
 
 def create_sam_model_dir():
     model_dir = os.path.join(ag_path, "../../models/sam")
     if not os.path.isdir(model_dir):
         os.makedirs(model_dir)
     add_model_folder_path('sam', model_dir)
+
+
 create_sam_model_dir()
 
 paths = ['blender', 'sam', 'common']
@@ -65,6 +70,15 @@ for file in files:
                 NODE_CLASS_MAPPINGS.update(obj.NODE_CLASS_MAPPINGS())
                 NODE_DISPLAY_NAME_MAPPINGS.update(
                     obj.NODE_DISPLAY_NAME_MAPPINGS())
+
+    if (hasattr(module, 'BLENDER_NODES')):
+        for node in module.BLENDER_NODES:
+            # print(node)
+            # NODE_CLASS_MAPPINGS.update({node: module.BLENDER_NODES[node]})
+            # NODE_DISPLAY_NAME_MAPPINGS.update({node: node})
+            NODE_CLASS_MAPPINGS.update(node.NODE_CLASS_MAPPINGS())
+            NODE_DISPLAY_NAME_MAPPINGS.update(
+                node.NODE_DISPLAY_NAME_MAPPINGS())
 
     if hasattr(module, 'NODE_CLASS_MAPPINGS'):
         NODE_CLASS_MAPPINGS.update(module.NODE_CLASS_MAPPINGS)

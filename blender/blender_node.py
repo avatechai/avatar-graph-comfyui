@@ -1,3 +1,5 @@
+import inspect
+import re
 BPY_OBJS = "BPY_OBJS"
 BPY_OBJ = "BPY_OBJ"
 
@@ -5,7 +7,16 @@ BPY_OBJS_TYPE = {
     BPY_OBJS: (BPY_OBJS,),
 }
 
+
 class ObjectOps:
+    @classmethod
+    def get_extra_input_types(cls, bpy):
+        return cls.EXTRA_INPUT_TYPES
+
+    @classmethod
+    def get_base_input_types(cls, bpy):
+        return cls.BASE_INPUT_TYPES
+
     EXTRA_INPUT_TYPES = {}
     BASE_INPUT_TYPES = {
         "BPY_OBJ": ("BPY_OBJ",)
@@ -13,14 +24,17 @@ class ObjectOps:
 
     @classmethod
     def INPUT_TYPES(cls):
+        import global_bpy
+        bpy = global_bpy.get_bpy()
         # print(cls.BASE_INPUT_TYPES)
         # print(cls.EXTRA_INPUT_TYPES)
         result = {
             "required": {
-                **cls.BASE_INPUT_TYPES,
-                **cls.EXTRA_INPUT_TYPES
+                **cls.get_base_input_types(bpy),
+                **cls.get_extra_input_types(bpy)
             }
         }
+        # print(result)
         return result
 
     @classmethod
@@ -33,7 +47,7 @@ class ObjectOps:
     def NODE_DISPLAY_NAME_MAPPINGS(cls):
         import re
         return {
-            cls.__name__: re.sub("([a-z])([A-Z])","\g<1> \g<2>",cls.__name__)
+            cls.__name__: re.sub("([a-z])([A-Z])", "\g<1> \g<2>", cls.__name__)
         }
 
     RETURN_TYPES = ("BPY_OBJ",)
@@ -74,3 +88,106 @@ class EditOps(ObjectOps):
             return (props["BPY_OBJ"], )
 
         return results
+
+
+def map_args(bpy, func):
+    print(func, type(func))
+
+    if str(type(func)) == "<class 'bpy_func'>":
+        func = func.__init__
+        print(func)
+        print(dir(func))
+
+        if callable(func):
+            sig = inspect.signature(func)
+            print(sig)
+            args_dict = {
+                name: param.default
+                for name, param in sig.parameters.items()
+                if param.default is not inspect.Parameter.empty
+            }
+            print(args_dict)
+            return args_dict
+
+    
+
+    # if isinstance(func, bpy.types.Function):
+    #     print('is class')
+    #     func = func.__init__
+
+    rna_type = func.get_rna_type()
+    args_dict = {}
+    for prop in rna_type.properties:
+        if prop.is_readonly:
+            continue
+        prop_type = str(prop.type)
+        prop_dict = {}
+        if prop_type in ["INT", "FLOAT"]:
+            prop_dict.update(
+                {"min": prop.hard_min, "max": prop.hard_max, "default": prop.default})
+        elif prop_type == "BOOLEAN":
+            prop_dict.update({"default": prop.default})
+        elif prop_type == "STRING":
+            prop_dict.update(
+                {"default": prop.default, "multiline": False})
+        elif prop_type == "ENUM":
+            enum_items = [item.identifier for item in prop.enum_items]
+            args_dict[prop.identifier] = (enum_items,)
+
+            # print(enum_items)
+
+        if args_dict.get(prop.identifier) is None:
+            args_dict[prop.identifier] = (prop_type, prop_dict)
+
+    # print(args_dict)
+    return args_dict
+
+
+def camel_to_snake(name):
+    name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+
+
+def snake_to_camel(snake_str):
+    components = snake_str.split('_')
+    # capitalize the first letter of each component and join them together
+    camel_str = ''.join(x.title() for x in components)
+    return camel_str
+
+
+def get_nested_attr(obj, attr_str):
+    attrs = attr_str.split('.')
+    for attr in attrs:
+        obj = getattr(obj, attr)
+    return obj
+
+
+def print_blender_functions(path):
+    import sys
+    import os
+
+    ag_path = os.path.join(os.path.dirname(__file__), '../')
+    if ag_path not in sys.path:
+        sys.path.append(ag_path)
+
+    import global_bpy
+    bpy = global_bpy.get_bpy()
+
+    print(dir(get_nested_attr(bpy, path)), type(get_nested_attr(bpy, path)))
+
+
+def create_ops_class(cls, path, name=None):
+    node_name = snake_to_camel(
+        name if name is not None else path.split('.')[-1])
+    print(node_name)
+    return type(
+        node_name, (cls, object),
+        {
+            'get_extra_input_types': classmethod(
+                lambda cls, bpy: {
+                    **map_args(bpy, get_nested_attr(bpy, path))}
+            ),
+            'blender_process': lambda self, bpy, BPY_OBJ, **props:
+                (get_nested_attr(bpy, path)(**props), None)[1]
+        }
+    )
