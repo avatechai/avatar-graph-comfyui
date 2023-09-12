@@ -9,6 +9,7 @@ object_api = ['add', 'add_named', 'align', 'anim_transforms_to_deltas', 'armatur
 create_primitive_shape_api = ['primitive_circle_add', 'primitive_cone_add', 'primitive_cube_add', 'primitive_cube_add_gizmo',
                               'primitive_cylinder_add', 'primitive_grid_add', 'primitive_ico_sphere_add', 'primitive_monkey_add', 'primitive_plane_add', 'primitive_torus_add', 'primitive_uv_sphere_add',]
 
+transfrom_api = ['bbone_resize', 'bend', 'create_orientation', 'delete_orientation', 'edge_bevelweight', 'edge_crease', 'edge_slide', 'from_gizmo', 'mirror', 'push_pull', 'resize', 'rotate', 'rotate_normal', 'select_orientation', 'seq_slide', 'shear', 'shrink_fatten', 'skin_resize', 'tilt', 'tosphere', 'trackball', 'transform', 'translate', 'vert_crease', 'vert_slide', 'vertex_random', 'vertex_warp']
 
 BLENDER_NODES = [
     blender_node.create_ops_class(
@@ -19,13 +20,12 @@ BLENDER_NODES = [
 ] + [
     blender_node.create_primitive_shape_class(
         blender_node.ObjectOps, 'ops.mesh.' + op) for op in create_primitive_shape_api
-]
-
-# + [
-#      blender_node.create_ops_class(
-#         blender_node.ObjectOps, 'context.object.vertex_groups.new', 'create_new_vertex_group'),
-# ]
+] + [
+    blender_node.create_ops_class(
+        blender_node.EditOps, 'ops.transform.' + op) for op in transfrom_api
+] 
 
 # print(blender_node.print_blender_functions('ops','object'))
 # print(blender_node.print_blender_functions('context.object'))
 # print(blender_node.print_blender_functions('context.object.vertex_groups.new'))
+# print(blender_node.print_blender_functions('ops.transform'))
