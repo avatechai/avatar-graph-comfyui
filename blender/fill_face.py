@@ -42,5 +42,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "FillFace": "Fill Face"
+    "FillFace": "Fill Face (Old)"
 }

@@ -1,3 +1,4 @@
+# import re
 import blender_node
 
 mesh_api = ['attribute_set', 'average_normals', 'beautify_fill', 'bevel', 'bisect', 'blend_from_shape', 'bridge_edge_loops', 'colors_reverse', 'colors_rotate', 'convex_hull', 'customdata_bevel_weight_edge_add', 'customdata_bevel_weight_edge_clear', 'customdata_bevel_weight_vertex_add', 'customdata_bevel_weight_vertex_clear', 'customdata_crease_edge_add', 'customdata_crease_edge_clear', 'customdata_crease_vertex_add', 'customdata_crease_vertex_clear', 'customdata_custom_splitnormals_add', 'customdata_custom_splitnormals_clear', 'customdata_mask_clear', 'customdata_skin_add', 'customdata_skin_clear', 'decimate', 'delete', 'delete_edgeloop', 'delete_loose', 'dissolve_degenerate', 'dissolve_edges', 'dissolve_faces', 'dissolve_limited', 'dissolve_mode', 'dissolve_verts', 'dupli_extrude_cursor', 'duplicate', 'duplicate_move', 'edge_collapse', 'edge_face_add', 'edge_rotate', 'edge_split', 'edgering_select', 'edges_select_sharp', 'extrude_context', 'extrude_context_move', 'extrude_edges_indiv', 'extrude_edges_move', 'extrude_faces_indiv', 'extrude_faces_move', 'extrude_manifold', 'extrude_region', 'extrude_region_move', 'extrude_region_shrink_fatten', 'extrude_repeat', 'extrude_vertices_move', 'extrude_verts_indiv', 'face_make_planar', 'face_set_extract', 'face_split_by_edges', 'faces_mirror_uv', 'faces_select_linked_flat', 'faces_shade_flat', 'faces_shade_smooth', 'fill', 'fill_grid', 'fill_holes', 'flip_normals', 'flip_quad_tessellation', 'hide', 'inset', 'intersect', 'intersect_boolean', 'knife_project', 'knife_tool', 'loop_multi_select', 'loop_select', 'loop_to_region', 'loopcut', 'loopcut_slide', 'mark_freestyle_edge', 'mark_freestyle_face', 'mark_seam', 'mark_sharp', 'merge', 'merge_normals',
@@ -12,7 +13,11 @@ create_primitive_shape_api = ['primitive_circle_add', 'primitive_cone_add', 'pri
 transfrom_api = ['bbone_resize', 'bend', 'create_orientation', 'delete_orientation', 'edge_bevelweight', 'edge_crease', 'edge_slide', 'from_gizmo', 'mirror', 'push_pull', 'resize', 'rotate', 'rotate_normal',
                  'select_orientation', 'seq_slide', 'shear', 'shrink_fatten', 'skin_resize', 'tilt', 'tosphere', 'trackball', 'transform', 'translate', 'vert_crease', 'vert_slide', 'vertex_random', 'vertex_warp']
 
-bpy_object_member = [('active_material_index', 0), ('active_shape_key_index', 2), ('add_rest_position_attribute', False), ('display_bounds_type', 'BOX'), ('display_type', 'TEXTURED'), ('empty_display_size', 1.0), ('empty_display_type', 'ARROWS'), ('empty_image_depth', 'DEFAULT'), ('empty_image_side', 'DOUBLE_SIDED'), ('hide_render', False), ('hide_select', False), ('hide_viewport', False), ('instance_faces_scale', 1.0), ('instance_type', 'NONE'), ('is_embedded_data', False), ('is_evaluated', False), ('is_from_instancer', False), ('is_from_set', False), ('is_holdout', False), ('is_instancer', False), ('is_library_indirect', False), ('is_missing', False), ('is_runtime_data', False), ('is_shadow_catcher', False), ('lightgroup', ''), ('lock_rotation_w', False), ('lock_rotations_4d', False), ('mode', 'OBJECT'), ('name', 'Cube'), ('name_full', 'Cube'), ('parent_bone', ''), ('parent_type', 'OBJECT'), ('pass_index', 0), ('rotation_mode', 'XYZ'), ('show_all_edges', False), ('show_axis', False), ('show_bounds', False), ('show_empty_image_only_axis_aligned', False), ('show_empty_image_orthographic', True), ('show_empty_image_perspective', True), ('show_in_front', False), ('show_instancer_for_render', True), ('show_instancer_for_viewport', True), ('show_name', False), ('show_only_shape_key', False), ('show_texture_space', False), ('show_transparent', False), ('show_wire', False), ('tag', False), ('track_axis', 'POS_Y'), ('type', 'MESH'), ('up_axis', 'Z'), ('use_camera_lock_parent', False), ('use_dynamic_topology_sculpting', False), ('use_empty_image_alpha', False), ('use_extra_user', False), ('use_fake_user', False), ('use_grease_pencil_lights', False), ('use_instance_faces_scale', False), ('use_instance_vertices_rotation', False), ('use_mesh_mirror_x', False), ('use_mesh_mirror_y', False), ('use_mesh_mirror_z', False), ('use_shape_key_edit_mode', False), ('use_simulation_cache', True), ('users', 1), ('visible_camera', True), ('visible_diffuse', True), ('visible_glossy', True), ('visible_shadow', True), ('visible_transmission', True), ('visible_volume_scatter', True)]
+bpy_object_member = [('active_material_index', 0), ('active_shape_key_index', 2), ('add_rest_position_attribute', False), ('display_bounds_type', 'BOX'), ('display_type', 'TEXTURED'), ('empty_display_size', 1.0), ('empty_display_type', 'ARROWS'), ('empty_image_depth', 'DEFAULT'), ('empty_image_side', 'DOUBLE_SIDED'), ('hide_render', False), ('hide_select', False), ('hide_viewport', False), ('instance_faces_scale', 1.0), ('instance_type', 'NONE'), ('is_embedded_data', False), ('is_evaluated', False), ('is_from_instancer', False), ('is_from_set', False), ('is_holdout', False), ('is_instancer', False), ('is_library_indirect', False), ('is_missing', False), ('is_runtime_data', False), ('is_shadow_catcher', False), ('lightgroup', ''), ('lock_rotation_w', False), ('lock_rotations_4d', False), ('mode', 'OBJECT'), ('name', 'Cube'), ('name_full', 'Cube'), ('parent_bone', ''), ('parent_type', 'OBJECT'), ('pass_index', 0), ('rotation_mode', 'XYZ'), ('show_all_edges', False), ('show_axis', False), ('show_bounds', False), ('show_empty_image_only_axis_aligned',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  False), ('show_empty_image_orthographic', True), ('show_empty_image_perspective', True), ('show_in_front', False), ('show_instancer_for_render', True), ('show_instancer_for_viewport', True), ('show_name', False), ('show_only_shape_key', False), ('show_texture_space', False), ('show_transparent', False), ('show_wire', False), ('tag', False), ('track_axis', 'POS_Y'), ('type', 'MESH'), ('up_axis', 'Z'), ('use_camera_lock_parent', False), ('use_dynamic_topology_sculpting', False), ('use_empty_image_alpha', False), ('use_extra_user', False), ('use_fake_user', False), ('use_grease_pencil_lights', False), ('use_instance_faces_scale', False), ('use_instance_vertices_rotation', False), ('use_mesh_mirror_x', False), ('use_mesh_mirror_y', False), ('use_mesh_mirror_z', False), ('use_shape_key_edit_mode', False), ('use_simulation_cache', True), ('users', 1), ('visible_camera', True), ('visible_diffuse', True), ('visible_glossy', True), ('visible_shadow', True), ('visible_transmission', True), ('visible_volume_scatter', True)]
+
+bpy_object_function = [('animation_data_clear', None), ('animation_data_create', None), ('asset_clear', None), ('asset_generate_preview', None), ('asset_mark', None), ('cache_release', None), ('calc_matrix_camera', {'depsgraph': ('depsgraph', {'default': None}), 'x': ('INT', {'default': 1}), 'y': ('INT', {'default': 1}), 'scale_x': ('INT', {'default': 1}), 'scale_y': ('INT', {'default': 1})}), ('camera_fit_coords', {'depsgraph': ('depsgraph', {'default': None}), ' coordinates': (' coordinates', {'default': None})}), ('closest_point_on_mesh', {'origin': ('origin', {'default': None}), 'distance': ('FLOAT', {'default': 1.84467e+19})}), ('convert_space', {' 0': (' 0', {'default': None})}), ('copy', None), ('crazyspace_displacement_to_deformed', {'vertex_index': ('INT', {'default': 0}), ' 0': (' 0', {'default': None})}), ('crazyspace_displacement_to_original', {'vertex_index': ('INT', {'default': 0}), ' 0': (' 0', {'default': None})}), ('crazyspace_eval', {'depsgraph': ('depsgraph', {'default': None}), ' scene': (' scene', {'default': None})}), ('crazyspace_eval_clear', None), ('evaluated_get', {'depsgraph': ('depsgraph', {'default': None})}), ('find_armature', None), ('generate_gpencil_strokes', {'grease_pencil_object': ('grease_pencil_object', {'default': None}), 'use_collections': ('BOOLEAN', {'default': True}), 'scale_thickness': ('INT', {'default': 1}), 'sample': ('INT', {'default': 0})}), ('hide_get', {}), ('hide_set', {'state': ('state', {'default': None})}), ('holdout_get', {}), ('indirect_only_get', {}), ('is_deform_modified', {'scene': ('scene', {'default': None}), ' settings': (' settings', {
+    'default': None})}), ('is_modified', {'scene': ('scene', {'default': None}), ' settings': (' settings', {'default': None})}), ('local_view_get', {'viewport': ('viewport', {'default': None})}), ('local_view_set', {'viewport': ('viewport', {'default': None}), ' state': (' state', {'default': None})}), ('make_local', {'clear_proxy': ('BOOLEAN', {'default': True})}), ('override_create', {'remap_local_usages': ('BOOLEAN', {'default': False})}), ('override_hierarchy_create', {'scene': ('scene', {'default': None}), ' view_layer': (' view_layer', {'default': None}), 'do_fully_editable': ('BOOLEAN', {'default': False})}), ('override_template_create', None), ('preview_ensure', None), ('ray_cast', {'origin': ('origin', {'default': None}), ' direction': (' direction', {'default': None}), 'distance': ('FLOAT', {'default': 1.70141e+38})}), ('select_get', {}), ('select_set', {'state': ('state', {'default': None})}), ('shape_key_add', {'name': ('STRING', {'default': 'Key'}), 'from_mix': ('BOOLEAN', {'default': True})}), ('shape_key_clear', None), ('shape_key_remove', {'key': ('key', {'default': None})}), ('to_curve', {'depsgraph': ('depsgraph', {'default': None}), 'apply_modifiers': ('BOOLEAN', {'default': False})}), ('to_curve_clear', None), ('to_mesh', {'preserve_all_data_layers': ('BOOLEAN', {'default': False})}), ('to_mesh_clear', None), ('update_from_editmode', None), ('update_tag', {}), ('user_clear', None), ('user_of_id', {'id': ('id', {'default': None})}), ('user_remap', {'new_id': ('new_id', {'default': None})}), ('visible_get', {}), ('visible_in_viewport_get', {'viewport': ('viewport', {'default': None})})]
 
 BLENDER_NODES = [
     blender_node.create_ops_class(
@@ -28,6 +33,8 @@ BLENDER_NODES = [
         blender_node.EditOps, 'ops.transform.' + op, None, 'Transform_') for op in transfrom_api
 ] + [
     blender_node.create_obj_setter_class(blender_node.ObjectOps, op) for op in bpy_object_member
+] + [
+    blender_node.create_obj_function_class(blender_node.ObjectOps, op) for op in bpy_object_function
 ]
 
 # print(blender_node.print_blender_functions('ops','object'))
@@ -68,3 +75,45 @@ BLENDER_NODES = [
 
 # cls.shape_key_add
 
+
+# def extract_info(func_name, docstring):
+#     # Include the function name in the regular expression
+#     match = re.search(rf'{func_name}\((.*?)\)', docstring)
+#     # print(docstring, match.groups)
+#     if match:
+#         arguments = match.group(1)
+#         if not arguments:  # No arguments found
+#             return None  # Or return some default value
+#         # print(arguments)
+#         args = arguments.split(',')
+#         result = {}
+#         for arg in args:
+#             if (not arg) or ('=' not in arg):
+#                 result[arg] = (arg, {'default': None})
+#                 continue
+#             arg_name, arg_value = arg.split('=')
+#             arg_name = arg_name.strip()
+#             arg_value = arg_value.strip()
+#             if arg_value.startswith('"') and arg_value.endswith('"'):
+#                 arg_type = 'STRING'
+#                 arg_value = arg_value[1:-1]  # Remove the quotes
+#             elif arg_value == 'True' or arg_value == 'False':
+#                 arg_type = 'BOOLEAN'
+#                 arg_value = arg_value == 'True'
+#             # check for float and int
+#             elif '.' in arg_value:
+#                 arg_type = 'FLOAT'
+#                 arg_value = float(arg_value)
+#             elif arg_value.isdigit():
+#                 arg_type = 'INT'
+#                 arg_value = int(arg_value)
+#             else:
+#                 # arg_type = 'UNKNOWN'
+#                 continue
+#             result[arg_name] = (arg_type, {'default': arg_value})
+#             print(result[arg_name])
+#         return result
+#     return None
+
+
+# [(a, extract_info(a, b.__doc__)) for a, b in simple_function]

@@ -45,7 +45,8 @@ class ObjectOps:
     def NODE_DISPLAY_NAME_MAPPINGS(cls):
         import re
         return {
-            cls.__name__: re.sub("([a-z])([A-Z])", "\g<1> \g<2>", cls.__name__).replace('_', ' ')
+            cls.__name__: re.sub(
+                "([a-z])([A-Z])", "\g<1> \g<2>", cls.__name__).replace('_', ' ')
         }
 
     RETURN_TYPES = ("BPY_OBJ",)
@@ -121,7 +122,13 @@ def map_args(bpy, func):
         elif prop_type == "ENUM":
             if not prop.default_flag:
                 enum_items = [item.identifier for item in prop.enum_items]
-                args_dict[prop.identifier] = (enum_items,)
+
+                if len(enum_items) == 0:
+                    prop_type = "B_ENUM"
+                    # prop_dict.update(
+                    #     {"default": None, "multiline": False})
+                else:
+                    args_dict[prop.identifier] = (enum_items,)
             else:
                 prop_type = "B_ENUM_SET"
 
@@ -208,6 +215,7 @@ def create_primitive_shape_class(cls, path, name=None, name_prefix=''):
 
 def assign_and_return(BPY_OBJ, name, value):
     BPY_OBJ[name] = value
+    print(BPY_OBJ, name, BPY_OBJ[name])
     return None
 
 
@@ -236,5 +244,23 @@ def create_obj_setter_class(cls, item):
                 lambda cls, bpy: ainput),
             'blender_process': lambda self, bpy, BPY_OBJ, **props:
                 assign_and_return(BPY_OBJ, name, props['value'])
+        }
+    )
+
+
+def create_obj_function_class(cls, item):
+    name = item[0]
+
+    node_name = 'ObjectCall_' + snake_to_camel(
+        name if name is not None else path.split('.')[-1])
+
+    # print(item)
+
+    return type(
+        node_name, (cls, object),
+        {
+            'get_extra_input_types': classmethod(
+                lambda cls, bpy: item[1] if item[1] != None else {}),
+            'blender_process': lambda self, bpy, BPY_OBJ, **props: (None, getattr(BPY_OBJ, name)(**props))[0]
         }
     )
