@@ -1,5 +1,7 @@
 import folder_paths
 import os
+import requests
+import base64
 
 class ExportGLTF():
     def __init__(self):
@@ -20,6 +22,7 @@ class ExportGLTF():
                 "model_type": (["GLB", "GLTF_EMBEDDED"],),
                 "write_mode": (["Overwrite", "Increment"],),
             },
+            "hidden": {"endpoint": "ENDPOINT", "token": "TOKEN", "baseModelId": "BASE_MODEL_ID"},
         }
 
     RETURN_TYPES = ()
@@ -29,7 +32,7 @@ class ExportGLTF():
 
     CATEGORY = "mesh"
 
-    def process(self, bpy_objects, filename, model_type, write_mode):
+    def process(self, bpy_objects, filename, model_type, write_mode, endpoint=None, token=None, baseModelId=None):
         import global_bpy
         bpy = global_bpy.get_bpy()
         # print(bpy, bpy_objects)
@@ -55,6 +58,29 @@ class ExportGLTF():
         with bpy.context.temp_override(**override):
             bpy.ops.export_scene.gltf(filepath=filepath, export_format=model_type, use_selection=True)
             print(filepath)
+
+        if endpoint != None and token != None and baseModelId != None:
+            # Read binary file
+            with open(filepath, "rb") as f:
+                data = f.read()
+
+            # Convert binary data to base64 string to ensure safe transmission
+            data_string = base64.b64encode(data).decode()
+
+            # Make the POST request
+            response = requests.post(
+                endpoint,
+                headers={
+                    "Authorization": f"Bearer {token}",
+                },
+                json={
+                    "modelStr": data_string,
+                    "baseModelId": baseModelId,
+                    "format": "threejs",
+                },
+            )
+            model_id = response.json()["model_id"]
+            return { "ui" : { "model_id": { model_id } } }
 
         return { "ui" : { "gltfFilename": { filepath.replace(f"{self.output_dir}/", "") } } }
 
