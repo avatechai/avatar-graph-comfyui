@@ -111,13 +111,19 @@ def map_args(bpy, func):
                 # prop_dict.update(
                 #     {"default": prop.default_array})
         elif prop_type == "BOOLEAN":
-            prop_dict.update({"default": prop.default})
+            if not prop.is_array:
+                prop_dict.update({"default": prop.default})
+            else:
+                prop_type = "B_BOOLEAN" + str(prop.array_length)
         elif prop_type == "STRING":
             prop_dict.update(
                 {"default": prop.default, "multiline": False})
         elif prop_type == "ENUM":
-            enum_items = [item.identifier for item in prop.enum_items]
-            args_dict[prop.identifier] = (enum_items,)
+            if not prop.default_flag:
+                enum_items = [item.identifier for item in prop.enum_items]
+                args_dict[prop.identifier] = (enum_items,)
+            else:
+                prop_type = "B_ENUM_SET"
 
             # print(enum_items)
 
@@ -175,7 +181,7 @@ def create_ops_class(cls, path, name=None, name_prefix=''):
                     **map_args(bpy, get_nested_attr(bpy, path))}
             ),
             'blender_process': lambda self, bpy, BPY_OBJ, **props:
-                (None, get_nested_attr(bpy, path)(**props))[0]
+                (None, print(props), get_nested_attr(bpy, path)(**props))[0]
         }
     )
 
