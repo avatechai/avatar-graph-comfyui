@@ -28,11 +28,9 @@ BLENDER_NODES = [
 ] + [
     blender_node.create_ops_class(
         blender_node.EditOps, 'ops.transform.' + op, None, 'Transform_') for op in transfrom_api
+] + [
+    blender_node.create_obj_setter_class(blender_node.ObjectOps, op) for op in bpy_object_member
 ]
-
-# + [
-#     blender_node.create_obj_setter_class(blender_node.ObjectOps, op) for op, _ in bpy_object_member
-# ]
 
 # print(blender_node.print_blender_functions('ops','object'))
 # print(blender_node.print_blender_functions('types.Object'))

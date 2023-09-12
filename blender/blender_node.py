@@ -45,7 +45,7 @@ class ObjectOps:
     def NODE_DISPLAY_NAME_MAPPINGS(cls):
         import re
         return {
-            cls.__name__: re.sub("([a-z])([A-Z])", "\g<1> \g<2>", cls.__name__)
+            cls.__name__: re.sub("([a-z])([A-Z])", "\g<1> \g<2>", cls.__name__).replace('_', ' ')
         }
 
     RETURN_TYPES = ("BPY_OBJ",)
@@ -59,6 +59,7 @@ class ObjectOps:
         results = self.blender_process(bpy, **props)
 
         if results is None:
+            print(results)
             if props.get("BPY_OBJ") != None:
                 return (props["BPY_OBJ"], )
             else:
@@ -165,7 +166,7 @@ def print_blender_functions(path):
 def create_ops_class(cls, path, name=None, name_prefix=''):
     node_name = name_prefix + snake_to_camel(
         name if name is not None else path.split('.')[-1])
-    print(node_name)
+    # print(node_name)
     return type(
         node_name, (cls, object),
         {
@@ -204,30 +205,30 @@ def assign_and_return(BPY_OBJ, name, value):
     return None
 
 
-# def create_obj_setter_class(cls, item):
-#     name = item[0]
-#     item_type = {
-#         int: "INT",
-#         float: "FLOAT",
-#         str: "STRING",
-#         bool: "BOOLEAN",
-#     }[type(item[1])]
+def create_obj_setter_class(cls, item):
+    name = item[0]
+    item_type = {
+        int: "INT",
+        float: "FLOAT",
+        str: "STRING",
+        bool: "BOOLEAN",
+    }[type(item[1])]
 
-#     node_name = snake_to_camel(
-#         name if name is not None else path.split('.')[-1])
+    node_name = 'ObjectSet_' + snake_to_camel(
+        name if name is not None else path.split('.')[-1])
 
-#     ainput = {
-#         'value': (item_type, {"default": item[1]})
-#     }
+    ainput = {
+        'value': (item_type, {"default": item[1]})
+    }
 
-#     print(ainput)
+    # print(item, item_type, type(item[1]), ainput)
 
-#     return type(
-#         node_name, (cls, object),
-#         {
-#             'get_extra_input_types': classmethod(
-#                 lambda cls, bpy: ainput),
-#             'blender_process': lambda self, bpy, BPY_OBJ, **props:
-#                 assign_and_return(BPY_OBJ, name, props['value'])
-#         }
-#     )
+    return type(
+        node_name, (cls, object),
+        {
+            'get_extra_input_types': classmethod(
+                lambda cls, bpy: ainput),
+            'blender_process': lambda self, bpy, BPY_OBJ, **props:
+                assign_and_return(BPY_OBJ, name, props['value'])
+        }
+    )
