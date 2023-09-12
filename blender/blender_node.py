@@ -59,7 +59,7 @@ class ObjectOps:
         results = self.blender_process(bpy, **props)
 
         if results is None:
-            if props.get("BPY_OBJ" is not None):
+            if props.get("BPY_OBJ") != None:
                 return (props["BPY_OBJ"], )
             else:
                 return (bpy.context.view_layer.objects.active, )
@@ -157,13 +157,15 @@ def print_blender_functions(path):
     import global_bpy
     bpy = global_bpy.get_bpy()
 
+    # add a an empty object
+
     print(dir(get_nested_attr(bpy, path)), type(get_nested_attr(bpy, path)))
 
 
-def create_ops_class(cls, path, name=None):
-    node_name = snake_to_camel(
+def create_ops_class(cls, path, name=None, name_prefix=''):
+    node_name = name_prefix + snake_to_camel(
         name if name is not None else path.split('.')[-1])
-    # print(node_name)
+    print(node_name)
     return type(
         node_name, (cls, object),
         {
@@ -177,8 +179,8 @@ def create_ops_class(cls, path, name=None):
     )
 
 
-def create_primitive_shape_class(cls, path, name=None):
-    node_name = snake_to_camel(
+def create_primitive_shape_class(cls, path, name=None, name_prefix=''):
+    node_name = name_prefix + snake_to_camel(
         name if name is not None else path.split('.')[-1])
     # print(node_name)
     return type(
@@ -195,3 +197,37 @@ def create_primitive_shape_class(cls, path, name=None):
                 (print(props), get_nested_attr(bpy, path)(), None)[2]
         }
     )
+
+
+def assign_and_return(BPY_OBJ, name, value):
+    BPY_OBJ[name] = value
+    return None
+
+
+# def create_obj_setter_class(cls, item):
+#     name = item[0]
+#     item_type = {
+#         int: "INT",
+#         float: "FLOAT",
+#         str: "STRING",
+#         bool: "BOOLEAN",
+#     }[type(item[1])]
+
+#     node_name = snake_to_camel(
+#         name if name is not None else path.split('.')[-1])
+
+#     ainput = {
+#         'value': (item_type, {"default": item[1]})
+#     }
+
+#     print(ainput)
+
+#     return type(
+#         node_name, (cls, object),
+#         {
+#             'get_extra_input_types': classmethod(
+#                 lambda cls, bpy: ainput),
+#             'blender_process': lambda self, bpy, BPY_OBJ, **props:
+#                 assign_and_return(BPY_OBJ, name, props['value'])
+#         }
+#     )

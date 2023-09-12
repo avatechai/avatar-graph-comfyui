@@ -1,3 +1,5 @@
+import inspect
+import bpy
 import blender_node
 
 mesh_api = ['attribute_set', 'average_normals', 'beautify_fill', 'bevel', 'bisect', 'blend_from_shape', 'bridge_edge_loops', 'colors_reverse', 'colors_rotate', 'convex_hull', 'customdata_bevel_weight_edge_add', 'customdata_bevel_weight_edge_clear', 'customdata_bevel_weight_vertex_add', 'customdata_bevel_weight_vertex_clear', 'customdata_crease_edge_add', 'customdata_crease_edge_clear', 'customdata_crease_vertex_add', 'customdata_crease_vertex_clear', 'customdata_custom_splitnormals_add', 'customdata_custom_splitnormals_clear', 'customdata_mask_clear', 'customdata_skin_add', 'customdata_skin_clear', 'decimate', 'delete', 'delete_edgeloop', 'delete_loose', 'dissolve_degenerate', 'dissolve_edges', 'dissolve_faces', 'dissolve_limited', 'dissolve_mode', 'dissolve_verts', 'dupli_extrude_cursor', 'duplicate', 'duplicate_move', 'edge_collapse', 'edge_face_add', 'edge_rotate', 'edge_split', 'edgering_select', 'edges_select_sharp', 'extrude_context', 'extrude_context_move', 'extrude_edges_indiv', 'extrude_edges_move', 'extrude_faces_indiv', 'extrude_faces_move', 'extrude_manifold', 'extrude_region', 'extrude_region_move', 'extrude_region_shrink_fatten', 'extrude_repeat', 'extrude_vertices_move', 'extrude_verts_indiv', 'face_make_planar', 'face_set_extract', 'face_split_by_edges', 'faces_mirror_uv', 'faces_select_linked_flat', 'faces_shade_flat', 'faces_shade_smooth', 'fill', 'fill_grid', 'fill_holes', 'flip_normals', 'flip_quad_tessellation', 'hide', 'inset', 'intersect', 'intersect_boolean', 'knife_project', 'knife_tool', 'loop_multi_select', 'loop_select', 'loop_to_region', 'loopcut', 'loopcut_slide', 'mark_freestyle_edge', 'mark_freestyle_face', 'mark_seam', 'mark_sharp', 'merge', 'merge_normals',
@@ -9,23 +11,64 @@ object_api = ['add', 'add_named', 'align', 'anim_transforms_to_deltas', 'armatur
 create_primitive_shape_api = ['primitive_circle_add', 'primitive_cone_add', 'primitive_cube_add', 'primitive_cube_add_gizmo',
                               'primitive_cylinder_add', 'primitive_grid_add', 'primitive_ico_sphere_add', 'primitive_monkey_add', 'primitive_plane_add', 'primitive_torus_add', 'primitive_uv_sphere_add',]
 
-transfrom_api = ['bbone_resize', 'bend', 'create_orientation', 'delete_orientation', 'edge_bevelweight', 'edge_crease', 'edge_slide', 'from_gizmo', 'mirror', 'push_pull', 'resize', 'rotate', 'rotate_normal', 'select_orientation', 'seq_slide', 'shear', 'shrink_fatten', 'skin_resize', 'tilt', 'tosphere', 'trackball', 'transform', 'translate', 'vert_crease', 'vert_slide', 'vertex_random', 'vertex_warp']
+transfrom_api = ['bbone_resize', 'bend', 'create_orientation', 'delete_orientation', 'edge_bevelweight', 'edge_crease', 'edge_slide', 'from_gizmo', 'mirror', 'push_pull', 'resize', 'rotate', 'rotate_normal',
+                 'select_orientation', 'seq_slide', 'shear', 'shrink_fatten', 'skin_resize', 'tilt', 'tosphere', 'trackball', 'transform', 'translate', 'vert_crease', 'vert_slide', 'vertex_random', 'vertex_warp']
+
+bpy_object_member = [('active_material_index', 0), ('active_shape_key_index', 2), ('add_rest_position_attribute', False), ('display_bounds_type', 'BOX'), ('display_type', 'TEXTURED'), ('empty_display_size', 1.0), ('empty_display_type', 'ARROWS'), ('empty_image_depth', 'DEFAULT'), ('empty_image_side', 'DOUBLE_SIDED'), ('hide_render', False), ('hide_select', False), ('hide_viewport', False), ('instance_faces_scale', 1.0), ('instance_type', 'NONE'), ('is_embedded_data', False), ('is_evaluated', False), ('is_from_instancer', False), ('is_from_set', False), ('is_holdout', False), ('is_instancer', False), ('is_library_indirect', False), ('is_missing', False), ('is_runtime_data', False), ('is_shadow_catcher', False), ('lightgroup', ''), ('lock_rotation_w', False), ('lock_rotations_4d', False), ('mode', 'OBJECT'), ('name', 'Cube'), ('name_full', 'Cube'), ('parent_bone', ''), ('parent_type', 'OBJECT'), ('pass_index', 0), ('rotation_mode', 'XYZ'), ('show_all_edges', False), ('show_axis', False), ('show_bounds', False), ('show_empty_image_only_axis_aligned', False), ('show_empty_image_orthographic', True), ('show_empty_image_perspective', True), ('show_in_front', False), ('show_instancer_for_render', True), ('show_instancer_for_viewport', True), ('show_name', False), ('show_only_shape_key', False), ('show_texture_space', False), ('show_transparent', False), ('show_wire', False), ('tag', False), ('track_axis', 'POS_Y'), ('type', 'MESH'), ('up_axis', 'Z'), ('use_camera_lock_parent', False), ('use_dynamic_topology_sculpting', False), ('use_empty_image_alpha', False), ('use_extra_user', False), ('use_fake_user', False), ('use_grease_pencil_lights', False), ('use_instance_faces_scale', False), ('use_instance_vertices_rotation', False), ('use_mesh_mirror_x', False), ('use_mesh_mirror_y', False), ('use_mesh_mirror_z', False), ('use_shape_key_edit_mode', False), ('use_simulation_cache', True), ('users', 1), ('visible_camera', True), ('visible_diffuse', True), ('visible_glossy', True), ('visible_shadow', True), ('visible_transmission', True), ('visible_volume_scatter', True)]
 
 BLENDER_NODES = [
     blender_node.create_ops_class(
-        blender_node.EditOps, 'ops.mesh.' + op) for op in mesh_api
+        blender_node.EditOps, 'ops.mesh.' + op, None, 'Mesh_') for op in mesh_api
 ] + [
     blender_node.create_ops_class(
-        blender_node.ObjectOps, 'ops.object.' + op) for op in object_api
+        blender_node.ObjectOps, 'ops.object.' + op, None, 'Object_') for op in object_api
 ] + [
     blender_node.create_primitive_shape_class(
-        blender_node.ObjectOps, 'ops.mesh.' + op) for op in create_primitive_shape_api
+        blender_node.ObjectOps, 'ops.mesh.' + op, None, 'Mesh_') for op in create_primitive_shape_api
 ] + [
     blender_node.create_ops_class(
-        blender_node.EditOps, 'ops.transform.' + op) for op in transfrom_api
-] 
+        blender_node.EditOps, 'ops.transform.' + op, None, 'Transform_') for op in transfrom_api
+]
+
+# + [
+#     blender_node.create_obj_setter_class(blender_node.ObjectOps, op) for op, _ in bpy_object_member
+# ]
 
 # print(blender_node.print_blender_functions('ops','object'))
-# print(blender_node.print_blender_functions('context.object'))
+# print(blender_node.print_blender_functions('types.Object'))
 # print(blender_node.print_blender_functions('context.object.vertex_groups.new'))
 # print(blender_node.print_blender_functions('ops.transform'))
+
+
+# Get the class itself, not an instance
+# cls = bpy.context.object
+
+# # Get all callable methods of the class
+# methods = [(method_name, method,)
+#            for method_name, method in inspect.getmembers(cls, )]
+# # only keep those with that are string, int or float, boolean
+# simple_setter = [(method_name, method,) for method_name, method in methods if not callable(
+#     method) and not method_name.startswith("__") and type(method) in [str, int, float, bool]]
+
+# simple_function = [(method_name, method,) for method_name, method in methods if callable(
+#     method) and not method_name.startswith("__")]
+
+
+# simple_function_with_args = []
+# for method_name, method in simple_function:
+#     print(dir(method), method.call())
+#     try:
+#         params = inspect.signature(method).parameters
+#         simple_function_with_args.append((method_name, method, params))
+#     except ValueError:
+#         print(f"Cannot retrieve signature for {method_name}", type(method),)
+
+# print(simple_function_with_args)
+
+# print("Content of cls.shape_key_add:")
+# for item in dir(cls.shape_key_add):
+#     print(item, getattr(cls.shape_key_add, item))
+
+
+# cls.shape_key_add
+
