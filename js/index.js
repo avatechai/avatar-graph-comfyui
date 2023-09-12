@@ -81,22 +81,6 @@ const ext = {
     window.addEventListener(
       'keydown',
       (event) => {
-        if (event.key === 'b') {
-          event.preventDefault();
-          const currentGraph = app.graph.list_of_graphcanvas[0];
-          if (currentGraph.selected_nodes.length !== 1) {
-            Object.values(currentGraph.selected_nodes).forEach((targetNode) => {
-              if (targetNode.mode === 4) targetNode.mode = 0;
-              else targetNode.mode = 4;
-            });
-          } else {
-            const targetNode = currentGraph.current_node;
-            if (targetNode.mode === 4) targetNode.mode = 0;
-            else targetNode.mode = 4;
-          }
-          app.graph.change();
-        }
-
         if (event.key === 'Escape') {
           event.preventDefault();
           showImageEditor.val = false;
@@ -106,6 +90,24 @@ const ext = {
         capture: true,
       },
     );
+
+    graphCanvas.addEventListener('keydown', (event) => {
+      if (event.key === 'b') {
+        event.preventDefault();
+        const currentGraph = app.graph.list_of_graphcanvas[0];
+        if (currentGraph.selected_nodes.length !== 1) {
+          Object.values(currentGraph.selected_nodes).forEach((targetNode) => {
+            if (targetNode.mode === 4) targetNode.mode = 0;
+            else targetNode.mode = 4;
+          });
+        } else {
+          const targetNode = currentGraph.current_node;
+          if (targetNode.mode === 4) targetNode.mode = 0;
+          else targetNode.mode = 4;
+        }
+        app.graph.change();
+      }
+    });
 
     window.addEventListener('keydown', (event) => {
       // if enter
