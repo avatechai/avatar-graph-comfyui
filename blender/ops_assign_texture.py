@@ -40,7 +40,7 @@ class Object_AssignTexture(blender_node.ObjectOps):
         # img.save()
 
         # Get the active object
-        obj = bpy_objs[0]
+        obj = BPY_OBJ
 
         # Create a material
         mat = bpy.data.materials.new("MaterialName")
