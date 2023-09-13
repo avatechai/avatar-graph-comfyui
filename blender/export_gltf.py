@@ -79,8 +79,10 @@ class ExportGLTF():
                     "format": "threejs",
                 },
             )
+            if response.status_code != 200:
+                return { "ui" : { "status_code": { response.status_code } } }
             model_id = response.json()["model_id"]
-            return { "ui" : { "model_id": { model_id } } }
+            return { "ui" : { "model_id": { model_id }, "status_code": { response.status_code } } }
 
         return { "ui" : { "gltfFilename": { filepath.replace(f"{self.output_dir}/", "") } } }
 
