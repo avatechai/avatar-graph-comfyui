@@ -3,7 +3,7 @@ class B_ENUM:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "enum": ("STRING", {"multiline": False}),
+                "value": ("STRING", {"multiline": False}),
             },
         }
 
@@ -13,8 +13,8 @@ class B_ENUM:
 
     CATEGORY = "blender"
 
-    def run(self, x, y, z, u):
-        return ((x, y, z, u),)
+    def run(self, value):
+        return (value,)
 
 
 NODE_CLASS_MAPPINGS = {

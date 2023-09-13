@@ -57,6 +57,9 @@ class ObjectOps:
         import global_bpy
         bpy = global_bpy.get_bpy()
 
+        if props.get("BPY_OBJ") != None:
+            bpy.context.view_layer.objects.active = props["BPY_OBJ"]
+
         results = self.blender_process(bpy, **props)
 
         if results is None:
