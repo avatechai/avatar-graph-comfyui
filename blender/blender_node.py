@@ -215,7 +215,7 @@ def create_primitive_shape_class(cls, path, name=None, name_prefix=''):
 
 def assign_and_return(BPY_OBJ, name, value):
     BPY_OBJ[name] = value
-    print(BPY_OBJ, name, BPY_OBJ[name])
+    print(BPY_OBJ,name, BPY_OBJ[name])
     return None
 
 
