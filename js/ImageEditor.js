@@ -51,7 +51,7 @@ export function ImageEditor() {
     ),
     div(
       {
-        class: 'flex items-center justify-center absolute h-full left-0 right-0 bottom-0 top-0 mx-auto my-auto max-h-96 ',
+        class: 'flex items-center justify-center absolute h-full left-0 right-0 bottom-0 top-0 mx-auto my-auto max-h-[1000px] ',
       },
       img({
         class: 'w-fit h-full',
