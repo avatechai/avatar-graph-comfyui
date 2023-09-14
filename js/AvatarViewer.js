@@ -12,8 +12,8 @@ export function AvatarViewer() {
       title: 'avatech-viewer-iframe',
       name: 'avatech-viewer-iframe',
       class: () => 'w-full h-full flex pointer-events-auto ',
-      src: 'http://localhost:3000/viewer/default',
-      // src: 'https://labs.avatech.ai/viewer',
+      src: 'https://labs.avatech.ai/viewer/default',
+      // src: 'http://localhost:3000/viewer/default',
     })
   )
 }
