@@ -14,7 +14,8 @@ class SAM_Prompt_Image:
         return {
             "required":
                 {
-                    "image": (sorted(files), ),
+                    "image": ('IMAGE', ),
+                    # "image": (sorted(files), ),
                     "image_prompts_json": ("STRING", {
                         "multiline": False,
                         "default": "[]"
@@ -35,14 +36,6 @@ class SAM_Prompt_Image:
         print(image_prompts)
 
         return (image_prompts, )
-
-    @classmethod
-    def IS_CHANGED(s, image):
-        image_path = folder_paths.get_annotated_filepath(image)
-        m = hashlib.sha256()
-        with open(image_path, 'rb') as f:
-            m.update(f.read())
-        return m.digest().hex()
 
 NODE_CLASS_MAPPINGS = {
     "SAM_Prompt_Image": SAM_Prompt_Image

@@ -12,6 +12,12 @@ import { api } from './api.js';
 import { Container } from './Container.js';
 
 /**
+ * @typedef {import('../../../web/types/litegraph.js').LGraph} LGraph
+ * @typedef {import('../../../web/types/litegraph.js').LGraphNode} LGraphNode
+ */
+
+
+/**
  * Adds a menu handler to a node type.
  * @param {Object} nodeType - The type of the node.
  * @param {Function} cb - The callback function to handle the menu.
@@ -40,7 +46,42 @@ function openInAvatechEditor(url, fileName) {
   );
 }
 
+/**
+ * 
+ * @param {LGraphNode} node 
+ */
 function showMyImageEditor(node) {
+
+  /** @type {LGraph} */
+  const graph = app.graph;
+
+  const imageNodeLink = node.inputs[0].link
+  if (!imageNodeLink) return
+
+  const targetLink = graph.links[imageNodeLink]
+
+  /** @type {LGraphNode} */
+  let nodea = graph._nodes_by_id[targetLink.origin_id]
+
+  while (nodea.type == "Reroute") {
+    nodea = nodea.getInputNode(0)
+  }
+
+  console.log(targetLink, nodea);
+  console.log(nodea.getInputNode(0, true));
+
+  /** @type {string} */
+  let connectedImageFileName = nodea.widgets.find((x) => x.name === 'image').value
+  
+  const split = connectedImageFileName.split('/')
+
+  if (split.length > 1)
+    connectedImageFileName = split[1]
+
+  console.log(connectedImageFileName);
+
+  // node.widgets.find((x) => x.name === 'image').value
+  
   showImageEditor.val = true;
 
   imagePrompts.val = JSON.parse(
@@ -48,8 +89,8 @@ function showMyImageEditor(node) {
   );
   imageUrl.val = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      node.widgets.find((x) => x.name === 'image').value,
-    )}&type=input&subfolder=`,
+      connectedImageFileName,
+    )}&type=input&subfolder=${split.length > 1 ? split[0] : ''}`,
   );
   targetNode.val = node;
 }
@@ -166,7 +207,7 @@ const ext = {
       });
     } else if (nodeData.name === 'SAM_Prompt_Image') {
       nodeData.input.required.sam = ['SAM_PROMPTS'];
-      nodeData.input.required.upload = ['IMAGEUPLOAD'];
+      // nodeData.input.required.upload = ['IMAGEUPLOAD'];
       // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
       addMenuHandler(nodeType, function (_, options) {
         options.unshift({
