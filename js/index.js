@@ -119,6 +119,13 @@ const ext = {
 
   async setup() {
     const graphCanvas = document.getElementById('graph-canvas');
+
+    api.addEventListener('executed', (evt) => {
+      if (evt.detail?.output.gltfFilename) {
+        console.log(evt.detail.output.gltfFilename);
+      }
+    })
+
     window.addEventListener(
       'keydown',
       (event) => {
