@@ -21,6 +21,10 @@ class ExportGLTF():
                 }),
                 "model_type": (["GLB", "GLTF_EMBEDDED"],),
                 "write_mode": (["Overwrite", "Increment"],),
+                "blendshapes": ("STRING", {
+                    "multiline": False,
+                    "default": "{node: ''}"
+                }),
             },
             "hidden": {"endpoint": "ENDPOINT", "token": "TOKEN", "baseModelId": "BASE_MODEL_ID"},
         }
@@ -32,7 +36,7 @@ class ExportGLTF():
 
     CATEGORY = "mesh"
 
-    def process(self, bpy_objects, filename, model_type, write_mode, endpoint=None, token=None, baseModelId=None):
+    def process(self, bpy_objects, filename, model_type, write_mode, blendshapes, endpoint=None, token=None, baseModelId=None):
         import global_bpy
         bpy = global_bpy.get_bpy()
         # print(bpy, bpy_objects)
@@ -83,8 +87,7 @@ class ExportGLTF():
                 return { "ui" : { "status_code": { response.status_code } } }
             model_id = response.json()["model_id"]
             return { "ui" : { "model_id": { model_id }, "status_code": { response.status_code } } }
-
-        return { "ui" : { "gltfFilename": { filepath.replace(f"{self.output_dir}/", "") } } }
+        return { "ui" : { "gltfFilename": { filepath.replace(f"{self.output_dir}/", "") }, "blendshapes": { blendshapes } } }
 
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
