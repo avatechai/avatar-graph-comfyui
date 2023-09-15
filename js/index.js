@@ -11,6 +11,121 @@ import { app } from './app.js';
 import { api } from './api.js';
 import { Container } from './Container.js';
 
+/** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
+const recomputeInsideNodesOps = LGraphGroup.prototype.recomputeInsideNodes;
+LGraphGroup.prototype.recomputeInsideNodes = function () {
+  this._nodes.length = 0;
+  var nodes = this.graph._nodes;
+  var node_bounding = new Float32Array(4);
+
+  // const r = recomputeInsideNodesOps.apply(this, arguments);
+  for (var i = 0; i < nodes.length; ++i) {
+    var node = nodes[i];
+    node.getBounding(node_bounding);
+    if (!LiteGraph.overlapBounding(this._bounding, node_bounding)) {
+      if (node.parentId != undefined && node.parentId == this.id) {
+        node.parentId = null;
+      }
+      continue;
+    } //out of the visible area
+    this._nodes.push(node);
+  }
+
+  this.repositionNodes();
+};
+
+const nodeSer = LGraphNode.prototype.serialize;
+LGraphNode.prototype.serialize = function () {
+  const r = nodeSer.apply(this, arguments);
+  r.parentId = this.parentId;
+  return r;
+};
+
+LGraphGroup.prototype.repositionNodes = function () {
+  if (!this.isStack) return;
+
+  const pos = [this.pos[0] + 10, this.pos[1] + 80];
+
+  let height = 0;
+
+  const sortedNodes = this._nodes.sort((a, b) => a.pos[1] - b.pos[1]);
+
+  for (var i = 0; i < sortedNodes.length; ++i) {
+    /** @type {LGraphNode} */
+    var node = sortedNodes[i];
+    node.pos[0] = pos[0];
+    node.pos[1] = pos[1] + height;
+
+    node.parentId = this.id;
+    node.size[0] = this.size[0] - 20;
+
+    height += 40;
+
+    if (node.flags.collapsed) {
+    } else {
+      height += node.size[1];
+    }
+  }
+
+  this.size[1] = height + 60;
+};
+
+const collapseOps = LGraphNode.prototype.collapse;
+LGraphNode.prototype.collapse = function (force) {
+  collapseOps.apply(this, arguments);
+  this.computeParentGroupResize();
+};
+
+LGraphNode.prototype.computeParentGroupResize = function () {
+  if (this.parentId) {
+    const parent = this.graph._groups.find((x) => x.id === this.parentId);
+    if (parent) {
+      parent.recomputeInsideNodes();
+    }
+  }
+};
+
+const getOpts = LGraphCanvas.prototype.getCanvasMenuOptions;
+LGraphCanvas.prototype.getCanvasMenuOptions = function () {
+  const r = getOpts.apply(this, arguments);
+  r.push({
+    content: 'Add Stack',
+    callback: (info, entry, mouse_event) => {
+      var canvas = LGraphCanvas.active_canvas;
+      var ref_window = canvas.getCanvasWindow();
+
+      var group = new LiteGraph.LGraphGroup();
+      group.pos = canvas.convertEventToCanvasOffset(mouse_event);
+      group.isStack = true;
+      group.title = 'Stack';
+      canvas.graph.add(group);
+    },
+  });
+  return r;
+};
+
+const ctor = LGraphGroup.prototype._ctor;
+LGraphGroup.prototype._ctor = function (title) {
+  ctor.apply(this, arguments);
+  this.isStack = false;
+  this.id = LiteGraph.uuidv4();
+};
+
+const serializationOps = LGraphGroup.prototype.serialize;
+LGraphGroup.prototype.serialize = function () {
+  const r = serializationOps.apply(this, arguments);
+  r.id = this.id;
+  r.isStack = this.isStack;
+  return r;
+};
+
+const configureOps = LGraphGroup.prototype.configure;
+LGraphGroup.prototype.configure = function (o) {
+  configureOps.apply(this, arguments);
+  this.id = o.id;
+  this.isStack = o.isStack;
+};
+
 /**
  * @typedef {import('../../../web/types/litegraph.js').LGraph} LGraph
  * @typedef {import('../../../web/types/litegraph.js').LGraphNode} LGraphNode
@@ -114,7 +229,14 @@ const ext = {
 
   name: 'Avatech.Avatar.BlendshapeEditor',
 
-  init(app) {},
+  init(app) {
+    const onNodeMoved = app.canvas.onNodeMoved;
+    app.canvas.onNodeMoved = function (node) {
+      const r = onNodeMoved?.apply(this, arguments);
+
+      node.computeParentGroupResize();
+    };
+  },
 
   async setup() {
     const graphCanvas = document.getElementById('graph-canvas');
@@ -172,6 +294,27 @@ const ext = {
           const targetNode = currentGraph.current_node;
           if (targetNode.mode === 4) targetNode.mode = 0;
           else targetNode.mode = 4;
+        }
+        app.graph.change();
+      }
+
+      if (event.key === 'v') {
+        event.preventDefault();
+        const currentGraph = app.graph.list_of_graphcanvas[0];
+        if (currentGraph.selected_nodes.length !== 1) {
+          Object.values(currentGraph.selected_nodes).forEach((targetNode) => {
+            if (targetNode.flags.collapsed) targetNode.flags.collapsed = false;
+            else targetNode.flags.collapsed = true;
+
+            targetNode.computeParentGroupResize();
+          });
+        } else {
+          const targetNode = currentGraph.current_node;
+          console.log(currentGraph.selected_nodes);
+          if (targetNode.flags.collapsed) targetNode.flags.collapsed = false;
+          else targetNode.flags.collapsed = true;
+
+          targetNode.computeParentGroupResize();
         }
         app.graph.change();
       }
