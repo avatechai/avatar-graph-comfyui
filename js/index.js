@@ -47,23 +47,42 @@ LGraphGroup.prototype.repositionNodes = function () {
   const pos = [this.pos[0] + 10, this.pos[1] + 80];
 
   let height = 0;
+  let width = this.size[0];
 
-  const sortedNodes = this._nodes.sort((a, b) => a.pos[1] - b.pos[1]);
+  let sortedNodes = this._nodes.sort((a, b) => a.pos[1] - b.pos[1]);
+  // Separate input and output nodes from the rest
+  const inputNodes = sortedNodes.filter(node => node.properties.routeType === 'input');
+  const outputNodes = sortedNodes.filter(node => node.properties.routeType === 'output');
+  const otherNodes = sortedNodes.filter(node => node.properties.routeType !== 'input' && node.properties.routeType !== 'output');
+
+  // Concatenate the arrays so that input nodes are first and output nodes are last
+  sortedNodes = [...inputNodes, ...otherNodes, ...outputNodes];
 
   for (var i = 0; i < sortedNodes.length; ++i) {
     /** @type {LGraphNode} */
     var node = sortedNodes[i];
     node.pos[0] = pos[0];
-    node.pos[1] = pos[1] + height;
-
+    node.pos[1] = pos[1] + height
+    
     node.parentId = this.id;
-    node.size[0] = this.size[0] - 20;
 
-    height += 40;
+    if (node.type !== 'Reroute')
+      node.size[0] = width - 20;
 
     if (node.flags.collapsed) {
+      height += 40;
+    } else if (node.type === 'Reroute') {
+      height += 30;
+      node.pos[1] -= 30;
     } else {
+      height += 40;
       height += node.size[1];
+    }
+
+    // connect this node output
+    if (i < sortedNodes.length - 1) {
+      node.disconnectOutput(0);
+      node.connect(0, sortedNodes[i + 1], 0);
     }
   }
 
@@ -99,6 +118,16 @@ LGraphCanvas.prototype.getCanvasMenuOptions = function () {
       group.isStack = true;
       group.title = 'Stack';
       canvas.graph.add(group);
+
+      // add two reroute nodes
+      var reroute1 = LiteGraph.createNode('Reroute');
+      var reroute2 = LiteGraph.createNode('Reroute');
+      reroute1.properties.routeType = 'input';
+      reroute2.properties.routeType = 'output';
+      reroute1.pos = [group.pos[0] + 10, group.pos[1] + 40];
+      reroute2.pos = [group.pos[0] + 10, group.pos[1] + 70];
+      canvas.graph.add(reroute1);
+      canvas.graph.add(reroute2);
     },
   });
   return r;
@@ -234,6 +263,10 @@ const ext = {
     app.canvas.onNodeMoved = function (node) {
       const r = onNodeMoved?.apply(this, arguments);
 
+      app.graph._groups.forEach((x) => {
+        x.recomputeInsideNodes();
+      });
+
       node.computeParentGroupResize();
     };
   },
@@ -244,8 +277,8 @@ const ext = {
     api.addEventListener('executed', (evt) => {
       if (evt.detail?.output.gltfFilename) {
         const viewer = document.getElementById(
-          'avatech-viewer-iframe'
-        ).contentWindow
+          'avatech-viewer-iframe',
+        ).contentWindow;
 
         const gltfFilename =
           window.location.protocol +
@@ -254,18 +287,17 @@ const ext = {
           api.api_base +
           `/view?filename=${evt.detail?.output.gltfFilename[0]}`;
 
-
         viewer.postMessage(
           JSON.stringify({
             avatarURL: gltfFilename,
             blendshapes: evt.detail?.output.blendshapes[0],
           }),
-          '*'
-        )
+          '*',
+        );
 
-        console.log(evt.detail.output.gltfFilename)
+        console.log(evt.detail.output.gltfFilename);
       }
-    })
+    });
 
     window.addEventListener(
       'keydown',
@@ -297,7 +329,7 @@ const ext = {
         app.graph.change();
       }
 
-      if (event.key === 'v') {
+      if (event.key === 'v' && !event.ctrlKey && !event.metaKey) {
         event.preventDefault();
         const currentGraph = app.graph.list_of_graphcanvas[0];
         if (currentGraph.selected_nodes.length !== 1) {
