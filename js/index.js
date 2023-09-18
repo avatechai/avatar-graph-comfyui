@@ -5,8 +5,7 @@ import {
   imageUrl,
   imagePrompts,
   targetNode,
-  selectedLayer,
-  imagePromptsMulti,
+  embeddings,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -252,6 +251,14 @@ function showMyImageEditor(node) {
       connectedImageFileName
     )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`
   );
+  const embeedingUrl = api.apiURL(
+    `/view?filename=${encodeURIComponent(
+      "tmp_emb.npy"
+    )}&type=output&subfolder=${split.length > 1 ? split[0] : ""}`
+  );
+  loadNpyTensor(embeedingUrl).then((tensor) => {
+    embeddings.val = tensor;
+  });
   targetNode.val = node;
 }
 

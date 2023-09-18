@@ -2,8 +2,12 @@ import requests
 from PIL import Image
 import io
 import numpy as np
+import folder_paths
 
 class SAM_Embedding:
+    def __init__(self):
+        self.output_dir = folder_paths.get_output_directory()
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -68,6 +72,7 @@ class SAM_Embedding:
 
             # print(output)
 
+        np.save(f"{self.output_dir}/tmp_emb.npy", output["image_embedding"])
         return (output, )
 
 NODE_CLASS_MAPPINGS = {

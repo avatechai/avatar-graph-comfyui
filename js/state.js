@@ -36,4 +36,5 @@ export const selectedLayer = van.state();
 /** @type {State<LGraphNode>} */
 export const targetNode = van.state();
 
-export const imageSize = van.state({ width: 0, height: 0 });
+export const imageSize = van.state({ width: 0, height: 0, samScale: 0 });
+export const embeddings = van.state();

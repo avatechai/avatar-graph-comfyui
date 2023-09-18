@@ -1,4 +1,5 @@
 import { SideBar } from "./SideBar.js";
+import { initModel, runONNX } from "./onnx.js";
 import {
   showImageEditor,
   point_label,
@@ -9,9 +10,10 @@ import {
   imageSize,
   selectedLayer,
   imagePromptsMulti,
+  embeddings,
 } from "./state.js";
 import { van } from "./van.js";
-const { button, div, img } = van.tags;
+const { button, div, img, canvas } = van.tags;
 
 function updateImagePrompts() {
   if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
@@ -56,11 +58,21 @@ function handlePointClick(e, point) {
   updateImagePrompts();
 }
 
+function handleImageSize(image) {
+  // Input images to SAM must be resized so the longest side is 1024
+  const LONG_SIDE_LENGTH = 1024;
+  let w = image.naturalWidth;
+  let h = image.naturalHeight;
+  const samScale = LONG_SIDE_LENGTH / Math.max(h, w);
+  return { height: h, width: w, samScale };
+}
+
 export function ImageEditor() {
+  initModel();
   return div(
     {
       class: () =>
-        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto  " +
+        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto" +
         (showImageEditor.val ? "" : "hidden"),
     },
     button(
@@ -99,22 +111,23 @@ export function ImageEditor() {
     ),
     div(
       {
-        class:
-          "flex items-center justify-center absolute h-full left-0 right-0 bottom-0 top-0 mx-auto my-auto max-h-[1000px] ",
+        class: "flex items-center justify-center w-full h-full",
       },
       img({
-        class: "w-fit h-full",
+        class:
+          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
         src: imageUrl,
         onload: (e) => {
-          imageSize.val = {
-            width: e.target.naturalWidth,
-            height: e.target.naturalHeight,
-          };
+          imageSize.val = handleImageSize(e.target);
 
           imageContainerSize.val = {
             width: e.target.offsetWidth,
             height: e.target.offsetHeight,
           };
+
+          const canvas = document.getElementById("mask-canvas");
+          canvas.width = e.target.naturalWidth;
+          canvas.height = e.target.naturalHeight;
         },
         oncontextmenu: (e) => {
           e.preventDefault();
@@ -123,6 +136,25 @@ export function ImageEditor() {
         },
         onclick: (e) => {
           handleClick(e);
+        },
+        onmousemove: (e) => {
+          // console.log('Yo', e);
+        },
+      }),
+      canvas({
+        class:
+          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
+        id: "mask-canvas",
+        onclick: (e) => {
+          if (embeddings.val) {
+            const clicks = [{ x: e.clientX, y: e.clientY, clickType: 1 }];
+            runONNX(clicks, embeddings.val).then((mask) => {
+              const canvas = document.getElementById("mask-canvas");
+              const ctx = canvas.getContext("2d");
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              ctx.drawImage(mask, 0, 0);
+            });
+          }
         },
       }),
       () => {
