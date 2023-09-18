@@ -27,6 +27,12 @@ export const imageContainerSize = van.state({
 /** @type {State<Point[]>} */
 export const imagePrompts = van.state([]);
 
+/** @type {State<Record<string, Point[]>>} */
+export const imagePromptsMulti = van.state({});
+
+/** @type {State<string>} */
+export const selectedLayer = van.state();
+
 /** @type {State<LGraphNode>} */
 export const targetNode = van.state();
 

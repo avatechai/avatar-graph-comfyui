@@ -5,15 +5,50 @@ import {
   imageContainerSize,
   imagePrompts,
   targetNode,
-  imageSize
+  imageSize,
+  selectedLayer,
 } from './state.js';
 import { van } from './van.js';
 const { button, iframe, div, img } = van.tags;
 
+function updateImagePrompts() {
+  targetNode.val.widgets.find((x) => x.name === 'image_prompts_json').value =
+    JSON.stringify(imagePrompts.val);
+  targetNode.val.graph.change();
+}
+
+function handleClick(e) {
+  const rect = e.target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const relativeX = Math.trunc(
+    (x / e.target.offsetWidth) * imageSize.val.width,
+  );
+  const relativeY = Math.trunc(
+    (y / e.target.offsetHeight) * imageSize.val.height,
+  );
+
+  imagePrompts.val = [
+    ...imagePrompts.val,
+    { x: relativeX, y: relativeY, label: e.isRight ? 0 : 1 },
+  ];
+
+  updateImagePrompts();
+}
+
+function handlePointClick(e, point) {
+  e.preventDefault();
+  imagePrompts.val = imagePrompts.val.filter(
+    (x) => x.x !== point.x && x.y !== point.y,
+  );
+  updateImagePrompts();
+}
+
 export function ImageEditor() {
   return div(
     {
-      class: () => 'absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto  ' +
+      class: () =>
+        'absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto  ' +
         (showImageEditor.val ? '' : 'hidden'),
     },
     button(
@@ -24,11 +59,12 @@ export function ImageEditor() {
           showImageEditor.val = false;
         },
       },
-      'back'
+      'back',
     ),
     div(
       {
-        class: 'w-full flex justify-center absolute top-0 left-0 right-0 items-center',
+        class:
+          'hidden w-full flex justify-center absolute top-0 left-0 right-0 items-center',
       },
       button(
         {
@@ -37,7 +73,7 @@ export function ImageEditor() {
             point_label.val = 1;
           },
         },
-        'Positive'
+        'Positive',
       ),
       button(
         {
@@ -46,12 +82,13 @@ export function ImageEditor() {
             point_label.val = 0;
           },
         },
-        'Negative'
-      )
+        'Negative',
+      ),
     ),
     div(
       {
-        class: 'flex items-center justify-center absolute h-full left-0 right-0 bottom-0 top-0 mx-auto my-auto max-h-[1000px] ',
+        class:
+          'flex items-center justify-center absolute h-full left-0 right-0 bottom-0 top-0 mx-auto my-auto max-h-[1000px] ',
       },
       img({
         class: 'w-fit h-full',
@@ -67,62 +104,46 @@ export function ImageEditor() {
             height: e.target.offsetHeight,
           };
         },
+        oncontextmenu: (e) => {
+          e.preventDefault();
+          e.isRight = true;
+          handleClick(e);
+        },
         onclick: (e) => {
-          const rect = e.target.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const relativeX = Math.trunc(
-            (x / e.target.offsetWidth) * imageSize.val.width
-          );
-          const relativeY = Math.trunc(
-            (y / e.target.offsetHeight) * imageSize.val.height
-          );
-
-          imagePrompts.val = [
-            ...imagePrompts.val,
-            { x: relativeX, y: relativeY, label: point_label.val },
-          ];
-
-          // targetWidget.widgets.find((x) => x.name === 'x').value = relativeX;
-          // targetWidget.widgets.find((x) => x.name === 'y').value = relativeY;
-          targetNode.val.widgets.find(
-            (x) => x.name === 'image_prompts_json'
-          ).value = JSON.stringify(imagePrompts.val);
-          targetNode.val.graph.change();
-          // showImageEditor.val = false;
+          handleClick(e);
         },
       }),
       () => {
         return div(
           {
             class: 'absolute w-full h-full pointer-events-none',
-            style: () => `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
+            style: () =>
+              `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
           },
           ...imagePrompts.val.map((point) => {
-            return div(
-              {
-                class: 'absolute',
-                style: () => `left: ${(point.x / imageSize.val.width) *
-                  imageContainerSize.val.width}px; top: ${(point.y / imageSize.val.height) *
-                  imageContainerSize.val.height}px; transform: translate(-50%, -50%);`,
+            return button({
+              style: () =>
+                `left: ${
+                  (point.x / imageSize.val.width) * imageContainerSize.val.width
+                }px; top: ${
+                  (point.y / imageSize.val.height) *
+                  imageContainerSize.val.height
+                }px; transform: translate(-50%, -50%);`,
+              class: () =>
+                `absolute w-3 h-3  p-0 rounded-full pointer-events-auto ${
+                  point.label === 1 ? 'bg-green-500' : 'bg-red-500'
+                }`,
+
+              oncontextmenu: (e) => {
+                handlePointClick(e, point);
               },
-              button({
-                class: () => `w-4 h-4 rounded-full pointer-events-auto ${point.label === 1 ? 'bg-green-500' : 'bg-red-500'}`,
-                onclick: (e) => {
-                  e.preventDefault();
-                  imagePrompts.val = imagePrompts.val.filter(
-                    (x) => x.x !== point.x && x.y !== point.y
-                  );
-                  targetNode.val.widgets.find(
-                    (x) => x.name === 'image_prompts_json'
-                  ).value = JSON.stringify(imagePrompts.val);
-                  targetNode.val.graph.change();
-                },
-              })
-            );
-          })
+              onclick: (e) => {
+                handlePointClick(e, point);
+              },
+            });
+          }),
         );
-      }
-    )
+      },
+    ),
   );
 }
