@@ -1,4 +1,4 @@
-import { SideBar } from './SideBar.js';
+import { SideBar } from "./SideBar.js";
 import {
   showImageEditor,
   point_label,
@@ -9,21 +9,21 @@ import {
   imageSize,
   selectedLayer,
   imagePromptsMulti,
-} from './state.js';
-import { van } from './van.js';
+} from "./state.js";
+import { van } from "./van.js";
 const { button, div, img } = van.tags;
 
 function updateImagePrompts() {
-  if (selectedLayer.val !== '' && selectedLayer.val !== undefined) {
+  if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
     imagePromptsMulti.val = {
       ...imagePromptsMulti.val,
       [selectedLayer.val]: imagePrompts.val,
     };
 
-    targetNode.val.widgets.find((x) => x.name === 'image_prompts_json').value =
+    targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePromptsMulti.val);
   } else {
-    targetNode.val.widgets.find((x) => x.name === 'image_prompts_json').value =
+    targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePrompts.val);
   }
   targetNode.val.graph.change();
@@ -34,10 +34,10 @@ function handleClick(e) {
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
   const relativeX = Math.trunc(
-    (x / e.target.offsetWidth) * imageSize.val.width,
+    (x / e.target.offsetWidth) * imageSize.val.width
   );
   const relativeY = Math.trunc(
-    (y / e.target.offsetHeight) * imageSize.val.height,
+    (y / e.target.offsetHeight) * imageSize.val.height
   );
 
   imagePrompts.val = [
@@ -51,7 +51,7 @@ function handleClick(e) {
 function handlePointClick(e, point) {
   e.preventDefault();
   imagePrompts.val = imagePrompts.val.filter(
-    (x) => !(x.x === point.x && x.y === point.y),
+    (x) => !(x.x === point.x && x.y === point.y)
   );
   updateImagePrompts();
 }
@@ -60,50 +60,50 @@ export function ImageEditor() {
   return div(
     {
       class: () =>
-        'absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto  ' +
-        (showImageEditor.val ? '' : 'hidden'),
+        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto  " +
+        (showImageEditor.val ? "" : "hidden"),
     },
     button(
       {
-        class: () => 'absolute px-4 py-2 rounded-md left-0 top-0 z-[200] ',
+        class: () => "absolute px-4 py-2 rounded-md left-0 top-0 z-[200] ",
         onclick: () => {
-          console.log('close');
+          console.log("close");
           showImageEditor.val = false;
         },
       },
-      'back',
+      "back"
     ),
     div(
       {
         class:
-          'hidden w-full flex justify-center absolute top-0 left-0 right-0 items-center',
+          "hidden w-full flex justify-center absolute top-0 left-0 right-0 items-center",
       },
       button(
         {
-          class: () => ' px-4 py-2 rounded-md left-0 top-0 z-[200] ',
+          class: () => " px-4 py-2 rounded-md left-0 top-0 z-[200] ",
           onclick: () => {
             point_label.val = 1;
           },
         },
-        'Positive',
+        "Positive"
       ),
       button(
         {
-          class: () => ' px-4 py-2 rounded-md left-0 top-0 z-[200] ',
+          class: () => " px-4 py-2 rounded-md left-0 top-0 z-[200] ",
           onclick: () => {
             point_label.val = 0;
           },
         },
-        'Negative',
-      ),
+        "Negative"
+      )
     ),
     div(
       {
         class:
-          'flex items-center justify-center absolute h-full left-0 right-0 bottom-0 top-0 mx-auto my-auto max-h-[1000px] ',
+          "flex items-center justify-center absolute h-full left-0 right-0 bottom-0 top-0 mx-auto my-auto max-h-[1000px] ",
       },
       img({
-        class: 'w-fit h-full',
+        class: "w-fit h-full",
         src: imageUrl,
         onload: (e) => {
           imageSize.val = {
@@ -128,7 +128,7 @@ export function ImageEditor() {
       () => {
         return div(
           {
-            class: 'absolute w-full h-full pointer-events-none',
+            class: "absolute w-full h-full pointer-events-none",
             style: () =>
               `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
           },
@@ -143,7 +143,7 @@ export function ImageEditor() {
                 }px; transform: translate(-50%, -50%);`,
               class: () =>
                 `absolute w-3 h-3  p-0 rounded-full pointer-events-auto ${
-                  point.label === 1 ? 'bg-green-500' : 'bg-red-500'
+                  point.label === 1 ? "bg-green-500" : "bg-red-500"
                 }`,
 
               oncontextmenu: (e) => {
@@ -153,10 +153,10 @@ export function ImageEditor() {
                 handlePointClick(e, point);
               },
             });
-          }),
+          })
         );
-      },
+      }
     ),
-    SideBar(),
+    SideBar()
   );
 }

@@ -5,12 +5,14 @@ import {
   imageUrl,
   imagePrompts,
   targetNode,
-} from './state.js';
-import { van } from './van.js';
-import { app } from './app.js';
-import { api } from './api.js';
-import { Container } from './Container.js';
-import 'https://code.iconify.design/3/3.1.0/iconify.min.js';
+  selectedLayer,
+  imagePromptsMulti,
+} from "./state.js";
+import { van } from "./van.js";
+import { app } from "./app.js";
+import { api } from "./api.js";
+import { Container } from "./Container.js";
+import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 
 /** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
 const recomputeInsideNodesOps = LGraphGroup.prototype.recomputeInsideNodes;
@@ -53,15 +55,15 @@ LGraphGroup.prototype.repositionNodes = function () {
   let sortedNodes = this._nodes.sort((a, b) => a.pos[1] - b.pos[1]);
   // Separate input and output nodes from the rest
   const inputNodes = sortedNodes.filter(
-    (node) => node.properties.routeType === 'input',
+    (node) => node.properties.routeType === "input"
   );
   const outputNodes = sortedNodes.filter(
-    (node) => node.properties.routeType === 'output',
+    (node) => node.properties.routeType === "output"
   );
   const otherNodes = sortedNodes.filter(
     (node) =>
-      node.properties.routeType !== 'input' &&
-      node.properties.routeType !== 'output',
+      node.properties.routeType !== "input" &&
+      node.properties.routeType !== "output"
   );
 
   // Concatenate the arrays so that input nodes are first and output nodes are last
@@ -75,11 +77,11 @@ LGraphGroup.prototype.repositionNodes = function () {
 
     node.parentId = this.id;
 
-    if (node.type !== 'Reroute') node.size[0] = width - 20;
+    if (node.type !== "Reroute") node.size[0] = width - 20;
 
     if (node.flags.collapsed) {
       height += 40;
-    } else if (node.type === 'Reroute') {
+    } else if (node.type === "Reroute") {
       height += 30;
       node.pos[1] -= 30;
     } else {
@@ -116,7 +118,7 @@ const getOpts = LGraphCanvas.prototype.getCanvasMenuOptions;
 LGraphCanvas.prototype.getCanvasMenuOptions = function () {
   const r = getOpts.apply(this, arguments);
   r.push({
-    content: 'Add Stack',
+    content: "Add Stack",
     callback: (info, entry, mouse_event) => {
       var canvas = LGraphCanvas.active_canvas;
       var ref_window = canvas.getCanvasWindow();
@@ -124,14 +126,14 @@ LGraphCanvas.prototype.getCanvasMenuOptions = function () {
       var group = new LiteGraph.LGraphGroup();
       group.pos = canvas.convertEventToCanvasOffset(mouse_event);
       group.isStack = true;
-      group.title = 'Stack';
+      group.title = "Stack";
       canvas.graph.add(group);
 
       // add two reroute nodes
-      var reroute1 = LiteGraph.createNode('Reroute');
-      var reroute2 = LiteGraph.createNode('Reroute');
-      reroute1.properties.routeType = 'input';
-      reroute2.properties.routeType = 'output';
+      var reroute1 = LiteGraph.createNode("Reroute");
+      var reroute2 = LiteGraph.createNode("Reroute");
+      reroute1.properties.routeType = "input";
+      reroute2.properties.routeType = "output";
       reroute1.pos = [group.pos[0] + 10, group.pos[1] + 40];
       reroute2.pos = [group.pos[0] + 10, group.pos[1] + 70];
       canvas.graph.add(reroute1);
@@ -183,17 +185,17 @@ function addMenuHandler(nodeType, cb) {
 }
 
 function openInAvatechEditor(url, fileName) {
-  let editor = document.getElementById('avatech-editor-iframe');
+  let editor = document.getElementById("avatech-editor-iframe");
   iframeSrc.val = url;
   showEditor.val = true;
 
   editor.contentWindow.postMessage(
     {
-      key: 'key',
+      key: "key",
       value: fileName,
-      method: 'store',
+      method: "store",
     },
-    '*',
+    "*"
   );
 }
 
@@ -213,7 +215,7 @@ function showMyImageEditor(node) {
   /** @type {LGraphNode} */
   let nodea = graph._nodes_by_id[targetLink.origin_id];
 
-  while (nodea.type == 'Reroute') {
+  while (nodea.type == "Reroute") {
     nodea = nodea.getInputNode(0);
   }
 
@@ -222,10 +224,10 @@ function showMyImageEditor(node) {
 
   /** @type {string} */
   let connectedImageFileName = nodea.widgets.find(
-    (x) => x.name === 'image',
+    (x) => x.name === "image"
   ).value;
 
-  const split = connectedImageFileName.split('/');
+  const split = connectedImageFileName.split("/");
 
   if (split.length > 1) connectedImageFileName = split[1];
 
@@ -236,12 +238,19 @@ function showMyImageEditor(node) {
   showImageEditor.val = true;
 
   imagePrompts.val = JSON.parse(
-    node.widgets.find((x) => x.name === 'image_prompts_json').value,
+    node.widgets.find((x) => x.name === "image_prompts_json").value
   );
+  if (!Array.isArray(imagePrompts.val)) {
+    imagePromptsMulti.val = imagePrompts.val;
+
+    selectedLayer.val = Object.keys(imagePromptsMulti.val)[0];
+
+    imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
+  }
   imageUrl.val = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      connectedImageFileName,
-    )}&type=input&subfolder=${split.length > 1 ? split[0] : ''}`,
+      connectedImageFileName
+    )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`
   );
   targetNode.val = node;
 }
@@ -252,7 +261,7 @@ const ext = {
   getCustomWidgets(app) {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
-        const btn = node.addWidget('button', 'Edit prompt', '', () => {
+        const btn = node.addWidget("button", "Edit prompt", "", () => {
           showMyImageEditor(node);
         });
         btn.serialize = false;
@@ -264,7 +273,7 @@ const ext = {
     };
   },
 
-  name: 'Avatech.Avatar.BlendshapeEditor',
+  name: "Avatech.Avatar.BlendshapeEditor",
 
   init(app) {
     const onNodeMoved = app.canvas.onNodeMoved;
@@ -280,17 +289,17 @@ const ext = {
   },
 
   async setup() {
-    const graphCanvas = document.getElementById('graph-canvas');
+    const graphCanvas = document.getElementById("graph-canvas");
 
-    api.addEventListener('executed', (evt) => {
+    api.addEventListener("executed", (evt) => {
       if (evt.detail?.output.gltfFilename) {
         const viewer = document.getElementById(
-          'avatech-viewer-iframe',
+          "avatech-viewer-iframe"
         ).contentWindow;
 
         const gltfFilename =
           window.location.protocol +
-          '//' +
+          "//" +
           api.api_host +
           api.api_base +
           `/view?filename=${evt.detail?.output.gltfFilename[0]}`;
@@ -300,7 +309,7 @@ const ext = {
             avatarURL: gltfFilename,
             blendshapes: evt.detail?.output.blendshapes[0],
           }),
-          '*',
+          "*"
         );
 
         console.log(evt.detail.output.gltfFilename);
@@ -308,20 +317,20 @@ const ext = {
     });
 
     window.addEventListener(
-      'keydown',
+      "keydown",
       (event) => {
-        if (event.key === 'Escape') {
+        if (event.key === "Escape") {
           event.preventDefault();
           showImageEditor.val = false;
         }
       },
       {
         capture: true,
-      },
+      }
     );
 
-    graphCanvas.addEventListener('keydown', (event) => {
-      if (event.key === 'b') {
+    graphCanvas.addEventListener("keydown", (event) => {
+      if (event.key === "b") {
         event.preventDefault();
         const currentGraph = app.graph.list_of_graphcanvas[0];
         if (currentGraph.selected_nodes.length !== 1) {
@@ -337,7 +346,7 @@ const ext = {
         app.graph.change();
       }
 
-      if (event.key === 'v' && !event.ctrlKey && !event.metaKey) {
+      if (event.key === "v" && !event.ctrlKey && !event.metaKey) {
         event.preventDefault();
         const currentGraph = app.graph.list_of_graphcanvas[0];
         if (currentGraph.selected_nodes.length !== 1) {
@@ -359,11 +368,11 @@ const ext = {
       }
     });
 
-    graphCanvas.addEventListener('keydown', (event) => {
+    graphCanvas.addEventListener("keydown", (event) => {
       // if enter
-      if (event.key === 'Enter') {
+      if (event.key === "Enter") {
         event.preventDefault();
-        document.getElementById('queue-button').click();
+        document.getElementById("queue-button").click();
       }
     });
 
@@ -371,28 +380,28 @@ const ext = {
   },
 
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
-    if (nodeData.name === 'ExportGLTF') {
+    if (nodeData.name === "ExportGLTF") {
       addMenuHandler(nodeType, function (_, options) {
-        const output = app.nodeOutputs[this.id + ''];
+        const output = app.nodeOutputs[this.id + ""];
         if (!output || !output.gltfFilename) return;
 
         const gltfFilename =
           window.location.protocol +
-          '//' +
+          "//" +
           api.api_host +
           api.api_base +
           `/view?filename=${output.gltfFilename[0]}`;
 
         options.unshift({
-          content: 'Save file',
+          content: "Save file",
           callback: () => {
-            const a = document.createElement('a');
+            const a = document.createElement("a");
             let url = new URL(gltfFilename);
-            url.searchParams.delete('preview');
+            url.searchParams.delete("preview");
             a.href = url;
             a.setAttribute(
-              'download',
-              new URLSearchParams(url.search).get('filename'),
+              "download",
+              new URLSearchParams(url.search).get("filename")
             );
             document.body.append(a);
             a.click();
@@ -401,26 +410,26 @@ const ext = {
         });
 
         options.unshift({
-          content: 'Open In Avatech Editor (Local)',
+          content: "Open In Avatech Editor (Local)",
           callback: () => {
-            openInAvatechEditor('http://localhost:3006', gltfFilename);
+            openInAvatechEditor("http://localhost:3006", gltfFilename);
           },
         });
 
         options.unshift({
-          content: 'Open In Avatech Editor',
+          content: "Open In Avatech Editor",
           callback: () => {
-            openInAvatechEditor('https://editor.avatech.ai', gltfFilename);
+            openInAvatechEditor("https://editor.avatech.ai", gltfFilename);
           },
         });
       });
-    } else if (nodeData.name === 'SAM_Prompt_Image') {
-      nodeData.input.required.sam = ['SAM_PROMPTS'];
+    } else if (nodeData.name === "SAM_Prompt_Image") {
+      nodeData.input.required.sam = ["SAM_PROMPTS"];
       // nodeData.input.required.upload = ['IMAGEUPLOAD'];
       // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
       addMenuHandler(nodeType, function (_, options) {
         options.unshift({
-          content: 'Open In Points Editor (Local)',
+          content: "Open In Points Editor (Local)",
           callback: () => {
             showMyImageEditor(this);
           },
