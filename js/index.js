@@ -10,6 +10,7 @@ import { van } from './van.js';
 import { app } from './app.js';
 import { api } from './api.js';
 import { Container } from './Container.js';
+import 'https://code.iconify.design/3/3.1.0/iconify.min.js';
 
 /** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
 const recomputeInsideNodesOps = LGraphGroup.prototype.recomputeInsideNodes;
@@ -51,9 +52,17 @@ LGraphGroup.prototype.repositionNodes = function () {
 
   let sortedNodes = this._nodes.sort((a, b) => a.pos[1] - b.pos[1]);
   // Separate input and output nodes from the rest
-  const inputNodes = sortedNodes.filter(node => node.properties.routeType === 'input');
-  const outputNodes = sortedNodes.filter(node => node.properties.routeType === 'output');
-  const otherNodes = sortedNodes.filter(node => node.properties.routeType !== 'input' && node.properties.routeType !== 'output');
+  const inputNodes = sortedNodes.filter(
+    (node) => node.properties.routeType === 'input',
+  );
+  const outputNodes = sortedNodes.filter(
+    (node) => node.properties.routeType === 'output',
+  );
+  const otherNodes = sortedNodes.filter(
+    (node) =>
+      node.properties.routeType !== 'input' &&
+      node.properties.routeType !== 'output',
+  );
 
   // Concatenate the arrays so that input nodes are first and output nodes are last
   sortedNodes = [...inputNodes, ...otherNodes, ...outputNodes];
@@ -62,12 +71,11 @@ LGraphGroup.prototype.repositionNodes = function () {
     /** @type {LGraphNode} */
     var node = sortedNodes[i];
     node.pos[0] = pos[0];
-    node.pos[1] = pos[1] + height
-    
+    node.pos[1] = pos[1] + height;
+
     node.parentId = this.id;
 
-    if (node.type !== 'Reroute')
-      node.size[0] = width - 20;
+    if (node.type !== 'Reroute') node.size[0] = width - 20;
 
     if (node.flags.collapsed) {
       height += 40;
@@ -351,7 +359,7 @@ const ext = {
       }
     });
 
-    window.addEventListener('keydown', (event) => {
+    graphCanvas.addEventListener('keydown', (event) => {
       // if enter
       if (event.key === 'Enter') {
         event.preventDefault();

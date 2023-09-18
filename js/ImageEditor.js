@@ -1,3 +1,4 @@
+import { SideBar } from './SideBar.js';
 import {
   showImageEditor,
   point_label,
@@ -7,13 +8,24 @@ import {
   targetNode,
   imageSize,
   selectedLayer,
+  imagePromptsMulti,
 } from './state.js';
 import { van } from './van.js';
-const { button, iframe, div, img } = van.tags;
+const { button, div, img } = van.tags;
 
 function updateImagePrompts() {
-  targetNode.val.widgets.find((x) => x.name === 'image_prompts_json').value =
-    JSON.stringify(imagePrompts.val);
+  if (selectedLayer.val !== '' && selectedLayer.val !== undefined) {
+    imagePromptsMulti.val = {
+      ...imagePromptsMulti.val,
+      [selectedLayer.val]: imagePrompts.val,
+    };
+
+    targetNode.val.widgets.find((x) => x.name === 'image_prompts_json').value =
+      JSON.stringify(imagePromptsMulti.val);
+  } else {
+    targetNode.val.widgets.find((x) => x.name === 'image_prompts_json').value =
+      JSON.stringify(imagePrompts.val);
+  }
   targetNode.val.graph.change();
 }
 
@@ -39,7 +51,7 @@ function handleClick(e) {
 function handlePointClick(e, point) {
   e.preventDefault();
   imagePrompts.val = imagePrompts.val.filter(
-    (x) => x.x !== point.x && x.y !== point.y,
+    (x) => !(x.x === point.x && x.y === point.y),
   );
   updateImagePrompts();
 }
@@ -145,5 +157,6 @@ export function ImageEditor() {
         );
       },
     ),
+    SideBar(),
   );
 }
