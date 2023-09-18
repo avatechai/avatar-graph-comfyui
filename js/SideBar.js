@@ -1,4 +1,4 @@
-import { imagePrompts, selectedLayer, imagePromptsMulti } from "./state.js";
+import { imagePrompts, selectedLayer, imagePromptsMulti, targetNode } from "./state.js";
 import { van } from "./van.js";
 const {
   button,
@@ -83,6 +83,7 @@ export function SideBar() {
               console.log(inputText, imagePromptsMulti.val);
               my_modal_3.close();
               e.target.elements[1].value = "";
+              targetNode.val.addInput(inputText, "SAM_PROMPT")
             },
           },
           button(
