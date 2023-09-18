@@ -1,4 +1,10 @@
-import { imagePrompts, selectedLayer, imagePromptsMulti, targetNode } from "./state.js";
+import { updateImagePrompts } from "./ImageEditor.js";
+import {
+  imagePrompts,
+  selectedLayer,
+  imagePromptsMulti,
+  targetNode,
+} from "./state.js";
 import { van } from "./van.js";
 const {
   button,
@@ -20,7 +26,7 @@ export function SideBar() {
   return div(
     {
       class:
-        "z-100 w-fit flex-col flex justify-center absolute top-0 left-0 bottom-0 items-start gap-2",
+        "ml-2 z-100 w-fit flex-col flex justify-center absolute top-0 left-0 bottom-0 items-start gap-2",
     },
 
     () => {
@@ -72,6 +78,7 @@ export function SideBar() {
         { class: "modal-box text-base-content" },
         form(
           {
+            class: "gap-2 flex flex-col",
             method: "dialog",
             onsubmit: (e) => {
               e.preventDefault();
@@ -83,7 +90,16 @@ export function SideBar() {
               console.log(inputText, imagePromptsMulti.val);
               my_modal_3.close();
               e.target.elements[1].value = "";
-              targetNode.val.addInput(inputText, "SAM_PROMPT")
+              targetNode.val.addOutput(inputText, "SAM_PROMPT");
+              targetNode.val.graph.change();
+              if (
+                selectedLayer.val === null ||
+                selectedLayer.val === undefined ||
+                selectedLayer.val === ""
+              ) {
+                selectedLayer.val = inputText;
+              }
+              updateImagePrompts();
             },
           },
           button(
@@ -104,9 +120,16 @@ export function SideBar() {
           input({
             type: "text",
             placeholder: "Type here",
-            class: "input input-bordered w-full max-w-xs",
+            class: "input input-bordered w-full",
             autofocus: true,
-          })
+          }),
+          button(
+            {
+              type: "submit",
+              class: "btn btn-sm  btn-ghost place-self-end",
+            },
+            "Confirm"
+          )
         )
       )
     )

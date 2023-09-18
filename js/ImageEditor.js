@@ -15,7 +15,9 @@ import {
 import { van } from "./van.js";
 const { button, div, img, canvas } = van.tags;
 
-function updateImagePrompts() {
+let throttle = false;
+
+export function updateImagePrompts() {
   if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
     imagePromptsMulti.val = {
       ...imagePromptsMulti.val,
@@ -36,10 +38,11 @@ function handleClick(e) {
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
   const relativeX = Math.trunc(
-    (x / e.target.offsetWidth) * imageSize.val.width
+    ((x / e.target.offsetWidth) * imageSize.val.width) / imageSize.val.samScale
   );
   const relativeY = Math.trunc(
-    (y / e.target.offsetHeight) * imageSize.val.height
+    ((y / e.target.offsetHeight) * imageSize.val.height) /
+      imageSize.val.samScale
   );
 
   imagePrompts.val = [
@@ -67,12 +70,13 @@ function handleImageSize(image) {
   return { height: h, width: w, samScale };
 }
 
+initModel();
+
 export function ImageEditor() {
-  initModel();
   return div(
     {
       class: () =>
-        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto" +
+        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto " +
         (showImageEditor.val ? "" : "hidden"),
     },
     button(
@@ -112,6 +116,7 @@ export function ImageEditor() {
     div(
       {
         class: "flex items-center justify-center w-full h-full",
+        id: "image-container",
       },
       img({
         class:
@@ -119,6 +124,9 @@ export function ImageEditor() {
         src: imageUrl,
         onload: (e) => {
           imageSize.val = handleImageSize(e.target);
+
+          document.getElementById("image-container").style.scale =
+            imageSize.val.samScale;
 
           imageContainerSize.val = {
             width: e.target.offsetWidth,
@@ -138,24 +146,40 @@ export function ImageEditor() {
           handleClick(e);
         },
         onmousemove: (e) => {
-          // console.log('Yo', e);
+          if (!throttle) {
+            throttle = true;
+            setTimeout(() => {
+              throttle = false;
+
+              if (embeddings.val) {
+                const rect = e.target.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = Math.trunc(
+                  ((x / e.target.offsetWidth) * imageSize.val.width) /
+                    imageSize.val.samScale
+                );
+                const relativeY = Math.trunc(
+                  ((y / e.target.offsetHeight) * imageSize.val.height) /
+                    imageSize.val.samScale
+                );
+
+                const clicks = [{ x: relativeX, y: relativeY, clickType: 1 }];
+                runONNX(clicks, embeddings.val).then((mask) => {
+                  const canvas = document.getElementById("mask-canvas");
+                  const ctx = canvas.getContext("2d");
+                  ctx.clearRect(0, 0, canvas.width, canvas.height);
+                  ctx.drawImage(mask, 0, 0);
+                });
+              }
+            }, 10);
+          }
         },
       }),
       canvas({
         class:
-          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
+          "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80",
         id: "mask-canvas",
-        onclick: (e) => {
-          if (embeddings.val) {
-            const clicks = [{ x: e.clientX, y: e.clientY, clickType: 1 }];
-            runONNX(clicks, embeddings.val).then((mask) => {
-              const canvas = document.getElementById("mask-canvas");
-              const ctx = canvas.getContext("2d");
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              ctx.drawImage(mask, 0, 0);
-            });
-          }
-        },
       }),
       () => {
         return div(
@@ -164,7 +188,7 @@ export function ImageEditor() {
             style: () =>
               `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
           },
-          ...imagePrompts.val.map((point) => {
+          ...imagePrompts.val?.map((point) => {
             return button({
               style: () =>
                 `left: ${

@@ -33,9 +33,15 @@ class SAM_Prompt_Image:
 
         image_prompts = json.loads(image_prompts_json)
 
-        print(image_prompts)
+        result = (image_prompts, )
 
-        return (image_prompts, )
+        if isinstance(image_prompts, list):
+            pass
+        elif all(isinstance(item, list) for item in image_prompts.values()):
+            for item in image_prompts.values():
+                result.extend(item)
+
+        return result
 
 NODE_CLASS_MAPPINGS = {
     "SAM_Prompt_Image": SAM_Prompt_Image

@@ -33,7 +33,7 @@ export const loadNpyTensor = async (tensorFile, dType = "float32") => {
 };
 
 export const runONNX = async (clicks, tensor) => {
-  console.log('tensor', tensor);
+  // console.log('tensor', tensor);
   try {
     if (
       model === null ||
