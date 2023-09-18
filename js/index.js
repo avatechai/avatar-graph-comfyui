@@ -6,11 +6,14 @@ import {
   imagePrompts,
   targetNode,
   embeddings,
+  imagePromptsMulti,
+  selectedLayer
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
 import { api } from "./api.js";
 import { Container } from "./Container.js";
+import { loadNpyTensor } from './onnx.js'
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 
 /** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
