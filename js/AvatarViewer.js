@@ -14,8 +14,8 @@ export function AvatarViewer() {
       allow: "cross-origin-isolated",
       class: () =>
         "w-full h-full flex pointer-events-auto rounded-2xl border-none",
-      // src: "https://labs.avatech.ai/viewer/default",
-      src: 'http://localhost:3000/viewer/default',
+      src: "https://labs.avatech.ai/viewer/default",
+      // src: 'http://localhost:3000/viewer/default',
     })
   );
 }
