@@ -23,7 +23,7 @@ export function AvatarEditor() {
       id: 'avatech-editor-iframe',
       title: 'avatech-editor-iframe',
       name: 'avatech-editor-iframe',
-      crossorigin: "anonymous",
+      allow: "cross-origin-isolated",
       class: () =>
         'w-full h-full pointer-events-auto ' + (showEditor.val ? '' : 'hidden'),
       src: iframeSrc,

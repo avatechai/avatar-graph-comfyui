@@ -12,7 +12,6 @@ export function AvatarViewer() {
       title: "avatech-viewer-iframe",
       name: "avatech-viewer-iframe",
       allow: "cross-origin-isolated",
-      sandbox: "true",
       class: () =>
         "w-full h-full flex pointer-events-auto rounded-2xl border-none",
       // src: "https://labs.avatech.ai/viewer/default",
