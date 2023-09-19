@@ -13,6 +13,10 @@ class SAM_Embedding:
         return {
             "required": {
                 "image": ("IMAGE",),
+                "embedding_id": ("STRING", {
+                    "multiline": False,
+                    "default": "embedding"
+                }),
             },
             "optional": {
                 "predictor": ("SAMPREDICTOR",)
@@ -26,7 +30,7 @@ class SAM_Embedding:
 
     CATEGORY = "image"
 
-    def segment(self, image, predictor=None):
+    def segment(self, image, embedding_id, predictor=None):
         # Convert PyTorch tensor to numpy array
         image_np = (image[0].numpy() * 255).astype(np.uint8)
         
@@ -72,7 +76,7 @@ class SAM_Embedding:
 
             # print(output)
 
-        np.save(f"{self.output_dir}/tmp_emb.npy", output["image_embedding"])
+        np.save(f"{self.output_dir}/{embedding_id}.npy", output["image_embedding"])
         return (output, )
 
 NODE_CLASS_MAPPINGS = {

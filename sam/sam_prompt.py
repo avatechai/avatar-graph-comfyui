@@ -1,7 +1,4 @@
 import folder_paths
-import torch
-from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
-from einops import rearrange, repeat
 import os
 
 
@@ -15,6 +12,7 @@ class SAM_Prompt_Image:
             "required":
                 {
                     "image": ('IMAGE', ),
+                    "embeddings": ("EMBEDDINGS", ),
                     # "image": (sorted(files), ),
                     "image_prompts_json": ("STRING", {
                         "multiline": False,
@@ -28,7 +26,7 @@ class SAM_Prompt_Image:
     RETURN_TYPES = ("SAM_PROMPT", )
     FUNCTION = "load_image"
 
-    def load_image(self, image, image_prompts_json):
+    def load_image(self, image, embeddings, image_prompts_json):
         import json
 
         image_prompts = json.loads(image_prompts_json)

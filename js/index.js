@@ -7,13 +7,13 @@ import {
   targetNode,
   embeddings,
   imagePromptsMulti,
-  selectedLayer
+  selectedLayer,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
 import { api } from "./api.js";
 import { Container } from "./Container.js";
-import { loadNpyTensor } from './onnx.js'
+import { loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 
 /** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
@@ -201,18 +201,14 @@ function openInAvatechEditor(url, fileName) {
   );
 }
 
-/**
- *
- * @param {LGraphNode} node
- */
-function showMyImageEditor(node) {
+function getWidgetValue(node, inputIndex, widgetName) {
   /** @type {LGraph} */
   const graph = app.graph;
 
-  const imageNodeLink = node.inputs[0].link;
-  if (!imageNodeLink) return;
+  const nodeLink = node.inputs[inputIndex].link;
+  if (!nodeLink) return;
 
-  const targetLink = graph.links[imageNodeLink];
+  const targetLink = graph.links[nodeLink];
 
   /** @type {LGraphNode} */
   let nodea = graph._nodes_by_id[targetLink.origin_id];
@@ -225,17 +221,19 @@ function showMyImageEditor(node) {
   console.log(nodea.getInputNode(0, true));
 
   /** @type {string} */
-  let connectedImageFileName = nodea.widgets.find(
-    (x) => x.name === "image"
-  ).value;
+  return nodea.widgets.find((x) => x.name === widgetName).value;
+}
 
+/**
+ *
+ * @param {LGraphNode} node
+ */
+function showMyImageEditor(node) {
+  let connectedImageFileName = getWidgetValue(node, 0, "image");
   const split = connectedImageFileName.split("/");
-
   if (split.length > 1) connectedImageFileName = split[1];
 
-  console.log(connectedImageFileName);
-
-  // node.widgets.find((x) => x.name === 'image').value
+  const connectedEmbeddingFileName = getWidgetValue(node, 1, "embedding_id");
 
   showImageEditor.val = true;
 
@@ -256,8 +254,8 @@ function showMyImageEditor(node) {
   );
   const embeedingUrl = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      "tmp_emb.npy"
-    )}&type=output&subfolder=${split.length > 1 ? split[0] : ""}`
+      `${connectedEmbeddingFileName}.npy`
+    )}&type=output&subfolder=`
   );
   loadNpyTensor(embeedingUrl).then((tensor) => {
     embeddings.val = tensor;
