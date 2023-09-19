@@ -252,6 +252,8 @@ function showMyImageEditor(node) {
     selectedLayer.val = Object.keys(imagePromptsMulti.val)[0];
 
     imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
+  } else {
+    imagePromptsMulti.val = {};
   }
   imageUrl.val = api.apiURL(
     `/view?filename=${encodeURIComponent(

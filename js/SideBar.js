@@ -23,6 +23,8 @@ const {
 } = van.tags;
 
 export function SideBar() {
+  const layer_to_delete = van.state("");
+
   return div(
     {
       class:
@@ -41,7 +43,7 @@ export function SideBar() {
             a(
               {
                 class: () =>
-                  `capitalize text-start items-start ${
+                  `capitalize text-start items-start flex items-center justify-between  ${
                     selectedLayer.val === key ? "active" : ""
                   }`,
                 onclick: () => {
@@ -49,7 +51,27 @@ export function SideBar() {
                   imagePrompts.val = imagePromptsMulti.val[key];
                 },
               },
-              key
+              key,
+              button(
+                {
+                  class:
+                    "btn btn-circle btn-xs btn-ghost group hover:text-red-500",
+                  onclick: (e) => {
+                    console.log("delete");
+                    e.preventDefault();
+                    e.stopPropagation();
+                    layer_to_delete.val = key;
+                    setTimeout(() => {
+                      delete_layer_dialog.showModal();
+                    }, 0);
+                  },
+                },
+                span({
+                  class: "iconify",
+                  "data-icon": "ic:baseline-delete",
+                  "data-inline": "false",
+                })
+              )
             )
           );
         }),
@@ -72,6 +94,39 @@ export function SideBar() {
         )
       );
     },
+    () =>
+      ConfirmDialog(
+        {
+          id: "delete_layer_dialog",
+          title: "Delete Layer: " + layer_to_delete.val,
+          onsubmit: () => {
+            imagePromptsMulti.val = Object.fromEntries(
+              Object.entries(imagePromptsMulti.val).filter(
+                ([key, value]) => key !== layer_to_delete.val
+              )
+            );
+            console.log(imagePromptsMulti.val);
+            if (selectedLayer.val === layer_to_delete.val) {
+              // Select another layer if there is one
+              if (Object.keys(imagePromptsMulti.val).length > 0) {
+                selectedLayer.val = Object.keys(imagePromptsMulti.val)[0];
+                imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
+              } else {
+                selectedLayer.val = "";
+                imagePrompts.val = [];
+              }
+            }
+            const outputIndex = targetNode.val.findOutputSlot(
+              layer_to_delete.val
+            );
+            targetNode.val.removeOutput(outputIndex);
+            targetNode.val.graph.change();
+            updateImagePrompts();
+            delete_layer_dialog.close();
+          },
+        },
+        p("Are you sure you want to delete this layer?")
+      ),
     dialog(
       { id: "my_modal_3", class: "modal" },
       div(
@@ -130,6 +185,42 @@ export function SideBar() {
             },
             "Confirm"
           )
+        )
+      )
+    )
+  );
+}
+
+function ConfirmDialog({ id, title, onsubmit }, ...children) {
+  return dialog(
+    { id: id, class: "modal" },
+    div(
+      { class: "modal-box text-base-content" },
+      form(
+        {
+          class: "gap-2 flex flex-col",
+          method: "dialog",
+          onsubmit: onsubmit,
+        },
+        button(
+          {
+            type: "button",
+            class: "btn btn-sm btn-circle btn-ghost absolute right-2 top-2",
+            onclick: (e) => {
+              e.stopPropagation();
+              window[id].close();
+            },
+          },
+          "✕"
+        ),
+        h3({ class: "font-bold text-lg text-base-content" }, title),
+        ...children,
+        button(
+          {
+            type: "submit",
+            class: "btn btn-sm  btn-ghost place-self-end",
+          },
+          "Confirm"
         )
       )
     )
