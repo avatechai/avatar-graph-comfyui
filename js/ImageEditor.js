@@ -63,7 +63,8 @@ function handlePointClick(e, point) {
 
 function handleImageSize(image) {
   // Input images to SAM must be resized so the longest side is 1024
-  const LONG_SIDE_LENGTH = 1024;
+  const documentHeight = document.documentElement.clientHeight;
+  const LONG_SIDE_LENGTH = documentHeight;
   let w = image.naturalWidth;
   let h = image.naturalHeight;
   const samScale = LONG_SIDE_LENGTH / Math.max(h, w);
@@ -152,7 +153,7 @@ export function ImageEditor() {
       },
       img({
         class:
-          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[95%]",
+          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
         src: imageUrl,
         onload: (e) => {
           imageSize.val = handleImageSize(e.target);
@@ -208,7 +209,7 @@ export function ImageEditor() {
       }),
       canvas({
         class:
-          "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80 max-h-[95%]",
+          "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80",
         id: "mask-canvas",
       }),
       () => {
