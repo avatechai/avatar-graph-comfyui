@@ -3,6 +3,7 @@ import torch
 from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
 from einops import rearrange, repeat
 
+
 class SAM_Load_Embedding:
     @classmethod
     def INPUT_TYPES(s):
@@ -11,6 +12,10 @@ class SAM_Load_Embedding:
                 "filename": ("STRING", {
                     "multiline": False,
                     "default": "embeddings"
+                }),
+                "embedding_id": ("STRING", {
+                    "multiline": False,
+                    "default": "embedding"
                 }),
             }
         }
@@ -24,17 +29,17 @@ class SAM_Load_Embedding:
 
     CATEGORY = "image"
 
-    def process(self, filename):
+    def process(self, filename, embedding_id):
         import json
         import numpy as np
 
         data = {}
         with open(filename, 'r') as f:
             data = json.load(f)
-        
+
         # Convert list to numpy ndarray
         data['image_embedding'] = np.array(data['image_embedding'])
-        
+
         return (data, )
 
 
