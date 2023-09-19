@@ -51,6 +51,7 @@ function handleClick(e) {
   ];
 
   updateImagePrompts();
+  drawSegment(getClicks());
 }
 
 function handlePointClick(e, point) {
@@ -59,6 +60,7 @@ function handlePointClick(e, point) {
     (x) => !(x.x === point.x && x.y === point.y)
   );
   updateImagePrompts();
+  drawSegment(getClicks());
 }
 
 function handleImageSize(image) {
@@ -193,7 +195,7 @@ export function ImageEditor() {
             setTimeout(() => {
               throttle = false;
 
-              if (embeddings.val) {
+              if (embeddings.val && realTimeSegment) {
                 const rect = e.target.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
@@ -206,10 +208,10 @@ export function ImageEditor() {
                     imageSize.val.imgScale
                 );
 
-                const clicks = getClicks();
-                if (!realTimeSegment) {
-                  clicks.push({ x: relativeX, y: relativeY, clickType: 1 });
-                }
+                const clicks = [
+                  ...getClicks(),
+                  { x: relativeX, y: relativeY, clickType: 1 },
+                ];
                 drawSegment(clicks);
               }
             }, 10);
