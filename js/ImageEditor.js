@@ -70,9 +70,41 @@ function handleImageSize(image) {
   return { height: h, width: w, samScale };
 }
 
+function getClicks() {
+  return imagePrompts.val.map((point) => ({
+    x: point.x,
+    y: point.y,
+    clickType: point.label,
+  }));
+}
+
+function drawSegment(clicks) {
+  runONNX(clicks, embeddings.val).then((mask) => {
+    const canvas = document.getElementById("mask-canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(mask, 0, 0);
+  });
+}
+
 initModel();
 
 export function ImageEditor() {
+  let spacebarPressed = false;
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "Tab") {
+      drawSegment(getClicks());
+      spacebarPressed = true;
+      e.preventDefault();
+    }
+  });
+  document.addEventListener("keyup", (e) => {
+    if (e.code === "Tab") {       
+      spacebarPressed = false;
+      e.preventDefault();
+    }
+  });
+
   return div(
     {
       class: () =>
@@ -164,13 +196,11 @@ export function ImageEditor() {
                     imageSize.val.samScale
                 );
 
-                const clicks = [{ x: relativeX, y: relativeY, clickType: 1 }];
-                runONNX(clicks, embeddings.val).then((mask) => {
-                  const canvas = document.getElementById("mask-canvas");
-                  const ctx = canvas.getContext("2d");
-                  ctx.clearRect(0, 0, canvas.width, canvas.height);
-                  ctx.drawImage(mask, 0, 0);
-                });
+                const clicks = getClicks();
+                if (!spacebarPressed) {
+                  clicks.push({ x: relativeX, y: relativeY, clickType: 1 });
+                }
+                drawSegment(clicks);
               }
             }, 10);
           }
