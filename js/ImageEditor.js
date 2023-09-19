@@ -38,11 +38,11 @@ function handleClick(e) {
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
   const relativeX = Math.trunc(
-    ((x / e.target.offsetWidth) * imageSize.val.width) / imageSize.val.samScale
+    ((x / e.target.offsetWidth) * imageSize.val.width) / imageSize.val.imgScale
   );
   const relativeY = Math.trunc(
     ((y / e.target.offsetHeight) * imageSize.val.height) /
-      imageSize.val.samScale
+      imageSize.val.imgScale
   );
 
   imagePrompts.val = [
@@ -64,11 +64,12 @@ function handlePointClick(e, point) {
 function handleImageSize(image) {
   // Input images to SAM must be resized so the longest side is 1024
   const documentHeight = document.documentElement.clientHeight;
-  const LONG_SIDE_LENGTH = documentHeight;
+  const LONG_SIDE_LENGTH = 1024;
   let w = image.naturalWidth;
   let h = image.naturalHeight;
   const samScale = LONG_SIDE_LENGTH / Math.max(h, w);
-  return { height: h, width: w, samScale };
+  const imgScale = documentHeight / Math.max(h, w);
+  return { height: h, width: w, samScale, imgScale };
 }
 
 export function getClicks() {
@@ -161,7 +162,7 @@ export function ImageEditor() {
           imageSize.val = handleImageSize(e.target);
 
           document.getElementById("image-container").style.scale =
-            imageSize.val.samScale;
+            imageSize.val.imgScale;
 
           imageContainerSize.val = {
             width: e.target.offsetWidth,
@@ -192,11 +193,11 @@ export function ImageEditor() {
                 const y = e.clientY - rect.top;
                 const relativeX = Math.trunc(
                   ((x / e.target.offsetWidth) * imageSize.val.width) /
-                    imageSize.val.samScale
+                    imageSize.val.imgScale
                 );
                 const relativeY = Math.trunc(
                   ((y / e.target.offsetHeight) * imageSize.val.height) /
-                    imageSize.val.samScale
+                    imageSize.val.imgScale
                 );
 
                 const clicks = getClicks();
