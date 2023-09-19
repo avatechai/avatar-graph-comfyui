@@ -120,7 +120,7 @@ export function ImageEditor() {
       },
       img({
         class:
-          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
+          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[95%]",
         src: imageUrl,
         onload: (e) => {
           imageSize.val = handleImageSize(e.target);
@@ -178,7 +178,7 @@ export function ImageEditor() {
       }),
       canvas({
         class:
-          "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80",
+          "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80 max-h-[95%]",
         id: "mask-canvas",
       }),
       () => {
