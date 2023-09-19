@@ -37,8 +37,8 @@ class SAM_Prompt_Image:
             pass
         elif all(isinstance(item, list) for item in image_prompts.values()):
             for item in image_prompts.values():
-                result.extend(item)
-
+                result += (item,)
+                
         return result
 
 NODE_CLASS_MAPPINGS = {
