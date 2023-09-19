@@ -287,7 +287,7 @@ const ext = {
       BLENDSHAPES_CONFIG(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit blendshapes", "", () => {
           targetNode.val = node;
-          openInAvatechEditor('https://editor.avatech.ai', fileName.val)
+          openInAvatechEditor("https://editor.avatech.ai", fileName.val);
           // openInAvatechEditor("http://localhost:3006", fileName.val);
         });
         btn.serialize = false;
@@ -318,8 +318,9 @@ const ext = {
     const graphCanvas = document.getElementById("graph-canvas");
 
     window.addEventListener("message", (event) => {
-      console.log(event.data);
-      updateBlendshapesPrompts(event.data.value);
+      if (!event.data.flow || Object.entries(event.data.flow).length <= 0)
+        return;
+      updateBlendshapesPrompts(event.data.flow);
     });
 
     api.addEventListener("executed", (evt) => {
