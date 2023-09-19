@@ -13,7 +13,7 @@ import {
   embeddings,
 } from "./state.js";
 import { van } from "./van.js";
-const { button, div, img, canvas } = van.tags;
+const { button, div, img, canvas, span } = van.tags;
 
 let throttle = false;
 
@@ -117,13 +117,19 @@ export function ImageEditor() {
     },
     button(
       {
-        class: () => "absolute px-4 py-2 rounded-md left-0 top-0 z-[200] ",
+        class: () =>
+          "btn btn-circle flex flex-row btn-ghost normal-case absolute p-0 rounded-md left-2 top-0 z-[200] w-fit",
         onclick: () => {
           console.log("close");
           showImageEditor.val = false;
         },
       },
-      "back"
+      span({
+        class: "iconify text-lg",
+        "data-icon": "ic:baseline-arrow-back",
+        "data-inline": "false",
+      }),
+      div("Back")
     ),
     div(
       {
