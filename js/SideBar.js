@@ -127,7 +127,7 @@ export function SideBar() {
         },
         p("Are you sure you want to delete this layer?")
       ),
-    dialog(
+    () => dialog(
       { id: "my_modal_3", class: "modal" },
       div(
         { class: "modal-box text-base-content" },
@@ -136,6 +136,7 @@ export function SideBar() {
             class: "gap-2 flex flex-col",
             method: "dialog",
             onsubmit: (e) => {
+              console.log('add new layer');
               e.preventDefault();
               const inputText = e.target.elements[1].value;
               imagePromptsMulti.val = {
@@ -218,6 +219,7 @@ function ConfirmDialog({ id, title, onsubmit }, ...children) {
         button(
           {
             type: "submit",
+            autofocus: true,
             class: "btn btn-sm  btn-ghost place-self-end",
           },
           "Confirm"

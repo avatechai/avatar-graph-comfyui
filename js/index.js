@@ -242,20 +242,22 @@ function showMyImageEditor(node) {
 
   const connectedEmbeddingFileName = getWidgetValue(node, 1, "embedding_id");
 
-  showImageEditor.val = true;
-
-  imagePrompts.val = JSON.parse(
+  const v = JSON.parse(
     node.widgets.find((x) => x.name === "image_prompts_json").value
   );
-  if (!Array.isArray(imagePrompts.val)) {
-    imagePromptsMulti.val = imagePrompts.val;
 
+  if (!Array.isArray(v)) {
+    // this is a multi prompt
+    imagePromptsMulti.val = v;
     selectedLayer.val = Object.keys(imagePromptsMulti.val)[0];
-
     imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
   } else {
+    // this is a single prompt
+    selectedLayer.val = "";
     imagePromptsMulti.val = {};
+    imagePrompts.val = v;
   }
+  showImageEditor.val = true;
   imageUrl.val = api.apiURL(
     `/view?filename=${encodeURIComponent(
       connectedImageFileName
