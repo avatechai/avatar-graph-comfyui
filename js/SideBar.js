@@ -35,15 +35,14 @@ export function SideBar() {
       const layers = Object.entries(imagePromptsMulti.val);
       return ul(
         {
-          class: "menu bg-base-200 w-56 rounded-box text-base-content",
+          class: "menu bg-base-200 w-56 rounded-box text-base-content ",
         },
         layers.length === 0 ? li(a("Empty layer")) : null,
         ...layers.map(([key, value]) => {
           return li(
             a(
               {
-                class: () =>
-                  `capitalize text-start items-start flex items-center justify-between  ${
+                class: () => `normal-case text-start items-start flex items-center justify-between  ${
                     selectedLayer.val === key ? "active" : ""
                   }`,
                 onclick: () => {

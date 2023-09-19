@@ -11,9 +11,9 @@ class SAM_Predict:
                 "image": ("IMAGE",),
                 "embeddings": ("EMBEDDINGS",),
                 "predictor": ("SAMPREDICTOR",),
-                "prompt": ("SAM_PROMPT", )
             },
             "optional": {
+                "prompt": ("SAM_PROMPT", ),
                 "mask": ("IMAGE",),
             }
         }
