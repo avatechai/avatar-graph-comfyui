@@ -91,18 +91,14 @@ function drawSegment(clicks) {
 initModel();
 
 export function ImageEditor() {
-  let spacebarPressed = false;
+  let realTimeSegment = true;
   document.addEventListener("keydown", (e) => {
-    if (e.code === "Tab") {
-      drawSegment(getClicks());
-      spacebarPressed = true;
+    if (showImageEditor.val && e.code === "Tab") {
       e.preventDefault();
-    }
-  });
-  document.addEventListener("keyup", (e) => {
-    if (e.code === "Tab") {       
-      spacebarPressed = false;
-      e.preventDefault();
+      realTimeSegment = !realTimeSegment;
+      if (!realTimeSegment && embeddings.val) {
+        drawSegment(getClicks());
+      }
     }
   });
 
@@ -198,7 +194,7 @@ export function ImageEditor() {
                 );
 
                 const clicks = getClicks();
-                if (!spacebarPressed) {
+                if (!realTimeSegment) {
                   clicks.push({ x: relativeX, y: relativeY, clickType: 1 });
                 }
                 drawSegment(clicks);
