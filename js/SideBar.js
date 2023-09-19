@@ -1,4 +1,4 @@
-import { updateImagePrompts } from "./ImageEditor.js";
+import { drawSegment, getClicks, updateImagePrompts } from "./ImageEditor.js";
 import {
   imagePrompts,
   selectedLayer,
@@ -49,6 +49,7 @@ export function SideBar() {
                 onclick: () => {
                   selectedLayer.val = key;
                   imagePrompts.val = imagePromptsMulti.val[key];
+                  drawSegment(getClicks());
                 },
               },
               key,

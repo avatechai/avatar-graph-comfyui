@@ -16,6 +16,7 @@ import { api } from "./api.js";
 import { Container } from "./Container.js";
 import { loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
+import { drawSegment, getClicks } from "./ImageEditor.js";
 
 /** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
 const recomputeInsideNodesOps = LGraphGroup.prototype.recomputeInsideNodes;
@@ -267,6 +268,7 @@ function showMyImageEditor(node) {
   );
   loadNpyTensor(embeedingUrl).then((tensor) => {
     embeddings.val = tensor;
+    drawSegment(getClicks());
   });
   targetNode.val = node;
 }

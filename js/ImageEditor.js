@@ -71,7 +71,7 @@ function handleImageSize(image) {
   return { height: h, width: w, samScale };
 }
 
-function getClicks() {
+export function getClicks() {
   return imagePrompts.val.map((point) => ({
     x: point.x,
     y: point.y,
@@ -79,13 +79,19 @@ function getClicks() {
   }));
 }
 
-function drawSegment(clicks) {
-  runONNX(clicks, embeddings.val).then((mask) => {
-    const canvas = document.getElementById("mask-canvas");
-    const ctx = canvas.getContext("2d");
+export function drawSegment(clicks) {
+  const canvas = document.getElementById("mask-canvas");
+  const ctx = canvas.getContext("2d");
+  if (clicks.length === 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(mask, 0, 0);
-  });
+    return;
+  }
+  if (embeddings.val) {
+    runONNX(clicks, embeddings.val).then((mask) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(mask, 0, 0);
+    });
+  }
 }
 
 initModel();
@@ -96,7 +102,7 @@ export function ImageEditor() {
     if (showImageEditor.val && e.code === "Tab") {
       e.preventDefault();
       realTimeSegment = !realTimeSegment;
-      if (!realTimeSegment && embeddings.val) {
+      if (!realTimeSegment) {
         drawSegment(getClicks());
       }
     }
