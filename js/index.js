@@ -5,6 +5,7 @@ import {
   imageUrl,
   imagePrompts,
   targetNode,
+  fileName,
   embeddings,
   imagePromptsMulti,
   selectedLayer,
@@ -201,6 +202,11 @@ function openInAvatechEditor(url, fileName) {
   );
 }
 
+function updateBlendshapesPrompts(value) {
+  targetNode.val.widgets.find((x) => x.name === "blendshapes").value = value;
+  targetNode.val.graph.change();
+}
+
 function getWidgetValue(node, inputIndex, widgetName) {
   /** @type {LGraph} */
   const graph = app.graph;
@@ -278,6 +284,18 @@ const ext = {
           widget: btn,
         };
       },
+      BLENDSHAPES_CONFIG(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Edit blendshapes", "", () => {
+          targetNode.val = node;
+          openInAvatechEditor('https://editor.avatech.ai', fileName.val)
+          // openInAvatechEditor("http://localhost:3006", fileName.val);
+        });
+        btn.serialize = false;
+
+        return {
+          widget: btn,
+        };
+      },
     };
   },
 
@@ -299,6 +317,11 @@ const ext = {
   async setup() {
     const graphCanvas = document.getElementById("graph-canvas");
 
+    window.addEventListener("message", (event) => {
+      console.log(event.data);
+      updateBlendshapesPrompts(event.data.value);
+    });
+
     api.addEventListener("executed", (evt) => {
       if (evt.detail?.output.gltfFilename) {
         const viewer = document.getElementById(
@@ -312,6 +335,7 @@ const ext = {
           api.api_base +
           `/view?filename=${evt.detail?.output.gltfFilename[0]}`;
 
+        fileName.val = gltfFilename;
         viewer.postMessage(
           JSON.stringify({
             avatarURL: gltfFilename,
@@ -319,8 +343,6 @@ const ext = {
           }),
           "*"
         );
-
-        console.log(evt.detail.output.gltfFilename);
       }
     });
 
@@ -440,6 +462,16 @@ const ext = {
           content: "Open In Points Editor (Local)",
           callback: () => {
             showMyImageEditor(this);
+          },
+        });
+      });
+    } else if (nodeData.name === "ExportBlendshapes") {
+      nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
+      addMenuHandler(nodeType, function (_, options) {
+        options.unshift({
+          content: "Open In Blendshapes Editor",
+          callback: () => {
+            openInAvatechEditor("https://editor.avatech.ai", gltfFilename);
           },
         });
       });

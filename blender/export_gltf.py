@@ -21,10 +21,7 @@ class ExportGLTF():
                 }),
                 "model_type": (["GLB", "GLTF_EMBEDDED"],),
                 "write_mode": (["Overwrite", "Increment"],),
-                "blendshapes": ("STRING", {
-                    "multiline": False,
-                    "default": "{node: ''}"
-                }),
+                "blendshapes": ("blendshapes",),
             },
             "hidden": {"endpoint": "ENDPOINT", "token": "TOKEN", "baseModelId": "BASE_MODEL_ID"},
         }
