@@ -208,7 +208,7 @@ function updateBlendshapesPrompts(value) {
   targetNode.val.graph.change();
 }
 
-function getWidgetValue(node, inputIndex, widgetName) {
+function getInputWidgetValue(node, inputIndex, widgetName) {
   /** @type {LGraph} */
   const graph = app.graph;
 
@@ -236,11 +236,13 @@ function getWidgetValue(node, inputIndex, widgetName) {
  * @param {LGraphNode} node
  */
 function showMyImageEditor(node) {
-  let connectedImageFileName = getWidgetValue(node, 0, "image");
+  let connectedImageFileName = getInputWidgetValue(node, 0, "image");
   const split = connectedImageFileName.split("/");
   if (split.length > 1) connectedImageFileName = split[1];
 
-  const connectedEmbeddingFileName = getWidgetValue(node, 1, "embedding_id");
+  const embeddingFilename = node.widgets.find(
+    (x) => x.name === "embedding_id"
+  ).value;
 
   const v = JSON.parse(
     node.widgets.find((x) => x.name === "image_prompts_json").value
@@ -265,7 +267,7 @@ function showMyImageEditor(node) {
   );
   const embeedingUrl = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      `${connectedEmbeddingFileName}.npy`
+      `${embeddingFilename}.npy`
     )}&type=output&subfolder=`
   );
   loadNpyTensor(embeedingUrl).then((tensor) => {
@@ -282,7 +284,30 @@ const ext = {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit prompt", "", () => {
-          showMyImageEditor(node);
+          let connectedImageFileName = getInputWidgetValue(node, 0, "image");
+          const split = connectedImageFileName.split("/");
+          if (split.length > 1) connectedImageFileName = split[1];
+
+          node.widgets.find((x) => x.name === "embedding_id").value =
+            connectedImageFileName;
+          const ckpt = node.widgets.find((x) => x.name === "ckpt").value;
+          const model_type = node.widgets.find(
+            (x) => x.name === "model_type"
+          ).value;
+
+          api
+            .fetchApi("/sam_model", {
+              method: "POST",
+              body: JSON.stringify({
+                image: connectedImageFileName,
+                embedding_id: connectedImageFileName,
+                ckpt,
+                model_type,
+              }),
+            })
+            .then(() => {
+              showMyImageEditor(node);
+            });
         });
         btn.serialize = false;
 
