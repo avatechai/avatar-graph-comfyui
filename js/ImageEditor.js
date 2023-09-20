@@ -91,8 +91,10 @@ export function drawSegment(clicks) {
   }
   if (embeddings.val) {
     runONNX(clicks, embeddings.val).then((mask) => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(mask, 0, 0);
+      if (mask) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(mask, 0, 0);
+      }
     });
   }
 }
