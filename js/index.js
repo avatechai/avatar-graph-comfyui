@@ -302,6 +302,19 @@ const ext = {
           widget: btn,
         };
       },
+      MESH_GROUP_CONFIG(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Add Mesh", "", () => {
+          node.addInput("BPY_OBJ" + (node.inputs.length + 1), "BPY_OBJ");
+          node.graph.change();
+          // openInAvatechEditor("https://editor.avatech.ai", fileName.val);
+          // openInAvatechEditor("http://localhost:3006", fileName.val);
+        });
+        btn.serialize = false;
+
+        return {
+          widget: btn,
+        };
+      },
     };
   },
 
@@ -417,71 +430,80 @@ const ext = {
   },
 
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
-    if (nodeData.name === "ExportGLTF") {
-      addMenuHandler(nodeType, function (_, options) {
-        const output = app.nodeOutputs[this.id + ""];
-        if (!output || !output.gltfFilename) return;
+    switch (nodeData.name) {
+      case "ExportGLTF":
+        addMenuHandler(nodeType, function (_, options) {
+          const output = app.nodeOutputs[this.id + ""];
+          if (!output || !output.gltfFilename) return;
 
-        const gltfFilename =
-          window.location.protocol +
-          "//" +
-          api.api_host +
-          api.api_base +
-          `/view?filename=${output.gltfFilename[0]}`;
+          const gltfFilename =
+            window.location.protocol +
+            "//" +
+            api.api_host +
+            api.api_base +
+            `/view?filename=${output.gltfFilename[0]}`;
 
-        options.unshift({
-          content: "Save file",
-          callback: () => {
-            const a = document.createElement("a");
-            let url = new URL(gltfFilename);
-            url.searchParams.delete("preview");
-            a.href = url;
-            a.setAttribute(
-              "download",
-              new URLSearchParams(url.search).get("filename")
-            );
-            document.body.append(a);
-            a.click();
-            requestAnimationFrame(() => a.remove());
-          },
-        });
+          options.unshift({
+            content: "Save file",
+            callback: () => {
+              const a = document.createElement("a");
+              let url = new URL(gltfFilename);
+              url.searchParams.delete("preview");
+              a.href = url;
+              a.setAttribute(
+                "download",
+                new URLSearchParams(url.search).get("filename")
+              );
+              document.body.append(a);
+              a.click();
+              requestAnimationFrame(() => a.remove());
+            },
+          });
 
-        options.unshift({
-          content: "Open In Avatech Editor (Local)",
-          callback: () => {
-            openInAvatechEditor("http://localhost:3006", gltfFilename);
-          },
-        });
+          options.unshift({
+            content: "Open In Avatech Editor (Local)",
+            callback: () => {
+              openInAvatechEditor("http://localhost:3006", gltfFilename);
+            },
+          });
 
-        options.unshift({
-          content: "Open In Avatech Editor",
-          callback: () => {
-            openInAvatechEditor("https://editor.avatech.ai", gltfFilename);
-          },
+          options.unshift({
+            content: "Open In Avatech Editor",
+            callback: () => {
+              openInAvatechEditor("https://editor.avatech.ai", gltfFilename);
+            },
+          });
         });
-      });
-    } else if (nodeData.name === "SAM_Prompt_Image") {
-      nodeData.input.required.sam = ["SAM_PROMPTS"];
-      // nodeData.input.required.upload = ['IMAGEUPLOAD'];
-      // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
-      addMenuHandler(nodeType, function (_, options) {
-        options.unshift({
-          content: "Open In Points Editor (Local)",
-          callback: () => {
-            showMyImageEditor(this);
-          },
+        break;
+      case "SAM_Prompt_Image":
+        nodeData.input.required.sam = ["SAM_PROMPTS"];
+        // nodeData.input.required.upload = ['IMAGEUPLOAD'];
+        // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
+        addMenuHandler(nodeType, function (_, options) {
+          options.unshift({
+            content: "Open In Points Editor (Local)",
+            callback: () => {
+              showMyImageEditor(this);
+            },
+          });
         });
-      });
-    } else if (nodeData.name === "ExportBlendshapes") {
-      nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
-      addMenuHandler(nodeType, function (_, options) {
-        options.unshift({
-          content: "Open In Blendshapes Editor",
-          callback: () => {
-            openInAvatechEditor("https://editor.avatech.ai", gltfFilename);
-          },
+        break;
+      case "ExportBlendshapes":
+        nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
+        addMenuHandler(nodeType, function (_, options) {
+          options.unshift({
+            content: "Open In Blendshapes Editor",
+            callback: () => {
+              openInAvatechEditor("https://editor.avatech.ai", gltfFilename);
+            },
+          });
         });
-      });
+        break;
+      case "Mesh_JoinMesh":
+        nodeData.input.required.obj = ["MESH_GROUP_CONFIG"];
+        break;
+      default:
+        break;
     }
   },
 };

@@ -5,12 +5,15 @@ class Mesh_JoinMesh(blender_node.ObjectOps):
     EXTRA_INPUT_TYPES = {
         "BPY_OBJ2": (blender_node.BPY_OBJ,)
     }
+    
 
-    def blender_process(self, bpy, BPY_OBJ, BPY_OBJ2, **props):
-
+    def blender_process(self, bpy, BPY_OBJ, **props):
+        
+        prop_values = props.values()
+        
         override = bpy.context.copy()
         override["active_object"] = BPY_OBJ
-        override["selected_editable_objects"] = list([BPY_OBJ, BPY_OBJ2])
+        override["selected_editable_objects"] = list(prop_values) + [BPY_OBJ]
         bpy.ops.object.join(override)
 
         return (BPY_OBJ,)
