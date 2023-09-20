@@ -191,6 +191,9 @@ export function ImageEditor() {
         onclick: (e) => {
           handleClick(e);
         },
+        onmouseleave: (e) => {
+          drawSegment(getClicks());
+        },
         onmousemove: (e) => {
           if (!throttle) {
             throttle = true;
