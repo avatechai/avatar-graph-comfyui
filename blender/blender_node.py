@@ -22,6 +22,18 @@ class ObjectOps:
         "BPY_OBJ": ("BPY_OBJ",)
     }
 
+    def object_mode(self, bpy):
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+    def edit_mode(self, bpy):
+        bpy.ops.object.mode_set(mode='EDIT')
+
+    def select_all(self, bpy):
+        bpy.ops.object.select_all(action='SELECT')
+
+    def deselect_all(self, bpy):
+        bpy.ops.object.select_all(action='DESELECT')
+
     @classmethod
     def INPUT_TYPES(cls):
         import global_bpy
@@ -191,7 +203,7 @@ def create_ops_class(cls, path, name=None, name_prefix=''):
                     **map_args(bpy, get_nested_attr(bpy, path))}
             ),
             'blender_process': lambda self, bpy, BPY_OBJ, **props:
-                (None, print(props), get_nested_attr(bpy, path)(**props))[0]
+                (None, get_nested_attr(bpy, path)(**props))[0]
         }
     )
 
@@ -211,14 +223,14 @@ def create_primitive_shape_class(cls, path, name=None, name_prefix=''):
                     **map_args(bpy, get_nested_attr(bpy, path))}
             ),
             'blender_process': lambda self, bpy, **props:
-                (print(props), get_nested_attr(bpy, path)(), None)[2]
+                (None, get_nested_attr(bpy, path)())[0]
         }
     )
 
 
 def assign_and_return(BPY_OBJ, name, value):
     BPY_OBJ[name] = value
-    print(BPY_OBJ,name, BPY_OBJ[name])
+    # print(BPY_OBJ,name, BPY_OBJ[name])
     return None
 
 
