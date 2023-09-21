@@ -285,11 +285,14 @@ const ext = {
       SAM_PROMPTS(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit prompt", "", () => {
           let connectedImageFileName = getInputWidgetValue(node, 0, "image");
+          
           const split = connectedImageFileName.split("/");
-          if (split.length > 1) connectedImageFileName = split[1];
+          let id = connectedImageFileName
+          if (split.length > 1) id = split[1];
 
-          node.widgets.find((x) => x.name === "embedding_id").value =
-            connectedImageFileName;
+
+          node.widgets.find((x) => x.name === "embedding_id").value = id;
+
           const ckpt = node.widgets.find((x) => x.name === "ckpt").value;
           const model_type = node.widgets.find(
             (x) => x.name === "model_type"
@@ -300,7 +303,7 @@ const ext = {
               method: "POST",
               body: JSON.stringify({
                 image: connectedImageFileName,
-                embedding_id: connectedImageFileName,
+                embedding_id: id,
                 ckpt,
                 model_type,
               }),
