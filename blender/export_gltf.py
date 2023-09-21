@@ -2,6 +2,7 @@ import folder_paths
 import os
 import requests
 import base64
+from mesh_utils import export_gltf
 
 class ExportGLTF():
     def __init__(self):
@@ -34,31 +35,9 @@ class ExportGLTF():
     CATEGORY = "mesh"
 
     def process(self, bpy_objects, filename, model_type, write_mode, blendshapes, endpoint=None, token=None, baseModelId=None):
-        import global_bpy
-        bpy = global_bpy.get_bpy()
-        # print(bpy, bpy_objects)
-        
-        # deselect all objects
-        override = bpy.context.copy()
-        override["selected_objects"] = list(bpy_objects)
-        override["active_object"] = list(bpy_objects)[0]
-
-        for obj in bpy_objects:
-            obj.select_set(True)
-
-        filepath = self.output_dir + "/" + filename + '.' + ("glb" if model_type == "GLB" else "gltf")
-
-        if write_mode == "Increment":
-            count = 0
-            # while file exists, increment count
-            while os.path.exists(self.output_dir + "/" + filename + '_' + str(count) + '.' + ("glb" if model_type == "GLB" else "gltf")):
-                count += 1
-
-            filepath = self.output_dir + "/" + filename + '_' + str(count) + '.' + ("glb" if model_type == "GLB" else "gltf")
-        
-        with bpy.context.temp_override(**override):
-            bpy.ops.export_scene.gltf(filepath=filepath, export_format=model_type, use_selection=True)
-            print(filepath)
+        filepath = export_gltf(
+            self.output_dir, bpy_objects, filename, model_type, write_mode
+        )
 
         if endpoint != None and token != None and baseModelId != None:
             # Read binary file

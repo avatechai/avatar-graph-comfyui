@@ -1,11 +1,12 @@
 import subprocess
 import folder_paths
 import os
+from mesh_utils import open_in_blender
 
-blender_process_global = []
 
 class OpenInBlender:
     def __init__(self):
+        self.my_blender_process = None
         self.output_dir = folder_paths.get_output_directory()
 
     @classmethod
@@ -31,37 +32,12 @@ class OpenInBlender:
     CATEGORY = "mesh"
 
     def process(self, bpy_objs, blender_path, shading, camera_location, camera_rotation):
-        import mathutils
-        import global_bpy
-        bpy = global_bpy.get_bpy()
-
-        # Change shading mode and viewport
-        for area in bpy.context.screen.areas:
-            if area.type == 'VIEW_3D':
-                for space in area.spaces:
-                    if space.type == 'VIEW_3D':
-                        space.shading.type = shading.upper()
-                        rv3d = space.region_3d
-                        rv3d.view_location = camera_location
-                        rv3d.view_rotation = mathutils.Euler(camera_rotation).to_quaternion()
-
-        # Open blender
-        if hasattr(self, 'blender_process'):
-            self.blender_process.kill()
-            # remove from global list so it doesn't get garbage collected
-            blender_process_global.remove(self.blender_process)
-
-        # Save as .blend
         output_file = self.output_dir + '/tmp.blend'
-        if os.path.exists(output_file):
-            os.remove(output_file)
-        bpy.ops.wm.save_as_mainfile(filepath=output_file)
+        p = open_in_blender(self.my_blender_process, blender_path=blender_path, output_file=output_file, camera_location=camera_location,
+                        camera_rotation=camera_rotation, shading=shading)
+        self.my_blender_process = p
+        return {"ui": {}}
 
-
-        self.blender_process = subprocess.Popen([blender_path, output_file])
-        # append to global list so it doesn't get garbage collected
-        blender_process_global.append(self.blender_process)
-        return { "ui" : {  } }
 
 NODE_CLASS_MAPPINGS = {
     "OpenInBlender": OpenInBlender
@@ -70,11 +46,3 @@ NODE_CLASS_MAPPINGS = {
 NODE_DISPLAY_NAME_MAPPINGS = {
     "OpenInBlender": "Open in Blender"
 }
-
-# detects when the python process is killed, and kills the blender process
-import atexit
-@atexit.register
-def kill_blender_process():
-    print('blender_process_global', blender_process_global)
-    for process in blender_process_global:
-        process.kill()

@@ -14,7 +14,7 @@ class GetImageWidthHeight(blender_node.ObjectOps):
 
         height, width  = image[0].shape[:2]
 
-        print(height, width)
-        print((width * scale, height * scale, ))
+        # print(height, width)
+        # print((width * scale, height * scale, ))
 
         return (width * scale, height * scale, )
