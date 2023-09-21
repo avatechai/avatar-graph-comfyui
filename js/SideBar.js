@@ -42,7 +42,8 @@ export function SideBar() {
           return li(
             a(
               {
-                class: () => `normal-case text-start items-start flex items-center justify-between  ${
+                class: () =>
+                  `normal-case text-start items-start flex items-center justify-between  ${
                     selectedLayer.val === key ? "active" : ""
                   }`,
                 onclick: () => {
@@ -52,25 +53,48 @@ export function SideBar() {
                 },
               },
               key,
-              button(
-                {
-                  class:
-                    "btn btn-circle btn-xs btn-ghost group hover:text-red-500",
-                  onclick: (e) => {
-                    console.log("delete");
-                    e.preventDefault();
-                    e.stopPropagation();
-                    layer_to_delete.val = key;
-                    setTimeout(() => {
-                      delete_layer_dialog.showModal();
-                    }, 0);
+              div(
+                {},
+                button(
+                  {
+                    class:
+                      "btn btn-circle btn-xs btn-ghost group hover:text-red-500",
+                    onclick: (e) => {
+                      console.log("clear");
+                      e.preventDefault();
+                      e.stopPropagation();
+                      imagePrompts.val = [];
+                      imagePromptsMulti.val[key] = [];
+                      drawSegment([]);
+                      updateImagePrompts();
+                    },
                   },
-                },
-                span({
-                  class: "iconify",
-                  "data-icon": "ic:baseline-delete",
-                  "data-inline": "false",
-                })
+                  span({
+                    class: "iconify",
+                    "data-icon": "ant-design:clear-outlined",
+                    "data-inline": "false",
+                  })
+                ),
+                button(
+                  {
+                    class:
+                      "btn btn-circle btn-xs btn-ghost group hover:text-red-500",
+                    onclick: (e) => {
+                      console.log("delete");
+                      e.preventDefault();
+                      e.stopPropagation();
+                      layer_to_delete.val = key;
+                      setTimeout(() => {
+                        delete_layer_dialog.showModal();
+                      }, 0);
+                    },
+                  },
+                  span({
+                    class: "iconify",
+                    "data-icon": "ic:baseline-delete",
+                    "data-inline": "false",
+                  })
+                )
               )
             )
           );
@@ -127,68 +151,69 @@ export function SideBar() {
         },
         p("Are you sure you want to delete this layer?")
       ),
-    () => dialog(
-      { id: "my_modal_3", class: "modal" },
-      div(
-        { class: "modal-box text-base-content" },
-        form(
-          {
-            class: "gap-2 flex flex-col",
-            method: "dialog",
-            onsubmit: (e) => {
-              console.log('add new layer');
-              e.preventDefault();
-              const inputText = e.target.elements[1].value;
-              imagePromptsMulti.val = {
-                ...imagePromptsMulti.val,
-                [inputText]: [],
-              };
-              console.log(inputText, imagePromptsMulti.val);
-              my_modal_3.close();
-              e.target.elements[1].value = "";
-              targetNode.val.addOutput(inputText, "SAM_PROMPT");
-              targetNode.val.graph.change();
-              if (
-                selectedLayer.val === null ||
-                selectedLayer.val === undefined ||
-                selectedLayer.val === ""
-              ) {
-                selectedLayer.val = inputText;
-              }
-              updateImagePrompts();
-            },
-          },
-          button(
+    () =>
+      dialog(
+        { id: "my_modal_3", class: "modal" },
+        div(
+          { class: "modal-box text-base-content" },
+          form(
             {
-              type: "button",
-              class: "btn btn-sm btn-circle btn-ghost absolute right-2 top-2",
-              onclick: (e) => {
-                e.stopPropagation();
+              class: "gap-2 flex flex-col",
+              method: "dialog",
+              onsubmit: (e) => {
+                console.log("add new layer");
+                e.preventDefault();
+                const inputText = e.target.elements[1].value;
+                imagePromptsMulti.val = {
+                  ...imagePromptsMulti.val,
+                  [inputText]: [],
+                };
+                console.log(inputText, imagePromptsMulti.val);
                 my_modal_3.close();
+                e.target.elements[1].value = "";
+                targetNode.val.addOutput(inputText, "SAM_PROMPT");
+                targetNode.val.graph.change();
+                if (
+                  selectedLayer.val === null ||
+                  selectedLayer.val === undefined ||
+                  selectedLayer.val === ""
+                ) {
+                  selectedLayer.val = inputText;
+                }
+                updateImagePrompts();
               },
             },
-            "✕"
-          ),
-          h3(
-            { class: "font-bold text-lg text-base-content" },
-            "Add new layer!"
-          ),
-          input({
-            type: "text",
-            placeholder: "Type here",
-            class: "input input-bordered w-full",
-            autofocus: true,
-          }),
-          button(
-            {
-              type: "submit",
-              class: "btn btn-sm  btn-ghost place-self-end",
-            },
-            "Confirm"
+            button(
+              {
+                type: "button",
+                class: "btn btn-sm btn-circle btn-ghost absolute right-2 top-2",
+                onclick: (e) => {
+                  e.stopPropagation();
+                  my_modal_3.close();
+                },
+              },
+              "✕"
+            ),
+            h3(
+              { class: "font-bold text-lg text-base-content" },
+              "Add new layer!"
+            ),
+            input({
+              type: "text",
+              placeholder: "Type here",
+              class: "input input-bordered w-full",
+              autofocus: true,
+            }),
+            button(
+              {
+                type: "submit",
+                class: "btn btn-sm  btn-ghost place-self-end",
+              },
+              "Confirm"
+            )
           )
         )
       )
-    )
   );
 }
 
