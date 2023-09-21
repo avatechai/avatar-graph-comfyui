@@ -173,7 +173,7 @@ export function SideBar() {
                 e.target.elements[1].value = "";
                 targetNode.val.addOutput(
                   inputText,
-                  targetNode.type === "SAM" ? "IMAGE" : "SAM_PROMPT"
+                  targetNode.val.type === "SAM" ? "IMAGE" : "SAM_PROMPT"
                 );
                 targetNode.val.graph.change();
                 if (

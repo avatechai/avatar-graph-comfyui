@@ -68,6 +68,10 @@ class SAM:
             pass
         elif all(isinstance(item, list) for item in image_prompts.values()):
             for item in image_prompts.values():
+                if (len(item) == 0):
+                    h, w, c = image[0].shape
+                    result.append(torch.zeros(1, h, w, c))
+                    continue
                 point_coords = np.array([[p['x'], p['y']] for p in item])
                 point_labels = np.array([p['label'] for p in item])
 
