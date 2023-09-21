@@ -1,5 +1,6 @@
 import folder_paths
 import torch
+import os
 from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
 from einops import rearrange, repeat
 

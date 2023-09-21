@@ -519,6 +519,19 @@ const ext = {
           });
         });
         break;
+      case "SAM":
+          nodeData.input.required.sam = ["SAM_PROMPTS"];
+          // nodeData.input.required.upload = ['IMAGEUPLOAD'];
+          // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
+          addMenuHandler(nodeType, function (_, options) {
+            options.unshift({
+              content: "Open In Points Editor (Local)",
+              callback: () => {
+                showMyImageEditor(this);
+              },
+            });
+          });
+          break;
       case "ExportBlendshapes":
         nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
         addMenuHandler(nodeType, function (_, options) {

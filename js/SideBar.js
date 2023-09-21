@@ -171,7 +171,10 @@ export function SideBar() {
                 console.log(inputText, imagePromptsMulti.val);
                 my_modal_3.close();
                 e.target.elements[1].value = "";
-                targetNode.val.addOutput(inputText, "SAM_PROMPT");
+                targetNode.val.addOutput(
+                  inputText,
+                  targetNode.type === "SAM" ? "IMAGE" : "SAM_PROMPT"
+                );
                 targetNode.val.graph.change();
                 if (
                   selectedLayer.val === null ||
