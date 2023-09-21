@@ -9,6 +9,7 @@ import {
   embeddings,
   imagePromptsMulti,
   selectedLayer,
+  showLoading,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -284,12 +285,13 @@ const ext = {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit prompt", "", () => {
-          let connectedImageFileName = getInputWidgetValue(node, 0, "image");
-          
-          const split = connectedImageFileName.split("/");
-          let id = connectedImageFileName
-          if (split.length > 1) id = split[1];
+          showLoading.val = true;
 
+          let connectedImageFileName = getInputWidgetValue(node, 0, "image");
+
+          const split = connectedImageFileName.split("/");
+          let id = connectedImageFileName;
+          if (split.length > 1) id = split[1];
 
           node.widgets.find((x) => x.name === "embedding_id").value = id;
 
@@ -309,6 +311,7 @@ const ext = {
               }),
             })
             .then(() => {
+              showLoading.val = false;
               showMyImageEditor(node);
             });
         });
