@@ -337,8 +337,6 @@ const ext = {
         const btn = node.addWidget("button", "Add Mesh", "", () => {
           node.addInput("BPY_OBJ" + (node.inputs.length + 1), "BPY_OBJ");
           node.graph.change();
-          // openInAvatechEditor("https://editor.avatech.ai", fileName.val);
-          // openInAvatechEditor("http://localhost:3006", fileName.val);
         });
         btn.serialize = false;
 

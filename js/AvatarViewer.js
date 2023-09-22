@@ -5,7 +5,7 @@ export function AvatarViewer() {
   return div(
     {
       class:
-        "w-[310px] h-[310px] absolute right-0 top-0 z-[100] pointer-events-auto mt-4 mr-4",
+        "w-[310px] h-[350px] absolute right-0 top-0 z-[100] pointer-events-auto mt-4 mr-4",
     },
     iframe({
       id: "avatech-viewer-iframe",
