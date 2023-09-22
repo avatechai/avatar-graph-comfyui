@@ -6,8 +6,11 @@ from segment_anything import sam_model_registry, SamPredictor
 from einops import rearrange, repeat
 
 
+global_predictor = None
+
 class SAM:
     def __init__(self):
+        self.predictor = None
         self.output_dir = folder_paths.get_output_directory()
 
     @classmethod
@@ -40,10 +43,16 @@ class SAM:
     def load_image(self, image, model_type, ckpt, embedding_id, image_prompts_json):
         import json
 
-        ckpt = folder_paths.get_full_path("sam", ckpt)
-        sam = sam_model_registry[model_type](checkpoint=ckpt)
-        predictor = SamPredictor(sam)
+        global global_predictor
 
+        if global_predictor is None:
+            ckpt = folder_paths.get_full_path("sam", ckpt)
+            sam = sam_model_registry[model_type](checkpoint=ckpt)
+            predictor = SamPredictor(sam)
+            global_predictor = predictor
+        
+        predictor = global_predictor
+        
         emb_filename = f"{self.output_dir}/{embedding_id}.npy"
         if not os.path.exists(emb_filename):
             image_np = (image[0].numpy() * 255).astype(np.uint8)
