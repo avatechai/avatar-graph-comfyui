@@ -1,11 +1,13 @@
 import { van } from "./van.js";
+import { showEditor } from "./state.js";
 const { button, iframe, div, img } = van.tags;
 
 export function AvatarViewer() {
   return div(
     {
-      class:
-        "w-[310px] h-[350px] absolute right-0 top-0 z-[100] pointer-events-auto mt-4 mr-4",
+      class: () =>
+        "w-[310px] h-[350px] absolute right-0 top-0 z-[100] pointer-events-auto mt-4 mr-4 " +
+        (!showEditor.val ? "" : "hidden"),
     },
     iframe({
       id: "avatech-viewer-iframe",
@@ -13,7 +15,8 @@ export function AvatarViewer() {
       name: "avatech-viewer-iframe",
       allow: "cross-origin-isolated",
       class: () =>
-        "w-full h-full flex pointer-events-auto rounded-2xl border-none",
+        "w-full h-full flex pointer-events-auto rounded-2xl border-none " +
+        (!showEditor.val ? "" : "hidden"),
       src: "https://labs.avatech.ai/viewer/default",
       // src: 'http://localhost:3000/viewer/default',
     })
