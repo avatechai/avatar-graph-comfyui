@@ -199,6 +199,8 @@ function openInAvatechEditor(url, fileName) {
       key: "key",
       value: fileName,
       method: "store",
+      blendshapes: targetNode.val.widgets.find((x) => x.name === "blendshapes")
+        .value,
     },
     "*"
   );
@@ -336,6 +338,18 @@ const ext = {
       MESH_GROUP_CONFIG(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Add Mesh", "", () => {
           node.addInput("BPY_OBJ" + (node.inputs.length + 1), "BPY_OBJ");
+          node.graph.change();
+        });
+        btn.serialize = false;
+
+        return {
+          widget: btn,
+        };
+      },
+      MESH_GROUP_DELETE(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Delete Mesh", "", () => {
+          console.log(node.inputs.length);
+          node.removeInput(node.inputs.length - 1);
           node.graph.change();
         });
         btn.serialize = false;
@@ -518,18 +532,18 @@ const ext = {
         });
         break;
       case "SAM":
-          nodeData.input.required.sam = ["SAM_PROMPTS"];
-          // nodeData.input.required.upload = ['IMAGEUPLOAD'];
-          // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
-          addMenuHandler(nodeType, function (_, options) {
-            options.unshift({
-              content: "Open In Points Editor (Local)",
-              callback: () => {
-                showMyImageEditor(this);
-              },
-            });
+        nodeData.input.required.sam = ["SAM_PROMPTS"];
+        // nodeData.input.required.upload = ['IMAGEUPLOAD'];
+        // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
+        addMenuHandler(nodeType, function (_, options) {
+          options.unshift({
+            content: "Open In Points Editor (Local)",
+            callback: () => {
+              showMyImageEditor(this);
+            },
           });
-          break;
+        });
+        break;
       case "ExportBlendshapes":
         nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
         addMenuHandler(nodeType, function (_, options) {
@@ -543,6 +557,7 @@ const ext = {
         break;
       case "Mesh_JoinMesh":
         nodeData.input.required.obj = ["MESH_GROUP_CONFIG"];
+        nodeData.input.required.del_obj = ["MESH_GROUP_DELETE"];
         break;
       default:
         break;
