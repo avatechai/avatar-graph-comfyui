@@ -32,12 +32,13 @@ class Mesh_ModifyShapeKey(blender_node.ObjectOps):
 
         obj = BPY_OBJ
 
-        # Create new shape key
-        # sk = obj.active_shape_key
+        # Create new shape key if its not in the object
+        if shape_key_name not in BPY_OBJ.data.shape_keys.key_blocks:
+            BPY_OBJ.shape_key_add(name=shape_key_name, from_mix=True)
 
         # get shape key
         sk = obj.data.shape_keys.key_blocks[shape_key_name]
-        print(obj, sk)
+        # print(obj, sk)
         # sk.interpolation = 'KEY_LINEAR'
 
 
