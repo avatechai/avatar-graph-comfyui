@@ -6,7 +6,7 @@ export function AvatarViewer() {
   return div(
     {
       class: () =>
-        "w-[310px] h-[350px] absolute right-0 top-0 z-[100] pointer-events-auto mt-4 mr-4 " +
+        "w-[320px] h-[370px] absolute right-0 top-0 z-[100] pointer-events-auto mt-4 mr-4 " +
         (!showEditor.val ? "" : "hidden"),
     },
     iframe({
