@@ -31,8 +31,10 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 <summary> Character Gen Prompting Guide </summary>
     
 ### Notice: 
-- We need a character image with an open mouth, so please add to the prompt: open mouth, [smile]
-- 
+- We need a character image with an open mouth, so please add to the prompt: ```open mouth, [smile]```
+  
+Simple Character Gen Template Download
+  
 </details>
 
 <details>
