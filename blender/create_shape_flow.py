@@ -6,7 +6,7 @@ class CreateShapeFlow():
             "required": {
                 "shape_flow": ("STRING", {
                     "multiline": False,
-                    "default": '{"nodes": ""}'
+                    "default": '{"nodes": []}'
                 }),
             },
         }
