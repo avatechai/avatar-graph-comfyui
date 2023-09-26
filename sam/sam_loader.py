@@ -15,7 +15,7 @@ class SAM_Remote_Emb:
         return {
             "required": {
                 "model_type": (["vit_h", "vit_l", "vit_b"],),
-                "ckpt": (folder_paths.get_filename_list("sam"),),
+                "ckpt": (folder_paths.get_filename_list("sams"),),
             },
         }
 
@@ -27,7 +27,7 @@ class SAM_Remote_Emb:
     CATEGORY = "image"
 
     def segment(self, model_type, ckpt):
-        ckpt = folder_paths.get_full_path("sam", ckpt)
+        ckpt = folder_paths.get_full_path("sams", ckpt)
         sam = sam_model_registry[model_type](checkpoint=ckpt)
         predictor = SamPredictor(sam)
 

@@ -5,4 +5,5 @@ opencv-contrib-python
 einops
 bpy
 segment-anything
+tqdm
 # -e git+https://github.com/facebookresearch/segment-anything.git#egg=segment_anything
