@@ -1,0 +1,383 @@
+{
+  "last_node_id": 318,
+  "last_link_id": 563,
+  "nodes": [
+    {
+      "id": 184,
+      "type": "VAEDecode",
+      "pos": [
+        1290,
+        410
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 248
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 249,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            562
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 317,
+      "type": "SaveImage",
+      "pos": [
+        1530,
+        420
+      ],
+      "size": [
+        315,
+        270
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 562
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 175,
+      "type": "CLIPTextEncode",
+      "pos": [
+        530,
+        480
+      ],
+      "size": [
+        301.38145862926115,
+        151.58555811101718
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 527
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            554
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "worst quality, low quality, normal quality, monochrome, grayscale, closed mouth, extended tongue, sad, text, signature, username, artist name, animal, big mouth,leg,hand"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 181,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        100,
+        390
+      ],
+      "size": {
+        "0": 340.6639709472656,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            552
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            527,
+            558
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            249
+          ],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "meinamix_meinaV11.safetensors"
+      ]
+    },
+    {
+      "id": 174,
+      "type": "CLIPTextEncode",
+      "pos": [
+        530,
+        300
+      ],
+      "size": [
+        294.7698808149855,
+        129.02360742742354
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 558,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            557
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "looking at viewer, detailed face, open mouth, smile, solo,eye-level angle,\nsimple background, 1 girl, half body"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 318,
+      "type": "EmptyLatentImage",
+      "pos": [
+        530,
+        690
+      ],
+      "size": [
+        299.24921209161903,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            563
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        768,
+        1
+      ]
+    },
+    {
+      "id": 176,
+      "type": "KSampler",
+      "pos": [
+        890,
+        410
+      ],
+      "size": {
+        "0": 326.9862060546875,
+        "1": 262.3746643066406
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 552
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 557,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 554
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 563,
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            248
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        24285104147823,
+        "randomize",
+        25,
+        5,
+        "dpmpp_2m",
+        "karras",
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      248,
+      176,
+      0,
+      184,
+      0,
+      "LATENT"
+    ],
+    [
+      249,
+      181,
+      2,
+      184,
+      1,
+      "VAE"
+    ],
+    [
+      527,
+      181,
+      1,
+      175,
+      0,
+      "CLIP"
+    ],
+    [
+      552,
+      181,
+      0,
+      176,
+      0,
+      "MODEL"
+    ],
+    [
+      554,
+      175,
+      0,
+      176,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      557,
+      174,
+      0,
+      176,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      558,
+      181,
+      1,
+      174,
+      0,
+      "CLIP"
+    ],
+    [
+      562,
+      184,
+      0,
+      317,
+      0,
+      "IMAGE"
+    ],
+    [
+      563,
+      318,
+      0,
+      176,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
