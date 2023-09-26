@@ -199,7 +199,7 @@ function openInAvatechEditor(url, fileName) {
       key: "key",
       value: fileName,
       method: "store",
-      blendshapes: targetNode.val.widgets.find((x) => x.name === "blendshapes")
+      blendshapes: targetNode.val.widgets.find((x) => x.name === "shape_flow")
         .value,
     },
     "*"
@@ -207,7 +207,7 @@ function openInAvatechEditor(url, fileName) {
 }
 
 function updateBlendshapesPrompts(value) {
-  targetNode.val.widgets.find((x) => x.name === "blendshapes").value = value;
+  targetNode.val.widgets.find((x) => x.name === "shape_flow").value = value;
   targetNode.val.graph.change();
 }
 
@@ -324,7 +324,7 @@ const ext = {
         };
       },
       BLENDSHAPES_CONFIG(node, inputName, inputData, app) {
-        const btn = node.addWidget("button", "Edit blendshapes", "", () => {
+        const btn = node.addWidget("button", "Edit Shape Flow", "", () => {
           targetNode.val = node;
           openInAvatechEditor(
             "https://editor.avatech.ai?comfyui=true",
@@ -405,7 +405,7 @@ const ext = {
         viewer.postMessage(
           JSON.stringify({
             avatarURL: gltfFilename,
-            blendshapes: evt.detail?.output.blendshapes[0],
+            blendshapes: evt.detail?.output.SHAPE_FLOW[0],
           }),
           "*"
         );
@@ -418,6 +418,7 @@ const ext = {
         if (event.key === "Escape") {
           event.preventDefault();
           showImageEditor.val = false;
+          showEditor.val = false;
         }
       },
       {
