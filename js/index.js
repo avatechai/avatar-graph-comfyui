@@ -553,7 +553,7 @@ const ext = {
           });
         });
         break;
-      case "CreateShapesFlow":
+      case "CreateShapeFlow":
         nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
         addMenuHandler(nodeType, function (_, options) {
           options.unshift({

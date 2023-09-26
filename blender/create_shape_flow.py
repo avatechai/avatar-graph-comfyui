@@ -4,15 +4,15 @@ class CreateShapeFlow():
     def INPUT_TYPES(s):
         return {
             "required": {
-                "shape_flow": ("STRING", {
+                "blendshapes": ("STRING", {
                     "multiline": False,
                     "default": "{node: ''}"
                 }),
             },
         }
 
-    RETURN_TYPES = ("shape_flow",)
-    RETURN_NAMES = ("shape_flow",)
+    RETURN_TYPES = ("blendshapes",)
+    RETURN_NAMES = ("blendshapes",)
     FUNCTION = "process"
 
     CATEGORY = "mesh"
@@ -28,5 +28,5 @@ NODE_CLASS_MAPPINGS = {
 
 # A dictionary that contains the friendly/humanly readable titles for the nodes
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "CreateShapeFlow": "CreateShapeFlow"
+    "CreateShapeFlow": "Create Shape Flow"
 }
