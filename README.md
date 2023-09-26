@@ -16,10 +16,10 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 | Mesh | ![CleanShot 2023-09-26 at 15 44 01](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/40740d25-9411-4cd3-a6c0-8b9008bca41c) | Create Mesh Layer | Create a mesh object from the input images (usually a segmented part of the entire image) |
 |  |![CleanShot 2023-09-26 at 15 44 29](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ba7afbc5-9cd5-4f97-9614-f71133f5783e) | Join Meshes | |
 | Blendshapes | ![CleanShot 2023-09-26 at 15 48 26](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ab4f259c-89a7-4f51-bc54-fd179e252073) | Mesh Modify Shape Key | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform |
-|  |  | Create Shape Flow  | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime |
+|  | ![CleanShot 2023-09-26 at 16 38 51](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/abfdd801-0387-4c5d-9c11-6c23337ff1dd) | Create Shape Flow  | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime |
 | UV & Texture |  | Match Texture Aspect Ratio | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation |
 | | | Plane Texture Unwrap | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.
-| Output |  | Avatar Main Output |  |
+| Output | ![CleanShot 2023-09-26 at 16 37 54](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a) | Avatar Main Output |  |
 
 # Workflow
 
