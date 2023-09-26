@@ -298,9 +298,6 @@ const ext = {
           node.widgets.find((x) => x.name === "embedding_id").value = id;
 
           const ckpt = node.widgets.find((x) => x.name === "ckpt").value;
-          const model_type = node.widgets.find(
-            (x) => x.name === "model_type"
-          ).value;
 
           api
             .fetchApi("/sam_model", {
@@ -309,7 +306,6 @@ const ext = {
                 image: connectedImageFileName,
                 embedding_id: id,
                 ckpt,
-                model_type,
               }),
             })
             .then(() => {
