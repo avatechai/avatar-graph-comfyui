@@ -66,7 +66,7 @@ async def post_sam_model(request):
         image = load_image(post.get("image"))
         ckpt = post.get("ckpt")
         model_type = post.get("model_type")
-        ckpt = folder_paths.get_full_path("sam", ckpt)
+        ckpt = folder_paths.get_full_path("sams", ckpt)
         sam = sam_model_registry[model_type](checkpoint=ckpt)
         predictor = SamPredictor(sam)
 

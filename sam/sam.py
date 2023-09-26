@@ -25,7 +25,7 @@ class SAM:
             "required": {
                 "image": ("IMAGE",),
                 "model_type": (["vit_h", "vit_l", "vit_b"],),
-                "ckpt": (folder_paths.get_filename_list("sam"),),
+                "ckpt": (folder_paths.get_filename_list("sams"),),
                 "embedding_id": (
                     "STRING",
                     {"multiline": False, "default": "embedding"},
@@ -46,7 +46,7 @@ class SAM:
         global global_predictor
 
         if global_predictor is None:
-            ckpt = folder_paths.get_full_path("sam", ckpt)
+            ckpt = folder_paths.get_full_path("sams", ckpt)
             sam = sam_model_registry[model_type](checkpoint=ckpt)
             predictor = SamPredictor(sam)
             global_predictor = predictor
