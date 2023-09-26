@@ -4,6 +4,7 @@
 @nickname: Avatar Graph
 @description: Include nodes for sam + bpy operation, that allows workflow creations for generative 2d character rig.
 """
+import routes
 
 import inspect
 import os

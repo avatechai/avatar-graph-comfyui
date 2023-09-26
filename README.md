@@ -17,15 +17,19 @@ def prompt_worker(q, server):
 
     # This is a workaround since using blender as a python module, the bpy module has to be imported after in the custom thread, otherwise it will cause a segfault if imported in the custom nodes.
 
-    # Add this line here
-    import sys
-    sys.path.append(os.path.join(os.path.dirname(__file__), "custom_nodes", "avatar-graph-comfyui"))
+    # Add next line
     import global_bpy
 
     while True:
         item, item_id = q.get()
-        # Add this line here
+        # Add next line
         global_bpy.reset_bpy()
+
+if __name__ == "__main__":
+    # Add next two lines 
+    import sys
+    sys.path.append(os.path.join(os.path.dirname(__file__), "custom_nodes", "avatar-graph-comfyui"))
+
 
 ```
 
