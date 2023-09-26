@@ -4,21 +4,20 @@ class CreateShapeFlow():
     def INPUT_TYPES(s):
         return {
             "required": {
-                "blendshapes": ("STRING", {
+                "shape_flow": ("STRING", {
                     "multiline": False,
-                    "default": "{node: ''}"
+                    "default": '{"nodes": ""}'
                 }),
             },
         }
 
-    RETURN_TYPES = ("blendshapes",)
-    RETURN_NAMES = ("blendshapes",)
+    RETURN_TYPES = ("SHAPE_FLOW",)
     FUNCTION = "process"
 
     CATEGORY = "mesh"
 
-    def process(self, blendshapes):
-        return (blendshapes,)
+    def process(self, shape_flow):
+        return (shape_flow,)
 
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
