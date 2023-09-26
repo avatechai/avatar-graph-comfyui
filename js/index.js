@@ -326,7 +326,10 @@ const ext = {
       BLENDSHAPES_CONFIG(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit blendshapes", "", () => {
           targetNode.val = node;
-          openInAvatechEditor("https://editor.avatech.ai?comfyui=true", fileName.val);
+          openInAvatechEditor(
+            "https://editor.avatech.ai?comfyui=true",
+            fileName.val
+          );
           // openInAvatechEditor("http://localhost:3006?comfyui=true", fileName.val);
         });
         btn.serialize = false;
@@ -506,14 +509,20 @@ const ext = {
           options.unshift({
             content: "Open In Avatech Editor (Local)",
             callback: () => {
-              openInAvatechEditor("http://localhost:3006?comfyui=true", gltfFilename);
+              openInAvatechEditor(
+                "http://localhost:3006?comfyui=true",
+                gltfFilename
+              );
             },
           });
 
           options.unshift({
             content: "Open In Avatech Editor",
             callback: () => {
-              openInAvatechEditor("https://editor.avatech.ai?comfyui=true", gltfFilename);
+              openInAvatechEditor(
+                "https://editor.avatech.ai?comfyui=true",
+                gltfFilename
+              );
             },
           });
         });
@@ -544,13 +553,16 @@ const ext = {
           });
         });
         break;
-      case "ExportBlendshapes":
+      case "CreateShapesFlow":
         nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
         addMenuHandler(nodeType, function (_, options) {
           options.unshift({
             content: "Open In Blendshapes Editor",
             callback: () => {
-              openInAvatechEditor("https://editor.avatech.ai?comfyui=true", gltfFilename);
+              openInAvatechEditor(
+                "https://editor.avatech.ai?comfyui=true",
+                gltfFilename
+              );
             },
           });
         });
