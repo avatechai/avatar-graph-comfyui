@@ -5,7 +5,7 @@ class Object_PlaneTextureUnwrap(blender_node.EditOps):
 
     EXTRA_INPUT_TYPES = {
         "image": ("IMAGE",),
-        "scale": ('FLOAT', {'default': 1, }),
+        "scale": ('FLOAT', {'default': 1, "display": "number", "step": 0.01}),
         "texture_name": ('STRING', {'default': 'Texture', })
     }
 
