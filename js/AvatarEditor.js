@@ -10,7 +10,7 @@ export function AvatarEditor() {
     button(
       {
         class: () =>
-          "btn btn-circle flex flex-row btn-ghost normal-case absolute p-0 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto bg-black " +
+          "btn btn-circle flex flex-row btn-ghost normal-case absolute px-2 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto bg-black " +
           (showEditor.val ? "" : "hidden"),
         onclick: () => {
           console.log("close");
