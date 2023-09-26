@@ -2,6 +2,7 @@ import folder_paths
 import os
 import numpy as np
 import torch
+import re
 from segment_anything import sam_model_registry, SamPredictor
 from einops import rearrange, repeat
 
@@ -24,7 +25,6 @@ class SAM:
         return {
             "required": {
                 "image": ("IMAGE",),
-                "model_type": (["vit_h", "vit_l", "vit_b"],),
                 "ckpt": (folder_paths.get_filename_list("sams"),),
                 "embedding_id": (
                     "STRING",
@@ -40,13 +40,14 @@ class SAM:
     RETURN_TYPES = ("SAM_PROMPT",)
     FUNCTION = "load_image"
 
-    def load_image(self, image, model_type, ckpt, embedding_id, image_prompts_json):
+    def load_image(self, image, ckpt, embedding_id, image_prompts_json):
         import json
 
         global global_predictor
 
         if global_predictor is None:
             ckpt = folder_paths.get_full_path("sams", ckpt)
+            model_type = re.findall(r'vit_[lbh]', ckpt)[0]
             sam = sam_model_registry[model_type](checkpoint=ckpt)
             predictor = SamPredictor(sam)
             global_predictor = predictor

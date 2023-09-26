@@ -7,6 +7,7 @@ import folder_paths
 import json
 import numpy as np
 import server
+import re
 
 # For speeding up ONNX model, see https://github.com/facebookresearch/segment-anything/tree/main/demo#onnx-multithreading-with-sharedarraybuffer
 def inject_headers(original_handler):
@@ -65,7 +66,7 @@ async def post_sam_model(request):
     if not os.path.exists(emb_filename):
         image = load_image(post.get("image"))
         ckpt = post.get("ckpt")
-        model_type = post.get("model_type")
+        model_type = re.findall(r'vit_[lbh]', ckpt)[0]
         ckpt = folder_paths.get_full_path("sams", ckpt)
         sam = sam_model_registry[model_type](checkpoint=ckpt)
         predictor = SamPredictor(sam)
