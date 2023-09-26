@@ -90,13 +90,6 @@ def prompt_worker(q, server):
         item, item_id = q.get()
         # Add next line
         global_bpy.reset_bpy()
-
-if __name__ == "__main__":
-    # Add next two lines 
-    import sys
-    sys.path.append(os.path.join(os.path.dirname(__file__), "custom_nodes", "avatar-graph-comfyui"))
-
-
 ```
 
 5. Restart comfyui
