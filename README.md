@@ -1,6 +1,32 @@
 # avatar-graph-comfyui
 
+![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/201a005b-7e00-4671-85a1-54937bf0704e)
+
+
+
+https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-4755-a8e0-9149260eef12
+
+
+
+
 This introduce a custom workflow on top of comfyui built for avatar-graph.
+
+# Custom Nodes
+
+| Category | Node Name | Description |
+| --- | --- | --- |
+| Segmentation | Segmentation (SAM) |  |
+| Mesh | Create Mesh Layer | Create a mesh object from the input images (usually a segmented part of the entire image) |
+| Blendshapes | Mesh Modify Shape Key | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform |
+|  | Create Shape Flow  | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime |
+| UV & Texture | Match Texture Aspect Ratio | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation |
+| Output | Avatar Main Output |  |
+
+# Workflow
+
+# Shape Flow
+![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e95aa89c-5c1d-4ef4-89e9-37aa8ad8bb55)
+
 
 # Installation
 
