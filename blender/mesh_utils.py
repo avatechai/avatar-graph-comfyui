@@ -210,18 +210,29 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metad
     for obj in bpy_objects:
         obj.select_set(True)
 
-    filepath = output_dir + "/" + filename + '.' + ("glb" if model_type == "GLB" else "gltf")
+    def get_file_extension(model_type):
+        if model_type == "GLB":
+            return ".glb"
+        elif model_type == "GLTF_EMBEDDED":
+            return ".gltf"
+        elif model_type == "GLTF_SEPARATE":
+            return ".gltf"
+        elif model_type == "AVA":
+            return ".ava"
+
+    ext = get_file_extension(model_type)
+    filepath = output_dir + "/" + filename + '.' + ext
 
     if write_mode == "Increment":
         count = 0
         # while file exists, increment count
-        while os.path.exists(output_dir + "/" + filename + '_' + str(count) + '.' + ("glb" if model_type == "GLB" else "gltf")):
+        while os.path.exists(output_dir + "/" + filename + '_' + str(count) + '.' + ext):
             count += 1
 
-        filepath = output_dir + "/" + filename + '_' + str(count) + '.' + ("glb" if model_type == "GLB" else "gltf")
+        filepath = output_dir + "/" + filename + '_' + str(count) + '.' + ext
     
     with bpy.context.temp_override(**override):
-        bpy.ops.export_scene.gltf(filepath=filepath, export_format=model_type, use_selection=True, export_extras=True)
+        bpy.ops.export_scene.gltf(filepath=filepath, export_format="GLB" if model_type == "AVA" else model_type, use_selection=True, export_extras=True)
         # print(filepath)
 
     return filepath

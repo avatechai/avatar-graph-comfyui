@@ -42,7 +42,7 @@ class AvatarMainOutput(blender_node.ObjectOps):
             "multiline": False,
             "default": "out"
         }),
-        "model_type": (["GLB", "GLTF_EMBEDDED"],),
+        "model_type": (["AVA","GLB", "GLTF_EMBEDDED"],),
         "write_mode": (["Overwrite", "Increment"],),
 
         "SHAPE_FLOW": ("SHAPE_FLOW",),
