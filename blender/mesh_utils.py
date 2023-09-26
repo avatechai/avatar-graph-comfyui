@@ -67,7 +67,7 @@ def genreate_mesh_from_texture(bpy, image):
     cv2.drawContours(image, contours, -1, (0, 255, 0), 3)
 
     # Convert image back to tensor
-    image = [torch.from_numpy(image)]
+    image = torch.from_numpy(np.expand_dims(image, axis=0))
     return (image, meshes[0])
 
 
