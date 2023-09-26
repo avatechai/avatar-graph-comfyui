@@ -23,15 +23,37 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 
 # Workflow
 
+<details>
+<summary>  Workflow </summary>
+</details>
+
+<details>
+<summary> Character Gen Prompting Guide </summary>
+    - 
+</details>
 
 <details>
 <summary>  Mouth Open(Inpaint) Guide </summary>
 
-[Mouth Open Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/easyopenmouth_(inpaint).json)
-    
+### Notice: 
+- To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
+
+### Recommend Model List:
+##### Anime Style SD1.5
+https://civitai.com/models/35960/flat-2d-animerge
+https://civitai.com/models/24149/mistoonanime
+https://civitai.com/models/22364/kizuki-anime-hentai-checkpoint
+##### Realistic Style SD1.5
+https://civitai.com/models/4201/realistic-vision-v51
+https://civitai.com/models/49463/am-i-real
+https://civitai.com/models/43331/majicmix-realistic
+
+### Inpaint Template Preview
+➡️[MouthOpen JSON Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/easyopenmouth_(inpaint).json)
 ![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
 
-Inpaint Demonstration 
+
+### Inpaint Demonstration 
 
 https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-4505-8993-8f117cee34ff
 </details>
