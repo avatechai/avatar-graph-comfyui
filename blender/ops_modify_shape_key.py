@@ -2,6 +2,9 @@ import blender_node
 
 
 class Mesh_ModifyShapeKey(blender_node.ObjectOps):
+
+    CUSTOM_NAME = "Modify Shape Key"
+
     EXTRA_INPUT_TYPES = {
         "shape_key_name": ("STRING", {
             # True if you want the field to look like the one on the ClipTextEncode node

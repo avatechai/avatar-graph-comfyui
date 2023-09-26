@@ -4,6 +4,8 @@ from mesh_utils import genreate_mesh_from_texture
 class Object_CreateMeshLayer(blender_node.ObjectOps):
 
     BASE_INPUT_TYPES = {}
+    
+    CUSTOM_NAME = "Create Mesh Layer"
 
     EXTRA_INPUT_TYPES = {
         "image": ("IMAGE",),

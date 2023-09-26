@@ -22,6 +22,8 @@ class ObjectOps:
         "BPY_OBJ": ("BPY_OBJ",)
     }
 
+    CUSTOM_NAME = None
+
     def object_mode(self, bpy):
         bpy.ops.object.mode_set(mode='OBJECT')
 
@@ -56,6 +58,11 @@ class ObjectOps:
     @classmethod
     def NODE_DISPLAY_NAME_MAPPINGS(cls):
         import re
+        if cls.CUSTOM_NAME is not None: 
+            return {
+                cls.__name__: cls.CUSTOM_NAME
+            }
+            
         return {
             cls.__name__: re.sub(
                 "([a-z])([A-Z])", "\g<1> \g<2>", cls.__name__).replace('_', ' ')

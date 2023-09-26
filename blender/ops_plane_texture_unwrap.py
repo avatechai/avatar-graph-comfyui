@@ -9,6 +9,8 @@ class Object_PlaneTextureUnwrap(blender_node.EditOps):
         "texture_name": ('STRING', {'default': 'Texture', })
     }
 
+    CUSTOM_NAME = "Plane Texture Unwrap"
+
     def blender_process(self, bpy, BPY_OBJ, image, scale, texture_name):
         bpy.ops.mesh.select_all(action='SELECT')
         # Mesh fill

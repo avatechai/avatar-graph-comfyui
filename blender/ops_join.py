@@ -6,6 +6,7 @@ class Mesh_JoinMesh(blender_node.ObjectOps):
         "BPY_OBJ2": (blender_node.BPY_OBJ,)
     }
     
+    CUSTOM_NAME = "Join Meshes"
 
     def blender_process(self, bpy, BPY_OBJ, **props):
         

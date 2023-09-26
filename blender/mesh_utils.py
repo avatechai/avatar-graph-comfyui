@@ -2,7 +2,6 @@ import atexit
 import subprocess
 import os
 
-
 def genreate_mesh_from_texture(bpy, image):
     import torch
     import cv2
@@ -74,6 +73,10 @@ def genreate_mesh_from_texture(bpy, image):
 
 def assign_texture(bpy, BPY_OBJ, texture, texture_name):
     import numpy as np
+    import time
+    
+    # Start the timer
+    start_time = time.time()
 
     # Convert image to numpy
     texture = texture[0].numpy()
@@ -90,9 +93,17 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
         alpha_channel = np.ones((*texture.shape[:2], 1))
         texture = np.concatenate((texture, alpha_channel), axis=2)
 
+    end_time = time.time()
+    print(f"Time taken (np.concatenate) : {end_time - start_time} seconds")
+
     # Flatten image data and rearrange color channels for blender
     img.pixels = texture.ravel()
 
+    end_time = time.time()
+    print(f"Time taken (texture.ravel) : {end_time - start_time} seconds")
+
+    # End the timer and print the time taken
+  
     # Pack image to store it within .blend file
     img.pack()
 
@@ -132,6 +143,9 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
         obj.data.materials[0] = mat
     else:
         obj.data.materials.append(mat)
+
+    end_time = time.time()
+    print(f"Time taken (Full) : {end_time - start_time} seconds")
 
 
 blender_process_global = []
