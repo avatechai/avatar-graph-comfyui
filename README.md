@@ -25,8 +25,9 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 
 
 <details>
-<summary> Mouth Open(Inpaint) Guide </summary>
+<summary>  Mouth Open(Inpaint) Guide </summary>
 
+[Mouth Open Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/easyopenmouth_(inpaint).json)
     
 ![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
 
