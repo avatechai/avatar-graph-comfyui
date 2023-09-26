@@ -29,7 +29,10 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 
 <details>
 <summary> Character Gen Prompting Guide </summary>
-    - 
+    
+### Notice: 
+- We need a character image with an open mouth, so please add to the prompt: open mouth, [smile]
+- 
 </details>
 
 <details>
@@ -40,13 +43,13 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 
 ### Recommend Model List:
 ##### Anime Style SD1.5
-https://civitai.com/models/35960/flat-2d-animerge
-https://civitai.com/models/24149/mistoonanime
-https://civitai.com/models/22364/kizuki-anime-hentai-checkpoint
+- https://civitai.com/models/35960/flat-2d-animerge
+- https://civitai.com/models/24149/mistoonanime
+- https://civitai.com/models/22364/kizuki-anime-hentai-checkpoint
 ##### Realistic Style SD1.5
-https://civitai.com/models/4201/realistic-vision-v51
-https://civitai.com/models/49463/am-i-real
-https://civitai.com/models/43331/majicmix-realistic
+- https://civitai.com/models/4201/realistic-vision-v51
+- https://civitai.com/models/49463/am-i-real
+- https://civitai.com/models/43331/majicmix-realistic
 
 ### Inpaint Template Preview
 ➡️[MouthOpen JSON Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/easyopenmouth_(inpaint).json)
