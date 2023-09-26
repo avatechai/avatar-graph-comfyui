@@ -68,8 +68,8 @@ class GroupVertexInside():
         # get the indices of the vertices that are inside the convex hull
         inside_vertices_indices = [i for (x,y,i) in all_vertices_without_vertex_group if tri.find_simplex((x,y))>=0]
         
-        print(inside_vertices_indices)
-        print(len(vertex_group_vertices))
+        # print(inside_vertices_indices)
+        # print(len(vertex_group_vertices))
 
         bpy.ops.mesh.select_all(action='DESELECT')
 

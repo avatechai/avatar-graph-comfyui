@@ -51,8 +51,8 @@ class Mesh_ModifyShapeKey(blender_node.ObjectOps):
         # Create a new array of verts with sk as co and verts' groups
         new_verts = []
         for i, vert in enumerate(verts):
-            print(i)
-            print(sk.data[i].co)
+            # print(i)
+            # print(sk.data[i].co)
             new_vert = {
                 'co': sk.data[i].co,
                 'groups': vert.groups
@@ -129,6 +129,6 @@ class Mesh_ModifyShapeKey(blender_node.ObjectOps):
             new_pos = center + vec
 
             # Apply new position
-            print(i, vert['co'], new_pos, weight)
+            # print(i, vert['co'], new_pos, weight)
 
             sk.data[i].co = new_pos
