@@ -12,6 +12,8 @@ class Object_CreateMeshLayer(blender_node.ObjectOps):
         "face_threshold": ("FLOAT", {"display": "number", "default": 0.7}),
         "shape_threshold": ("FLOAT", {"display": "number", "default": 0.7}),
         "mesh_layer_name": ("STRING", {"default": "mesh_layer"}),
+        "scale_x": ("FLOAT", {"display": "number", "default": 1}),
+        "scale_y": ("FLOAT", {"display": "number", "default": 1}),
         "extrude_x": ("FLOAT", {"display": "number", "default": 0}),
         "extrude_y": ("FLOAT", {"display": "number", "default": 0}),
         "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
@@ -19,7 +21,7 @@ class Object_CreateMeshLayer(blender_node.ObjectOps):
 
     RETURN_TYPES = ("BPY_OBJ", "IMAGE")
 
-    def blender_process(self, bpy, image, face_threshold, shape_threshold, mesh_layer_name, extrude_x, extrude_y, seed):
+    def blender_process(self, bpy, image, face_threshold, shape_threshold, mesh_layer_name, scale_x,scale_y , extrude_x, extrude_y, seed):
         image, BPY_OBJ = genreate_mesh_from_texture(bpy, image)
 
         bpy.context.view_layer.objects.active = BPY_OBJ
@@ -34,6 +36,8 @@ class Object_CreateMeshLayer(blender_node.ObjectOps):
         bpy.ops.mesh.delete(type='EDGE_FACE')
         bpy.ops.mesh.select_all(action='SELECT')
         bpy.ops.mesh.edge_face_add()
+
+        bpy.ops.transform.resize(value=(scale_x, scale_y, 1))
 
         bpy.context.object.vertex_groups.new(name=mesh_layer_name)
         bpy.ops.object.vertex_group_assign()
