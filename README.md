@@ -2,11 +2,11 @@
 
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/201a005b-7e00-4671-85a1-54937bf0704e)
 
+A custom_nodes module for creating real-time interactive avatars powered by blender bpy mesh api + Avatech Shape Flow runtime.
+
+# Demo
+
 https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-4755-a8e0-9149260eef12
-
-A custom_nodes module for creating realtime interactive avatars powered by blender bpy mesh api + avatech runtime.
-
-# Custom Nodes
 
 # Custom Nodes
 
