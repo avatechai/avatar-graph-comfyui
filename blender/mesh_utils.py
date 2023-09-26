@@ -196,7 +196,7 @@ def kill_blender_process():
         process.kill()
 
 
-def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode):
+def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metadata):
     import global_bpy
     bpy = global_bpy.get_bpy()
     # print(bpy, bpy_objects)
@@ -206,6 +206,7 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode):
     override["selected_objects"] = list(bpy_objects)
     override["active_object"] = list(bpy_objects)[0]
 
+    bpy_objects[0]["metadata"] = metadata
     for obj in bpy_objects:
         obj.select_set(True)
 
@@ -220,7 +221,7 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode):
         filepath = output_dir + "/" + filename + '_' + str(count) + '.' + ("glb" if model_type == "GLB" else "gltf")
     
     with bpy.context.temp_override(**override):
-        bpy.ops.export_scene.gltf(filepath=filepath, export_format=model_type, use_selection=True)
+        bpy.ops.export_scene.gltf(filepath=filepath, export_format=model_type, use_selection=True, export_extras=True)
         # print(filepath)
 
     return filepath
