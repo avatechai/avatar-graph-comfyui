@@ -221,15 +221,15 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metad
             return ".ava"
 
     ext = get_file_extension(model_type)
-    filepath = output_dir + "/" + filename + '.' + ext
+    filepath = output_dir + "/" + filename + ext
 
     if write_mode == "Increment":
         count = 0
         # while file exists, increment count
-        while os.path.exists(output_dir + "/" + filename + '_' + str(count) + '.' + ext):
+        while os.path.exists(output_dir + "/" + filename + '_' + str(count) + ext):
             count += 1
 
-        filepath = output_dir + "/" + filename + '_' + str(count) + '.' + ext
+        filepath = output_dir + "/" + filename + '_' + str(count) + ext
     
     with bpy.context.temp_override(**override):
         bpy.ops.export_scene.gltf(filepath=filepath, export_format="GLB" if model_type == "AVA" else model_type, use_selection=True, export_extras=True)
