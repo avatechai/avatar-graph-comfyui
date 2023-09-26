@@ -25,6 +25,7 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 
 <details>
 <summary>  Workflow01 </summary>
+    
 ![eye+mouth movement](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8a237b9d-05fc-4e4a-b802-6465911f0d77)
 
 
