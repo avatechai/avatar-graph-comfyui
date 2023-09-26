@@ -24,26 +24,42 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-
 # Workflow
 
 <details>
-<summary>  Workflow </summary>
+<summary>  Workflow01 </summary>
 </details>
 
 <details>
 <summary> Character Gen Prompting Guide </summary>
     
 ### Notice: 
-- We need a character image with an open mouth, so please add to the prompt: ```open mouth, [smile]```
+- We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt: ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
+
+### Workflow Download:
+
+➡️[Simple CharacterGen Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
+- Feel free to change any checkpoint model that suits your needs.
   
-Simple Character Gen Template Download
+![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/acea9933-359b-4398-8d2a-582bf02bef99)
+
   
 </details>
 
 <details>
 <summary>  Mouth Open(Inpaint) Guide </summary>
-
+    
 ### Notice: 
 - To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 
-### Recommend Model List:
+### Workflow Download:
+
+➡️[MouthOpen Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
+
+![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
+
+### Inpaint Demonstration 
+
+https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-4505-8993-8f117cee34ff
+
+### Recommend Checkpoint Model List:
 ##### Anime Style SD1.5
 - https://civitai.com/models/35960/flat-2d-animerge
 - https://civitai.com/models/24149/mistoonanime
@@ -52,15 +68,7 @@ Simple Character Gen Template Download
 - https://civitai.com/models/4201/realistic-vision-v51
 - https://civitai.com/models/49463/am-i-real
 - https://civitai.com/models/43331/majicmix-realistic
-
-### Inpaint Template Preview
-➡️[MouthOpen JSON Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/easyopenmouth_(inpaint).json)
-![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
-
-
-### Inpaint Demonstration 
-
-https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-4505-8993-8f117cee34ff
+- 
 </details>
 
 # Shape Flow
