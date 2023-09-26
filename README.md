@@ -72,11 +72,7 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-
 </details>
 
 # Shape Flow
-![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e95aa89c-5c1d-4ef4-89e9-37aa8ad8bb55)
-
-
-
-
+![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/a834e535-4f87-4b77-81a6-435e3a67ca4a)
 
 # Installation
 
