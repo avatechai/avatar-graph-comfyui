@@ -15,9 +15,10 @@ A custom_nodes module for creating realtime interactive avatars powered by blend
 | Segmentation | ![CleanShot 2023-09-26 at 15 42 46](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8aabeba8-5450-4d39-8203-e91f9ab47190) | Segmentation (SAM) |  |
 | Mesh | ![CleanShot 2023-09-26 at 15 44 01](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/40740d25-9411-4cd3-a6c0-8b9008bca41c) | Create Mesh Layer | Create a mesh object from the input images (usually a segmented part of the entire image) |
 |  |![CleanShot 2023-09-26 at 15 44 29](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ba7afbc5-9cd5-4f97-9614-f71133f5783e) | Join Meshes | |
-| Blendshapes |  | Mesh Modify Shape Key | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform |
+| Blendshapes | ![CleanShot 2023-09-26 at 15 48 26](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ab4f259c-89a7-4f51-bc54-fd179e252073) | Mesh Modify Shape Key | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform |
 |  |  | Create Shape Flow  | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime |
 | UV & Texture |  | Match Texture Aspect Ratio | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation |
+| | | Plane Texture Unwrap | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.
 | Output |  | Avatar Main Output |  |
 
 # Workflow
