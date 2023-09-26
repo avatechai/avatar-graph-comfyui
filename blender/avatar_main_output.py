@@ -63,7 +63,7 @@ class AvatarMainOutput(blender_node.ObjectOps):
         objs = BPY_OBJS if BPY_OBJS else [BPY_OBJ]
 
         filepath = export_gltf(
-            self.output_dir, objs, filename, model_type, write_mode
+            self.output_dir, objs, filename, model_type, write_mode, blendshapes
         )
 
         return {"ui": {"gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, "blendshapes": {blendshapes}}}
