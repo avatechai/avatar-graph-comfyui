@@ -82,7 +82,7 @@ class ObjectOps:
         results = self.blender_process(bpy, **props)
 
         if results is None:
-            print(results)
+            # print(results)
             if props.get("BPY_OBJ") != None:
                 return (props["BPY_OBJ"], )
             else:
@@ -195,7 +195,7 @@ def print_blender_functions(path):
 
     # add a an empty object
 
-    print(dir(get_nested_attr(bpy, path)), type(get_nested_attr(bpy, path)))
+    # print(dir(get_nested_attr(bpy, path)), type(get_nested_attr(bpy, path)))
 
 
 def create_ops_class(cls, path, name=None, name_prefix=''):
