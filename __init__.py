@@ -4,10 +4,12 @@
 @nickname: Avatar Graph
 @description: Include nodes for sam + bpy operation, that allows workflow creations for generative 2d character rig.
 """
-import routes
-
-import inspect
 import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__)))
+
+import routes
+import inspect
 import sys
 import importlib
 import subprocess
