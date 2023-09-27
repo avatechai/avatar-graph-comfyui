@@ -24,21 +24,34 @@ const {
 } = van.tags;
 
 van.derive(() => {
-  if (showImageEditor.val && targetNode.val != undefined && targetNode.val.outputs) {
-    const outputNames = targetNode.val.outputs.map(x => x.name).slice(1)
-    const record = Object.keys(imagePromptsMulti.val)
+  if (
+    showImageEditor.val &&
+    targetNode.val != undefined &&
+    targetNode.val.outputs
+  ) {
+    const outputNames = targetNode.val.outputs.map((x) => x.name).slice(1);
+    const record = Object.keys(imagePromptsMulti.val);
 
-    const diff = outputNames.filter(x => !record.includes(x));
+    const diff = outputNames.filter((x) => !record.includes(x));
+    const missingDiff = record.filter((x) => !outputNames.includes(x));
 
-    if (diff.length === 0) return;
-
-    console.log("Cleaning up missing output slots", diff);
-    diff.forEach((x) => {
-      targetNode.val.removeOutput(targetNode.val.findOutputSlot(x))
-    })
-    targetNode.val.graph.change();
+    if (diff.length > 0) {
+      console.log("Cleaning up missing output slots", diff);
+      diff.forEach((x) => {
+        targetNode.val.removeOutput(targetNode.val.findOutputSlot(x));
+      });
+      targetNode.val.graph.change();
+    } else if (missingDiff.length > 0) {
+      missingDiff.forEach((x) => {
+        targetNode.val.addOutput(
+          x,
+          targetNode.val.type === "SAM" ? "IMAGE" : "SAM_PROMPT"
+        );
+      });
+      targetNode.val.graph.change();
+    }
   }
-}) 
+});
 
 export function SideBar() {
   const layer_to_delete = van.state("");
