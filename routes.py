@@ -32,6 +32,10 @@ for item in server.PromptServer.instance.routes._items:
     routes.append(item)
 server.PromptServer.instance.routes._items = routes
 
+@server.PromptServer.instance.routes.get("/avatar-graph-comfyui/tw-styles.css")
+async def get_web_styles(request):
+    filename = os.path.join(os.path.dirname(__file__), "js/tw-styles.css")
+    return web.FileResponse(filename)
 
 @server.PromptServer.instance.routes.get("/sam_model")
 async def get_sam_model(request):

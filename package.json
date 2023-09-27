@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"tailwindcss -i ./js/style.css -o ./js/output.css --watch -m\" \"node ./style-watcher.js\""
+    "dev": "tailwindcss -i ./js/styles.css -o ./js/tw-styles.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chokidar": "^3.5.3",
-    "concurrently": "^8.2.1",
     "daisyui": "^3.7.5",
     "tailwindcss": "^3.3.3"
   }
