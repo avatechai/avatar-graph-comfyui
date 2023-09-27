@@ -53,14 +53,13 @@ To enable the character to blink eyes and talking.
 > 
 > For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
 > 
-[Generate new image or make your image open mouth Guide](#image-preprocess-guide)
+[Generate new image Guide](#Character-Gen-Prompting-Guide)
+[Make your character mouth open Guide](#Mouth-Open-Guide-(Inpaint))
 
 ![eye+mouth movement](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8a237b9d-05fc-4e4a-b802-6465911f0d77)
 
-
 ### Download: 📂[Simple Rig Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
     
-
 
 # Image Preprocess Guide
 
@@ -69,6 +68,7 @@ To enable the character to blink eyes and talking.
 > <details> 
 > <summary> Character Gen Prompting Guide </summary>
 >
+> # Character Gen Prompting Guide
 >> **🎯Notice**
 >> 
 >> We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt:
@@ -87,6 +87,7 @@ To enable the character to blink eyes and talking.
 > <details> 
 > <summary> Mouth Open Guide (Inpaint) </summary>
 >
+> # Mouth Open Guide (Inpaint)
 > To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 >
 > ![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
