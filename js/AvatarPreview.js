@@ -2,7 +2,7 @@ import { van } from "./van.js";
 import { showEditor } from "./state.js";
 const { button, iframe, div, img } = van.tags;
 
-export function AvatarViewer() {
+export function AvatarPreview() {
   return div(
     {
       class: () =>

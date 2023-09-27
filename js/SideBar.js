@@ -1,4 +1,4 @@
-import { drawSegment, getClicks, updateImagePrompts } from "./ImageEditor.js";
+import { drawSegment, getClicks, updateImagePrompts } from "./LayerEditor.js";
 import {
   imagePrompts,
   selectedLayer,

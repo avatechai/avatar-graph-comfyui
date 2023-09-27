@@ -2,7 +2,7 @@ import { iframeSrc, showEditor } from "./state.js";
 import { van } from "./van.js";
 const { button, iframe, div, img, span } = van.tags;
 
-export function AvatarEditor() {
+export function ShapeFlowEditor() {
   return div(
     {
       class: "w-full h-full relative",
