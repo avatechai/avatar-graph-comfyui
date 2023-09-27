@@ -336,11 +336,11 @@ const ext = {
       BLENDSHAPES_CONFIG(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit Shape Flow", "", () => {
           targetNode.val = node;
-          openInAvatechEditor(
-            "https://editor.avatech.ai?comfyui=true",
-            fileName.val
-          );
-          // openInAvatechEditor("http://localhost:3006?comfyui=true", fileName.val);
+          // openInAvatechEditor(
+          //   "https://editor.avatech.ai?comfyui=true",
+          //   fileName.val
+          // );
+          openInAvatechEditor("http://localhost:3006?comfyui=true", fileName.val);
         });
         btn.serialize = false;
 

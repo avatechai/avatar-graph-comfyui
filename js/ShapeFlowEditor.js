@@ -10,7 +10,7 @@ export function ShapeFlowEditor() {
     button(
       {
         class: () =>
-          "btn btn-circle flex flex-row btn-ghost normal-case absolute px-2 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto bg-black " +
+          "ml-2 mt-2 btn btn-circle flex flex-row btn-ghost normal-case absolute px-4 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto bg-black " +
           (showEditor.val ? "" : "hidden"),
         onclick: () => {
           console.log("close");
