@@ -411,6 +411,18 @@ const ext = {
           api.api_base +
           `/view?filename=${evt.detail?.output.gltfFilename[0]}`;
 
+        if (
+          gltfFilename.endsWith(".ava") &&
+          evt.detail?.output.auto_save[0] == "true"
+        ) {
+          const link = document.createElement("a");
+          link.href = gltfFilename;
+          link.download = gltfFilename.split("/").pop();
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+
         fileName.val = gltfFilename;
         viewer.postMessage(
           JSON.stringify({
@@ -488,6 +500,36 @@ const ext = {
 
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
     switch (nodeData.name) {
+      case "AvatarMainOutput":
+        addMenuHandler(nodeType, function (_, options) {
+          const output = app.nodeOutputs[this.id + ""];
+          if (!output || !output.gltfFilename) return;
+
+          const gltfFilename =
+            window.location.protocol +
+            "//" +
+            api.api_host +
+            api.api_base +
+            `/view?filename=${output.gltfFilename[0]}`;
+
+          options.unshift({
+            content: "Save file",
+            callback: () => {
+              const a = document.createElement("a");
+              let url = new URL(gltfFilename);
+              url.searchParams.delete("preview");
+              a.href = url;
+              a.setAttribute(
+                "download",
+                new URLSearchParams(url.search).get("filename")
+              );
+              document.body.append(a);
+              a.click();
+              requestAnimationFrame(() => a.remove());
+            },
+          });
+        });
+        break;
       case "ExportGLTF":
         addMenuHandler(nodeType, function (_, options) {
           const output = app.nodeOutputs[this.id + ""];
@@ -566,17 +608,6 @@ const ext = {
         break;
       case "CreateShapeFlow":
         nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
-        addMenuHandler(nodeType, function (_, options) {
-          options.unshift({
-            content: "Open In Blendshapes Editor",
-            callback: () => {
-              openInAvatechEditor(
-                "https://editor.avatech.ai?comfyui=true",
-                gltfFilename
-              );
-            },
-          });
-        });
         break;
       case "Mesh_JoinMesh":
         nodeData.input.required.obj = ["MESH_GROUP_CONFIG"];
