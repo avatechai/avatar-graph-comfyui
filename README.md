@@ -21,7 +21,7 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 # Custom Nodes
 
 <details>
-<summary>Expand to see all the nodes available</summary>
+<summary>✨Expand to see all the nodes available✨</summary>
 
 | Preview                                                                                                                                     | Node Name                  | Description                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -37,34 +37,34 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 
 # Workflow Tempalte
 
-> **Notice**
+> **🎯Notice**
 > 
-> To achieve the best results, please ensure that the pictures of recommended characters have a minimum resolution of 768x768, and that the characters have their mouths open, with clear facial features.
+> To achieve the best results, please ensure character image with an **open mouth** and have a minimum resolution of 768x768, it enable the tool to easily recognize facial features.
 
-## Simple Eyeblink and Talking 
-
-//Add Video
+## Simple Eyeblink and Talking Workflow
     
 ![eye+mouth movement](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8a237b9d-05fc-4e4a-b802-6465911f0d77)
 
 
-➡️[Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
+📂[Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 
 
-# Image Pre-process Guide
+# Image Preprocess Guide
 
-> If you want to generate a new character image,
-> you can refer to this Guide!
+> 💡If you want to generate a new character image, you can refer to this Guide!
+
 <details> 
 <summary> Character Gen Prompting Guide </summary>
     
-> **Notice**
+> **🎯Notice**
 > 
-> We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt: ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
+> We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt:
+>
+> ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
 
 ### Workflow Download:
 
-➡️[Simple CharacterGen Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
+📂[Simple CharacterGen Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
 > Feel free to change any checkpoint model that suits your needs.
   
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/acea9933-359b-4398-8d2a-582bf02bef99)
@@ -72,18 +72,18 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
   
 </details>
 
-> If you have a character image but it's not mouth open,
-> you can refer to this Guide!
+> 💡If you have a character image but it's not mouth open, you can refer to this Guide!
+
 <details> 
 <summary>  Mouth Open(Inpaint) Guide </summary>
 
-> **Notice**
+> **🎯Notice**
 > 
 > To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 
 ### Workflow Download:
 
-➡️[MouthOpen Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
+📂[MouthOpen Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
 
 ![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
 
@@ -91,7 +91,8 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 
 https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-4505-8993-8f117cee34ff
 
-### Recommend Checkpoint Model List:
+Recommend Checkpoint Model List 
+
 ##### Anime Style SD1.5
 - https://civitai.com/models/35960/flat-2d-animerge
 - https://civitai.com/models/24149/mistoonanime
@@ -100,7 +101,7 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-
 - https://civitai.com/models/4201/realistic-vision-v51
 - https://civitai.com/models/49463/am-i-real
 - https://civitai.com/models/43331/majicmix-realistic
-- 
+  
 </details>
 
 # Shape Flow
