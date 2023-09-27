@@ -10,6 +10,7 @@ import {
   imagePromptsMulti,
   selectedLayer,
   showLoading,
+  loadingCaption,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -287,6 +288,7 @@ const ext = {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit prompt", "", () => {
+          loadingCaption.val = "Computing image embedding...";
           showLoading.val = true;
 
           let connectedImageFileName = getInputWidgetValue(node, 0, "image");
