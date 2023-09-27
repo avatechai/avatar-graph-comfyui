@@ -91,10 +91,11 @@ To enable the character to blink eyes and talking.
 > </details>
 
 # Custom Nodes
-[Image Segmentation Nodes](#image-segmentation-nodes) | [Mesh Edit Nodes](#mesh-edit-nodes) | [Shape Keys Nodes](#shape-keys-nodes) | [Avatar Output Nodes](#avatar-output-nodes)
 
 <details>
 <summary> Expand to see all the available nodes description </summary>
+
+[Image Segmentation Nodes](#image-segmentation-nodes) | [Mesh Edit Nodes](#mesh-edit-nodes) | [Shape Keys Nodes](#shape-keys-nodes) | [Avatar Output Nodes](#avatar-output-nodes)
 
 ## Image Segmentation Nodes
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
