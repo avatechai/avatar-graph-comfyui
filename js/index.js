@@ -19,7 +19,7 @@ import { api } from "./api.js";
 import { Container } from "./Container.js";
 import { loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
-import { drawSegment, getClicks } from "./ImageEditor.js";
+import { drawSegment, getClicks } from "./LayerEditor.js";
 
 /** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
 const recomputeInsideNodesOps = LGraphGroup.prototype.recomputeInsideNodes;
@@ -336,11 +336,11 @@ const ext = {
       BLENDSHAPES_CONFIG(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit Shape Flow", "", () => {
           targetNode.val = node;
-          openInAvatechEditor(
-            "https://editor.avatech.ai?comfyui=true",
-            fileName.val
-          );
-          // openInAvatechEditor("http://localhost:3006?comfyui=true", fileName.val);
+          // openInAvatechEditor(
+          //   "https://editor.avatech.ai?comfyui=true",
+          //   fileName.val
+          // );
+          openInAvatechEditor("http://localhost:3006?comfyui=true", fileName.val);
         });
         btn.serialize = false;
 

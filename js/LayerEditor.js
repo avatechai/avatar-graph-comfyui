@@ -101,7 +101,7 @@ export function drawSegment(clicks) {
 
 initModel();
 
-export function ImageEditor() {
+export function LayerEditor() {
   let realTimeSegment = true;
   document.addEventListener("keydown", (e) => {
     if (showImageEditor.val && e.code === "Tab") {
