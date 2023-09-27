@@ -313,6 +313,10 @@ const ext = {
             .then(() => {
               showLoading.val = false;
               showMyImageEditor(node);
+            })
+            .catch((err) => {
+              console.log(err);
+              showLoading.val = false;
             });
         });
         btn.serialize = false;
