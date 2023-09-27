@@ -16,8 +16,15 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 # Contents
 - [Workflow Template](workflow-template)
+    - [Template01 - Simple Shape Flow](#template01---simple-shape-flow)
 - [Image Preprocess Guide](#image-preprocess-guide)
+    - [Character Gen Prompting Guide](#character-gen-prompting-guide)
+    - [Mouth Open Guide (Inpaint)](#mouth-open-guide-inpaint)
 - [Custom Nodes](custom-nodes)
+    - [Image Segmentation Nodes](#image-segmentation-nodes)
+    - [Mesh Edit Nodes](#mesh-edit-nodes)
+    - [Shape Keys Nodes](#shape-keys-nodes)
+    - [Avatar Output Nodes](#avatar-output-nodes)
 - [Shape Flow](#shape-flow)
 - [Installation](#installation)
 - [Development](#development)
