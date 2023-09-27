@@ -41,7 +41,10 @@ van.derive(() => {
         targetNode.val.removeOutput(targetNode.val.findOutputSlot(x));
       });
       targetNode.val.graph.change();
-    } else if (missingDiff.length > 0) {
+    }
+
+    if (missingDiff.length > 0) {
+      console.log("Adding missing output slots", diff);
       missingDiff.forEach((x) => {
         targetNode.val.addOutput(
           x,
