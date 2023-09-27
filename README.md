@@ -52,7 +52,7 @@ To enable the character able to blink eyes and talking.
 # Image Preprocess Guide
 
 #### 💡If you want to generate a new character image,
-you can refer to this Guide and download Template!
+you can download this Template and refer to the Guide!
 
 <details> 
 <summary> Character Gen Prompting Guide </summary>
@@ -73,10 +73,10 @@ Feel free to change any checkpoint model that suits your needs.
 </details>
 
 #### 💡If you have a character image but it's not mouth open, 
-you can refer to this Guide and download Template!
+you can download this Template and refer to the Guide!
 
 <details> 
-<summary> Mouth Open Guide (using Inpaint) </summary>
+<summary> Mouth Open Guide (Inpaint) </summary>
 
 ### Download: 📂[MouthOpen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
 To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
