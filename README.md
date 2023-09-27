@@ -2,7 +2,7 @@
 
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/201a005b-7e00-4671-85a1-54937bf0704e)
 
-A custom_nodes module for creating real-time interactive avatars powered by blender bpy mesh api + Avatech Shape Flow runtime.
+A custom nodes module for **creating real-time interactive avatars** powered by blender bpy mesh api + Avatech Shape Flow runtime.
 
 # Demo
 
@@ -28,9 +28,10 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 - [Development](#development)
 
 # Custom Nodes
-Custom nodes for ComfyUI.
+[Image Segmentation Nodes](#image-segmentation-nodes) | [Mesh Edit Nodes](#mesh-edit-nodes) | [Shape Keys Nodes](#shape-keys-nodes) | [Avatar Output Nodes](#avatar-output-nodes)
+
 <details>
-<summary> Expand to see all the nodes available✨</summary>
+<summary> Expand to see all the available nodes description </summary>
 
 ## Image Segmentation Nodes
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
@@ -60,7 +61,7 @@ Custom nodes for ComfyUI.
 
 # Workflow Template
 
-## Simple Rig Workflow
+## Simple Rig
 To enable the character to blink eyes and talking.
 
 > **🎯Notice**
@@ -131,6 +132,8 @@ To enable the character to blink eyes and talking.
 
 # Installation
 
+Clone the repository to custom_nodes in your [ComfyUI](https://github.com/comfyanonymous/ComfyUI) directory:
+
 1. `cd custom_nodes`
 
 2. `git clone https://github.com/avatechgg/avatar-graph-comfyui.git`
@@ -160,7 +163,7 @@ def prompt_worker(q, server):
 # Development
 
 <details>
-<summary> If you are interested in contributing expand to see development details✨ </summary>
+<summary> If you are interested in contributing expand to see development details </summary>
 
 
 For comfyui frontend extension, frontend js located at `avatar-graph-comfyui/js`
