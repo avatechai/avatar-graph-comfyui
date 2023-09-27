@@ -18,6 +18,15 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 
  [➡️Open in Avatech Labs]()
 
+# Contents
+- [Demo](#demo)
+- [Custom Nodes](custom-nodes)
+- [Workflow Template](workflow-template)
+- [Image Preprocess Guide](#image-preprocess-guide)
+- [Shape Flow](#shape-flow)
+- [Installation](#installation)
+- [Development](#development)
+
 # Custom Nodes
 
 <details>
@@ -35,7 +44,7 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 | ![CleanShot 2023-09-26 at 16 37 54](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a) | Avatar Main Output         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output |
 </details>
 
-# Workflow Tempalte
+# Workflow Template
 
 ## Simple Rig Workflow
 To enable the character to blink eyes and talking.
@@ -44,7 +53,7 @@ To enable the character to blink eyes and talking.
 > 
 > For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
 > 
-<a href="lable"> Generate new image or make your image open mouth Guide </a>
+[Generate new image or make your image open mouth Guide](#image-preprocess-guide)
 
 ![eye+mouth movement](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8a237b9d-05fc-4e4a-b802-6465911f0d77)
 
@@ -53,7 +62,7 @@ To enable the character to blink eyes and talking.
     
 
 
-# <span id="lable">Image Preprocess Guide </span>
+# Image Preprocess Guide
 
 ### 💡If you want to generate a new character image
 > you can download this Template and refer to the Guide!
