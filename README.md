@@ -51,54 +51,52 @@ To enable the character able to blink eyes and talking.
 
 # Image Preprocess Guide
 
-#### 💡If you want to generate a new character image,
-you can download this Template and refer to the Guide!
-
-<details> 
-<summary> Character Gen Prompting Guide </summary>
-
-### Download: 📂[Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
-Feel free to change any checkpoint model that suits your needs.
-    
-> **🎯Notice**
-> 
-> We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt:
+### 💡If you want to generate a new character image
+> you can download this Template and refer to the Guide!
+> <details> 
+> <summary> Character Gen Prompting Guide </summary>
 >
-> ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
+> ### Download: 📂[Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
+> Feel free to change any checkpoint model that suits your needs.
+>    
+>> **🎯Notice**
+>> 
+>> We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt:
+>>
+>> ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
+>
+>  
+>![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/acea9933-359b-4398-8d2a-582bf02bef99)
+>
+>  
+> </details>
 
-  
-![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/acea9933-359b-4398-8d2a-582bf02bef99)
-
-  
-</details>
-
-#### 💡If you have a character image but it's not mouth open, 
-you can download this Template and refer to the Guide!
-
-<details> 
-<summary> Mouth Open Guide (Inpaint) </summary>
-
-### Download: 📂[MouthOpen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
-To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
-
-![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
-
-### Inpaint Demonstration 
-
-https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-4505-8993-8f117cee34ff
-
-### Recommend Checkpoint Model List 
-
-##### Anime Style SD1.5
-- https://civitai.com/models/35960/flat-2d-animerge
-- https://civitai.com/models/24149/mistoonanime
-- https://civitai.com/models/22364/kizuki-anime-hentai-checkpoint
-##### Realistic Style SD1.5
-- https://civitai.com/models/4201/realistic-vision-v51
-- https://civitai.com/models/49463/am-i-real
-- https://civitai.com/models/43331/majicmix-realistic
-  
-</details>
+### 💡If you have a character image but it's not mouth open
+> you can download this Template and refer to the Guide!
+> <details> 
+> <summary> Mouth Open Guide (Inpaint) </summary>
+>
+> ### Download: 📂[MouthOpen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
+> To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
+>
+> ![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
+>
+> ### Inpaint Demonstration 
+>
+> https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-4505-8993-8f117cee34ff
+> 
+> ### Recommend Checkpoint Model List 
+> 
+> ##### Anime Style SD1.5
+>- https://civitai.com/models/35960/flat-2d-animerge
+>- https://civitai.com/models/24149/mistoonanime
+>- https://civitai.com/models/22364/kizuki-anime-hentai-checkpoint
+>##### Realistic Style SD1.5
+>- https://civitai.com/models/4201/realistic-vision-v51
+>- https://civitai.com/models/49463/am-i-real
+>- https://civitai.com/models/43331/majicmix-realistic
+> 
+> </details>
 
 # Shape Flow
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/a834e535-4f87-4b77-81a6-435e3a67ca4a)
