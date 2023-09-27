@@ -171,10 +171,6 @@ export function SideBar() {
                 imagePrompts.val = [];
               }
             }
-            const outputIndex = targetNode.val.findOutputSlot(
-              layer_to_delete.val
-            );
-            targetNode.val.removeOutput(outputIndex);
             targetNode.val.graph.change();
             updateImagePrompts();
             delete_layer_dialog.close();
@@ -202,11 +198,6 @@ export function SideBar() {
                 console.log(inputText, imagePromptsMulti.val);
                 my_modal_3.close();
                 e.target.elements[1].value = "";
-                targetNode.val.addOutput(
-                  inputText,
-                  targetNode.val.type === "SAM" ? "IMAGE" : "SAM_PROMPT"
-                );
-                targetNode.val.graph.change();
                 if (
                   selectedLayer.val === null ||
                   selectedLayer.val === undefined ||
