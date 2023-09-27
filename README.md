@@ -52,9 +52,10 @@ To enable the character to blink eyes and talking.
 > **🎯Notice**
 > 
 > For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
-> 
-[Generate new image Guide](#Character-Gen-Prompting-Guide)
-[Make your character mouth open Guide](#Mouth-Open-Guide-(Inpaint))
+
+[💡Generate new image Guide](#character-gen-prompting-guide)
+
+[💡Make your character mouth open Guide](#mouth-open-guide-inpaint)
 
 ![eye+mouth movement](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8a237b9d-05fc-4e4a-b802-6465911f0d77)
 
