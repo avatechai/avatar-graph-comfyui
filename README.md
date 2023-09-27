@@ -21,7 +21,7 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 # Custom Nodes
 
 <details>
-<summary>✨Expand to see all the nodes available✨</summary>
+<summary> Expand to see all the nodes available✨</summary>
 
 | Preview                                                                                                                                     | Node Name                  | Description                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -138,7 +138,7 @@ def prompt_worker(q, server):
 # Development
 
 <details>
-<summary> If you are interested in contributing expand to see development details </summary>
+<summary> If you are interested in contributing expand to see development details✨ </summary>
 
 
 For comfyui frontend extension, frontend js located at `avatar-graph-comfyui/js`
