@@ -6,17 +6,11 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 # Demo
 
-https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763
+| Demo Name | Demo Name | Demo Name | Demo Name |
+| ------------- | ------------- | ------------- | ------------- |
+|  <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763.mp4"> | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-4755-a8e0-9149260eef12.mp4">  | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-4ca6-be44-0ba9c7c07d50">  | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763.mp4">  |
+|  [➡️Open in Avatech Labs]()  | [➡️Open in Avatech Labs]()  | [➡️Open in Avatech Labs]()  | [➡️Open in Avatech Labs]()  |
 
- [➡️Open in Avatech Labs]()
-
-https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-4755-a8e0-9149260eef12
-
- [➡️Open in Avatech Labs]()
-
-https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-4ca6-be44-0ba9c7c07d50
-
- [➡️Open in Avatech Labs]()
 
 # Contents
 - [Demo](#demo)
