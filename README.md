@@ -28,20 +28,33 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 - [Development](#development)
 
 # Custom Nodes
-
+Custom nodes for ComfyUI.
 <details>
 <summary> Expand to see all the nodes available✨</summary>
 
-| Name                       | Description                                                                                           | Preview                                                                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Segmentation (SAM)         | Integrative SAM node allowing you to directly select and create multiple image segment output.        | ![CleanShot 2023-09-26 at 15 42 46](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8aabeba8-5450-4d39-8203-e91f9ab47190) |
-| Create Mesh Layer          | Create a mesh object from the input images (usually a segmented part of the entire image)             | ![CleanShot 2023-09-26 at 15 44 01](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/40740d25-9411-4cd3-a6c0-8b9008bca41c) |
-| Join Meshes                | Combine multiple meshes into a single mesh object                                                     | ![CleanShot 2023-09-26 at 15 44 29](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ba7afbc5-9cd5-4f97-9614-f71133f5783e) |
-| Mesh Modify Shape Key      | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform                | ![CleanShot 2023-09-26 at 15 48 26](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ab4f259c-89a7-4f51-bc54-fd179e252073) |
-| Create Shape Flow          | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime    | ![CleanShot 2023-09-26 at 16 38 51](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/abfdd801-0387-4c5d-9c11-6c23337ff1dd) |
-| Match Texture Aspect Ratio | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       | ![CleanShot 2023-09-26 at 17 01 51](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/cb7155be-fb31-49f8-a24a-d001a1484ea7) |
-| Plane Texture Unwrap       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           | ![CleanShot 2023-09-26 at 17 11 44](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/4b9c0cf5-0497-47bf-8e06-5a3370084c11) |
-| Avatar Main Output         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output | ![CleanShot 2023-09-26 at 16 37 54](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a) |
+## Image Segmentation Nodes
+| Name                         | Description                                                                                           | Preview                                                                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `Segmentation (SAM)`         | Integrative SAM node allowing you to directly select and create multiple image segment output.        | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8aabeba8-5450-4d39-8203-e91f9ab47190" width="300"> |
+
+## Mesh Edit Nodes
+| Name                         | Description                                                                                           | Preview                                                                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `Create Mesh Layer`          | Create a mesh object from the input images (usually a segmented part of the entire image)             | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/40740d25-9411-4cd3-a6c0-8b9008bca41c" width="300"> |
+| `Join Meshes`                | Combine multiple meshes into a single mesh object                                                     | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ba7afbc5-9cd5-4f97-9614-f71133f5783e" width="300"> |
+| `Match Texture Aspect Ratio` | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/cb7155be-fb31-49f8-a24a-d001a1484ea7" width="300"> |
+| `Plane Texture Unwrap`       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/4b9c0cf5-0497-47bf-8e06-5a3370084c11" width="300"> |
+
+## Shape Keys Nodes
+| Name                         | Description                                                                                           | Preview                                                                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `Mesh Modify Shape Key`      | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform                | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ab4f259c-89a7-4f51-bc54-fd179e252073" width="300"> |
+| `Create Shape Flow`          | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime    | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/abfdd801-0387-4c5d-9c11-6c23337ff1dd" width="300"> |
+
+## Avatar Output Nodes
+| Name                         | Description                                                                                           | Preview                                                                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `Avatar Main Output`         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a" width="300"> |
 
 </details>
 
