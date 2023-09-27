@@ -14,6 +14,9 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 
 # Custom Nodes
 
+<details>
+<summary>  Expand to see all the nodes available </summary>
+
 | Preview                                                                                                                                     | Node Name                  | Description                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
 | ![CleanShot 2023-09-26 at 15 42 46](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8aabeba8-5450-4d39-8203-e91f9ab47190) | Segmentation (SAM)         | Integrative SAM node allowing you to directly select and create multiple image segment output.        |
@@ -24,6 +27,8 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 | ![CleanShot 2023-09-26 at 17 01 51](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/cb7155be-fb31-49f8-a24a-d001a1484ea7) | Match Texture Aspect Ratio | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       |
 | ![CleanShot 2023-09-26 at 17 11 44](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/4b9c0cf5-0497-47bf-8e06-5a3370084c11) | Plane Texture Unwrap       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           |
 | ![CleanShot 2023-09-26 at 16 37 54](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a) | Avatar Main Output         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output |
+
+</details>
 
 # Workflow
 
@@ -113,6 +118,10 @@ def prompt_worker(q, server):
 
 # Development
 
+<details>
+<summary> If you are interested in contributing expand to see development details </summary>
+
+
 For comfyui frontend extension, frontend js located at `avatar-graph-comfyui/js`
 
 Web stack used: [vanjs](https://github.com/vanjs-org/van) [tailwindcss](https://github.com/tailwindlabs/tailwindcss)
@@ -131,8 +140,9 @@ pnpm dev
 
 For each changes, simply refresh the comfyui page to see the changes.
 
-p.s. For tailwind autocomplete, add the following to your vscode settings.json.
-
+<details>
+<summary>p.s. For tailwind autocomplete, add the following to your vscode settings.json.</summary>
+    
 ```json
 {
     "tailwindCSS.experimental.classRegex": [
@@ -140,3 +150,9 @@ p.s. For tailwind autocomplete, add the following to your vscode settings.json.
     ]
 }
 ```
+
+</details>
+
+</details>
+
+
