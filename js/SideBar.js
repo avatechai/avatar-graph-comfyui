@@ -201,13 +201,10 @@ export function SideBar() {
                 console.log(inputText, imagePromptsMulti.val);
                 my_modal_3.close();
                 e.target.elements[1].value = "";
-                if (
-                  selectedLayer.val === null ||
-                  selectedLayer.val === undefined ||
-                  selectedLayer.val === ""
-                ) {
-                  selectedLayer.val = inputText;
-                }
+
+                selectedLayer.val = inputText;
+                imagePrompts.val = imagePromptsMulti.val[inputText];
+                drawSegment(getClicks());
                 updateImagePrompts();
               },
             },
