@@ -8,14 +8,20 @@ A custom_nodes module for creating real-time interactive avatars powered by blen
 
 https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763
 
+> [➡️Open in Avatech Labs]()
+
 https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-4755-a8e0-9149260eef12
 
+> [➡️Open in Avatech Labs]()
+
 https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-4ca6-be44-0ba9c7c07d50
+
+> [➡️Open in Avatech Labs]()
 
 # Custom Nodes
 
 <details>
-<summary>  Expand to see all the nodes available </summary>
+<summary>Expand to see all the nodes available</summary>
 
 | Preview                                                                                                                                     | Node Name                  | Description                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -27,41 +33,53 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 | ![CleanShot 2023-09-26 at 17 01 51](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/cb7155be-fb31-49f8-a24a-d001a1484ea7) | Match Texture Aspect Ratio | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       |
 | ![CleanShot 2023-09-26 at 17 11 44](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/4b9c0cf5-0497-47bf-8e06-5a3370084c11) | Plane Texture Unwrap       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           |
 | ![CleanShot 2023-09-26 at 16 37 54](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a) | Avatar Main Output         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output |
-
 </details>
 
-# Workflow
+# Workflow Tempalte
 
-<details>
-<summary>  Workflow01 </summary>
+> **Notice**
+> 
+> To achieve the best results, please ensure that the pictures of recommended characters have a minimum resolution of 768x768, and that the characters have their mouths open, with clear facial features.
+
+## Simple Eyeblink and Talking 
+
+//Add Video
     
 ![eye+mouth movement](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8a237b9d-05fc-4e4a-b802-6465911f0d77)
 
 
-➡️[Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
-</details>
+➡️[Workflow Download](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 
-<details>
+
+# Image Pre-process Guide
+
+> If you want to generate a new character image,
+> you can refer to this Guide!
+<details> 
 <summary> Character Gen Prompting Guide </summary>
     
-### Notice: 
-- We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt: ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
+> **Notice**
+> 
+> We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt: ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
 
 ### Workflow Download:
 
 ➡️[Simple CharacterGen Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
-- Feel free to change any checkpoint model that suits your needs.
+> Feel free to change any checkpoint model that suits your needs.
   
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/acea9933-359b-4398-8d2a-582bf02bef99)
 
   
 </details>
 
-<details>
+> If you have a character image but it's not mouth open,
+> you can refer to this Guide!
+<details> 
 <summary>  Mouth Open(Inpaint) Guide </summary>
-    
-### Notice: 
-- To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
+
+> **Notice**
+> 
+> To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 
 ### Workflow Download:
 
