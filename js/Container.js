@@ -3,6 +3,7 @@ import { AvatarEditor } from './AvatarEditor.js';
 import { van } from './van.js';
 import { AvatarViewer } from './AvatarViewer.js';
 import { Loading } from './Loading.js';
+import { Alert } from './Alert.js';
 const { button, iframe, div, img } = van.tags;
 
 export function Container() {
@@ -14,6 +15,7 @@ export function Container() {
     AvatarEditor(),
     ImageEditor(),
     AvatarViewer(),
-    Loading()
+    Loading(),
+    Alert(),
   );
 }

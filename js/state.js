@@ -12,15 +12,20 @@
  * @property {number} label - The label
  */
 
-import { van } from './van.js';
+import { van } from "./van.js";
 
-export const iframeSrc = van.state('https://editor.avatech.ai?comfyui=true');
+export const iframeSrc = van.state("https://editor.avatech.ai?comfyui=true");
 export const showEditor = van.state(false);
-export const fileName = van.state('');
+export const fileName = van.state("");
 export const showImageEditor = van.state(false);
 export const showLoading = van.state(false);
-export const loadingCaption = van.state('');
-export const imageUrl = van.state('');
+export const alertDialog = van.state({
+  text: "",
+  time: 0,
+});
+
+export const loadingCaption = van.state("");
+export const imageUrl = van.state("");
 export const point_label = van.state(1);
 export const imageContainerSize = van.state({
   width: 0,

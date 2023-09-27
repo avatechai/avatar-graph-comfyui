@@ -11,6 +11,7 @@ import {
   selectedLayer,
   showLoading,
   loadingCaption,
+  alertDialog,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -288,10 +289,17 @@ const ext = {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit prompt", "", () => {
+          let connectedImageFileName = getInputWidgetValue(node, 0, "image");
+          if (!connectedImageFileName) {
+            alertDialog.val = {
+              text: "Please connect an image first",
+              time: 3000,
+            };
+            return;
+          }
+
           loadingCaption.val = "Computing image embedding...";
           showLoading.val = true;
-
-          let connectedImageFileName = getInputWidgetValue(node, 0, "image");
 
           const split = connectedImageFileName.split("/");
           let id = connectedImageFileName;
