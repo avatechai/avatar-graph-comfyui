@@ -33,6 +33,9 @@ class AvatarMainOutput(blender_node.ObjectOps):
         "open_in_blender": ("BOOLEAN", {
             "default": False
         }),
+        "auto_save": ("BOOLEAN", {
+            "default": False
+        }),
         "blender_path_override": ("STRING", {
             "multiline": False,
             "default": ''
@@ -51,7 +54,7 @@ class AvatarMainOutput(blender_node.ObjectOps):
     OUTPUT_NODE = True
     RETURN_TYPES = ()
 
-    def blender_process(self, bpy, BPY_OBJ=None, BPY_OBJS=None, open_in_blender=False, blender_path_override='', filename='', model_type='', write_mode='', SHAPE_FLOW=''):
+    def blender_process(self, bpy, BPY_OBJ=None, BPY_OBJS=None, open_in_blender=False, auto_save=False, blender_path_override='', filename='', model_type='', write_mode='', SHAPE_FLOW=''):
         if open_in_blender:
             p = blender_path_override if blender_path_override else global_blender_path
             output_file = self.output_dir + '/tmp.blend'
@@ -66,4 +69,4 @@ class AvatarMainOutput(blender_node.ObjectOps):
             self.output_dir, objs, filename, model_type, write_mode, SHAPE_FLOW
         )
 
-        return {"ui": {"gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, "SHAPE_FLOW": {SHAPE_FLOW}}}
+        return {"ui": {"gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, "SHAPE_FLOW": {SHAPE_FLOW}, "auto_save": {'true' if auto_save else 'false'},}}
