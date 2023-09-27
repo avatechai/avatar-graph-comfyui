@@ -37,37 +37,39 @@ https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-
 
 # Workflow Tempalte
 
+## Simple Rig Workflow
+To enable the character to blink eyes and talking.
+
 > **🎯Notice**
 > 
 > For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
+> 
+<a href="lable"> Generate new image or make your image open mouth Guide </a>
 
-## Simple Rig Workflow
-
-### Download: 📂[Simple Rig Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
-To enable the character able to blink eyes and talking.
-    
 ![eye+mouth movement](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8a237b9d-05fc-4e4a-b802-6465911f0d77)
 
 
-# Image Preprocess Guide
+### Download: 📂[Simple Rig Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
+    
+
+
+# <span id="lable">Image Preprocess Guide </span>
 
 ### 💡If you want to generate a new character image
 > you can download this Template and refer to the Guide!
 > <details> 
 > <summary> Character Gen Prompting Guide </summary>
 >
-> ### Download: 📂[Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
-> Feel free to change any checkpoint model that suits your needs.
->    
 >> **🎯Notice**
 >> 
 >> We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt:
 >>
 >> ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
->
 >  
 >![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/acea9933-359b-4398-8d2a-582bf02bef99)
->
+> 
+> ### Download: 📂[Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
+> Feel free to change any checkpoint model that suits your needs.
 >  
 > </details>
 
@@ -76,10 +78,11 @@ To enable the character able to blink eyes and talking.
 > <details> 
 > <summary> Mouth Open Guide (Inpaint) </summary>
 >
-> ### Download: 📂[MouthOpen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
 > To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 >
 > ![inpaint_workflow](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/d11d840b-7ea6-4b47-bc26-a2af7c8c27a5)
+>
+> ### Download: 📂[MouthOpen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
 >
 > ### Inpaint Demonstration 
 >
