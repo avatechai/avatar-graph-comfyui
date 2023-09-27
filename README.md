@@ -40,8 +40,13 @@ To enable the character to blink eyes and talking.
 ### Download: 📂[Template01 - Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 ### Download: 📂[Template01 - ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
 _If you don't want to modify any values in the custom nodes, you can download the ControlNet Gen Template to generate your own image._
+
 <details> 
+    
 <summary> Template01 - ControlNet Gen Guide </summary>
+
+Place normal and openpose image with reference to images.
+
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/c3cae113-2df4-45f2-a19c-885cbee75450)
     
 </details>
