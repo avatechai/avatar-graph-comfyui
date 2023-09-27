@@ -1,11 +1,20 @@
 import inspect
 import re
+import json
+
 BPY_OBJS = "BPY_OBJS"
 BPY_OBJ = "BPY_OBJ"
 
 BPY_OBJS_TYPE = {
     BPY_OBJS: (BPY_OBJS,),
 }
+
+node_input_types = {}
+with open("custom_nodes/avatar-graph-comfyui/blender/input_types.txt") as f:
+    input_types = f.readlines()
+    for input_type in input_types:
+        node_cls, node_types = input_type.split("|")
+        node_input_types[node_cls] = json.loads(node_types)
 
 
 class ObjectOps:
@@ -38,16 +47,22 @@ class ObjectOps:
 
     @classmethod
     def INPUT_TYPES(cls):
-        import global_bpy
-        bpy = global_bpy.get_bpy()
-        result = {
-            "required": {},
-            "optional": {
-                **cls.get_base_input_types(bpy),
-                **cls.get_extra_input_types(bpy)
-            }
-        }
-        return result
+        return node_input_types[cls.__name__]
+
+        # import bpy
+        # bpy = global_bpy.get_bpy()
+        # result = {
+        #     "required": {},
+        #     "optional": {
+        #         **cls.get_base_input_types(bpy),
+        #         **cls.get_extra_input_types(bpy)
+        #     }
+        # }
+
+        # with open("input_types.txt", "a") as f:
+        #     f.write(cls.__name__ + "|" + json.dumps(result) + "\n")
+
+        # return result
 
     @classmethod
     def NODE_CLASS_MAPPINGS(cls):
@@ -190,8 +205,8 @@ def print_blender_functions(path):
     if ag_path not in sys.path:
         sys.path.append(ag_path)
 
-    import global_bpy
-    bpy = global_bpy.get_bpy()
+    # import global_bpy
+    # bpy = global_bpy.get_bpy()
 
     # add a an empty object
 
