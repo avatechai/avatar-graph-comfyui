@@ -69,4 +69,7 @@ class AvatarMainOutput(blender_node.ObjectOps):
             self.output_dir, objs, filename, model_type, write_mode, SHAPE_FLOW
         )
 
+        import global_bpy
+        global_bpy.reset_bpy()
+
         return {"ui": {"gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, "SHAPE_FLOW": {SHAPE_FLOW}, "auto_save": {'true' if auto_save else 'false'},}}

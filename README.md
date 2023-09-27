@@ -154,25 +154,9 @@ Clone the repository to custom_nodes in your [ComfyUI](https://github.com/comfya
 
 3. Install deps `cd avatar-graph-comfyui && python -m pip install -r requirements.txt`
 
-4. Navigate to in your comfyui installation folder, open `comfyui/main.py` and add the following lines:
-```py
-def prompt_worker(q, server):
-    e = execution.PromptExecutor(server)
+4. Restart comfyui
 
-    # This is a workaround since using blender as a python module, the bpy module has to be imported after in the custom thread, otherwise it will cause a segfault if imported in the custom nodes.
-
-    # Add next line
-    import global_bpy
-
-    while True:
-        item, item_id = q.get()
-        # Add next line
-        global_bpy.reset_bpy()
-```
-
-5. Restart comfyui
-
-6. Run comfyui with enable-cors-header `python main.py --enable-cors-header` or (mac)`python main.py --force-fp16 --enable-cors-header`
+5. Run comfyui with enable-cors-header `python main.py --enable-cors-header` or (mac)`python main.py --force-fp16 --enable-cors-header`
 
 # Development
 
