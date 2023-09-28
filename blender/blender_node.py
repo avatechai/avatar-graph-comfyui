@@ -49,7 +49,7 @@ class ObjectOps:
     def INPUT_TYPES(cls):
         return node_input_types[cls.__name__]
 
-        # import bpy
+        # import global_bpy
         # bpy = global_bpy.get_bpy()
         # result = {
         #     "required": {},

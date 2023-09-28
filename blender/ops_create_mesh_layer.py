@@ -9,7 +9,8 @@ class Object_CreateMeshLayer(blender_node.ObjectOps):
 
     EXTRA_INPUT_TYPES = {
         "image": ("IMAGE",),
-        "face_threshold": ("FLOAT", {"display": "number", "default": 0.7}),
+        "convex_hull": ("BOOLEAN", {"default": True}),
+        # "face_threshold": ("FLOAT", {"display": "number", "default": 0.7}),
         "shape_threshold": ("FLOAT", {"display": "number", "default": 0.7}),
         "mesh_layer_name": ("STRING", {"default": "mesh_layer"}),
         "scale_x": ("FLOAT", {"display": "number", "default": 1}),
@@ -21,17 +22,20 @@ class Object_CreateMeshLayer(blender_node.ObjectOps):
 
     RETURN_TYPES = ("BPY_OBJ", "IMAGE")
 
-    def blender_process(self, bpy, image, face_threshold, shape_threshold, mesh_layer_name, scale_x,scale_y , extrude_x, extrude_y, seed):
+    def blender_process(self, bpy, image, convex_hull, shape_threshold, mesh_layer_name, scale_x,scale_y , extrude_x, extrude_y, seed):
         image, BPY_OBJ = genreate_mesh_from_texture(bpy, image)
 
         bpy.context.view_layer.objects.active = BPY_OBJ
 
         self.edit_mode(bpy)
-        bpy.ops.mesh.convex_hull(
-            delete_unused=True, use_existing_faces=True,
-            face_threshold=face_threshold,
-            shape_threshold=shape_threshold,
-        )
+
+        if convex_hull:
+            bpy.ops.mesh.convex_hull(
+                delete_unused=True, use_existing_faces=True,
+                shape_threshold=shape_threshold,
+                # face_threshold=face_threshold
+                face_threshold=0.7
+            )
 
         bpy.ops.mesh.delete(type='EDGE_FACE')
         bpy.ops.mesh.select_all(action='SELECT')
