@@ -109,16 +109,23 @@ Place normal and openpose image with reference to images.
 > </details>
 
 # Custom Nodes
+Expand to see all the available nodes description
+Mesh Edit Nodes
+Shape Keys Nodes
+Avatar Output Nodes
 
 <details>
-<summary> Expand to see all the available nodes description </summary>
-
-[Image Segmentation Nodes](#image-segmentation-nodes) | [Mesh Edit Nodes](#mesh-edit-nodes) | [Shape Keys Nodes](#shape-keys-nodes) | [Avatar Output Nodes](#avatar-output-nodes)
+<summary> Image Segmentation Nodes </summary>
 
 ## Image Segmentation Nodes
-| Name                         | Description                                                                                           | Preview                                                                                                                        |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `Segmentation (SAM)`         | Integrative SAM node allowing you to directly select and create multiple image segment output.        | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8aabeba8-5450-4d39-8203-e91f9ab47190" width="300"> |
+| Name                         | Description  | Preview |
+| ---------------------------- | ------------ | ------- |
+| `Segmentation (SAM)`         | Integrative SAM node allowing you to directly select and create multiple image segment output. | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/8aabeba8-5450-4d39-8203-e91f9ab47190" width="300"> |
+
+</details>
+
+<details>
+<summary> Mesh Edit Nodes </summary>
 
 ## Mesh Edit Nodes
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
@@ -128,16 +135,28 @@ Place normal and openpose image with reference to images.
 | `Match Texture Aspect Ratio` | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/cb7155be-fb31-49f8-a24a-d001a1484ea7" width="300"> |
 | `Plane Texture Unwrap`       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/4b9c0cf5-0497-47bf-8e06-5a3370084c11" width="300"> |
 
+</details>
+
+<details>
+<summary> Shape Keys Nodes </summary>
+
 ## Shape Keys Nodes
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `Mesh Modify Shape Key`      | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform                | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ab4f259c-89a7-4f51-bc54-fd179e252073" width="300"> |
 | `Create Shape Flow`          | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime    | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/abfdd801-0387-4c5d-9c11-6c23337ff1dd" width="300"> |
 
+</details>
+
+<details>
+<summary> Avatar Output Nodes </summary>
+
 ## Avatar Output Nodes
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `Avatar Main Output`         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a" width="300"> |
+
+</details>
 
 </details>
 
