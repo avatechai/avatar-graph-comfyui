@@ -49,6 +49,30 @@ To enable the character to blink eyes and talking.
 _If you don't want to modify any values in the custom nodes, you can download the ControlNet Gen Template to generate your own image._
 
 <details> 
+<summary> Template01 - Nodes Value Setting Guide </summary>
+
+## Template01 - Nodes Value Setting Guide
+
+> ### Basic Eyeblink & Talking
+> 1. Click **[Segmentation (SAM)]/ Edit prompt** button
+>    
+> 2. Add new layer and rename
+>
+> 3. Drag layer to **[Create Mesh Layer]/image**
+> 
+> 4. **[Create Mesh Layer]/ face_threshold, shape_threshold**, To control mesh threshold, recommend value: 0.6~0.7
+>    
+> 5. **[Create Mesh Layer]/ scale_x, scale_y, extrude_x, extrude_y**, To control mesh threshold, recommend value: 1.2~1.4
+>
+> 6. **[Modify Shape Key]/ rotate** Setting Reference, If Head tilted to the left, set a positive number angle 
+> 
+> |  <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/abf2a843-8ca5-44a6-9611-c334d55928d1" width="300"> |  <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/37658a8e-6f46-4c5b-bfd6-adec270df60b" width="300"> |  <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/0fae0c27-428d-4a5d-8296-6634c9717b95" width="300"> |  <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/4fea7882-cc51-4a5a-af9a-e66589810f92" width="300"> |
+> | --- | --- | --- | --- |
+> | 0 | 5 | -5 | -15 |
+
+</details>
+
+<details> 
     
 <summary> Template01 - ControlNet Gen Guide </summary>
 
@@ -57,6 +81,8 @@ Place normal and openpose image with reference to images.
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/c3cae113-2df4-45f2-a19c-885cbee75450)
     
 </details>
+
+
     
 # Image Preprocess Guide
 
@@ -128,12 +154,14 @@ Avatar Output Nodes
 <summary> Mesh Edit Nodes </summary>
 
 ## Mesh Edit Nodes
+
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `Create Mesh Layer`          | Create a mesh object from the input images (usually a segmented part of the entire image)             | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/40740d25-9411-4cd3-a6c0-8b9008bca41c" width="300"> |
 | `Join Meshes`                | Combine multiple meshes into a single mesh object                                                     | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ba7afbc5-9cd5-4f97-9614-f71133f5783e" width="300"> |
 | `Match Texture Aspect Ratio` | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/cb7155be-fb31-49f8-a24a-d001a1484ea7" width="300"> |
 | `Plane Texture Unwrap`       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/4b9c0cf5-0497-47bf-8e06-5a3370084c11" width="300"> |
+
 
 </details>
 
@@ -158,7 +186,7 @@ Avatar Output Nodes
 
 </details>
 
-</details>
+
 
 # Shape Flow
 ![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/a834e535-4f87-4b77-81a6-435e3a67ca4a)
