@@ -27,7 +27,7 @@ van.derive(() => {
   if (
     showImageEditor.val &&
     targetNode.val != undefined &&
-    targetNode.val.outputs
+    targetNode.val.outputs && targetNode.val.type === 'SAM'
   ) {
     const outputNames = targetNode.val.outputs.map((x) => x.name).slice(1);
     const record = Object.keys(imagePromptsMulti.val);
