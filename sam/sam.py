@@ -60,6 +60,13 @@ class SAM:
             predictor.set_image(image_np)
             emb = predictor.get_image_embedding().cpu().numpy()
             np.save(emb_filename, emb)
+
+            with open(f"{self.output_dir}/{embedding_id}.json", "w") as f:
+                data = {
+                    "input_size": predictor.input_size,
+                    "original_size": predictor.original_size,
+                }
+                json.dump(data, f)
         else:
             emb = np.load(emb_filename)
 
