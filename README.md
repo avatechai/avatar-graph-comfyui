@@ -6,7 +6,7 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 # Demo
 
-| <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763.mp4"> | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-4755-a8e0-9149260eef12.mp4">  | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/e054e1a9-eb20-4ca6-be44-0ba9c7c07d50"> | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763.mp4"> |
+| <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763.mp4"> | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/b229a4b3-88ba-4755-a8e0-9149260eef12.mp4">  | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/10270460/4a4c81b3-0ef3-4e9c-b2ff-d513420dcba9"> | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/10270460/36c588fb-482b-4dab-b0b1-e6f70c1c1235"> |
 | --- | --- | --- | --- |
 |  [➡️Open in Avatech Labs]()  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e)  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e)  | [➡️Open in Avatech Labs]()  |
 
