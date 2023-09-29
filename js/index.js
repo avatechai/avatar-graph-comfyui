@@ -445,8 +445,12 @@ const ext = {
       (event) => {
         if (event.key === "Escape") {
           event.preventDefault();
-          showImageEditor.val = false;
-          showEditor.val = false;
+          if (my_modal_3.open) {
+            my_modal_3.close();
+          } else {
+            showImageEditor.val = false;
+            showEditor.val = false;
+          }
         }
       },
       {
