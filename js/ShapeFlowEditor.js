@@ -28,7 +28,7 @@ export function ShapeFlowEditor() {
       id: "avatech-editor-iframe",
       title: "avatech-editor-iframe",
       name: "avatech-editor-iframe",
-      allow: "cross-origin-isolated",
+      allow: "cross-origin-isolated; clipboard-read; clipboard-write",
       class: () =>
         "w-full h-full pointer-events-auto " + (showEditor.val ? "" : "hidden"),
       src: iframeSrc,
