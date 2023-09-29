@@ -1,13 +1,13 @@
 {
-  "last_node_id": 338,
-  "last_link_id": 593,
+  "last_node_id": 341,
+  "last_link_id": 596,
   "nodes": [
     {
       "id": 181,
       "type": "CheckpointLoaderSimple",
       "pos": [
-        99.9951931133789,
-        390.9791764082031
+        132.76851658855443,
+        372.00856853825894
       ],
       "size": {
         "0": 340.6639709472656,
@@ -57,8 +57,8 @@
       "id": 174,
       "type": "CLIPTextEncode",
       "pos": [
-        529.995193113379,
-        300.9791764082031
+        562.7685165885553,
+        282.0085685382591
       ],
       "size": {
         "0": 294.7698669433594,
@@ -99,8 +99,8 @@
       "id": 318,
       "type": "EmptyLatentImage",
       "pos": [
-        529.995193113379,
-        690.9791764082031
+        562.7685165885553,
+        672.0085685382586
       ],
       "size": {
         "0": 299.24920654296875,
@@ -132,8 +132,8 @@
       "id": 176,
       "type": "KSampler",
       "pos": [
-        889.995193113379,
-        410.9791764082031
+        922.7685165885553,
+        392.00856853825894
       ],
       "size": {
         "0": 326.9862060546875,
@@ -181,7 +181,7 @@
         "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        418489853766877,
+        215088714233025,
         "randomize",
         25,
         5,
@@ -194,8 +194,8 @@
       "id": 184,
       "type": "VAEDecode",
       "pos": [
-        1280.995193113379,
-        410.9791764082031
+        1313.7685165885548,
+        392.00856853825894
       ],
       "size": {
         "0": 210,
@@ -238,8 +238,8 @@
       "id": 175,
       "type": "CLIPTextEncode",
       "pos": [
-        529.995193113379,
-        480.9791764082031
+        562.7685165885553,
+        462.00856853825894
       ],
       "size": {
         "0": 301.3814697265625,
@@ -293,7 +293,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 570
+          "link": 595
         }
       ],
       "outputs": [
@@ -325,7 +325,7 @@
         1.2000000000000002,
         1.2000000000000002,
         1.2000000000000002,
-        1025551288548203,
+        189758316497145,
         "randomize"
       ],
       "color": "#323",
@@ -335,8 +335,8 @@
       "id": 317,
       "type": "SaveImage",
       "pos": [
-        1553.995193113379,
-        410.9791764082031
+        1586.7685165885548,
+        392.00856853825894
       ],
       "size": {
         "0": 315,
@@ -405,7 +405,7 @@
         "Node name for S&R": "Mesh_PrimitivePlaneAdd"
       },
       "widgets_values": [
-        273211200304032,
+        486903726717246,
         "randomize",
         2,
         true,
@@ -512,50 +512,6 @@
       ]
     },
     {
-      "id": 330,
-      "type": "Object_MatchTextureAspectRatio",
-      "pos": [
-        410,
-        1400
-      ],
-      "size": {
-        "0": 315,
-        "1": 78
-      },
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "BPY_OBJ",
-          "type": "BPY_OBJ",
-          "link": 577
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 578
-        }
-      ],
-      "outputs": [
-        {
-          "name": "BPY_OBJ",
-          "type": "BPY_OBJ",
-          "links": [
-            579
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Object_MatchTextureAspectRatio"
-      },
-      "widgets_values": [
-        0.001
-      ]
-    },
-    {
       "id": 331,
       "type": "Object_PlaneTextureUnwrap",
       "pos": [
@@ -652,57 +608,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 336,
-      "type": "Mesh_ModifyShapeKey",
-      "pos": [
-        770,
-        1510
-      ],
-      "size": {
-        "0": 315,
-        "1": 298
-      },
-      "flags": {},
-      "order": 19,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "BPY_OBJ",
-          "type": "BPY_OBJ",
-          "link": 585
-        }
-      ],
-      "outputs": [
-        {
-          "name": "BPY_OBJ",
-          "type": "BPY_OBJ",
-          "links": [
-            589
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Mesh_ModifyShapeKey"
-      },
-      "widgets_values": [
-        "EyeBlinkRight",
-        "Right_Eye",
-        1,
-        0.1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 338,
       "type": "Mesh_ModifyShapeKey",
       "pos": [
@@ -756,170 +661,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 323,
-      "type": "Object_CreateMeshLayer",
-      "pos": [
-        20,
-        1170
-      ],
-      "size": {
-        "0": 315,
-        "1": 270
-      },
-      "flags": {},
-      "order": 10,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 569
-        }
-      ],
-      "outputs": [
-        {
-          "name": "BPY_OBJ",
-          "type": "BPY_OBJ",
-          "links": [
-            592
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Object_CreateMeshLayer"
-      },
-      "widgets_values": [
-        0.7000000000000001,
-        0.7,
-        "Left_Eye",
-        1.2000000000000002,
-        1.2000000000000002,
-        1.2000000000000002,
-        1.2000000000000002,
-        158038013442843,
-        "randomize"
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
-      "id": 319,
-      "type": "SAM",
-      "pos": [
-        -300,
-        1700
-      ],
-      "size": {
-        "0": 210,
-        "1": 214
-      },
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 565
-        }
-      ],
-      "outputs": [
-        {
-          "name": "SAM_PROMPT",
-          "type": "SAM_PROMPT",
-          "links": null,
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "Left_Eye",
-          "type": "IMAGE",
-          "links": [
-            569
-          ],
-          "slot_index": 1
-        },
-        {
-          "name": "Right_Eye",
-          "type": "IMAGE",
-          "links": [
-            570
-          ],
-          "slot_index": 2
-        },
-        {
-          "name": "Mouth",
-          "type": "IMAGE",
-          "links": [
-            587
-          ],
-          "slot_index": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "SAM"
-      },
-      "widgets_values": [
-        "vit_h",
-        "sam_vit_h_4b8939.pth",
-        "ComfyUI_00005_.png",
-        "{\"Left_Eye\":[{\"x\":279,\"y\":255,\"label\":1},{\"x\":196,\"y\":291,\"label\":0},{\"x\":258,\"y\":338,\"label\":0}],\"Right_Eye\":[{\"x\":157,\"y\":266,\"label\":1},{\"x\":295,\"y\":262,\"label\":0}],\"Mouth\":[{\"x\":244,\"y\":364,\"label\":1},{\"x\":247,\"y\":281,\"label\":0}]}",
-        ""
-      ],
-      "color": "#232",
-      "bgcolor": "#353"
-    },
-    {
-      "id": 320,
-      "type": "LoadImage",
-      "pos": [
-        -400,
-        1330
-      ],
-      "size": {
-        "0": 315,
-        "1": 314
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            565,
-            578,
-            580
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "ComfyUI_00005_.png",
-        "image"
-      ]
-    },
-    {
       "id": 337,
       "type": "Object_CreateMeshLayer",
       "pos": [
@@ -937,7 +678,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 587
+          "link": 596
         }
       ],
       "outputs": [
@@ -969,11 +710,197 @@
         1.4000000000000001,
         1.4000000000000001,
         1.4000000000000001,
-        451952653636694,
+        738031192702645,
         "randomize"
       ],
       "color": "#323",
       "bgcolor": "#535"
+    },
+    {
+      "id": 334,
+      "type": "CreateShapeFlow",
+      "pos": [
+        1110,
+        1680
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SHAPE_FLOW",
+          "type": "SHAPE_FLOW",
+          "links": [
+            582
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateShapeFlow"
+      },
+      "widgets_values": [
+        "{\"nodes\":[{\"width\":160,\"height\":225,\"id\":\"modelBlendshapesOutput_fnNms\",\"data\":{\"label\":\"modelBlendshapesOutput_fnNms\",\"variableName\":\"modelBlendshapesOutput_fnNms\",\"defaultValues\":{\"model_blendshapes_Ex_6\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Q\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_i\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_QQ\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_HeadX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_HeadY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Param\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Breath\":{\"type\":\"number\",\"value\":1.8282266430674599},\"model_blendshapes_EX_zzz\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Cute\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Tear\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_drop\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeWide\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_JawOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Mouth_Y\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Blush\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Point\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Sweat\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeLookX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeLookY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowInner\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowOuter\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_CheekPuff\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Shadow\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkL\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkR\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeSquint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair01\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair02\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair03\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthForm\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthWide\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_NoseSneer\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_tongueOut\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_FireEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_StarEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_TearEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthClose\":{\"type\":\"number\",\"value\":1},\"model_blendshapes_Mouth_Form\":{\"value\":0.18,\"type\":\"number\"},\"model_blendshapes_Mouth_Puck\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_Mouth_wide\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_eye_LBlink\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_eye_RBlink\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_CheekSquint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_DizzyEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_HeartEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_wideopen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeL_Squint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeR_Squint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthPucker\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Mouth_Close\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_ParamAngleX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamAngleY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamAngleZ\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamBrowLY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamBrowRY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_EyeblinkL\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_EyeblinkR\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamJawOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_FaceShadow\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeBallX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeBallY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeLClose\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeRClose\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthForm\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthOpenY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthShrug\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthFunnel\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthPuckerWiden\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthPressLipOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkLeft\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_EyeBlinkRight\":{\"value\":0,\"type\":\"number\"}}},\"type\":\"modelBlendshapesOutput\",\"dragging\":false,\"position\":{\"x\":685.1880537355778,\"y\":635.5248233166805},\"selected\":true,\"positionAbsolute\":{\"x\":685.1880537355778,\"y\":635.5248233166805}},{\"width\":225,\"height\":640,\"id\":\"mp_blendshapes_input_MXRyt\",\"data\":{\"MPBlendshapes\":{\"Kiss\":-0.0000021287373783707153,\"Jaw_L\":0.0000036614283089875244,\"Jaw_R\":0.000002809933221215033,\"Volume\":0,\"Lips_Up\":0.0000020435877559066284,\"Mouth_L\":0.000009281295206164941,\"Mouth_R\":0.00003678458233480342,\"Smile_L\":0.0551496259868145,\"Smile_R\":0.2509416937828064,\"Lips_Down\":-0.0000044277735469222534,\"Eye_Open_L\":0.40511101484298706,\"Eye_Open_R\":0.5475320219993591,\"Mouth_Open\":0.012108939699828625,\"Eye_Close_L\":0,\"Eye_Close_R\":0,\"Brow_Lower_L\":0,\"Brow_Lower_R\":0,\"Brow_Raise_L\":0,\"Brow_Raise_R\":0,\"Eye_Move_In_L\":0,\"Eye_Move_In_R\":0,\"Eye_Move_Up_L\":0.00016199999663513154,\"Eye_Move_Up_R\":0.00016199999663513154,\"Eye_Move_Out_L\":0.06576699763536453,\"Eye_Move_Out_R\":0.06576699763536453,\"Eye_Move_Down_L\":0,\"Eye_Move_Down_R\":0,\"Upper_Lip_Raise_L\":0.0000022138867734611267,\"Upper_Lip_Raise_R\":0.0000016178403257072205,\"Lips_Corner_Lower_L\":-0.0000034059796689689392,\"Lips_Corner_Lower_R\":0.000003831727553915698}},\"type\":\"mp_blendshapes_input\",\"dragging\":false,\"position\":{\"x\":-49.93800545333147,\"y\":409.57190025779835},\"selected\":false,\"positionAbsolute\":{\"x\":-49.93800545333147,\"y\":409.57190025779835}},{\"width\":160,\"height\":80,\"id\":\"subGraphNode_bLsvu\",\"type\":\"subGraphNode\",\"data\":{\"label\":\"Eyes blink\",\"variableName\":\"subGraphNode_bLsvu\",\"subGraph\":{\"nodes\":[{\"width\":166,\"height\":94,\"id\":\"timeNode_jYYGz\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_jYYGz\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_jYYGz\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344},\"selected\":false,\"positionAbsolute\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344}},{\"width\":172,\"height\":74,\"id\":\"easingNode_bqAhh\",\"data\":{\"label\":\"easingNode_bqAhh\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bqAhh\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274},\"selected\":false,\"positionAbsolute\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274}},{\"width\":160,\"height\":147,\"id\":\"mathNode_UuJyg\",\"data\":{\"label\":\"mathNode_UuJyg\",\"fnName\":\"min\",\"variableName\":\"mathNode_UuJyg\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762},\"selected\":false,\"positionAbsolute\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762}},{\"width\":160,\"height\":66,\"id\":\"valueNode_rpCCe\",\"data\":{\"max\":1,\"label\":\"valueNode_rpCCe\",\"value\":1,\"variableName\":\"valueNode_rpCCe\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466},\"selected\":false,\"positionAbsolute\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_nKzQk\",\"data\":{\"label\":\"operatorNode_nKzQk\",\"operator\":2,\"variableName\":\"operatorNode_nKzQk\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.6}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278},\"selected\":false,\"positionAbsolute\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278}},{\"width\":160,\"height\":66,\"id\":\"valueNode_Biisy\",\"data\":{\"max\":100,\"label\":\"valueNode_Biisy\",\"value\":4.6,\"variableName\":\"valueNode_Biisy\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432},\"selected\":false,\"positionAbsolute\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432}},{\"width\":160,\"height\":66,\"id\":\"valueNode_gSXlE\",\"data\":{\"max\":10,\"label\":\"valueNode_gSXlE\",\"value\":4.1,\"variableName\":\"valueNode_gSXlE\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297},\"selected\":false,\"positionAbsolute\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_hddlu\",\"data\":{\"label\":\"operatorNode_hddlu\",\"operator\":2,\"variableName\":\"operatorNode_hddlu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":4.1},\"operand_2\":{\"type\":\"number\",\"value\":122.37870000004769}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534},\"selected\":false,\"positionAbsolute\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534}},{\"width\":160,\"height\":66,\"id\":\"valueNode_lYzmY\",\"data\":{\"label\":\"valueNode_lYzmY\",\"value\":1,\"variableName\":\"valueNode_lYzmY\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329},\"selected\":false,\"positionAbsolute\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_neoYv\",\"data\":{\"label\":\"operatorNode_neoYv\",\"operator\":1,\"variableName\":\"operatorNode_neoYv\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077},\"selected\":false,\"positionAbsolute\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077}},{\"width\":160,\"height\":66,\"id\":\"valueNode_UbOMo\",\"data\":{\"label\":\"valueNode_UbOMo\",\"value\":1,\"variableName\":\"valueNode_UbOMo\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297},\"selected\":false,\"positionAbsolute\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297}},{\"width\":166,\"height\":94,\"id\":\"timeNode_cLYze\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_cLYze\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_cLYze\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178}},{\"width\":172,\"height\":74,\"id\":\"easingNode_nGvYS\",\"data\":{\"label\":\"easingNode_nGvYS\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_nGvYS\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371},\"selected\":false,\"positionAbsolute\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_WMyHj\",\"data\":{\"label\":\"visualizationNode_WMyHj\",\"variableName\":\"visualizationNode_WMyHj\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097},\"selected\":false,\"positionAbsolute\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_sYXzG\",\"data\":{\"label\":\"visualizationNode_sYXzG\",\"variableName\":\"visualizationNode_sYXzG\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842},\"selected\":false,\"positionAbsolute\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_edAkt\",\"data\":{\"label\":\"operatorNode_edAkt\",\"operator\":4,\"variableName\":\"operatorNode_edAkt\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":501.75267000019545},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333},\"selected\":false,\"positionAbsolute\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333}},{\"width\":160,\"height\":66,\"id\":\"valueNode_ARGrY\",\"data\":{\"max\":100,\"label\":\"valueNode_ARGrY\",\"value\":10,\"variableName\":\"valueNode_ARGrY\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367},\"selected\":false,\"positionAbsolute\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367}},{\"width\":160,\"height\":200,\"id\":\"conditionNode_NuykU\",\"data\":{\"label\":\"conditionNode_NuykU\",\"operator\":0,\"variableName\":\"conditionNode_NuykU\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823}},{\"width\":160,\"height\":66,\"id\":\"valueNode_cPQRA\",\"data\":{\"label\":\"valueNode_cPQRA\",\"value\":1,\"variableName\":\"valueNode_cPQRA\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463}},{\"width\":172,\"height\":74,\"id\":\"easingNode_AIbfm\",\"data\":{\"label\":\"easingNode_AIbfm\",\"easingFn\":\"easeInOutSine\",\"variableName\":\"easingNode_AIbfm\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076},\"selected\":false,\"positionAbsolute\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076}},{\"width\":166,\"height\":94,\"id\":\"timeNode_vRvny\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_vRvny\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_vRvny\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699}},{\"width\":160,\"height\":200,\"id\":\"conditionNode_gNWNm\",\"data\":{\"label\":\"conditionNode_gNWNm\",\"operator\":0,\"variableName\":\"conditionNode_gNWNm\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":3.478700000047697},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.1102230246251565e-16},\"condition_false\":{\"type\":\"number\",\"value\":0}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818},\"selected\":false,\"positionAbsolute\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_dNObC\",\"data\":{\"label\":\"operatorNode_dNObC\",\"operator\":4,\"variableName\":\"operatorNode_dNObC\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.1}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195}},{\"width\":160,\"height\":66,\"id\":\"valueNode_ehGvn\",\"data\":{\"max\":10,\"label\":\"valueNode_ehGvn\",\"value\":4.1,\"variableName\":\"valueNode_ehGvn\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_NyUGz\",\"data\":{\"label\":\"visualizationNode_NyUGz\",\"variableName\":\"visualizationNode_NyUGz\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957},\"selected\":false,\"positionAbsolute\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_uiGHN\",\"data\":{\"label\":\"operatorNode_uiGHN\",\"operator\":2,\"variableName\":\"operatorNode_uiGHN\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":1}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741}},{\"width\":160,\"height\":66,\"id\":\"valueNode_ZlTlm\",\"data\":{\"max\":10,\"label\":\"valueNode_ZlTlm\",\"value\":1,\"variableName\":\"valueNode_ZlTlm\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055}},{\"width\":160,\"height\":147,\"id\":\"mathNode_TdXuG\",\"data\":{\"label\":\"mathNode_TdXuG\",\"fnName\":\"min\",\"variableName\":\"mathNode_TdXuG\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757},\"selected\":false,\"positionAbsolute\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757}},{\"width\":160,\"height\":66,\"id\":\"valueNode_TpLsh\",\"data\":{\"label\":\"valueNode_TpLsh\",\"value\":1,\"variableName\":\"valueNode_TpLsh\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_rEaHg\",\"data\":{\"label\":\"operatorNode_rEaHg\",\"operator\":4,\"variableName\":\"operatorNode_rEaHg\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":562.9420200002193},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756},\"selected\":false,\"positionAbsolute\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756}},{\"width\":160,\"height\":66,\"id\":\"valueNode_FSQaP\",\"data\":{\"max\":10,\"label\":\"valueNode_FSQaP\",\"value\":10,\"variableName\":\"valueNode_FSQaP\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694},\"selected\":false,\"positionAbsolute\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694}},{\"width\":160,\"height\":200,\"id\":\"conditionNode_pHuSn\",\"data\":{\"label\":\"conditionNode_pHuSn\",\"operator\":0,\"variableName\":\"conditionNode_pHuSn\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_oeTEr\",\"data\":{\"label\":\"operatorNode_oeTEr\",\"operator\":1,\"variableName\":\"operatorNode_oeTEr\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122},\"selected\":false,\"positionAbsolute\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122}},{\"width\":172,\"height\":74,\"id\":\"easingNode_bdjNf\",\"data\":{\"label\":\"easingNode_bdjNf\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bdjNf\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532},\"selected\":false,\"positionAbsolute\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_OAILX\",\"data\":{\"label\":\"visualizationNode_OAILX\",\"variableName\":\"visualizationNode_OAILX\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":661.6184822328263,\"y\":-1764.470845107487},\"selected\":false,\"positionAbsolute\":{\"x\":661.6184822328263,\"y\":-1764.470845107487}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_AHegu\",\"data\":{\"label\":\"operatorNode_AHegu\",\"operator\":1,\"variableName\":\"operatorNode_AHegu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":2.5}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232},\"selected\":false,\"positionAbsolute\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232}},{\"width\":160,\"height\":66,\"id\":\"valueNode_lZHtu\",\"data\":{\"max\":10,\"label\":\"valueNode_lZHtu\",\"value\":1,\"variableName\":\"valueNode_lZHtu\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635},\"selected\":false,\"positionAbsolute\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_LYPOZ\",\"data\":{\"label\":\"visualizationNode_LYPOZ\",\"variableName\":\"visualizationNode_LYPOZ\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292},\"selected\":false,\"positionAbsolute\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292}},{\"width\":160,\"height\":121,\"id\":\"subGraphOutputNode_dHexz\",\"type\":\"subGraphOutputNode\",\"data\":{\"label\":\"subGraphOutputNode_dHexz\",\"variableName\":\"subGraphOutputNode_dHexz\",\"outputs\":{\"6eq\":{\"type\":\"number\",\"name\":\"output_0\"},\"iiw\":{\"type\":\"number\",\"name\":\"output_1\"}},\"defaultValues\":{\"6eq\":{\"value\":0,\"type\":\"number\"},\"iiw\":{\"value\":0.11,\"type\":\"number\"}}},\"position\":{\"x\":649.301650118796,\"y\":-921.5106663745356},\"selected\":false,\"positionAbsolute\":{\"x\":649.301650118796,\"y\":-921.5106663745356},\"dragging\":false}],\"edges\":[{\"id\":\"reactflow__edge-valueNode_Biisyvalue-operatorNode_nKzQkoperand_2\",\"source\":\"valueNode_Biisy\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_lYzmYvalue-operatorNode_neoYvoperand_1\",\"source\":\"valueNode_lYzmY\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_UuJygoutput-operatorNode_neoYvoperand_2\",\"source\":\"mathNode_UuJyg\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-timeNode_cLYzetime-operatorNode_nKzQkoperand_1\",\"source\":\"timeNode_cLYze\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-timeNode_jYYGztime-operatorNode_hddluoperand_2\",\"source\":\"timeNode_jYYGz\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_gSXlEvalue-operatorNode_hddluoperand_1\",\"source\":\"valueNode_gSXlE\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-mathNode_UuJygmath_fn_input_1\",\"source\":\"valueNode_rpCCe\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-easingNode_bqAhhy-mathNode_UuJygmath_fn_input_0\",\"source\":\"easingNode_bqAhh\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_ARGrYvalue-operatorNode_edAktoperand_2\",\"source\":\"valueNode_ARGrY\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_a\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_b\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_true\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_false\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_NuykUoutput-easingNode_bqAhhx\",\"source\":\"conditionNode_NuykU\",\"target\":\"easingNode_bqAhh\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-operatorNode_hddluoutput-operatorNode_edAktoperand_1\",\"source\":\"operatorNode_hddlu\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_neoYvoutput-easingNode_AIbfmx\",\"source\":\"operatorNode_neoYv\",\"target\":\"easingNode_AIbfm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-visualizationNode_sYXzGvisualization_input\",\"source\":\"easingNode_AIbfm\",\"target\":\"visualizationNode_sYXzG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-valueNode_ehGvnvalue-operatorNode_dNObCoperand_2\",\"source\":\"valueNode_ehGvn\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-visualizationNode_NyUGzvisualization_input\",\"source\":\"operatorNode_dNObC\",\"target\":\"visualizationNode_NyUGz\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-timeNode_vRvnytime-operatorNode_uiGHNoperand_1\",\"source\":\"timeNode_vRvny\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_uiGHNoutput-operatorNode_dNObCoperand_1\",\"source\":\"operatorNode_uiGHN\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_ZlTlmvalue-operatorNode_uiGHNoperand_2\",\"source\":\"valueNode_ZlTlm\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-conditionNode_gNWNmcondition_a\",\"source\":\"operatorNode_dNObC\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-conditionNode_gNWNmcondition_b\",\"source\":\"valueNode_rpCCe\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-conditionNode_gNWNmcondition_false\",\"source\":\"easingNode_AIbfm\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-easingNode_nGvYSy-mathNode_TdXuGmath_fn_input_0\",\"source\":\"easingNode_nGvYS\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_UbOMovalue-mathNode_TdXuGmath_fn_input_1\",\"source\":\"valueNode_UbOMo\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-operatorNode_nKzQkoutput-operatorNode_rEaHgoperand_1\",\"source\":\"operatorNode_nKzQk\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_FSQaPvalue-operatorNode_rEaHgoperand_2\",\"source\":\"valueNode_FSQaP\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_a\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_b\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_true\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_false\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_pHuSnoutput-easingNode_nGvYSx\",\"source\":\"conditionNode_pHuSn\",\"target\":\"easingNode_nGvYS\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-operatorNode_oeTEroperand_1\",\"source\":\"valueNode_TpLsh\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_TdXuGoutput-operatorNode_oeTEroperand_2\",\"source\":\"mathNode_TdXuG\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-visualizationNode_WMyHjvisualization_input\",\"source\":\"operatorNode_oeTEr\",\"target\":\"visualizationNode_WMyHj\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-conditionNode_gNWNmcondition_true\",\"source\":\"operatorNode_oeTEr\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-conditionNode_gNWNmoutput-easingNode_bdjNfx\",\"source\":\"conditionNode_gNWNm\",\"target\":\"easingNode_bdjNf\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-visualizationNode_OAILXvisualization_input\",\"source\":\"easingNode_bdjNf\",\"target\":\"visualizationNode_OAILX\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_AHeguoutput-visualizationNode_LYPOZvisualization_input\",\"source\":\"operatorNode_AHegu\",\"target\":\"visualizationNode_LYPOZ\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"source\":\"easingNode_bdjNf\",\"sourceHandle\":\"y\",\"target\":\"subGraphOutputNode_dHexz\",\"targetHandle\":\"6eq\",\"id\":\"reactflow__edge-easingNode_bdjNfy-subGraphOutputNode_dHexz6eq\",\"selected\":false},{\"source\":\"operatorNode_AHegu\",\"sourceHandle\":\"output\",\"target\":\"subGraphOutputNode_dHexz\",\"targetHandle\":\"iiw\",\"id\":\"reactflow__edge-operatorNode_AHeguoutput-subGraphOutputNode_dHexziiw\",\"selected\":false},{\"source\":\"valueNode_lZHtu\",\"sourceHandle\":\"value\",\"target\":\"operatorNode_AHegu\",\"targetHandle\":\"operand_1\",\"id\":\"reactflow__edge-valueNode_lZHtuvalue-operatorNode_AHeguoperand_1\"},{\"source\":\"easingNode_bdjNf\",\"sourceHandle\":\"y\",\"target\":\"operatorNode_AHegu\",\"targetHandle\":\"operand_2\",\"id\":\"reactflow__edge-easingNode_bdjNfy-operatorNode_AHeguoperand_2\"}],\"viewport\":{\"x\":824.535160860398,\"y\":1641.9231904708736,\"zoom\":0.9645981845841377}}},\"position\":{\"x\":334.59096875525347,\"y\":622.6079715701512},\"selected\":false,\"positionAbsolute\":{\"x\":334.59096875525347,\"y\":622.6079715701512},\"dragging\":false},{\"width\":160,\"height\":133,\"id\":\"subGraphNode_BkbhM\",\"type\":\"subGraphNode\",\"data\":{\"label\":\"Mouth\",\"variableName\":\"subGraphNode_BkbhM\",\"subGraph\":{\"nodes\":[{\"width\":160,\"height\":66,\"id\":\"valueNode_Vamgm\",\"data\":{\"label\":\"valueNode_Vamgm\",\"value\":1,\"variableName\":\"valueNode_Vamgm\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-245.2589747413336,\"y\":1237.3741915337844},\"selected\":false,\"positionAbsolute\":{\"x\":-245.2589747413336,\"y\":1237.3741915337844}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_JOvyl\",\"data\":{\"label\":\"operatorNode_JOvyl\",\"operator\":1,\"variableName\":\"operatorNode_JOvyl\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-244.79681208357073,\"y\":1079.9773591696098},\"selected\":false,\"positionAbsolute\":{\"x\":-244.79681208357073,\"y\":1079.9773591696098}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_NMWUd\",\"data\":{\"label\":\"visualizationNode_NMWUd\",\"variableName\":\"visualizationNode_NMWUd\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":299.0843387831331,\"y\":728.4934883862524},\"selected\":false,\"positionAbsolute\":{\"x\":299.0843387831331,\"y\":728.4934883862524}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_PMyvX\",\"data\":{\"label\":\"operatorNode_PMyvX\",\"operator\":3,\"variableName\":\"operatorNode_PMyvX\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-900.2216635621324,\"y\":1075.9531149847442},\"selected\":false,\"positionAbsolute\":{\"x\":-900.2216635621324,\"y\":1075.9531149847442}},{\"width\":160,\"height\":66,\"id\":\"valueNode_XpZZm\",\"data\":{\"max\":2,\"label\":\"valueNode_XpZZm\",\"value\":2,\"variableName\":\"valueNode_XpZZm\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-899.9187990342721,\"y\":1236.4359492337112},\"selected\":false,\"positionAbsolute\":{\"x\":-899.9187990342721,\"y\":1236.4359492337112}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_rFWba\",\"data\":{\"label\":\"operatorNode_rFWba\",\"operator\":0,\"variableName\":\"operatorNode_rFWba\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1110.7569818937736,\"y\":1076.0918664187236},\"selected\":false,\"positionAbsolute\":{\"x\":-1110.7569818937736,\"y\":1076.0918664187236}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_bJicM\",\"data\":{\"label\":\"operatorNode_bJicM\",\"operator\":3,\"variableName\":\"operatorNode_bJicM\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-683.830014730419,\"y\":1077.8984983719388},\"selected\":false,\"positionAbsolute\":{\"x\":-683.830014730419,\"y\":1077.8984983719388}},{\"width\":160,\"height\":66,\"id\":\"valueNode_IiakT\",\"data\":{\"max\":7,\"label\":\"valueNode_IiakT\",\"value\":7,\"variableName\":\"valueNode_IiakT\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-682.2745864422745,\"y\":1237.4983205906728},\"selected\":false,\"positionAbsolute\":{\"x\":-682.2745864422745,\"y\":1237.4983205906728}},{\"width\":172,\"height\":74,\"id\":\"easingNode_EvFOi\",\"data\":{\"label\":\"easingNode_EvFOi\",\"easingFn\":\"easeInCirc\",\"variableName\":\"easingNode_EvFOi\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-23.803191056449734,\"y\":1075.5244090498552},\"selected\":false,\"positionAbsolute\":{\"x\":-23.803191056449734,\"y\":1075.5244090498552}},{\"width\":160,\"height\":147,\"id\":\"mathNode_uiaGH\",\"data\":{\"label\":\"mathNode_uiaGH\",\"fnName\":\"min\",\"variableName\":\"mathNode_uiaGH\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.3},\"math_fn_input_1\":{\"type\":\"number\",\"value\":0}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-463.7076089382392,\"y\":1075.4867691021484},\"selected\":false,\"positionAbsolute\":{\"x\":-463.7076089382392,\"y\":1075.4867691021484}},{\"width\":160,\"height\":66,\"id\":\"valueNode_guqQl\",\"data\":{\"max\":10,\"label\":\"valueNode_guqQl\",\"value\":0.3,\"variableName\":\"valueNode_guqQl\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-464.5223884885328,\"y\":1237.8351928385066},\"selected\":false,\"positionAbsolute\":{\"x\":-464.5223884885328,\"y\":1237.8351928385066}},{\"width\":160,\"height\":66,\"id\":\"valueNode_IoQLE\",\"data\":{\"label\":\"valueNode_IoQLE\",\"value\":1,\"variableName\":\"valueNode_IoQLE\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-17.863539448646662,\"y\":1320.6431754448995},\"selected\":false,\"positionAbsolute\":{\"x\":-17.863539448646662,\"y\":1320.6431754448995}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_AQEgn\",\"data\":{\"label\":\"operatorNode_AQEgn\",\"operator\":1,\"variableName\":\"operatorNode_AQEgn\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":1}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-21.08156710772019,\"y\":1161.2019137615985},\"selected\":false,\"positionAbsolute\":{\"x\":-21.08156710772019,\"y\":1161.2019137615985}},{\"width\":160,\"height\":121,\"id\":\"subGraphOutputNode_SfAbH\",\"data\":{\"label\":\"subGraphOutputNode_SfAbH\",\"outputs\":{\"6op\":{\"name\":\"output_0\",\"type\":\"number\"},\"lb6\":{\"name\":\"output_1\",\"type\":\"number\"}},\"variableName\":\"subGraphOutputNode_SfAbH\",\"defaultValues\":{\"6op\":{\"type\":\"number\",\"value\":0},\"lb6\":{\"type\":\"number\",\"value\":0}}},\"type\":\"subGraphOutputNode\",\"dragging\":false,\"position\":{\"x\":363.96502225147594,\"y\":1148.3188116155889},\"selected\":false,\"positionAbsolute\":{\"x\":363.96502225147594,\"y\":1148.3188116155889}},{\"width\":160,\"height\":108,\"id\":\"subGraphInputNode_vvYql\",\"data\":{\"label\":\"subGraphInputNode_vvYql\",\"inputs\":{\"mt5\":{\"name\":\"input_1\",\"type\":\"number\"},\"u7m\":{\"name\":\"input_0\",\"type\":\"number\"}},\"variableName\":\"subGraphInputNode_vvYql\"},\"type\":\"subGraphInputNode\",\"dragging\":false,\"position\":{\"x\":-1335.6914213092207,\"y\":1111.4383989318103},\"selected\":false,\"positionAbsolute\":{\"x\":-1335.6914213092207,\"y\":1111.4383989318103}}],\"edges\":[{\"id\":\"reactflowedge-valueNode_Vamgmvalue-operatorNode_JOvyloperand_1\",\"source\":\"valueNode_Vamgm\",\"target\":\"operatorNode_JOvyl\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_rFWbaoutput-operatorNode_PMyvXoperand_1\",\"source\":\"operatorNode_rFWba\",\"target\":\"operatorNode_PMyvX\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_XpZZmvalue-operatorNode_PMyvXoperand_2\",\"source\":\"valueNode_XpZZm\",\"target\":\"operatorNode_PMyvX\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_PMyvXoutput-operatorNode_bJicMoperand_1\",\"source\":\"operatorNode_PMyvX\",\"target\":\"operatorNode_bJicM\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_IiakTvalue-operatorNode_bJicMoperand_2\",\"source\":\"valueNode_IiakT\",\"target\":\"operatorNode_bJicM\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-visualizationNode_NMWUdvisualization_input\",\"source\":\"easingNode_EvFOi\",\"target\":\"visualizationNode_NMWUd\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_bJicMoutput-mathNode_uiaGHmath_fn_input_1\",\"source\":\"operatorNode_bJicM\",\"target\":\"mathNode_uiaGH\",\"sourceHandle\":\"output\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-valueNode_guqQlvalue-mathNode_uiaGHmath_fn_input_0\",\"source\":\"valueNode_guqQl\",\"target\":\"mathNode_uiaGH\",\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-mathNode_uiaGHoutput-operatorNode_JOvyloperand_2\",\"source\":\"mathNode_uiaGH\",\"target\":\"operatorNode_JOvyl\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_JOvyloutput-easingNode_EvFOix\",\"source\":\"operatorNode_JOvyl\",\"target\":\"easingNode_EvFOi\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-valueNode_IoQLEvalue-operatorNode_AQEgnoperand_1\",\"source\":\"valueNode_IoQLE\",\"target\":\"operatorNode_AQEgn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-operatorNode_AQEgnoperand_2\",\"source\":\"easingNode_EvFOi\",\"target\":\"operatorNode_AQEgn\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-subGraphInputNode_vvYqlu7m-operatorNode_rFWbaoperand_1\",\"source\":\"subGraphInputNode_vvYql\",\"target\":\"operatorNode_rFWba\",\"sourceHandle\":\"u7m\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-subGraphInputNode_vvYqlmt5-operatorNode_rFWbaoperand_2\",\"source\":\"subGraphInputNode_vvYql\",\"target\":\"operatorNode_rFWba\",\"sourceHandle\":\"mt5\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-subGraphOutputNode_SfAbH6op\",\"source\":\"easingNode_EvFOi\",\"target\":\"subGraphOutputNode_SfAbH\",\"sourceHandle\":\"y\",\"targetHandle\":\"6op\"},{\"source\":\"operatorNode_AQEgn\",\"sourceHandle\":\"output\",\"target\":\"subGraphOutputNode_SfAbH\",\"targetHandle\":\"lb6\",\"id\":\"reactflow__edge-operatorNode_AQEgnoutput-subGraphOutputNode_SfAbHlb6\"}],\"viewport\":{\"x\":1224.1540174099255,\"y\":-124.5560027222482,\"zoom\":0.6164261627319026}},\"defaultValues\":{\"mt5\":{\"value\":0,\"type\":\"number\"},\"u7m\":{\"value\":-0.11,\"type\":\"number\"}}},\"position\":{\"x\":335.12088527363767,\"y\":787.4171608036855},\"selected\":false,\"positionAbsolute\":{\"x\":335.12088527363767,\"y\":787.4171608036855},\"dragging\":false}],\"edges\":[{\"source\":\"subGraphNode_bLsvu\",\"sourceHandle\":\"6eq\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_EyeBlinkLeft\",\"id\":\"reactflow__edge-subGraphNode_bLsvu6eq-modelBlendshapesOutput_fnNmsmodel_blendshapes_EyeBlinkLeft\",\"selected\":false},{\"source\":\"subGraphNode_bLsvu\",\"sourceHandle\":\"6eq\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_EyeBlinkRight\",\"id\":\"reactflow__edge-subGraphNode_bLsvu6eq-modelBlendshapesOutput_fnNmsmodel_blendshapes_EyeBlinkRight\",\"selected\":false},{\"source\":\"mp_blendshapes_input_MXRyt\",\"sourceHandle\":\"mp_blendshapes_Mouth_Open\",\"target\":\"subGraphNode_BkbhM\",\"targetHandle\":\"mt5\",\"id\":\"reactflow__edge-mp_blendshapes_input_MXRytmp_blendshapes_Mouth_Open-subGraphNode_BkbhMmt5\",\"selected\":false},{\"source\":\"mp_blendshapes_input_MXRyt\",\"sourceHandle\":\"mp_blendshapes_Volume\",\"target\":\"subGraphNode_BkbhM\",\"targetHandle\":\"u7m\",\"id\":\"reactflow__edge-mp_blendshapes_input_MXRytmp_blendshapes_Volume-subGraphNode_BkbhMu7m\",\"selected\":false},{\"source\":\"subGraphNode_BkbhM\",\"sourceHandle\":\"lb6\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_Mouth_Close\",\"id\":\"reactflow__edge-subGraphNode_BkbhMlb6-modelBlendshapesOutput_fnNmsmodel_blendshapes_Mouth_Close\",\"selected\":false},{\"source\":\"subGraphNode_BkbhM\",\"sourceHandle\":\"6op\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_MouthClose\",\"id\":\"reactflow__edge-subGraphNode_BkbhM6op-modelBlendshapesOutput_fnNmsmodel_blendshapes_MouthClose\"}],\"viewport\":{\"x\":-32.73515124269943,\"y\":-647.9585296455045,\"zoom\":1.4499468328788518}}",
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 330,
+      "type": "Object_MatchTextureAspectRatio",
+      "pos": [
+        401,
+        1391
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 577
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 578
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            579
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_MatchTextureAspectRatio"
+      },
+      "widgets_values": [
+        0.001
+      ]
+    },
+    {
+      "id": 323,
+      "type": "Object_CreateMeshLayer",
+      "pos": [
+        20,
+        1170
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 594
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            592
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_CreateMeshLayer"
+      },
+      "widgets_values": [
+        0.7000000000000001,
+        0.7,
+        "Left_Eye",
+        1.2000000000000002,
+        1.2000000000000002,
+        1.2000000000000002,
+        1.2000000000000002,
+        986559243967983,
+        "randomize"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 336,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        771,
+        1510
+      ],
+      "size": {
+        "0": 315,
+        "1": 298
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 585
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            589
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "EyeBlinkRight",
+        "Right_Eye",
+        1,
+        0.1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
       "id": 332,
@@ -984,7 +911,7 @@
       ],
       "size": {
         "0": 315,
-        "1": 194
+        "1": 218
       },
       "flags": {},
       "order": 21,
@@ -1014,40 +941,113 @@
         "",
         "out",
         "GLB",
+        "AVA",
         "Overwrite"
       ]
     },
     {
-      "id": 334,
-      "type": "CreateShapeFlow",
+      "id": 320,
+      "type": "LoadImage",
       "pos": [
-        1110,
-        1680
+        -400,
+        1330
       ],
       "size": {
         "0": 315,
-        "1": 82
+        "1": 314
       },
       "flags": {},
       "order": 4,
       "mode": 0,
       "outputs": [
         {
-          "name": "SHAPE_FLOW",
-          "type": "SHAPE_FLOW",
+          "name": "IMAGE",
+          "type": "IMAGE",
           "links": [
-            582
+            565,
+            578,
+            580
           ],
           "shape": 3,
           "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "CreateShapeFlow"
+        "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "{\"nodes\":[{\"width\":160,\"height\":225,\"id\":\"modelBlendshapesOutput_fnNms\",\"data\":{\"label\":\"modelBlendshapesOutput_fnNms\",\"variableName\":\"modelBlendshapesOutput_fnNms\",\"defaultValues\":{\"model_blendshapes_Ex_6\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Q\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_i\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_QQ\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_HeadX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_HeadY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Param\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Breath\":{\"type\":\"number\",\"value\":1.8282266430674599},\"model_blendshapes_EX_zzz\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Cute\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Tear\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_drop\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeWide\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_JawOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Mouth_Y\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Blush\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Point\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Sweat\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeLookX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeLookY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowInner\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowOuter\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_CheekPuff\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Shadow\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkL\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkR\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeSquint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair01\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair02\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair03\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthForm\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthWide\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_NoseSneer\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_tongueOut\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_FireEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_StarEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_TearEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthClose\":{\"type\":\"number\",\"value\":1},\"model_blendshapes_Mouth_Form\":{\"value\":0.18,\"type\":\"number\"},\"model_blendshapes_Mouth_Puck\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_Mouth_wide\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_eye_LBlink\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_eye_RBlink\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_CheekSquint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_DizzyEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_HeartEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_wideopen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeL_Squint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeR_Squint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthPucker\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Mouth_Close\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_ParamAngleX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamAngleY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamAngleZ\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamBrowLY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamBrowRY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_EyeblinkL\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_EyeblinkR\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamJawOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_FaceShadow\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeBallX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeBallY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeLClose\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeRClose\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthForm\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthOpenY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthShrug\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthFunnel\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthPuckerWiden\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthPressLipOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkLeft\":{\"value\":0,\"type\":\"number\"},\"model_blendshapes_EyeBlinkRight\":{\"value\":0,\"type\":\"number\"}}},\"type\":\"modelBlendshapesOutput\",\"dragging\":false,\"position\":{\"x\":685.1880537355778,\"y\":635.5248233166805},\"selected\":true,\"positionAbsolute\":{\"x\":685.1880537355778,\"y\":635.5248233166805}},{\"width\":225,\"height\":640,\"id\":\"mp_blendshapes_input_MXRyt\",\"data\":{\"MPBlendshapes\":{\"Kiss\":-0.0000021287373783707153,\"Jaw_L\":0.0000036614283089875244,\"Jaw_R\":0.000002809933221215033,\"Volume\":0,\"Lips_Up\":0.0000020435877559066284,\"Mouth_L\":0.000009281295206164941,\"Mouth_R\":0.00003678458233480342,\"Smile_L\":0.0551496259868145,\"Smile_R\":0.2509416937828064,\"Lips_Down\":-0.0000044277735469222534,\"Eye_Open_L\":0.40511101484298706,\"Eye_Open_R\":0.5475320219993591,\"Mouth_Open\":0.012108939699828625,\"Eye_Close_L\":0,\"Eye_Close_R\":0,\"Brow_Lower_L\":0,\"Brow_Lower_R\":0,\"Brow_Raise_L\":0,\"Brow_Raise_R\":0,\"Eye_Move_In_L\":0,\"Eye_Move_In_R\":0,\"Eye_Move_Up_L\":0.00016199999663513154,\"Eye_Move_Up_R\":0.00016199999663513154,\"Eye_Move_Out_L\":0.06576699763536453,\"Eye_Move_Out_R\":0.06576699763536453,\"Eye_Move_Down_L\":0,\"Eye_Move_Down_R\":0,\"Upper_Lip_Raise_L\":0.0000022138867734611267,\"Upper_Lip_Raise_R\":0.0000016178403257072205,\"Lips_Corner_Lower_L\":-0.0000034059796689689392,\"Lips_Corner_Lower_R\":0.000003831727553915698}},\"type\":\"mp_blendshapes_input\",\"dragging\":false,\"position\":{\"x\":-49.93800545333147,\"y\":409.57190025779835},\"selected\":false,\"positionAbsolute\":{\"x\":-49.93800545333147,\"y\":409.57190025779835}},{\"width\":160,\"height\":80,\"id\":\"subGraphNode_bLsvu\",\"type\":\"subGraphNode\",\"data\":{\"label\":\"Eyes blink\",\"variableName\":\"subGraphNode_bLsvu\",\"subGraph\":{\"nodes\":[{\"width\":166,\"height\":94,\"id\":\"timeNode_jYYGz\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_jYYGz\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_jYYGz\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344},\"selected\":false,\"positionAbsolute\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344}},{\"width\":172,\"height\":74,\"id\":\"easingNode_bqAhh\",\"data\":{\"label\":\"easingNode_bqAhh\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bqAhh\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274},\"selected\":false,\"positionAbsolute\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274}},{\"width\":160,\"height\":147,\"id\":\"mathNode_UuJyg\",\"data\":{\"label\":\"mathNode_UuJyg\",\"fnName\":\"min\",\"variableName\":\"mathNode_UuJyg\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762},\"selected\":false,\"positionAbsolute\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762}},{\"width\":160,\"height\":66,\"id\":\"valueNode_rpCCe\",\"data\":{\"max\":1,\"label\":\"valueNode_rpCCe\",\"value\":1,\"variableName\":\"valueNode_rpCCe\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466},\"selected\":false,\"positionAbsolute\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_nKzQk\",\"data\":{\"label\":\"operatorNode_nKzQk\",\"operator\":2,\"variableName\":\"operatorNode_nKzQk\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.6}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278},\"selected\":false,\"positionAbsolute\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278}},{\"width\":160,\"height\":66,\"id\":\"valueNode_Biisy\",\"data\":{\"max\":100,\"label\":\"valueNode_Biisy\",\"value\":4.6,\"variableName\":\"valueNode_Biisy\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432},\"selected\":false,\"positionAbsolute\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432}},{\"width\":160,\"height\":66,\"id\":\"valueNode_gSXlE\",\"data\":{\"max\":10,\"label\":\"valueNode_gSXlE\",\"value\":4.1,\"variableName\":\"valueNode_gSXlE\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297},\"selected\":false,\"positionAbsolute\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_hddlu\",\"data\":{\"label\":\"operatorNode_hddlu\",\"operator\":2,\"variableName\":\"operatorNode_hddlu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":4.1},\"operand_2\":{\"type\":\"number\",\"value\":122.37870000004769}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534},\"selected\":false,\"positionAbsolute\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534}},{\"width\":160,\"height\":66,\"id\":\"valueNode_lYzmY\",\"data\":{\"label\":\"valueNode_lYzmY\",\"value\":1,\"variableName\":\"valueNode_lYzmY\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329},\"selected\":false,\"positionAbsolute\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_neoYv\",\"data\":{\"label\":\"operatorNode_neoYv\",\"operator\":1,\"variableName\":\"operatorNode_neoYv\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077},\"selected\":false,\"positionAbsolute\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077}},{\"width\":160,\"height\":66,\"id\":\"valueNode_UbOMo\",\"data\":{\"label\":\"valueNode_UbOMo\",\"value\":1,\"variableName\":\"valueNode_UbOMo\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297},\"selected\":false,\"positionAbsolute\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297}},{\"width\":166,\"height\":94,\"id\":\"timeNode_cLYze\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_cLYze\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_cLYze\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178}},{\"width\":172,\"height\":74,\"id\":\"easingNode_nGvYS\",\"data\":{\"label\":\"easingNode_nGvYS\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_nGvYS\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371},\"selected\":false,\"positionAbsolute\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_WMyHj\",\"data\":{\"label\":\"visualizationNode_WMyHj\",\"variableName\":\"visualizationNode_WMyHj\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097},\"selected\":false,\"positionAbsolute\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_sYXzG\",\"data\":{\"label\":\"visualizationNode_sYXzG\",\"variableName\":\"visualizationNode_sYXzG\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842},\"selected\":false,\"positionAbsolute\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_edAkt\",\"data\":{\"label\":\"operatorNode_edAkt\",\"operator\":4,\"variableName\":\"operatorNode_edAkt\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":501.75267000019545},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333},\"selected\":false,\"positionAbsolute\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333}},{\"width\":160,\"height\":66,\"id\":\"valueNode_ARGrY\",\"data\":{\"max\":100,\"label\":\"valueNode_ARGrY\",\"value\":10,\"variableName\":\"valueNode_ARGrY\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367},\"selected\":false,\"positionAbsolute\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367}},{\"width\":160,\"height\":200,\"id\":\"conditionNode_NuykU\",\"data\":{\"label\":\"conditionNode_NuykU\",\"operator\":0,\"variableName\":\"conditionNode_NuykU\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823}},{\"width\":160,\"height\":66,\"id\":\"valueNode_cPQRA\",\"data\":{\"label\":\"valueNode_cPQRA\",\"value\":1,\"variableName\":\"valueNode_cPQRA\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463}},{\"width\":172,\"height\":74,\"id\":\"easingNode_AIbfm\",\"data\":{\"label\":\"easingNode_AIbfm\",\"easingFn\":\"easeInOutSine\",\"variableName\":\"easingNode_AIbfm\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076},\"selected\":false,\"positionAbsolute\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076}},{\"width\":166,\"height\":94,\"id\":\"timeNode_vRvny\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_vRvny\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_vRvny\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699}},{\"width\":160,\"height\":200,\"id\":\"conditionNode_gNWNm\",\"data\":{\"label\":\"conditionNode_gNWNm\",\"operator\":0,\"variableName\":\"conditionNode_gNWNm\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":3.478700000047697},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.1102230246251565e-16},\"condition_false\":{\"type\":\"number\",\"value\":0}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818},\"selected\":false,\"positionAbsolute\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_dNObC\",\"data\":{\"label\":\"operatorNode_dNObC\",\"operator\":4,\"variableName\":\"operatorNode_dNObC\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.1}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195}},{\"width\":160,\"height\":66,\"id\":\"valueNode_ehGvn\",\"data\":{\"max\":10,\"label\":\"valueNode_ehGvn\",\"value\":4.1,\"variableName\":\"valueNode_ehGvn\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_NyUGz\",\"data\":{\"label\":\"visualizationNode_NyUGz\",\"variableName\":\"visualizationNode_NyUGz\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957},\"selected\":false,\"positionAbsolute\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_uiGHN\",\"data\":{\"label\":\"operatorNode_uiGHN\",\"operator\":2,\"variableName\":\"operatorNode_uiGHN\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":1}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741}},{\"width\":160,\"height\":66,\"id\":\"valueNode_ZlTlm\",\"data\":{\"max\":10,\"label\":\"valueNode_ZlTlm\",\"value\":1,\"variableName\":\"valueNode_ZlTlm\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055}},{\"width\":160,\"height\":147,\"id\":\"mathNode_TdXuG\",\"data\":{\"label\":\"mathNode_TdXuG\",\"fnName\":\"min\",\"variableName\":\"mathNode_TdXuG\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757},\"selected\":false,\"positionAbsolute\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757}},{\"width\":160,\"height\":66,\"id\":\"valueNode_TpLsh\",\"data\":{\"label\":\"valueNode_TpLsh\",\"value\":1,\"variableName\":\"valueNode_TpLsh\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_rEaHg\",\"data\":{\"label\":\"operatorNode_rEaHg\",\"operator\":4,\"variableName\":\"operatorNode_rEaHg\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":562.9420200002193},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756},\"selected\":false,\"positionAbsolute\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756}},{\"width\":160,\"height\":66,\"id\":\"valueNode_FSQaP\",\"data\":{\"max\":10,\"label\":\"valueNode_FSQaP\",\"value\":10,\"variableName\":\"valueNode_FSQaP\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694},\"selected\":false,\"positionAbsolute\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694}},{\"width\":160,\"height\":200,\"id\":\"conditionNode_pHuSn\",\"data\":{\"label\":\"conditionNode_pHuSn\",\"operator\":0,\"variableName\":\"conditionNode_pHuSn\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_oeTEr\",\"data\":{\"label\":\"operatorNode_oeTEr\",\"operator\":1,\"variableName\":\"operatorNode_oeTEr\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122},\"selected\":false,\"positionAbsolute\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122}},{\"width\":172,\"height\":74,\"id\":\"easingNode_bdjNf\",\"data\":{\"label\":\"easingNode_bdjNf\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bdjNf\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532},\"selected\":false,\"positionAbsolute\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_OAILX\",\"data\":{\"label\":\"visualizationNode_OAILX\",\"variableName\":\"visualizationNode_OAILX\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":661.6184822328263,\"y\":-1764.470845107487},\"selected\":false,\"positionAbsolute\":{\"x\":661.6184822328263,\"y\":-1764.470845107487}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_AHegu\",\"data\":{\"label\":\"operatorNode_AHegu\",\"operator\":1,\"variableName\":\"operatorNode_AHegu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":2.5}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232},\"selected\":false,\"positionAbsolute\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232}},{\"width\":160,\"height\":66,\"id\":\"valueNode_lZHtu\",\"data\":{\"max\":10,\"label\":\"valueNode_lZHtu\",\"value\":1,\"variableName\":\"valueNode_lZHtu\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635},\"selected\":false,\"positionAbsolute\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_LYPOZ\",\"data\":{\"label\":\"visualizationNode_LYPOZ\",\"variableName\":\"visualizationNode_LYPOZ\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292},\"selected\":false,\"positionAbsolute\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292}},{\"width\":160,\"height\":121,\"id\":\"subGraphOutputNode_dHexz\",\"type\":\"subGraphOutputNode\",\"data\":{\"label\":\"subGraphOutputNode_dHexz\",\"variableName\":\"subGraphOutputNode_dHexz\",\"outputs\":{\"6eq\":{\"type\":\"number\",\"name\":\"output_0\"},\"iiw\":{\"type\":\"number\",\"name\":\"output_1\"}},\"defaultValues\":{\"6eq\":{\"value\":0,\"type\":\"number\"},\"iiw\":{\"value\":0.11,\"type\":\"number\"}}},\"position\":{\"x\":649.301650118796,\"y\":-921.5106663745356},\"selected\":false,\"positionAbsolute\":{\"x\":649.301650118796,\"y\":-921.5106663745356},\"dragging\":false}],\"edges\":[{\"id\":\"reactflow__edge-valueNode_Biisyvalue-operatorNode_nKzQkoperand_2\",\"source\":\"valueNode_Biisy\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_lYzmYvalue-operatorNode_neoYvoperand_1\",\"source\":\"valueNode_lYzmY\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_UuJygoutput-operatorNode_neoYvoperand_2\",\"source\":\"mathNode_UuJyg\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-timeNode_cLYzetime-operatorNode_nKzQkoperand_1\",\"source\":\"timeNode_cLYze\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-timeNode_jYYGztime-operatorNode_hddluoperand_2\",\"source\":\"timeNode_jYYGz\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_gSXlEvalue-operatorNode_hddluoperand_1\",\"source\":\"valueNode_gSXlE\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-mathNode_UuJygmath_fn_input_1\",\"source\":\"valueNode_rpCCe\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-easingNode_bqAhhy-mathNode_UuJygmath_fn_input_0\",\"source\":\"easingNode_bqAhh\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_ARGrYvalue-operatorNode_edAktoperand_2\",\"source\":\"valueNode_ARGrY\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_a\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_b\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_true\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_false\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_NuykUoutput-easingNode_bqAhhx\",\"source\":\"conditionNode_NuykU\",\"target\":\"easingNode_bqAhh\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-operatorNode_hddluoutput-operatorNode_edAktoperand_1\",\"source\":\"operatorNode_hddlu\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_neoYvoutput-easingNode_AIbfmx\",\"source\":\"operatorNode_neoYv\",\"target\":\"easingNode_AIbfm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-visualizationNode_sYXzGvisualization_input\",\"source\":\"easingNode_AIbfm\",\"target\":\"visualizationNode_sYXzG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-valueNode_ehGvnvalue-operatorNode_dNObCoperand_2\",\"source\":\"valueNode_ehGvn\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-visualizationNode_NyUGzvisualization_input\",\"source\":\"operatorNode_dNObC\",\"target\":\"visualizationNode_NyUGz\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-timeNode_vRvnytime-operatorNode_uiGHNoperand_1\",\"source\":\"timeNode_vRvny\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_uiGHNoutput-operatorNode_dNObCoperand_1\",\"source\":\"operatorNode_uiGHN\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_ZlTlmvalue-operatorNode_uiGHNoperand_2\",\"source\":\"valueNode_ZlTlm\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-conditionNode_gNWNmcondition_a\",\"source\":\"operatorNode_dNObC\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-conditionNode_gNWNmcondition_b\",\"source\":\"valueNode_rpCCe\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-conditionNode_gNWNmcondition_false\",\"source\":\"easingNode_AIbfm\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-easingNode_nGvYSy-mathNode_TdXuGmath_fn_input_0\",\"source\":\"easingNode_nGvYS\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_UbOMovalue-mathNode_TdXuGmath_fn_input_1\",\"source\":\"valueNode_UbOMo\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-operatorNode_nKzQkoutput-operatorNode_rEaHgoperand_1\",\"source\":\"operatorNode_nKzQk\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_FSQaPvalue-operatorNode_rEaHgoperand_2\",\"source\":\"valueNode_FSQaP\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_a\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_b\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_true\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_false\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_pHuSnoutput-easingNode_nGvYSx\",\"source\":\"conditionNode_pHuSn\",\"target\":\"easingNode_nGvYS\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-operatorNode_oeTEroperand_1\",\"source\":\"valueNode_TpLsh\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_TdXuGoutput-operatorNode_oeTEroperand_2\",\"source\":\"mathNode_TdXuG\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-visualizationNode_WMyHjvisualization_input\",\"source\":\"operatorNode_oeTEr\",\"target\":\"visualizationNode_WMyHj\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-conditionNode_gNWNmcondition_true\",\"source\":\"operatorNode_oeTEr\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-conditionNode_gNWNmoutput-easingNode_bdjNfx\",\"source\":\"conditionNode_gNWNm\",\"target\":\"easingNode_bdjNf\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-visualizationNode_OAILXvisualization_input\",\"source\":\"easingNode_bdjNf\",\"target\":\"visualizationNode_OAILX\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_AHeguoutput-visualizationNode_LYPOZvisualization_input\",\"source\":\"operatorNode_AHegu\",\"target\":\"visualizationNode_LYPOZ\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"source\":\"easingNode_bdjNf\",\"sourceHandle\":\"y\",\"target\":\"subGraphOutputNode_dHexz\",\"targetHandle\":\"6eq\",\"id\":\"reactflow__edge-easingNode_bdjNfy-subGraphOutputNode_dHexz6eq\",\"selected\":false},{\"source\":\"operatorNode_AHegu\",\"sourceHandle\":\"output\",\"target\":\"subGraphOutputNode_dHexz\",\"targetHandle\":\"iiw\",\"id\":\"reactflow__edge-operatorNode_AHeguoutput-subGraphOutputNode_dHexziiw\",\"selected\":false},{\"source\":\"valueNode_lZHtu\",\"sourceHandle\":\"value\",\"target\":\"operatorNode_AHegu\",\"targetHandle\":\"operand_1\",\"id\":\"reactflow__edge-valueNode_lZHtuvalue-operatorNode_AHeguoperand_1\"},{\"source\":\"easingNode_bdjNf\",\"sourceHandle\":\"y\",\"target\":\"operatorNode_AHegu\",\"targetHandle\":\"operand_2\",\"id\":\"reactflow__edge-easingNode_bdjNfy-operatorNode_AHeguoperand_2\"}],\"viewport\":{\"x\":824.535160860398,\"y\":1641.9231904708736,\"zoom\":0.9645981845841377}}},\"position\":{\"x\":334.59096875525347,\"y\":622.6079715701512},\"selected\":false,\"positionAbsolute\":{\"x\":334.59096875525347,\"y\":622.6079715701512},\"dragging\":false},{\"width\":160,\"height\":133,\"id\":\"subGraphNode_BkbhM\",\"type\":\"subGraphNode\",\"data\":{\"label\":\"Mouth\",\"variableName\":\"subGraphNode_BkbhM\",\"subGraph\":{\"nodes\":[{\"width\":160,\"height\":66,\"id\":\"valueNode_Vamgm\",\"data\":{\"label\":\"valueNode_Vamgm\",\"value\":1,\"variableName\":\"valueNode_Vamgm\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-245.2589747413336,\"y\":1237.3741915337844},\"selected\":false,\"positionAbsolute\":{\"x\":-245.2589747413336,\"y\":1237.3741915337844}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_JOvyl\",\"data\":{\"label\":\"operatorNode_JOvyl\",\"operator\":1,\"variableName\":\"operatorNode_JOvyl\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-244.79681208357073,\"y\":1079.9773591696098},\"selected\":false,\"positionAbsolute\":{\"x\":-244.79681208357073,\"y\":1079.9773591696098}},{\"width\":328,\"height\":344,\"id\":\"visualizationNode_NMWUd\",\"data\":{\"label\":\"visualizationNode_NMWUd\",\"variableName\":\"visualizationNode_NMWUd\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":299.0843387831331,\"y\":728.4934883862524},\"selected\":false,\"positionAbsolute\":{\"x\":299.0843387831331,\"y\":728.4934883862524}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_PMyvX\",\"data\":{\"label\":\"operatorNode_PMyvX\",\"operator\":3,\"variableName\":\"operatorNode_PMyvX\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-900.2216635621324,\"y\":1075.9531149847442},\"selected\":false,\"positionAbsolute\":{\"x\":-900.2216635621324,\"y\":1075.9531149847442}},{\"width\":160,\"height\":66,\"id\":\"valueNode_XpZZm\",\"data\":{\"max\":2,\"label\":\"valueNode_XpZZm\",\"value\":2,\"variableName\":\"valueNode_XpZZm\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-899.9187990342721,\"y\":1236.4359492337112},\"selected\":false,\"positionAbsolute\":{\"x\":-899.9187990342721,\"y\":1236.4359492337112}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_rFWba\",\"data\":{\"label\":\"operatorNode_rFWba\",\"operator\":0,\"variableName\":\"operatorNode_rFWba\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-1110.7569818937736,\"y\":1076.0918664187236},\"selected\":false,\"positionAbsolute\":{\"x\":-1110.7569818937736,\"y\":1076.0918664187236}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_bJicM\",\"data\":{\"label\":\"operatorNode_bJicM\",\"operator\":3,\"variableName\":\"operatorNode_bJicM\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-683.830014730419,\"y\":1077.8984983719388},\"selected\":false,\"positionAbsolute\":{\"x\":-683.830014730419,\"y\":1077.8984983719388}},{\"width\":160,\"height\":66,\"id\":\"valueNode_IiakT\",\"data\":{\"max\":7,\"label\":\"valueNode_IiakT\",\"value\":7,\"variableName\":\"valueNode_IiakT\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-682.2745864422745,\"y\":1237.4983205906728},\"selected\":false,\"positionAbsolute\":{\"x\":-682.2745864422745,\"y\":1237.4983205906728}},{\"width\":172,\"height\":74,\"id\":\"easingNode_EvFOi\",\"data\":{\"label\":\"easingNode_EvFOi\",\"easingFn\":\"easeInCirc\",\"variableName\":\"easingNode_EvFOi\"},\"type\":\"easingNode\",\"dragging\":false,\"position\":{\"x\":-23.803191056449734,\"y\":1075.5244090498552},\"selected\":false,\"positionAbsolute\":{\"x\":-23.803191056449734,\"y\":1075.5244090498552}},{\"width\":160,\"height\":147,\"id\":\"mathNode_uiaGH\",\"data\":{\"label\":\"mathNode_uiaGH\",\"fnName\":\"min\",\"variableName\":\"mathNode_uiaGH\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.3},\"math_fn_input_1\":{\"type\":\"number\",\"value\":0}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-463.7076089382392,\"y\":1075.4867691021484},\"selected\":false,\"positionAbsolute\":{\"x\":-463.7076089382392,\"y\":1075.4867691021484}},{\"width\":160,\"height\":66,\"id\":\"valueNode_guqQl\",\"data\":{\"max\":10,\"label\":\"valueNode_guqQl\",\"value\":0.3,\"variableName\":\"valueNode_guqQl\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-464.5223884885328,\"y\":1237.8351928385066},\"selected\":false,\"positionAbsolute\":{\"x\":-464.5223884885328,\"y\":1237.8351928385066}},{\"width\":160,\"height\":66,\"id\":\"valueNode_IoQLE\",\"data\":{\"label\":\"valueNode_IoQLE\",\"value\":1,\"variableName\":\"valueNode_IoQLE\"},\"type\":\"valueNode\",\"dragging\":false,\"position\":{\"x\":-17.863539448646662,\"y\":1320.6431754448995},\"selected\":false,\"positionAbsolute\":{\"x\":-17.863539448646662,\"y\":1320.6431754448995}},{\"width\":160,\"height\":147,\"id\":\"operatorNode_AQEgn\",\"data\":{\"label\":\"operatorNode_AQEgn\",\"operator\":1,\"variableName\":\"operatorNode_AQEgn\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":1}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-21.08156710772019,\"y\":1161.2019137615985},\"selected\":false,\"positionAbsolute\":{\"x\":-21.08156710772019,\"y\":1161.2019137615985}},{\"width\":160,\"height\":121,\"id\":\"subGraphOutputNode_SfAbH\",\"data\":{\"label\":\"subGraphOutputNode_SfAbH\",\"outputs\":{\"6op\":{\"name\":\"output_0\",\"type\":\"number\"},\"lb6\":{\"name\":\"output_1\",\"type\":\"number\"}},\"variableName\":\"subGraphOutputNode_SfAbH\",\"defaultValues\":{\"6op\":{\"type\":\"number\",\"value\":0},\"lb6\":{\"type\":\"number\",\"value\":0}}},\"type\":\"subGraphOutputNode\",\"dragging\":false,\"position\":{\"x\":363.96502225147594,\"y\":1148.3188116155889},\"selected\":false,\"positionAbsolute\":{\"x\":363.96502225147594,\"y\":1148.3188116155889}},{\"width\":160,\"height\":108,\"id\":\"subGraphInputNode_vvYql\",\"data\":{\"label\":\"subGraphInputNode_vvYql\",\"inputs\":{\"mt5\":{\"name\":\"input_1\",\"type\":\"number\"},\"u7m\":{\"name\":\"input_0\",\"type\":\"number\"}},\"variableName\":\"subGraphInputNode_vvYql\"},\"type\":\"subGraphInputNode\",\"dragging\":false,\"position\":{\"x\":-1335.6914213092207,\"y\":1111.4383989318103},\"selected\":false,\"positionAbsolute\":{\"x\":-1335.6914213092207,\"y\":1111.4383989318103}}],\"edges\":[{\"id\":\"reactflowedge-valueNode_Vamgmvalue-operatorNode_JOvyloperand_1\",\"source\":\"valueNode_Vamgm\",\"target\":\"operatorNode_JOvyl\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_rFWbaoutput-operatorNode_PMyvXoperand_1\",\"source\":\"operatorNode_rFWba\",\"target\":\"operatorNode_PMyvX\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_XpZZmvalue-operatorNode_PMyvXoperand_2\",\"source\":\"valueNode_XpZZm\",\"target\":\"operatorNode_PMyvX\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_PMyvXoutput-operatorNode_bJicMoperand_1\",\"source\":\"operatorNode_PMyvX\",\"target\":\"operatorNode_bJicM\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_IiakTvalue-operatorNode_bJicMoperand_2\",\"source\":\"valueNode_IiakT\",\"target\":\"operatorNode_bJicM\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-visualizationNode_NMWUdvisualization_input\",\"source\":\"easingNode_EvFOi\",\"target\":\"visualizationNode_NMWUd\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_bJicMoutput-mathNode_uiaGHmath_fn_input_1\",\"source\":\"operatorNode_bJicM\",\"target\":\"mathNode_uiaGH\",\"sourceHandle\":\"output\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-valueNode_guqQlvalue-mathNode_uiaGHmath_fn_input_0\",\"source\":\"valueNode_guqQl\",\"target\":\"mathNode_uiaGH\",\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-mathNode_uiaGHoutput-operatorNode_JOvyloperand_2\",\"source\":\"mathNode_uiaGH\",\"target\":\"operatorNode_JOvyl\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_JOvyloutput-easingNode_EvFOix\",\"source\":\"operatorNode_JOvyl\",\"target\":\"easingNode_EvFOi\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-valueNode_IoQLEvalue-operatorNode_AQEgnoperand_1\",\"source\":\"valueNode_IoQLE\",\"target\":\"operatorNode_AQEgn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-operatorNode_AQEgnoperand_2\",\"source\":\"easingNode_EvFOi\",\"target\":\"operatorNode_AQEgn\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-subGraphInputNode_vvYqlu7m-operatorNode_rFWbaoperand_1\",\"source\":\"subGraphInputNode_vvYql\",\"target\":\"operatorNode_rFWba\",\"sourceHandle\":\"u7m\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-subGraphInputNode_vvYqlmt5-operatorNode_rFWbaoperand_2\",\"source\":\"subGraphInputNode_vvYql\",\"target\":\"operatorNode_rFWba\",\"sourceHandle\":\"mt5\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-subGraphOutputNode_SfAbH6op\",\"source\":\"easingNode_EvFOi\",\"target\":\"subGraphOutputNode_SfAbH\",\"sourceHandle\":\"y\",\"targetHandle\":\"6op\"},{\"source\":\"operatorNode_AQEgn\",\"sourceHandle\":\"output\",\"target\":\"subGraphOutputNode_SfAbH\",\"targetHandle\":\"lb6\",\"id\":\"reactflow__edge-operatorNode_AQEgnoutput-subGraphOutputNode_SfAbHlb6\"}],\"viewport\":{\"x\":1224.1540174099255,\"y\":-124.5560027222482,\"zoom\":0.6164261627319026}},\"defaultValues\":{\"mt5\":{\"value\":0,\"type\":\"number\"},\"u7m\":{\"value\":-0.11,\"type\":\"number\"}}},\"position\":{\"x\":335.12088527363767,\"y\":787.4171608036855},\"selected\":false,\"positionAbsolute\":{\"x\":335.12088527363767,\"y\":787.4171608036855},\"dragging\":false}],\"edges\":[{\"source\":\"subGraphNode_bLsvu\",\"sourceHandle\":\"6eq\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_EyeBlinkLeft\",\"id\":\"reactflow__edge-subGraphNode_bLsvu6eq-modelBlendshapesOutput_fnNmsmodel_blendshapes_EyeBlinkLeft\",\"selected\":false},{\"source\":\"subGraphNode_bLsvu\",\"sourceHandle\":\"6eq\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_EyeBlinkRight\",\"id\":\"reactflow__edge-subGraphNode_bLsvu6eq-modelBlendshapesOutput_fnNmsmodel_blendshapes_EyeBlinkRight\",\"selected\":false},{\"source\":\"mp_blendshapes_input_MXRyt\",\"sourceHandle\":\"mp_blendshapes_Mouth_Open\",\"target\":\"subGraphNode_BkbhM\",\"targetHandle\":\"mt5\",\"id\":\"reactflow__edge-mp_blendshapes_input_MXRytmp_blendshapes_Mouth_Open-subGraphNode_BkbhMmt5\",\"selected\":false},{\"source\":\"mp_blendshapes_input_MXRyt\",\"sourceHandle\":\"mp_blendshapes_Volume\",\"target\":\"subGraphNode_BkbhM\",\"targetHandle\":\"u7m\",\"id\":\"reactflow__edge-mp_blendshapes_input_MXRytmp_blendshapes_Volume-subGraphNode_BkbhMu7m\",\"selected\":false},{\"source\":\"subGraphNode_BkbhM\",\"sourceHandle\":\"lb6\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_Mouth_Close\",\"id\":\"reactflow__edge-subGraphNode_BkbhMlb6-modelBlendshapesOutput_fnNmsmodel_blendshapes_Mouth_Close\",\"selected\":false},{\"source\":\"subGraphNode_BkbhM\",\"sourceHandle\":\"6op\",\"target\":\"modelBlendshapesOutput_fnNms\",\"targetHandle\":\"model_blendshapes_MouthClose\",\"id\":\"reactflow__edge-subGraphNode_BkbhM6op-modelBlendshapesOutput_fnNmsmodel_blendshapes_MouthClose\"}],\"viewport\":{\"x\":-32.73515124269943,\"y\":-647.9585296455045,\"zoom\":1.4499468328788518}}",
-        ""
+        "character.png",
+        "image"
+      ]
+    },
+    {
+      "id": 319,
+      "type": "SAM",
+      "pos": [
+        -300,
+        1700
+      ],
+      "size": {
+        "0": 210,
+        "1": 190
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 565
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SAM_PROMPT",
+          "type": "SAM_PROMPT",
+          "links": null,
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "left_eye",
+          "type": "IMAGE",
+          "links": [
+            594
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "right_eye",
+          "type": "IMAGE",
+          "links": [
+            595
+          ],
+          "slot_index": 2
+        },
+        {
+          "name": "mouth",
+          "type": "IMAGE",
+          "links": [
+            596
+          ],
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAM"
+      },
+      "widgets_values": [
+        "sam_vit_h_4b8939.pth",
+        "character.png",
+        "{\"left_eye\":[{\"x\":185,\"y\":256,\"label\":1},{\"x\":196,\"y\":251,\"label\":1}],\"right_eye\":[{\"x\":312,\"y\":252,\"label\":1},{\"x\":327,\"y\":250,\"label\":1}],\"mouth\":[{\"x\":262,\"y\":316,\"label\":1}]}",
+        "{\"Left_Eye\":[{\"x\":279,\"y\":255,\"label\":1},{\"x\":196,\"y\":291,\"label\":0},{\"x\":258,\"y\":338,\"label\":0}],\"Right_Eye\":[{\"x\":157,\"y\":266,\"label\":1},{\"x\":295,\"y\":262,\"label\":0}],\"Mouth\":[{\"x\":244,\"y\":364,\"label\":1},{\"x\":247,\"y\":281,\"label\":0}]}"
       ],
       "color": "#232",
       "bgcolor": "#353"
@@ -1135,22 +1135,6 @@
       "IMAGE"
     ],
     [
-      569,
-      319,
-      1,
-      323,
-      0,
-      "IMAGE"
-    ],
-    [
-      570,
-      319,
-      2,
-      324,
-      0,
-      "IMAGE"
-    ],
-    [
       575,
       328,
       0,
@@ -1215,14 +1199,6 @@
       "BPY_OBJ"
     ],
     [
-      587,
-      319,
-      3,
-      337,
-      0,
-      "IMAGE"
-    ],
-    [
       588,
       337,
       0,
@@ -1269,14 +1245,38 @@
       327,
       2,
       "BPY_OBJ"
+    ],
+    [
+      594,
+      319,
+      1,
+      323,
+      0,
+      "IMAGE"
+    ],
+    [
+      595,
+      319,
+      2,
+      324,
+      0,
+      "IMAGE"
+    ],
+    [
+      596,
+      319,
+      3,
+      337,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [
     {
       "title": "Image Gen",
       "bounding": [
-        -21,
-        191,
+        12,
+        172,
         1967,
         669
       ],
