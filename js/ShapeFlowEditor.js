@@ -14,6 +14,13 @@ export function ShapeFlowEditor() {
           (showEditor.val ? "" : "hidden"),
         onclick: () => {
           console.log("close");
+          const editor = document.getElementById("avatech-editor-iframe");
+          editor.contentWindow.postMessage(
+            {
+              method: "back",
+            },
+            "*"
+          );
           showEditor.val = false;
         },
       },
@@ -22,7 +29,7 @@ export function ShapeFlowEditor() {
         "data-icon": "ic:baseline-arrow-back",
         "data-inline": "false",
       }),
-      div("Back")
+      div("Back & Save")
     ),
     iframe({
       id: "avatech-editor-iframe",
