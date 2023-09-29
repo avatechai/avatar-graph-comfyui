@@ -72,7 +72,7 @@ def download_sam_model():
 
 download_sam_model()
 
-paths = ["blender", "sam", "common"]
+paths = ["blender", "sam"]
 files = []
 
 for path in paths:
