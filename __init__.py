@@ -15,6 +15,7 @@ import sys
 import importlib
 import subprocess
 import requests
+import folder_paths
 from folder_paths import add_model_folder_path, get_filename_list, get_folder_paths
 from tqdm import tqdm
 
@@ -42,6 +43,7 @@ def append_to_sys_path(path):
     if path not in sys.path:
         sys.path.append(path)
 
+folder_paths.folder_names_and_paths["sams"] = ([os.path.join(folder_paths.models_dir, "sams")], folder_paths.supported_pt_extensions)
 
 def download_sam_model():
     model_dir = get_folder_paths("sams")[0]
