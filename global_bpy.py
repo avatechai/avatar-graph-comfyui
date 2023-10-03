@@ -1,9 +1,19 @@
 import bpy
+
 global_bpy = bpy
+should_reset_scene = True
+
+
+def set_should_reset_scene(value):
+    global should_reset_scene
+    should_reset_scene = value
 
 
 def get_bpy():
-    global global_bpy
+    global global_bpy, should_reset_scene
+    if should_reset_scene:
+        reset_bpy()
+        should_reset_scene = False
     return global_bpy
 
 
