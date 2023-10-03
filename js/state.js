@@ -16,7 +16,9 @@ import { van } from "./van.js";
 
 export const iframeSrc = van.state("https://editor.avatech.ai?comfyui=true");
 export const showEditor = van.state(false);
-export const fileName = van.state("");
+export const previewUrl = van.state("https://editor.avatech.ai/viewer/default");
+export const isDirty = van.state(false);
+export const fileName = van.state('');
 export const showImageEditor = van.state(false);
 export const showLoading = van.state(false);
 export const alertDialog = van.state({

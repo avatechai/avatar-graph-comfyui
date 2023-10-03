@@ -17,8 +17,10 @@ export function AvatarPreview() {
       class: () =>
         "w-full h-full flex pointer-events-auto rounded-2xl border-none " +
         (!showEditor.val ? "" : "hidden"),
-      src: "https://labs.avatech.ai/viewer/default",
-      // src: 'http://localhost:3000/viewer/default',
+      // src: "https://labs.avatech.ai/viewer/default",
+      // src: "http://localhost:3000/viewer/default",
+      src: previewUrl,
+    }),
     })
   );
 }

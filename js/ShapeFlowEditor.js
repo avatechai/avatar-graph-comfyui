@@ -1,6 +1,6 @@
 import { iframeSrc, showEditor } from "./state.js";
 import { van } from "./van.js";
-const { button, iframe, div, img, span } = van.tags;
+const { button, iframe, div, img, span, dialog, form } = van.tags;
 
 export function ShapeFlowEditor() {
   return div(
@@ -14,14 +14,7 @@ export function ShapeFlowEditor() {
           (showEditor.val ? "" : "hidden"),
         onclick: () => {
           console.log("close");
-          const editor = document.getElementById("avatech-editor-iframe");
-          editor.contentWindow.postMessage(
-            {
-              method: "back",
-            },
-            "*"
-          );
-          showEditor.val = false;
+          document.getElementById("alert-dialog").showModal();
         },
       },
       span({
@@ -39,6 +32,51 @@ export function ShapeFlowEditor() {
       class: () =>
         "w-full h-full pointer-events-auto " + (showEditor.val ? "" : "hidden"),
       src: iframeSrc,
-    })
+    }),
+    dialog(
+      {
+        id: "alert-dialog",
+        class: "modal modal-bottom sm:modal-middle",
+      },
+      div(
+        {
+          class: "modal-box",
+        },
+        div({ class: "text-black" }, "This is a dialog"),
+        div(
+          { class: "modal-action" },
+          form(
+            { method: "dialog", class: "flex flex-row gap-4" },
+            button(
+              {
+                class: "btn",
+                onclick: () => {
+                  showEditor.val = false;
+                },
+              },
+              "Discard"
+            ),
+            button(
+              {
+                class: "btn",
+                onclick: () => {
+                  const editor = document.getElementById(
+                    "avatech-editor-iframe"
+                  );
+                  editor.contentWindow.postMessage(
+                    {
+                      method: "back",
+                    },
+                    "*"
+                  );
+                  showEditor.val = false;
+                },
+              },
+              "Save & Close"
+            )
+          )
+        )
+      )
+    )
   );
 }
