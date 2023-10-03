@@ -1,6 +1,6 @@
 import { van } from "./van.js";
-import { showEditor } from "./state.js";
 const { button, iframe, div, img } = van.tags;
+import { showEditor, previewUrl } from "./state.js";
 
 export function AvatarPreview() {
   return div(
@@ -21,6 +21,5 @@ export function AvatarPreview() {
       // src: "http://localhost:3000/viewer/default",
       src: previewUrl,
     }),
-    })
   );
 }
