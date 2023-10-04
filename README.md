@@ -117,7 +117,7 @@ Place normal and openpose image with reference to images.
 >
 > ### Inpaint Demonstration 
 >
-> https://github.com/avatechai/avatar-graph-comfyui/assets/48451938/ff48c3d9-7292-4505-8993-8f117cee34ff
+> https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270589612-ff48c3d9-7292-4505-8993-8f117cee34ff.mp4
 > 
 > ### Recommend Checkpoint Model List 
 > 
@@ -155,10 +155,10 @@ Avatar Output Nodes
 
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `Create Mesh Layer`          | Create a mesh object from the input images (usually a segmented part of the entire image)             | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/40740d25-9411-4cd3-a6c0-8b9008bca41c" width="300"> |
-| `Join Meshes`                | Combine multiple meshes into a single mesh object                                                     | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ba7afbc5-9cd5-4f97-9614-f71133f5783e" width="300"> |
-| `Match Texture Aspect Ratio` | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/cb7155be-fb31-49f8-a24a-d001a1484ea7" width="300"> |
-| `Plane Texture Unwrap`       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/4b9c0cf5-0497-47bf-8e06-5a3370084c11" width="300"> |
+| `Create Mesh Layer`          | Create a mesh object from the input images (usually a segmented part of the entire image)             | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270576646-40740d25-9411-4cd3-a6c0-8b9008bca41c.png" width="300"> |
+| `Join Meshes`                | Combine multiple meshes into a single mesh object                                                     | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270577004-ba7afbc5-9cd5-4f97-9614-f71133f5783e.png" width="300"> |
+| `Match Texture Aspect Ratio` | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation       | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270602782-cb7155be-fb31-49f8-a24a-d001a1484ea7.png" width="300"> |
+| `Plane Texture Unwrap`       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.           | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270603006-4b9c0cf5-0497-47bf-8e06-5a3370084c11.png" width="300"> |
 
 
 </details>
@@ -169,8 +169,8 @@ Avatar Output Nodes
 ## Shape Keys Nodes
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `Mesh Modify Shape Key`      | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform                | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/ab4f259c-89a7-4f51-bc54-fd179e252073" width="300"> |
-| `Create Shape Flow`          | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime    | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/abfdd801-0387-4c5d-9c11-6c23337ff1dd" width="300"> |
+| `Mesh Modify Shape Key`      | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform                | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270577944-ab4f259c-89a7-4f51-bc54-fd179e252073.png" width="300"> |
+| `Create Shape Flow`          | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime    | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270592752-abfdd801-0387-4c5d-9c11-6c23337ff1dd.png" width="300"> |
 
 </details>
 
@@ -180,14 +180,14 @@ Avatar Output Nodes
 ## Avatar Output Nodes
 | Name                         | Description                                                                                           | Preview                                                                                                                        |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `Avatar Main Output`         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a" width="300"> |
+| `Avatar Main Output`         | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270592519-6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a.png" width="300"> |
 
 </details>
 
 
 
 # Shape Flow
-![image](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/a834e535-4f87-4b77-81a6-435e3a67ca4a)
+![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270618471-a834e535-4f87-4b77-81a6-435e3a67ca4a.png)
 
 # Installation
 
