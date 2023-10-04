@@ -116,7 +116,7 @@ Place normal and openpose image with reference to images.
 >
 > ### Inpaint Demonstration 
 >
-> https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270589612-ff48c3d9-7292-4505-8993-8f117cee34ff.mp4
+> <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/e3b77295-a1bf-4d96-9551-7cc423a4af73"/>
 > 
 > ### Recommend Checkpoint Model List 
 > 
