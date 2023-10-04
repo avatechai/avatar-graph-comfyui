@@ -1,15 +1,15 @@
 # avatar-graph-comfyui
 
-![image](https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/270574817-201a005b-7e00-4671-85a1-54937bf0704e.png)
+![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270574817-201a005b-7e00-4671-85a1-54937bf0704e.png)
 
 A custom nodes module for **creating real-time interactive avatars** powered by blender bpy mesh api + Avatech Shape Flow runtime.
 
 # Demo 
 
 
-| <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271996463-56aff559-1bf6-4055-ba45-dda0a3124348.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d) | <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/272203755-0975f2a5-4248-4f69-befb-73c7d369a8ba.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271988878-30a5a05b-99ea-4dcd-8fd6-e124ef9a9309.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/7c23b8d6-d1a5-41c7-a084-250461dbef22) | <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271986278-4b0c45bf-53b5-4d89-9ac0-bd9fd707766d.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/268b32c4-f9b9-4db8-a27c-a7e974f0f0ac) |
+| <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271996463-56aff559-1bf6-4055-ba45-dda0a3124348.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d) | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/272203755-0975f2a5-4248-4f69-befb-73c7d369a8ba.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271988878-30a5a05b-99ea-4dcd-8fd6-e124ef9a9309.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/7c23b8d6-d1a5-41c7-a084-250461dbef22) | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271986278-4b0c45bf-53b5-4d89-9ac0-bd9fd707766d.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/268b32c4-f9b9-4db8-a27c-a7e974f0f0ac) |
 |:---:|:---:|:---:|:---:|
-| <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271980641-c379c7b9-f461-4f16-83c6-6e966bcae099.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/c8a352a4-bed8-4b4d-b99c-c9c3938c5023) | <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271983234-d3333757-c70f-4bba-8364-abd6e80fa0ba.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/272217246-fc28fe68-7444-476d-8732-a54d4a795823.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271996463-56aff559-1bf6-4055-ba45-dda0a3124348.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d) |
+| <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271980641-c379c7b9-f461-4f16-83c6-6e966bcae099.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/c8a352a4-bed8-4b4d-b99c-c9c3938c5023) | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271983234-d3333757-c70f-4bba-8364-abd6e80fa0ba.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/272217246-fc28fe68-7444-476d-8732-a54d4a795823.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271996463-56aff559-1bf6-4055-ba45-dda0a3124348.gif" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d) |
 
 
 # Contents
@@ -40,7 +40,7 @@ To enable the character to blink eyes and talking.
 
 [💡Make your character mouth open Guide](#mouth-open-guide-inpaint)
 
-![eye+mouth movement](https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
+![eye+mouth movement](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
 
 ### Download: 📂[Template01 - Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 ### Download: 📂[Template01 - ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
@@ -64,7 +64,7 @@ _If you don't want to modify any values in the custom nodes, you can download th
 >
 > 6. **[Modify Shape Key]/ rotate** Setting Reference, If Head tilted to the left, set a positive number angle 
 > 
-> |  <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271264869-abf2a843-8ca5-44a6-9611-c334d55928d1.png" width="300"> |  <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271264902-37658a8e-6f46-4c5b-bfd6-adec270df60b.png" width="300"> |  <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271264910-0fae0c27-428d-4a5d-8296-6634c9717b95.png" width="300"> |  <img src="https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/271264920-4fea7882-cc51-4a5a-af9a-e66589810f92.png" width="300"> |
+> |  <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264869-abf2a843-8ca5-44a6-9611-c334d55928d1.png" width="300"> |  <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264902-37658a8e-6f46-4c5b-bfd6-adec270df60b.png" width="300"> |  <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264910-0fae0c27-428d-4a5d-8296-6634c9717b95.png" width="300"> |  <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264920-4fea7882-cc51-4a5a-af9a-e66589810f92.png" width="300"> |
 > | --- | --- | --- | --- |
 > | 0 | 5 | -5 | -15 |
 
@@ -76,7 +76,7 @@ _If you don't want to modify any values in the custom nodes, you can download th
 
 Place normal and openpose image with reference to images.
 
-![image](https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/270943267-c3cae113-2df4-45f2-a19c-885cbee75450.png)
+![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270943267-c3cae113-2df4-45f2-a19c-885cbee75450.png)
     
 </details>
 
@@ -96,7 +96,7 @@ Place normal and openpose image with reference to images.
 >>
 >> ```looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle```
 >  
->![image](https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/270609114-acea9933-359b-4398-8d2a-582bf02bef99.png)
+>![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270609114-acea9933-359b-4398-8d2a-582bf02bef99.png)
 > 
 > ### Download: 📂[Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
 > Feel free to change any checkpoint model that suits your needs.
@@ -111,7 +111,7 @@ Place normal and openpose image with reference to images.
 > # Mouth Open Guide (Inpaint)
 > To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 >
-> ![inpaint_workflow](https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/public-download/github-readme/270589181-d11d840b-7ea6-4b47-bc26-a2af7c8c27a5.png)
+> ![inpaint_workflow](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270589181-d11d840b-7ea6-4b47-bc26-a2af7c8c27a5.png)
 >
 > ### Download: 📂[MouthOpen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json)
 >
