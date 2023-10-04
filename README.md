@@ -4,16 +4,13 @@
 
 A custom nodes module for **creating real-time interactive avatars** powered by blender bpy mesh api + Avatech Shape Flow runtime.
 
-# Demo
+# Demo 
 
 
-| ![sideface_480p15_high](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/56aff559-1bf6-4055-ba45-dda0a3124348) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/10270460/0975f2a5-4248-4f69-befb-73c7d369a8ba" alt="van_gough" width="210"/> | ![grassgirl_480p10_high-min](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/30a5a05b-99ea-4dcd-8fd6-e124ef9a9309) | ![raingirl_480p10_high-min](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/4b0c45bf-53b5-4d89-9ac0-bd9fd707766d) |
-| --- | --- | --- | --- |
-|  [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d)  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e)  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/7c23b8d6-d1a5-41c7-a084-250461dbef22)  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/268b32c4-f9b9-4db8-a27c-a7e974f0f0ac)  |
+| <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/56aff559-1bf6-4055-ba45-dda0a3124348" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/10270460/0975f2a5-4248-4f69-befb-73c7d369a8ba" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/30a5a05b-99ea-4dcd-8fd6-e124ef9a9309" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/7c23b8d6-d1a5-41c7-a084-250461dbef22) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/4b0c45bf-53b5-4d89-9ac0-bd9fd707766d" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/268b32c4-f9b9-4db8-a27c-a7e974f0f0ac) |
+|:---:|:---:|:---:|:---:|
+| <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/c379c7b9-f461-4f16-83c6-6e966bcae099" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/c8a352a4-bed8-4b4d-b99c-c9c3938c5023) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/d3333757-c70f-4bba-8364-abd6e80fa0ba" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/10270460/fc28fe68-7444-476d-8732-a54d4a795823" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/56aff559-1bf6-4055-ba45-dda0a3124348" width="220"/><br>[Interact 👆](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d) |
 
-| ![cat_480p30_high](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/c379c7b9-f461-4f16-83c6-6e966bcae099) | ![bigball_480p20_high-min](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/d3333757-c70f-4bba-8364-abd6e80fa0ba)  | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/10270460/fc28fe68-7444-476d-8732-a54d4a795823" alt="van_gough" width="210"/> | <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/47fd5a98-ab0f-4c5c-b132-5d4b0aa02763.mp4"> |
-| --- | --- | --- | --- |
-|  [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/c8a352a4-bed8-4b4d-b99c-c9c3938c5023)  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e)  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e)  | [➡️Open in Avatech Labs](https://labs.avatech.ai/viewer/cce15b92-6d1c-4966-91b9-362d7833cb5d)  |
 
 # Contents
 - [Workflow Template](workflow-template)
