@@ -155,8 +155,7 @@ Clone the repository to custom_nodes in your [ComfyUI](https://github.com/comfya
 
 # Development
 
-<details>
-<summary> If you are interested in contributing expand to see development details </summary>
+If you are interested in contributing
 
 For comfyui frontend extension, frontend js located at `avatar-graph-comfyui/js`
 
@@ -186,7 +185,4 @@ For each changes, simply refresh the comfyui page to see the changes.
     ]
 }
 ```
-
-</details>
-
 </details>
