@@ -27,7 +27,7 @@ van.derive(() => {
   if (
     showImageEditor.val &&
     targetNode.val != undefined &&
-    targetNode.val.outputs && targetNode.val.type === 'SAM'
+    targetNode.val.outputs && targetNode.val.type === 'SAM MultiLayer'
   ) {
     const outputNames = targetNode.val.outputs.map((x) => x.name).slice(1);
     const record = Object.keys(imagePromptsMulti.val);
@@ -48,7 +48,7 @@ van.derive(() => {
       missingDiff.forEach((x) => {
         targetNode.val.addOutput(
           x,
-          targetNode.val.type === "SAM" ? "IMAGE" : "SAM_PROMPT"
+          targetNode.val.type === "SAM MultiLayer" ? "IMAGE" : "SAM_PROMPT"
         );
       });
       targetNode.val.graph.change();
