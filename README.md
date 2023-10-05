@@ -31,9 +31,7 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 >
 
 ![eye+mouth movement](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
-Download: [Template01 - Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
-
-Download: [Template01 - ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
+Download: [Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 
 <details> 
 <summary> Template01 - Nodes Value Setting Guide </summary>
@@ -70,7 +68,7 @@ Download: [Template01 - ControlNet Gen](https://github.com/avatechai/avatar-grap
 
 ![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270609114-acea9933-359b-4398-8d2a-582bf02bef99.png)
 
-Download: 📂[Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
+Download: [Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
 
 ## Make existing character image mouth open (Inpaint)
 
@@ -78,7 +76,7 @@ To maintain consistency with the base image, it is recommended to utilize a chec
 
 ![inpaint_workflow](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270589181-d11d840b-7ea6-4b47-bc26-a2af7c8c27a5.png)
 
-Download: 📂[Mouth Open Inpaint Template](<https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json>)
+Download: [Mouth Open Inpaint Template](<https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json>)
 
 <details>
 <summary> Inpaint Demonstration </summary>
@@ -92,6 +90,8 @@ Download: 📂[Mouth Open Inpaint Template](<https://github.com/avatechai/avatar
 Place normal and openpose image with reference to images.
 
 ![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270943267-c3cae113-2df4-45f2-a19c-885cbee75450.png)
+
+Download: [ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
 
 
 # Recommend Checkpoint Model List
