@@ -5,19 +5,14 @@ import { modelData, onnxMaskToImage } from "./onnx_helper.js";
 
 ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/";
 
-// Define image, embedding and model paths
-const IMAGE_PATH = "/assets/data/dogs.jpg";
-const IMAGE_EMBEDDING = "/assets/data/dogs_embedding.npy";
-const MODEL_DIR = "http://127.0.0.1:8188/sam_model";
-
 export let model = null;
 
 // Initialize the ONNX model
-export const initModel = async () => {
+export const initModel = async (modelType) => {
   try {
-    if (MODEL_DIR === undefined) return;
-    const URL = MODEL_DIR;
-    model = await ort.InferenceSession.create(URL);
+    model = await ort.InferenceSession.create(
+      `http://127.0.0.1:8188/sam_model?type=${modelType}`
+    );
   } catch (e) {
     console.log(e);
   }
@@ -25,9 +20,7 @@ export const initModel = async () => {
 
 export const loadNpyTensor = async (tensorFile, dType = "float32") => {
   let npLoader = new npyjs();
-  console.log('tensorFile', tensorFile);
   const npArray = await npLoader.load(tensorFile);
-  console.log('np array', npArray);
   const tensor = new ort.Tensor(dType, npArray.data, npArray.shape);
   return tensor;
 };

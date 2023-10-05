@@ -1,5 +1,5 @@
 import { SideBar } from "./SideBar.js";
-import { initModel, runONNX } from "./onnx.js";
+import { runONNX } from "./onnx.js";
 import {
   showImageEditor,
   point_label,
@@ -98,8 +98,6 @@ export function drawSegment(clicks) {
     });
   }
 }
-
-initModel();
 
 export function LayerEditor() {
   let realTimeSegment = true;
