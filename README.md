@@ -88,20 +88,12 @@ Download: [ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tre
 Expand to see all the available nodes description
 
 <details>
-<summary> Image Segmentation Nodes </summary>
-
-## Image Segmentation Nodes
+<summary> All Custom Nodes </summary>
 
 | Name                 | Description                                                                                    | Preview                                                                                                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Segmentation (SAM)` | Integrative SAM node allowing you to directly select and create multiple image segment output. | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270576351-8aabeba8-5450-4d39-8203-e91f9ab47190.png" width="300"> |
 
-</details>
-
-<details>
-<summary> Mesh Edit Nodes </summary>
-
-## Mesh Edit Nodes
 
 | Name                         | Description                                                                                     | Preview                                                                                                                                                              |
 | ---------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -110,24 +102,10 @@ Expand to see all the available nodes description
 | `Match Texture Aspect Ratio` | Since the mesh is created in 1:1 aspect ratio, a re-scale is needed at the end of the operation | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270602782-cb7155be-fb31-49f8-a24a-d001a1484ea7.png" width="300"> |
 | `Plane Texture Unwrap`       | Will perform mesh face fill and UV Cube project on the target plane mesh, scaled to bounds.     | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270603006-4b9c0cf5-0497-47bf-8e06-5a3370084c11.png" width="300"> |
 
-</details>
-
-<details>
-<summary> Shape Keys Nodes </summary>
-
-## Shape Keys Nodes
-
 | Name                    | Description                                                                                        | Preview                                                                                                                                                              |
 | ----------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Mesh Modify Shape Key` | Given shape key name & target vertex_group, modify the vertex / all vertex’s transform             | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270577944-ab4f259c-89a7-4f51-bc54-fd179e252073.png" width="300"> |
 | `Create Shape Flow`     | Create runtime shape flow graph, allowing interactive inputs affecting shape keys value in runtime | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270592752-abfdd801-0387-4c5d-9c11-6c23337ff1dd.png" width="300"> |
-
-</details>
-
-<details>
-<summary> Avatar Output Nodes </summary>
-
-## Avatar Output Nodes
 
 | Name                 | Description                                                                                           | Preview                                                                                                                                                              |
 | -------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
