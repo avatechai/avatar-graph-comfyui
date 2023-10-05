@@ -15,14 +15,13 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 
 # How to?
-- [Basic Workflow Template](workflow-template)
+- [Basic Workflow Template](#basic-workflow-template)
 - [Best Practices for image input](#image-preprocess-guide)
-- [Custom Nodes List](custom-nodes)
+- [Custom Nodes List](#custom-nodes)
 - [Shape Flow](#shape-flow)
 - [Installation](#installation)
 - [Development](#development)
-
-- [Join Discord](https://discord.gg/WNtBYksDwF)
+- [Join Discord 💬](https://discord.gg/WNtBYksDwF)
 
 # Basic Workflow Template
 
