@@ -19,13 +19,14 @@ class ImageAlphaMaskMerge:
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "load_image"
     def load_image(self, image, mask):
-        image = torch.cat((image, 1 - mask.unsqueeze(0).unsqueeze(3)), dim=3)
+        if image.shape[1] == mask.shape[0] and image.shape[2] == mask.shape[1]:
+            image = torch.cat((image, 1 - mask.unsqueeze(0).unsqueeze(3)), dim=3)
         return (image, )
 
 NODE_CLASS_MAPPINGS = {
-     "ImageAlphaMaskMerge": ImageAlphaMaskMerge,
+     "Image Alpha Mask Merge": ImageAlphaMaskMerge,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "ImageAlphaMaskMerge": "ImageAlphaMaskMerge"
+    "Image Alpha Mask Merge": "Image Alpha Mask Merge"
 }
