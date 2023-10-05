@@ -4,6 +4,9 @@
 
 A custom nodes module for **creating real-time interactive avatars** powered by blender bpy mesh api + Avatech Shape Flow runtime.
 
+> **WARNING**  
+> We are still making changes to the nodes and demo templates, please stay tuned.
+
 # Demo
 
 | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/12e2bfc6-438e-4d16-bead-9957ced3bae1" width="190"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=cce15b92-6d1c-4966-91b9-362d7833cb5d) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/0c497025-7ed5-4e25-b4d1-5a257e1ba814" width="190"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=42a8182f-b140-48c0-a556-35cddf0f76f7) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/a2bf71e3-0d9c-4ddd-957f-a6b0cb7e622a" width="190"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=7c23b8d6-d1a5-41c7-a084-250461dbef22) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/ad808c42-5297-4e61-8be8-d5cb7729d2ff" width="190"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=268b32c4-f9b9-4db8-a27c-a7e974f0f0ac) |
