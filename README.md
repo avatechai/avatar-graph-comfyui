@@ -98,18 +98,18 @@ Download: 📂[MouthOpen Template](<https://github.com/avatechai/avatar-graph-co
 
 </details>
 
-> ### Recommend Checkpoint Model List 
-> 
-> ##### Anime Style SD1.5
->- https://civitai.com/models/35960/flat-2d-animerge
->- https://civitai.com/models/24149/mistoonanime
->- https://civitai.com/models/22364/kizuki-anime-hentai-checkpoint
->##### Realistic Style SD1.5
->- https://civitai.com/models/4201/realistic-vision-v51
->- https://civitai.com/models/49463/am-i-real
->- https://civitai.com/models/43331/majicmix-realistic
-> 
->
+# Recommend Checkpoint Model List
+
+##### Anime Style SD1.5
+
+- https://civitai.com/models/35960/flat-2d-animerge
+- https://civitai.com/models/24149/mistoonanime
+
+##### Realistic Style SD1.5
+
+- https://civitai.com/models/4201/realistic-vision-v51
+- https://civitai.com/models/49463/am-i-real
+- https://civitai.com/models/43331/majicmix-realistic
 
 # Custom Nodes
 
