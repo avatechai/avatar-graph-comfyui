@@ -9,7 +9,7 @@ from einops import rearrange, repeat
 
 global_predictor = None
 
-class SAM:
+class SAMMultiLayer:
     def __init__(self):
         self.predictor = None
         self.output_dir = folder_paths.get_output_directory()
@@ -103,6 +103,6 @@ class SAM:
         return result
 
 
-NODE_CLASS_MAPPINGS = {"SAM": SAM}
+NODE_CLASS_MAPPINGS = {"SAM MultiLayer": SAMMultiLayer}
 
-NODE_DISPLAY_NAME_MAPPINGS = {"SAM": "Segmentation (SAM)"}
+NODE_DISPLAY_NAME_MAPPINGS = {"SAM MultiLayer": "SAM MultiLayer"}
