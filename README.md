@@ -14,38 +14,28 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/1d1ad8f9-31a6-48ec-bad2-ce972ee3b12f" width="186"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=f97fc5bb-93b0-4b02-bbc0-327dd41d0fc5) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/06958585-f780-4b38-8f5d-bddabd7da78a" width="186"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=4d50aa03-26e4-47e7-97b6-c3fe9d8fc96e) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/3d0e6b54-d45f-45ac-90bd-d8b149880f98" width="186"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=791014cb-7836-4641-afdb-ac331064b682) | <img src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/1d1ad8f9-31a6-48ec-bad2-ce972ee3b12f" width="186"/><br>[Interact 👆](https://editor.avatech.ai/viewer?avatarId=f97fc5bb-93b0-4b02-bbc0-327dd41d0fc5) |
 
 
-# Contents
-- [Workflow Template](workflow-template)
-    - [Template01 - Simple Shape Flow](#template01---simple-shape-flow)
-- [Image Preprocess Guide](#image-preprocess-guide)
-    - [Character Gen Prompting Guide](#character-gen-prompting-guide)
-    - [Mouth Open Guide (Inpaint)](#mouth-open-guide-inpaint)
-- [Custom Nodes](custom-nodes)
-    - [Image Segmentation Nodes](#image-segmentation-nodes)
-    - [Mesh Edit Nodes](#mesh-edit-nodes)
-    - [Shape Keys Nodes](#shape-keys-nodes)
-    - [Avatar Output Nodes](#avatar-output-nodes)
+# How to?
+- [Basic Workflow Template](workflow-template)
+- [Best Practices for image input](#image-preprocess-guide)
+- [Custom Nodes List](custom-nodes)
 - [Shape Flow](#shape-flow)
 - [Installation](#installation)
 - [Development](#development)
 
-# Workflow Template
+- [Join Discord](https://discord.gg/WNtBYksDwF)
 
-## Template01 - Simple Shape Flow
-To enable the character to blink eyes and talking.
+# Basic Workflow Template
 
-> **🎯Notice**
-> 
+### Creating an eye blink and lipsync avatar
+
 > For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
-
-[💡Generate new image Guide](#character-gen-prompting-guide)
-
-[💡Make your character mouth open Guide](#mouth-open-guide-inpaint)
+> 
+> [💡Make your character mouth open Guide](#mouth-open-guide-inpaint) [💡Generate new image Guide](#character-gen-prompting-guide)
 
 ![eye+mouth movement](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
+Download: 📂[Template01 - Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 
-### Download: 📂[Template01 - Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
-### Download: 📂[Template01 - ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
+Download: 📂[Template01 - ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
 _If you don't want to modify any values in the custom nodes, you can download the ControlNet Gen Template to generate your own image._
 
 <details> 
