@@ -590,20 +590,7 @@ const ext = {
           });
         });
         break;
-      case "SAM_Prompt_Image":
-        nodeData.input.required.sam = ["SAM_PROMPTS"];
-        // nodeData.input.required.upload = ['IMAGEUPLOAD'];
-        // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
-        addMenuHandler(nodeType, function (_, options) {
-          options.unshift({
-            content: "Open In Points Editor (Local)",
-            callback: () => {
-              showMyImageEditor(this);
-            },
-          });
-        });
-        break;
-      case "SAM":
+      case "SAM MultiLayer":
         nodeData.input.required.sam = ["SAM_PROMPTS"];
         // nodeData.input.required.upload = ['IMAGEUPLOAD'];
         // nodeData.input.required.prompts_points = ["IMAGEUPLOAD"];
