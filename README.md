@@ -27,13 +27,11 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 ### 1. Creating an eye blink and lipsync avatar
 
-![eye+mouth movement](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
+![ComfyUI_00027_](https://github.com/avatechai/avatar-graph-comfyui/assets/18395202/443c9ce4-d28b-4b05-95a4-89818f1bced1)
 
 For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
 
-
-Download: [Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
-
+Download: Drag the workflow image or [Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 
 # Best practices for image input
 
