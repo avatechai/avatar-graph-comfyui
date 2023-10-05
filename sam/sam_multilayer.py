@@ -3,6 +3,7 @@ import os
 import numpy as np
 import torch
 import re
+import json
 from segment_anything import sam_model_registry, SamPredictor
 from einops import rearrange, repeat
 
@@ -41,27 +42,25 @@ class SAMMultiLayer:
     FUNCTION = "load_image"
 
     def load_image(self, image, ckpt, embedding_id, image_prompts_json):
-        import json
-
         global global_predictor
+        model_type = re.findall(r'vit_[lbh]', ckpt)[0]
 
         if global_predictor is None:
             ckpt = folder_paths.get_full_path("sams", ckpt)
-            model_type = re.findall(r'vit_[lbh]', ckpt)[0]
             sam = sam_model_registry[model_type](checkpoint=ckpt)
             predictor = SamPredictor(sam)
             global_predictor = predictor
         
         predictor = global_predictor
         
-        emb_filename = f"{self.output_dir}/{embedding_id}.npy"
+        emb_filename = f"{self.output_dir}/{embedding_id}_{model_type}.npy"
         if not os.path.exists(emb_filename):
             image_np = (image[0].numpy() * 255).astype(np.uint8)
             predictor.set_image(image_np)
             emb = predictor.get_image_embedding().cpu().numpy()
             np.save(emb_filename, emb)
 
-            with open(f"{self.output_dir}/{embedding_id}.json", "w") as f:
+            with open(f"{self.output_dir}/{embedding_id}_{model_type}.json", "w") as f:
                 data = {
                     "input_size": predictor.input_size,
                     "original_size": predictor.original_size,
@@ -70,7 +69,7 @@ class SAMMultiLayer:
         else:
             emb = np.load(emb_filename)
 
-            with open(f"{self.output_dir}/{embedding_id}.json") as f:
+            with open(f"{self.output_dir}/{embedding_id}_{model_type}.json") as f:
                 data = json.load(f)
                 predictor.input_size = data["input_size"]
                 predictor.features = torch.from_numpy(emb)

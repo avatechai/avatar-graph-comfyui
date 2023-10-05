@@ -18,15 +18,15 @@ import { van } from "./van.js";
 import { app } from "./app.js";
 import { api } from "./api.js";
 import { Container } from "./Container.js";
-import { loadNpyTensor } from "./onnx.js";
+import { initModel, loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 import { drawSegment, getClicks } from "./LayerEditor.js";
 
-const stylesheet = document.createElement('link')
-stylesheet.setAttribute('type', "text/css")
-stylesheet.setAttribute('rel', "stylesheet")
-stylesheet.setAttribute('href', './avatar-graph-comfyui/tw-styles.css')
-document.head.appendChild(stylesheet)
+const stylesheet = document.createElement("link");
+stylesheet.setAttribute("type", "text/css");
+stylesheet.setAttribute("rel", "stylesheet");
+stylesheet.setAttribute("href", "./avatar-graph-comfyui/tw-styles.css");
+document.head.appendChild(stylesheet);
 
 /** @type {import( '../../../web/types/litegraph.js').LGraphGroup} */
 const recomputeInsideNodesOps = LGraphGroup.prototype.recomputeInsideNodes;
@@ -305,36 +305,41 @@ const ext = {
             return;
           }
 
-          loadingCaption.val = "Computing image embedding...";
+          loadingCaption.val = "Loading SAM model...";
           showLoading.val = true;
 
-          const split = connectedImageFileName.split("/");
-          let id = connectedImageFileName;
-          if (split.length > 1) id = split[1];
-
-          node.widgets.find((x) => x.name === "embedding_id").value = id;
-
           const ckpt = node.widgets.find((x) => x.name === "ckpt").value;
+          const modelType = ckpt.match(/vit_[lbh]/)?.[0];
+          initModel(modelType).then((res) => {
+            loadingCaption.val = "Computing image embedding...";
 
-          api
-            .fetchApi("/sam_model", {
-              method: "POST",
-              body: JSON.stringify({
-                image: connectedImageFileName,
-                embedding_id: id,
-                ckpt,
-              }),
-            })
-            .then(() => {
-              showLoading.val = false;
-              showMyImageEditor(node);
-            })
-            .catch((err) => {
-              console.log(err);
-              showLoading.val = false;
-            });
+            const split = connectedImageFileName.split("/");
+            let id = connectedImageFileName;
+            if (split.length > 1) id = split[1];
+
+            node.widgets.find((x) => x.name === "embedding_id").value = id;
+
+            api
+              .fetchApi("/sam_model", {
+                method: "POST",
+                body: JSON.stringify({
+                  image: connectedImageFileName,
+                  embedding_id: id,
+                  ckpt,
+                }),
+              })
+              .then(() => {
+                showLoading.val = false;
+                showMyImageEditor(node);
+              })
+              .catch((err) => {
+                console.log(err);
+                showLoading.val = false;
+              });
+
+            btn.serialize = false;
+          });
         });
-        btn.serialize = false;
 
         return {
           widget: btn,

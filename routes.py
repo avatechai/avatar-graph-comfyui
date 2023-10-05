@@ -39,17 +39,18 @@ async def get_web_styles(request):
 
 @server.PromptServer.instance.routes.get("/sam_model")
 async def get_sam_model(request):
-    filename = os.path.join(folder_paths.base_path, "web/models/sam.onnx")
-    # print(filename)
+    model_type = request.rel_url.query.get("type", "vit_h")
+    filename = os.path.join(folder_paths.base_path, f"web/models/sam_{model_type}.onnx")
     if not os.path.isfile(filename):
         os.makedirs(os.path.dirname(filename), exist_ok=True)
+        print(f"Downloading ONNX model to {filename}")
         response = requests.get(
-            "https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/models/sam.onnx"
+            f"https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/models/sam_{model_type}.onnx"
         )
         response.raise_for_status()
         with open(filename, "wb") as f:
             f.write(response.content)
-        print(f"ONNX model downloaded: {filename}")
+        print(f"ONNX model downloaded")
     return web.FileResponse(filename)
 
 
@@ -66,12 +67,13 @@ def load_image(image):
 async def post_sam_model(request):
     post = await request.json()
     emb_id = post.get("embedding_id")
-    emb_filename = f"{folder_paths.get_output_directory()}/{emb_id}.npy"
+    ckpt = post.get("ckpt")
+    ckpt = folder_paths.get_full_path("sams", ckpt)
+    model_type = re.findall(r'vit_[lbh]', ckpt)[0]
+    emb_filename = f"{folder_paths.get_output_directory()}/{emb_id}_{model_type}.npy"
     if not os.path.exists(emb_filename):
         image = load_image(post.get("image"))
-        ckpt = post.get("ckpt")
-        model_type = re.findall(r'vit_[lbh]', ckpt)[0]
-        ckpt = folder_paths.get_full_path("sams", ckpt)
+
         sam = sam_model_registry[model_type](checkpoint=ckpt)
         predictor = SamPredictor(sam)
 
@@ -79,7 +81,7 @@ async def post_sam_model(request):
         predictor.set_image(image_np)
         emb = predictor.get_image_embedding().cpu().numpy()
         np.save(emb_filename, emb)
-        with open(f"{folder_paths.get_output_directory()}/{emb_id}.json", "w") as f:
+        with open(f"{folder_paths.get_output_directory()}/{emb_id}_{model_type}.json", "w") as f:
             json.dump(
                 {
                     "input_size": predictor.input_size,
