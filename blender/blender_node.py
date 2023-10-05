@@ -1,6 +1,7 @@
 import inspect
 import re
 import json
+import os
 
 BPY_OBJS = "BPY_OBJS"
 BPY_OBJ = "BPY_OBJ"
@@ -10,7 +11,7 @@ BPY_OBJS_TYPE = {
 }
 
 node_input_types = {}
-with open("custom_nodes/avatar-graph-comfyui/blender/input_types.txt") as f:
+with open(f"{os.path.dirname(__file__)}/input_types.txt") as f:
     input_types = f.readlines()
     for input_type in input_types:
         node_cls, node_types = input_type.split("|")
