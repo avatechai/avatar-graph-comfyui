@@ -146,7 +146,7 @@ Avatar Output Nodes
 ## Image Segmentation Nodes
 | Name                         | Description  | Preview |
 | ---------------------------- | ------------ | ------- |
-| `Segmentation (SAM)`         | Integrative SAM node allowing you to directly select and create multiple image segment output. | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270576351-8aabeba8-5450-4d39-8203-e91f9ab47186.png" width="300"> |
+| `Segmentation (SAM)`         | Integrative SAM node allowing you to directly select and create multiple image segment output. | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270576351-8aabeba8-5450-4d39-8203-e91f9ab47190.png" width="300"> |
 
 </details>
 
