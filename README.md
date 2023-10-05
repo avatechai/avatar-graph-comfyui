@@ -16,7 +16,7 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 # How to?
 
 - [Basic Rigging Workflow Template](#basic-rigging-workflow-template)
-- [Best Practices for image input](#image-preprocess-guide)
+- [Best Practices for image input](#best-practices-for-image-input)
 - [Custom Nodes List](#custom-nodes)
 - [Shape Flow](#shape-flow)
 - [Installation](#installation)
@@ -60,17 +60,9 @@ _If you don't want to modify any values in the custom nodes, you can download th
 
 </details>
 
-<details> 
-    
-<summary> Template01 - ControlNet Gen Guide </summary>
 
-Place normal and openpose image with reference to images.
 
-![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270943267-c3cae113-2df4-45f2-a19c-885cbee75450.png)
-
-</details>
-
-# Image Preprocess Guide
+# Best practices for image input
 
 ## Generate a new character image
 
@@ -96,6 +88,13 @@ Download: 📂[Mouth Open Inpaint Template](<https://github.com/avatechai/avatar
 <video src="https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/e3b77295-a1bf-4d96-9551-7cc423a4af73"/>
 
 </details>
+
+## Pose Constraints (ControlNet)
+
+Place normal and openpose image with reference to images.
+
+![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270943267-c3cae113-2df4-45f2-a19c-885cbee75450.png)
+
 
 # Recommend Checkpoint Model List
 
