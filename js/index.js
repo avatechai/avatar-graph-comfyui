@@ -12,6 +12,7 @@ import {
   showLoading,
   loadingCaption,
   alertDialog,
+  showPreview,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -393,6 +394,7 @@ const ext = {
 
       node.computeParentGroupResize();
     };
+    injectUIComponentToComfyuimenu();
   },
 
   async setup() {
@@ -615,5 +617,15 @@ const ext = {
     }
   },
 };
+
+function injectUIComponentToComfyuimenu() {
+  const menu = document.querySelector(".comfy-menu");
+  const avatarPreview = document.createElement("button");
+  avatarPreview.textContent = "Avatar Preview";
+  avatarPreview.onclick = () => {
+    showPreview.val = !showPreview.val;
+  };
+  menu.append(avatarPreview);
+}
 
 app.registerExtension(ext);
