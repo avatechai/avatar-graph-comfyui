@@ -29,13 +29,11 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 > For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
 >
-> [💡Make your character mouth open Guide](#mouth-open-guide-inpaint) [💡Generate new image Guide](#character-gen-prompting-guide)
 
 ![eye+mouth movement](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
-Download: 📂[Template01 - Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
+Download: [Template01 - Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
 
-Download: 📂[Template01 - ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
-_If you don't want to modify any values in the custom nodes, you can download the ControlNet Gen Template to generate your own image._
+Download: [Template01 - ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
 
 <details> 
 <summary> Template01 - Nodes Value Setting Guide </summary>
