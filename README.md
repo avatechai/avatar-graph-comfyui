@@ -15,7 +15,7 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 # How to?
 
-- [Basic Rigging Workflow Template](#basic-workflow-template)
+- [Basic Rigging Workflow Template](#basic-rigging-workflow-template)
 - [Best Practices for image input](#image-preprocess-guide)
 - [Custom Nodes List](#custom-nodes)
 - [Shape Flow](#shape-flow)
@@ -81,7 +81,6 @@ Place normal and openpose image with reference to images.
 ![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270609114-acea9933-359b-4398-8d2a-582bf02bef99.png)
 
 Download: 📂[Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
-Feel free to change any checkpoint model that suits your needs.
 
 ## Make existing character image mouth open (Inpaint)
 
@@ -89,7 +88,7 @@ To maintain consistency with the base image, it is recommended to utilize a chec
 
 ![inpaint_workflow](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270589181-d11d840b-7ea6-4b47-bc26-a2af7c8c27a5.png)
 
-Download: 📂[MouthOpen Template](<https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json>)
+Download: 📂[Mouth Open Inpaint Template](<https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json>)
 
 <details>
 <summary> Inpaint Demonstration </summary>
