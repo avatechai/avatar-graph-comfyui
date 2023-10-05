@@ -42,7 +42,7 @@ export function ShapeFlowEditor() {
         {
           class: "modal-box",
         },
-        div({ class: "text-black" }, "This is a dialog"),
+        div({ class: "text-black" }, div({ class: "text-xl font-bold" }, "Shape Flow Editor"), div({ class: "" }, "The shape flow will be save in CreateShapeFlow node (comfyui node)! Or discard the changes!")),
         div(
           { class: "modal-action" },
           form(
