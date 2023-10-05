@@ -39,18 +39,18 @@ Download: [Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/
 
 ### 1. Generate a new character image
 
+![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270609114-acea9933-359b-4398-8d2a-582bf02bef99.png)
+
 We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt:
 `looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle`
-
-![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270609114-acea9933-359b-4398-8d2a-582bf02bef99.png)
 
 Download: [Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
 
 ### 2. Make existing character image mouth open (Inpaint)
 
-To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
-
 ![inpaint_workflow](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270589181-d11d840b-7ea6-4b47-bc26-a2af7c8c27a5.png)
+
+To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 
 Download: [Mouth Open Inpaint Template](<https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/MouthOpen_(inpaint).json>)
 
