@@ -86,7 +86,7 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
 
     # Create an image with the required dimensions
     img = bpy.data.images.new(
-        texture_name, width=texture.shape[1], height=texture.shape[0])
+        texture_name, width=texture.shape[1], height=texture.shape[0], alpha = True)
 
     # If there is no alpha channel, append one full of 1's
     if texture.shape[2] == 3:
@@ -118,6 +118,7 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
     # Create a material
     mat = bpy.data.materials.new("MaterialName")
     mat.use_nodes = True
+    mat.blend_method = 'BLEND'
     nodes = mat.node_tree.nodes
     for node in nodes:
         nodes.remove(node)
@@ -137,6 +138,8 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
     links.new(bsdf_node.inputs['Base Color'],
               texture_node.outputs['Color'])
     links.new(output_node.inputs['Surface'], bsdf_node.outputs['BSDF'])
+
+    links.new(bsdf_node.inputs['Alpha'], texture_node.outputs['Alpha'])
 
     # Assign the material to the active object
     if obj.data.materials:

@@ -33,7 +33,7 @@ class SaveImageWithWorkflow:
         image_path = folder_paths.get_annotated_filepath(image)
         i = Image.open(image_path)
         i = ImageOps.exif_transpose(i)
-        image = i.convert("RGB")
+        image = i.convert("RGBA")
         image = np.array(image).astype(np.float32) / 255.0
         image = torch.from_numpy(image)[None,]
         images=(image)

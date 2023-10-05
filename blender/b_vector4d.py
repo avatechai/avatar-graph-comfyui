@@ -5,17 +5,17 @@ class VECTOR4D:
             "required": {
                 "x": ("FLOAT", {
                     "default": 0,
-                    "step": 0.1,
+                    "step":  0.01,
                     "display": "number"
                 }),
                 "y": ("FLOAT", {
                     "default": 0,
-                    "step": 0.1,
+                    "step":  0.01,
                     "display": "number"
                 }),
                 "z": ("FLOAT", {
                     "default": 0,
-                    "step": 0.1,
+                    "step":  0.01,
                     "display": "number"
                 }),
                 "u": ("FLOAT", {
