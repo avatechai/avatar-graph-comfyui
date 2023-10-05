@@ -25,41 +25,19 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 # Basic Rigging Workflow Template
 
-### Creating an eye blink and lipsync avatar
+### 1. Creating an eye blink and lipsync avatar
+
+![eye+mouth movement](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
 
 For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
 
-![eye+mouth movement](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270634138-8a237b9d-05fc-4e4a-b802-6465911f0d77.png)
+
 Download: [Simple Shape Flow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleEye+MouthMovement.json)
-
-<details> 
-<summary> Template01 - Nodes Value Setting Guide </summary>
-
-## Template01 - Nodes Value Setting Guide
-
-> ### Basic Eyeblink & Talking
->
-> 1. Click **[Segmentation (SAM)]/ Edit prompt** button
-> 2. Add new layer and rename
->
-> 3. Drag layer to **[Create Mesh Layer]/image**
->
-> 4. **[Create Mesh Layer]/ face_threshold, shape_threshold**, To control mesh threshold, recommend value: 0.6~0.7
-> 5. **[Create Mesh Layer]/ scale_x, scale_y, extrude_x, extrude_y**, To control mesh threshold, recommend value: 1.2~1.4
->
-> 6. **[Modify Shape Key]/ rotate** Setting Reference, If Head tilted to the left, set a positive number angle
->
-> | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264869-abf2a843-8ca5-44a6-9611-c334d55928d1.png" width="300"> | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264902-37658a8e-6f46-4c5b-bfd6-adec270df60b.png" width="300"> | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264910-0fae0c27-428d-4a5d-8296-6634c9717b95.png" width="300"> | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/271264920-4fea7882-cc51-4a5a-af9a-e66589810f92.png" width="300"> |
-> | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-> | 0                                                                                                                                                                    | 5                                                                                                                                                                    | -5                                                                                                                                                                   | -15                                                                                                                                                                  |
-
-</details>
-
 
 
 # Best practices for image input
 
-## Generate a new character image
+### 1. Generate a new character image
 
 We need a character image with an open mouth and enable the tool to easily recognize facial features, so please add to the prompt:
 `looking at viewer, detailed face, open mouth, [smile], solo,eye-level angle`
@@ -68,7 +46,7 @@ We need a character image with an open mouth and enable the tool to easily recog
 
 Download: [Character Gen Template](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/SimpleCharacterGen.json)
 
-## Make existing character image mouth open (Inpaint)
+### 2. Make existing character image mouth open (Inpaint)
 
 To maintain consistency with the base image, it is recommended to utilize a checkpoint model that aligns with its style.
 
@@ -83,11 +61,11 @@ Download: [Mouth Open Inpaint Template](<https://github.com/avatechai/avatar-gra
 
 </details>
 
-## Pose Constraints (ControlNet)
-
-Place normal and openpose image with reference to images.
+### 3. Pose Constraints (ControlNet)
 
 ![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270943267-c3cae113-2df4-45f2-a19c-885cbee75450.png)
+
+Place normal and openpose image with reference to images.
 
 Download: [ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tree/main/workflow_templates/TemplateGen01)
 
