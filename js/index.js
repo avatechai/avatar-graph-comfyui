@@ -256,6 +256,9 @@ function showMyImageEditor(node) {
     (x) => x.name === "embedding_id"
   ).value;
 
+  const ckpt = node.widgets.find((x) => x.name === "ckpt").value;
+  const modelType = ckpt.match(/vit_[lbh]/)?.[0];
+
   const v = JSON.parse(
     node.widgets.find((x) => x.name === "image_prompts_json").value
   );
@@ -279,7 +282,7 @@ function showMyImageEditor(node) {
   );
   const embeedingUrl = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      `${embeddingFilename}.npy`
+      `${embeddingFilename}_${modelType}.npy`
     )}&type=output&subfolder=`
   );
   loadNpyTensor(embeedingUrl).then((tensor) => {
