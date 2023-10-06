@@ -249,47 +249,76 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
  */
 function showMyImageEditor(node) {
   let connectedImageFileName = getInputWidgetValue(node, 0, "image");
-  const split = connectedImageFileName.split("/");
-  if (split.length > 1) connectedImageFileName = split[1];
+  if (!connectedImageFileName) {
+    alertDialog.val = {
+      text: "Please connect an image first",
+      time: 3000,
+    };
+    return;
+  }
 
-  const embeddingFilename = node.widgets.find(
-    (x) => x.name === "embedding_id"
-  ).value;
+  loadingCaption.val = "Loading SAM model...";
+  showLoading.val = true;
 
   const ckpt = node.widgets.find((x) => x.name === "ckpt").value;
   const modelType = ckpt.match(/vit_[lbh]/)?.[0];
+  initModel(modelType).then((res) => {
+    loadingCaption.val = "Computing image embedding...";
 
-  const v = JSON.parse(
-    node.widgets.find((x) => x.name === "image_prompts_json").value
-  );
+    const split = connectedImageFileName.split("/");
+    let id = connectedImageFileName;
+    if (split.length > 1) id = split[1];
 
-  if (!Array.isArray(v)) {
-    // this is a multi prompt
-    imagePromptsMulti.val = v;
-    selectedLayer.val = Object.keys(imagePromptsMulti.val)[0];
-    imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
-  } else {
-    // this is a single prompt
-    selectedLayer.val = "";
-    imagePromptsMulti.val = {};
-    imagePrompts.val = v;
-  }
-  showImageEditor.val = true;
-  imageUrl.val = api.apiURL(
-    `/view?filename=${encodeURIComponent(
-      connectedImageFileName
-    )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`
-  );
-  const embeedingUrl = api.apiURL(
-    `/view?filename=${encodeURIComponent(
-      `${embeddingFilename}_${modelType}.npy`
-    )}&type=output&subfolder=`
-  );
-  loadNpyTensor(embeedingUrl).then((tensor) => {
-    embeddings.val = tensor;
-    drawSegment(getClicks());
+    node.widgets.find((x) => x.name === "embedding_id").value = id;
+
+    api
+      .fetchApi("/sam_model", {
+        method: "POST",
+        body: JSON.stringify({
+          image: connectedImageFileName,
+          embedding_id: id,
+          ckpt,
+        }),
+      })
+      .then(() => {
+        showLoading.val = false;
+        const v = JSON.parse(
+          node.widgets.find((x) => x.name === "image_prompts_json").value
+        );
+
+        if (!Array.isArray(v)) {
+          // this is a multi prompt
+          imagePromptsMulti.val = v;
+          selectedLayer.val = Object.keys(imagePromptsMulti.val)[0];
+          imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
+        } else {
+          // this is a single prompt
+          selectedLayer.val = "";
+          imagePromptsMulti.val = {};
+          imagePrompts.val = v;
+        }
+        showImageEditor.val = true;
+        imageUrl.val = api.apiURL(
+          `/view?filename=${encodeURIComponent(
+            connectedImageFileName
+          )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`
+        );
+        const embeedingUrl = api.apiURL(
+          `/view?filename=${encodeURIComponent(
+            `${id}_${modelType}.npy`
+          )}&type=output&subfolder=`
+        );
+        loadNpyTensor(embeedingUrl).then((tensor) => {
+          embeddings.val = tensor;
+          drawSegment(getClicks());
+        });
+        targetNode.val = node;
+      })
+      .catch((err) => {
+        console.log(err);
+        showLoading.val = false;
+      });
   });
-  targetNode.val = node;
 }
 
 /** @typedef {import('../../../web/types/comfy.js').ComfyExtension} ComfyExtension*/
@@ -299,51 +328,9 @@ const ext = {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit prompt", "", () => {
-          let connectedImageFileName = getInputWidgetValue(node, 0, "image");
-          if (!connectedImageFileName) {
-            alertDialog.val = {
-              text: "Please connect an image first",
-              time: 3000,
-            };
-            return;
-          }
-
-          loadingCaption.val = "Loading SAM model...";
-          showLoading.val = true;
-
-          const ckpt = node.widgets.find((x) => x.name === "ckpt").value;
-          const modelType = ckpt.match(/vit_[lbh]/)?.[0];
-          initModel(modelType).then((res) => {
-            loadingCaption.val = "Computing image embedding...";
-
-            const split = connectedImageFileName.split("/");
-            let id = connectedImageFileName;
-            if (split.length > 1) id = split[1];
-
-            node.widgets.find((x) => x.name === "embedding_id").value = id;
-
-            api
-              .fetchApi("/sam_model", {
-                method: "POST",
-                body: JSON.stringify({
-                  image: connectedImageFileName,
-                  embedding_id: id,
-                  ckpt,
-                }),
-              })
-              .then(() => {
-                showLoading.val = false;
-                showMyImageEditor(node);
-              })
-              .catch((err) => {
-                console.log(err);
-                showLoading.val = false;
-              });
-
-            btn.serialize = false;
-          });
+          showMyImageEditor(node);
+          btn.serialize = false;
         });
-
         return {
           widget: btn,
         };
