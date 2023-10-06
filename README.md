@@ -169,3 +169,11 @@ For each changes, simply refresh the comfyui page to see the changes.
 }
 ```
 </details>
+
+## Update blender node types
+
+To update blender operations input and output types (stored in `blender/input_types.txt`), run:
+
+```bash
+python generate_blender_types.py
+```

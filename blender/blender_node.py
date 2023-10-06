@@ -17,6 +17,7 @@ with open(f"{os.path.dirname(__file__)}/input_types.txt") as f:
         node_cls, node_types = input_type.split("|")
         node_input_types[node_cls] = json.loads(node_types)
 
+type_generation = os.getenv('TYPE_GENERATION', 0)
 
 class ObjectOps:
     @classmethod
@@ -48,22 +49,29 @@ class ObjectOps:
 
     @classmethod
     def INPUT_TYPES(cls):
-        return node_input_types[cls.__name__]
+        if type_generation:
+            import global_bpy
 
-        # import global_bpy
-        # bpy = global_bpy.get_bpy()
-        # result = {
-        #     "required": {},
-        #     "optional": {
-        #         **cls.get_base_input_types(bpy),
-        #         **cls.get_extra_input_types(bpy)
-        #     }
-        # }
+            bpy = global_bpy.get_bpy()
+            result = {
+                "required": {},
+                "optional": {
+                    **cls.get_base_input_types(bpy),
+                    **cls.get_extra_input_types(bpy),
+                },
+            }
 
-        # with open("input_types.txt", "a") as f:
-        #     f.write(cls.__name__ + "|" + json.dumps(result) + "\n")
-
-        # return result
+            return result
+        elif cls.__name__ in node_input_types:
+            return node_input_types[cls.__name__]
+        else:
+            return {
+                "required": {},
+                "optional": {
+                    **cls.get_base_input_types(None),
+                    **cls.get_extra_input_types(None),
+                },
+            }
 
     @classmethod
     def NODE_CLASS_MAPPINGS(cls):
