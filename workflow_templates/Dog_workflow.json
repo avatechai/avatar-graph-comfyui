@@ -1,0 +1,1935 @@
+{
+  "last_node_id": 566,
+  "last_link_id": 8529,
+  "nodes": [
+    {
+      "id": 340,
+      "type": "Mesh_PrimitivePlaneAdd",
+      "pos": [
+        -1189,
+        1107
+      ],
+      "size": {
+        "0": 315,
+        "1": 218
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "location",
+          "type": "B_VECTOR3",
+          "link": null
+        },
+        {
+          "name": "rotation",
+          "type": "B_VECTOR3",
+          "link": null
+        },
+        {
+          "name": "scale",
+          "type": "B_VECTOR3",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            352
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_PrimitivePlaneAdd"
+      },
+      "widgets_values": [
+        1037782699025605,
+        "randomize",
+        2,
+        true,
+        false,
+        "WORLD"
+      ]
+    },
+    {
+      "id": 528,
+      "type": "LoadImage",
+      "pos": [
+        -1980,
+        737
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5028
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "image (7).png",
+        "image"
+      ]
+    },
+    {
+      "id": 519,
+      "type": "CreateShapeFlow",
+      "pos": [
+        251,
+        1042
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SHAPE_FLOW",
+          "type": "SHAPE_FLOW",
+          "links": [
+            7489
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateShapeFlow"
+      },
+      "widgets_values": [
+        "{\"nodes\":[{\"width\":213,\"height\":594,\"id\":\"modelBlendshapesOutput_fnNms\",\"data\":{\"label\":\"modelBlendshapesOutput_fnNms\",\"variableName\":\"modelBlendshapesOutput_fnNms\",\"defaultValues\":{\"model_blendshapes_Body\":{\"type\":\"number\",\"value\":0.48},\"model_blendshapes_Ex_6\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Q\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_i\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_QQ\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_HeadX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_HeadY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Param\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_pos_x\":{\"type\":\"number\",\"value\":-0.04},\"model_blendshapes_pos_y\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_pos_z\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_rot_x\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_rot_y\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_rot_z\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Breath\":{\"type\":\"number\",\"value\":1.8282266430674599},\"model_blendshapes_EX_zzz\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthY\":{\"type\":\"number\",\"value\":-1.12},\"model_blendshapes_Ex_Cute\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_Tear\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_drop\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeWide\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_JawOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_LeftEar\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Mouth_Y\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_opacity\":{\"type\":\"number\",\"value\":0.99},\"model_blendshapes_scale_x\":{\"type\":\"number\",\"value\":1},\"model_blendshapes_scale_y\":{\"type\":\"number\",\"value\":1},\"model_blendshapes_scale_z\":{\"type\":\"number\",\"value\":1},\"model_blendshapes_visible\":{\"type\":\"number\",\"value\":1},\"model_blendshapes_EX_Blush\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Point\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Sweat\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeLookX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeLookY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_RIghtEar\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowInner\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_BrowOuter\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_CheekPuff\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_Shadow\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkL\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkR\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeSquint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair01\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair02\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_Hair03\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthForm\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthWide\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_NoseSneer\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_tongueOut\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_FireEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_StarEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_TearEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthClose\":{\"type\":\"number\",\"value\":1},\"model_blendshapes_Mouth_Form\":{\"type\":\"number\",\"value\":0.18},\"model_blendshapes_Mouth_Puck\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Mouth_wide\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_eye_LBlink\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_eye_RBlink\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_CheekSquint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_DizzyEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_HeartEye\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Ex_wideopen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeL_Squint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeR_Squint\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_MouthPucker\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_Mouth_Close\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamAngleX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamAngleY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamAngleZ\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamBrowLY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamBrowRY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkLeft\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_EyeblinkL\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_FX_EyeblinkR\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamJawOpen\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EX_FaceShadow\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_EyeBlinkRight\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeBallX\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeBallY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeLClose\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamEyeRClose\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthForm\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthOpenY\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthShrug\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthFunnel\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthPuckerWiden\":{\"type\":\"number\",\"value\":0},\"model_blendshapes_ParamMouthPressLipOpen\":{\"type\":\"number\",\"value\":0}}},\"type\":\"modelBlendshapesOutput\",\"dragging\":false,\"position\":{\"x\":1348.3214719287412,\"y\":662.2557828097382},\"selected\":false,\"positionAbsolute\":{\"x\":1348.3214719287412,\"y\":662.2557828097382}},{\"width\":197,\"height\":640,\"id\":\"mp_blendshapes_input_MXRyt\",\"data\":{\"MPBlendshapes\":{\"Kiss\":-0.0000021287373783707153,\"Jaw_L\":0.0000036614283089875244,\"Jaw_R\":0.000002809933221215033,\"Volume\":0,\"Lips_Up\":0.0000020435877559066284,\"Mouth_L\":0.000009281295206164941,\"Mouth_R\":0.00003678458233480342,\"Smile_L\":0.0551496259868145,\"Smile_R\":0.2509416937828064,\"Lips_Down\":-0.0000044277735469222534,\"Eye_Open_L\":0.40511101484298706,\"Eye_Open_R\":0.5475320219993591,\"Mouth_Open\":0.012108939699828625,\"Eye_Close_L\":0,\"Eye_Close_R\":0,\"Brow_Lower_L\":0,\"Brow_Lower_R\":0,\"Brow_Raise_L\":0,\"Brow_Raise_R\":0,\"Eye_Move_In_L\":0,\"Eye_Move_In_R\":0,\"Eye_Move_Up_L\":0.00016199999663513154,\"Eye_Move_Up_R\":0.00016199999663513154,\"Eye_Move_Out_L\":0.06576699763536453,\"Eye_Move_Out_R\":0.06576699763536453,\"Eye_Move_Down_L\":0,\"Eye_Move_Down_R\":0,\"Upper_Lip_Raise_L\":0.0000022138867734611267,\"Upper_Lip_Raise_R\":0.0000016178403257072205,\"Lips_Corner_Lower_L\":-0.0000034059796689689392,\"Lips_Corner_Lower_R\":0.000003831727553915698}},\"type\":\"mp_blendshapes_input\",\"dragging\":false,\"position\":{\"x\":-41.93800545333147,\"y\":19.57190025779829},\"selected\":false,\"positionAbsolute\":{\"x\":-41.93800545333147,\"y\":19.57190025779829}},{\"width\":192,\"height\":80,\"id\":\"subGraphNode_bLsvu\",\"data\":{\"label\":\"Eyes blink\",\"subGraph\":{\"edges\":[{\"id\":\"reactflow__edge-valueNode_Biisyvalue-operatorNode_nKzQkoperand_2\",\"source\":\"valueNode_Biisy\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_lYzmYvalue-operatorNode_neoYvoperand_1\",\"source\":\"valueNode_lYzmY\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_UuJygoutput-operatorNode_neoYvoperand_2\",\"source\":\"mathNode_UuJyg\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-timeNode_cLYzetime-operatorNode_nKzQkoperand_1\",\"source\":\"timeNode_cLYze\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-timeNode_jYYGztime-operatorNode_hddluoperand_2\",\"source\":\"timeNode_jYYGz\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_gSXlEvalue-operatorNode_hddluoperand_1\",\"source\":\"valueNode_gSXlE\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-mathNode_UuJygmath_fn_input_1\",\"source\":\"valueNode_rpCCe\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-easingNode_bqAhhy-mathNode_UuJygmath_fn_input_0\",\"source\":\"easingNode_bqAhh\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_ARGrYvalue-operatorNode_edAktoperand_2\",\"source\":\"valueNode_ARGrY\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_a\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_b\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_true\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_false\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_NuykUoutput-easingNode_bqAhhx\",\"source\":\"conditionNode_NuykU\",\"target\":\"easingNode_bqAhh\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-operatorNode_hddluoutput-operatorNode_edAktoperand_1\",\"source\":\"operatorNode_hddlu\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_neoYvoutput-easingNode_AIbfmx\",\"source\":\"operatorNode_neoYv\",\"target\":\"easingNode_AIbfm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-visualizationNode_sYXzGvisualization_input\",\"source\":\"easingNode_AIbfm\",\"target\":\"visualizationNode_sYXzG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-valueNode_ehGvnvalue-operatorNode_dNObCoperand_2\",\"source\":\"valueNode_ehGvn\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-visualizationNode_NyUGzvisualization_input\",\"source\":\"operatorNode_dNObC\",\"target\":\"visualizationNode_NyUGz\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-timeNode_vRvnytime-operatorNode_uiGHNoperand_1\",\"source\":\"timeNode_vRvny\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_uiGHNoutput-operatorNode_dNObCoperand_1\",\"source\":\"operatorNode_uiGHN\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_ZlTlmvalue-operatorNode_uiGHNoperand_2\",\"source\":\"valueNode_ZlTlm\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-conditionNode_gNWNmcondition_a\",\"source\":\"operatorNode_dNObC\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-conditionNode_gNWNmcondition_b\",\"source\":\"valueNode_rpCCe\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-conditionNode_gNWNmcondition_false\",\"source\":\"easingNode_AIbfm\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-easingNode_nGvYSy-mathNode_TdXuGmath_fn_input_0\",\"source\":\"easingNode_nGvYS\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_UbOMovalue-mathNode_TdXuGmath_fn_input_1\",\"source\":\"valueNode_UbOMo\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-operatorNode_nKzQkoutput-operatorNode_rEaHgoperand_1\",\"source\":\"operatorNode_nKzQk\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_FSQaPvalue-operatorNode_rEaHgoperand_2\",\"source\":\"valueNode_FSQaP\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_a\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_b\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_true\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_false\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_pHuSnoutput-easingNode_nGvYSx\",\"source\":\"conditionNode_pHuSn\",\"target\":\"easingNode_nGvYS\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-operatorNode_oeTEroperand_1\",\"source\":\"valueNode_TpLsh\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_TdXuGoutput-operatorNode_oeTEroperand_2\",\"source\":\"mathNode_TdXuG\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-visualizationNode_WMyHjvisualization_input\",\"source\":\"operatorNode_oeTEr\",\"target\":\"visualizationNode_WMyHj\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-conditionNode_gNWNmcondition_true\",\"source\":\"operatorNode_oeTEr\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-conditionNode_gNWNmoutput-easingNode_bdjNfx\",\"source\":\"conditionNode_gNWNm\",\"target\":\"easingNode_bdjNf\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-visualizationNode_OAILXvisualization_input\",\"source\":\"easingNode_bdjNf\",\"target\":\"visualizationNode_OAILX\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_AHeguoutput-visualizationNode_LYPOZvisualization_input\",\"source\":\"operatorNode_AHegu\",\"target\":\"visualizationNode_LYPOZ\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-subGraphOutputNode_dHexz6eq\",\"source\":\"easingNode_bdjNf\",\"target\":\"subGraphOutputNode_dHexz\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"6eq\"},{\"id\":\"reactflow__edge-operatorNode_AHeguoutput-subGraphOutputNode_dHexziiw\",\"source\":\"operatorNode_AHegu\",\"target\":\"subGraphOutputNode_dHexz\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"iiw\"},{\"id\":\"reactflow__edge-valueNode_lZHtuvalue-operatorNode_AHeguoperand_1\",\"source\":\"valueNode_lZHtu\",\"target\":\"operatorNode_AHegu\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-operatorNode_AHeguoperand_2\",\"source\":\"easingNode_bdjNf\",\"target\":\"operatorNode_AHegu\",\"sourceHandle\":\"y\",\"targetHandle\":\"operand_2\"}],\"nodes\":[{\"id\":\"timeNode_jYYGz\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_jYYGz\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_jYYGz\"},\"type\":\"timeNode\",\"width\":166,\"height\":94,\"dragging\":false,\"position\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344},\"selected\":false,\"positionAbsolute\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344}},{\"id\":\"easingNode_bqAhh\",\"data\":{\"label\":\"easingNode_bqAhh\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bqAhh\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274},\"selected\":false,\"positionAbsolute\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274}},{\"id\":\"mathNode_UuJyg\",\"data\":{\"label\":\"mathNode_UuJyg\",\"fnName\":\"min\",\"variableName\":\"mathNode_UuJyg\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762},\"selected\":false,\"positionAbsolute\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762}},{\"id\":\"valueNode_rpCCe\",\"data\":{\"max\":1,\"label\":\"valueNode_rpCCe\",\"value\":1,\"variableName\":\"valueNode_rpCCe\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466},\"selected\":false,\"positionAbsolute\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466}},{\"id\":\"operatorNode_nKzQk\",\"data\":{\"label\":\"operatorNode_nKzQk\",\"operator\":2,\"variableName\":\"operatorNode_nKzQk\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.6}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278},\"selected\":false,\"positionAbsolute\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278}},{\"id\":\"valueNode_Biisy\",\"data\":{\"max\":100,\"label\":\"valueNode_Biisy\",\"value\":4.6,\"variableName\":\"valueNode_Biisy\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432},\"selected\":false,\"positionAbsolute\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432}},{\"id\":\"valueNode_gSXlE\",\"data\":{\"max\":10,\"label\":\"valueNode_gSXlE\",\"value\":4.1,\"variableName\":\"valueNode_gSXlE\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297},\"selected\":false,\"positionAbsolute\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297}},{\"id\":\"operatorNode_hddlu\",\"data\":{\"label\":\"operatorNode_hddlu\",\"operator\":2,\"variableName\":\"operatorNode_hddlu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":4.1},\"operand_2\":{\"type\":\"number\",\"value\":122.37870000004769}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534},\"selected\":false,\"positionAbsolute\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534}},{\"id\":\"valueNode_lYzmY\",\"data\":{\"label\":\"valueNode_lYzmY\",\"value\":1,\"variableName\":\"valueNode_lYzmY\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329},\"selected\":false,\"positionAbsolute\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329}},{\"id\":\"operatorNode_neoYv\",\"data\":{\"label\":\"operatorNode_neoYv\",\"operator\":1,\"variableName\":\"operatorNode_neoYv\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077},\"selected\":false,\"positionAbsolute\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077}},{\"id\":\"valueNode_UbOMo\",\"data\":{\"label\":\"valueNode_UbOMo\",\"value\":1,\"variableName\":\"valueNode_UbOMo\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297},\"selected\":false,\"positionAbsolute\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297}},{\"id\":\"timeNode_cLYze\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_cLYze\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_cLYze\"},\"type\":\"timeNode\",\"width\":166,\"height\":94,\"dragging\":false,\"position\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178}},{\"id\":\"easingNode_nGvYS\",\"data\":{\"label\":\"easingNode_nGvYS\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_nGvYS\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371},\"selected\":false,\"positionAbsolute\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371}},{\"id\":\"visualizationNode_WMyHj\",\"data\":{\"label\":\"visualizationNode_WMyHj\",\"variableName\":\"visualizationNode_WMyHj\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097},\"selected\":false,\"positionAbsolute\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097}},{\"id\":\"visualizationNode_sYXzG\",\"data\":{\"label\":\"visualizationNode_sYXzG\",\"variableName\":\"visualizationNode_sYXzG\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842},\"selected\":false,\"positionAbsolute\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842}},{\"id\":\"operatorNode_edAkt\",\"data\":{\"label\":\"operatorNode_edAkt\",\"operator\":4,\"variableName\":\"operatorNode_edAkt\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":501.75267000019545},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333},\"selected\":false,\"positionAbsolute\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333}},{\"id\":\"valueNode_ARGrY\",\"data\":{\"max\":100,\"label\":\"valueNode_ARGrY\",\"value\":10,\"variableName\":\"valueNode_ARGrY\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367},\"selected\":false,\"positionAbsolute\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367}},{\"id\":\"conditionNode_NuykU\",\"data\":{\"label\":\"conditionNode_NuykU\",\"operator\":0,\"variableName\":\"conditionNode_NuykU\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"width\":160,\"height\":200,\"dragging\":false,\"position\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823}},{\"id\":\"valueNode_cPQRA\",\"data\":{\"label\":\"valueNode_cPQRA\",\"value\":1,\"variableName\":\"valueNode_cPQRA\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463}},{\"id\":\"easingNode_AIbfm\",\"data\":{\"label\":\"easingNode_AIbfm\",\"easingFn\":\"easeInOutSine\",\"variableName\":\"easingNode_AIbfm\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076},\"selected\":false,\"positionAbsolute\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076}},{\"id\":\"timeNode_vRvny\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_vRvny\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_vRvny\"},\"type\":\"timeNode\",\"width\":166,\"height\":94,\"dragging\":false,\"position\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699}},{\"id\":\"conditionNode_gNWNm\",\"data\":{\"label\":\"conditionNode_gNWNm\",\"operator\":0,\"variableName\":\"conditionNode_gNWNm\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":3.478700000047697},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.1102230246251565e-16},\"condition_false\":{\"type\":\"number\",\"value\":0}}},\"type\":\"conditionNode\",\"width\":160,\"height\":200,\"dragging\":false,\"position\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818},\"selected\":false,\"positionAbsolute\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818}},{\"id\":\"operatorNode_dNObC\",\"data\":{\"label\":\"operatorNode_dNObC\",\"operator\":4,\"variableName\":\"operatorNode_dNObC\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.1}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195}},{\"id\":\"valueNode_ehGvn\",\"data\":{\"max\":10,\"label\":\"valueNode_ehGvn\",\"value\":4.1,\"variableName\":\"valueNode_ehGvn\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639}},{\"id\":\"visualizationNode_NyUGz\",\"data\":{\"label\":\"visualizationNode_NyUGz\",\"variableName\":\"visualizationNode_NyUGz\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957},\"selected\":false,\"positionAbsolute\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957}},{\"id\":\"operatorNode_uiGHN\",\"data\":{\"label\":\"operatorNode_uiGHN\",\"operator\":2,\"variableName\":\"operatorNode_uiGHN\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":1}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741}},{\"id\":\"valueNode_ZlTlm\",\"data\":{\"max\":10,\"label\":\"valueNode_ZlTlm\",\"value\":1,\"variableName\":\"valueNode_ZlTlm\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055}},{\"id\":\"mathNode_TdXuG\",\"data\":{\"label\":\"mathNode_TdXuG\",\"fnName\":\"min\",\"variableName\":\"mathNode_TdXuG\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757},\"selected\":false,\"positionAbsolute\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757}},{\"id\":\"valueNode_TpLsh\",\"data\":{\"label\":\"valueNode_TpLsh\",\"value\":1,\"variableName\":\"valueNode_TpLsh\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546}},{\"id\":\"operatorNode_rEaHg\",\"data\":{\"label\":\"operatorNode_rEaHg\",\"operator\":4,\"variableName\":\"operatorNode_rEaHg\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":562.9420200002193},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756},\"selected\":false,\"positionAbsolute\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756}},{\"id\":\"valueNode_FSQaP\",\"data\":{\"max\":10,\"label\":\"valueNode_FSQaP\",\"value\":10,\"variableName\":\"valueNode_FSQaP\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694},\"selected\":false,\"positionAbsolute\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694}},{\"id\":\"conditionNode_pHuSn\",\"data\":{\"label\":\"conditionNode_pHuSn\",\"operator\":0,\"variableName\":\"conditionNode_pHuSn\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"width\":160,\"height\":200,\"dragging\":false,\"position\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558}},{\"id\":\"operatorNode_oeTEr\",\"data\":{\"label\":\"operatorNode_oeTEr\",\"operator\":1,\"variableName\":\"operatorNode_oeTEr\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122},\"selected\":false,\"positionAbsolute\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122}},{\"id\":\"easingNode_bdjNf\",\"data\":{\"label\":\"easingNode_bdjNf\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bdjNf\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532},\"selected\":false,\"positionAbsolute\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532}},{\"id\":\"visualizationNode_OAILX\",\"data\":{\"label\":\"visualizationNode_OAILX\",\"variableName\":\"visualizationNode_OAILX\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":661.6184822328263,\"y\":-1764.470845107487},\"selected\":false,\"positionAbsolute\":{\"x\":661.6184822328263,\"y\":-1764.470845107487}},{\"id\":\"operatorNode_AHegu\",\"data\":{\"label\":\"operatorNode_AHegu\",\"operator\":1,\"variableName\":\"operatorNode_AHegu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":2.5}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232},\"selected\":false,\"positionAbsolute\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232}},{\"id\":\"valueNode_lZHtu\",\"data\":{\"max\":10,\"label\":\"valueNode_lZHtu\",\"value\":1,\"variableName\":\"valueNode_lZHtu\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635},\"selected\":false,\"positionAbsolute\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635}},{\"id\":\"visualizationNode_LYPOZ\",\"data\":{\"label\":\"visualizationNode_LYPOZ\",\"variableName\":\"visualizationNode_LYPOZ\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292},\"selected\":false,\"positionAbsolute\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292}},{\"id\":\"subGraphOutputNode_dHexz\",\"data\":{\"label\":\"subGraphOutputNode_dHexz\",\"outputs\":{\"6eq\":{\"name\":\"output_0\",\"type\":\"number\"},\"iiw\":{\"name\":\"output_1\",\"type\":\"number\"}},\"variableName\":\"subGraphOutputNode_dHexz\",\"defaultValues\":{\"6eq\":{\"type\":\"number\",\"value\":0},\"iiw\":{\"type\":\"number\",\"value\":0.11}}},\"type\":\"subGraphOutputNode\",\"width\":160,\"height\":121,\"dragging\":false,\"position\":{\"x\":649.301650118796,\"y\":-921.5106663745356},\"selected\":false,\"positionAbsolute\":{\"x\":649.301650118796,\"y\":-921.5106663745356}}],\"viewport\":{\"x\":824.535160860398,\"y\":1641.9231904708736,\"zoom\":0.9645981845841377}},\"variableName\":\"subGraphNode_bLsvu\"},\"type\":\"subGraphNode\",\"dragging\":false,\"position\":{\"x\":262.51167334001644,\"y\":330.36634908739586},\"selected\":false,\"positionAbsolute\":{\"x\":262.51167334001644,\"y\":330.36634908739586}},{\"width\":192,\"height\":133,\"id\":\"subGraphNode_BkbhM\",\"data\":{\"label\":\"Mouth\",\"subGraph\":{\"edges\":[{\"id\":\"reactflowedge-valueNode_Vamgmvalue-operatorNode_JOvyloperand_1\",\"source\":\"valueNode_Vamgm\",\"target\":\"operatorNode_JOvyl\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_rFWbaoutput-operatorNode_PMyvXoperand_1\",\"source\":\"operatorNode_rFWba\",\"target\":\"operatorNode_PMyvX\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_XpZZmvalue-operatorNode_PMyvXoperand_2\",\"source\":\"valueNode_XpZZm\",\"target\":\"operatorNode_PMyvX\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_PMyvXoutput-operatorNode_bJicMoperand_1\",\"source\":\"operatorNode_PMyvX\",\"target\":\"operatorNode_bJicM\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_IiakTvalue-operatorNode_bJicMoperand_2\",\"source\":\"valueNode_IiakT\",\"target\":\"operatorNode_bJicM\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-visualizationNode_NMWUdvisualization_input\",\"source\":\"easingNode_EvFOi\",\"target\":\"visualizationNode_NMWUd\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_bJicMoutput-mathNode_uiaGHmath_fn_input_1\",\"source\":\"operatorNode_bJicM\",\"target\":\"mathNode_uiaGH\",\"sourceHandle\":\"output\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-valueNode_guqQlvalue-mathNode_uiaGHmath_fn_input_0\",\"source\":\"valueNode_guqQl\",\"target\":\"mathNode_uiaGH\",\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-mathNode_uiaGHoutput-operatorNode_JOvyloperand_2\",\"source\":\"mathNode_uiaGH\",\"target\":\"operatorNode_JOvyl\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_JOvyloutput-easingNode_EvFOix\",\"source\":\"operatorNode_JOvyl\",\"target\":\"easingNode_EvFOi\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-valueNode_IoQLEvalue-operatorNode_AQEgnoperand_1\",\"source\":\"valueNode_IoQLE\",\"target\":\"operatorNode_AQEgn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-operatorNode_AQEgnoperand_2\",\"source\":\"easingNode_EvFOi\",\"target\":\"operatorNode_AQEgn\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-subGraphInputNode_vvYqlu7m-operatorNode_rFWbaoperand_1\",\"source\":\"subGraphInputNode_vvYql\",\"target\":\"operatorNode_rFWba\",\"sourceHandle\":\"u7m\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-subGraphInputNode_vvYqlmt5-operatorNode_rFWbaoperand_2\",\"source\":\"subGraphInputNode_vvYql\",\"target\":\"operatorNode_rFWba\",\"sourceHandle\":\"mt5\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-easingNode_EvFOiy-subGraphOutputNode_SfAbH6op\",\"source\":\"easingNode_EvFOi\",\"target\":\"subGraphOutputNode_SfAbH\",\"sourceHandle\":\"y\",\"targetHandle\":\"6op\"},{\"id\":\"reactflow__edge-operatorNode_AQEgnoutput-subGraphOutputNode_SfAbHlb6\",\"source\":\"operatorNode_AQEgn\",\"target\":\"subGraphOutputNode_SfAbH\",\"sourceHandle\":\"output\",\"targetHandle\":\"lb6\"}],\"nodes\":[{\"id\":\"valueNode_Vamgm\",\"data\":{\"label\":\"valueNode_Vamgm\",\"value\":1,\"variableName\":\"valueNode_Vamgm\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-245.2589747413336,\"y\":1237.3741915337844},\"selected\":false,\"positionAbsolute\":{\"x\":-245.2589747413336,\"y\":1237.3741915337844}},{\"id\":\"operatorNode_JOvyl\",\"data\":{\"label\":\"operatorNode_JOvyl\",\"operator\":1,\"variableName\":\"operatorNode_JOvyl\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-244.79681208357073,\"y\":1079.9773591696098},\"selected\":false,\"positionAbsolute\":{\"x\":-244.79681208357073,\"y\":1079.9773591696098}},{\"id\":\"visualizationNode_NMWUd\",\"data\":{\"label\":\"visualizationNode_NMWUd\",\"variableName\":\"visualizationNode_NMWUd\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":299.0843387831331,\"y\":728.4934883862524},\"selected\":false,\"positionAbsolute\":{\"x\":299.0843387831331,\"y\":728.4934883862524}},{\"id\":\"operatorNode_PMyvX\",\"data\":{\"label\":\"operatorNode_PMyvX\",\"operator\":3,\"variableName\":\"operatorNode_PMyvX\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-900.2216635621324,\"y\":1075.9531149847442},\"selected\":false,\"positionAbsolute\":{\"x\":-900.2216635621324,\"y\":1075.9531149847442}},{\"id\":\"valueNode_XpZZm\",\"data\":{\"max\":2,\"label\":\"valueNode_XpZZm\",\"value\":2,\"variableName\":\"valueNode_XpZZm\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-899.9187990342721,\"y\":1236.4359492337112},\"selected\":false,\"positionAbsolute\":{\"x\":-899.9187990342721,\"y\":1236.4359492337112}},{\"id\":\"operatorNode_rFWba\",\"data\":{\"label\":\"operatorNode_rFWba\",\"operator\":0,\"variableName\":\"operatorNode_rFWba\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1110.7569818937736,\"y\":1076.0918664187236},\"selected\":false,\"positionAbsolute\":{\"x\":-1110.7569818937736,\"y\":1076.0918664187236}},{\"id\":\"operatorNode_bJicM\",\"data\":{\"label\":\"operatorNode_bJicM\",\"operator\":3,\"variableName\":\"operatorNode_bJicM\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-683.830014730419,\"y\":1077.8984983719388},\"selected\":false,\"positionAbsolute\":{\"x\":-683.830014730419,\"y\":1077.8984983719388}},{\"id\":\"valueNode_IiakT\",\"data\":{\"max\":7,\"label\":\"valueNode_IiakT\",\"value\":7,\"variableName\":\"valueNode_IiakT\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-682.2745864422745,\"y\":1237.4983205906728},\"selected\":false,\"positionAbsolute\":{\"x\":-682.2745864422745,\"y\":1237.4983205906728}},{\"id\":\"easingNode_EvFOi\",\"data\":{\"label\":\"easingNode_EvFOi\",\"easingFn\":\"easeInCirc\",\"variableName\":\"easingNode_EvFOi\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":-23.803191056449734,\"y\":1075.5244090498552},\"selected\":false,\"positionAbsolute\":{\"x\":-23.803191056449734,\"y\":1075.5244090498552}},{\"id\":\"mathNode_uiaGH\",\"data\":{\"label\":\"mathNode_uiaGH\",\"fnName\":\"min\",\"variableName\":\"mathNode_uiaGH\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.3},\"math_fn_input_1\":{\"type\":\"number\",\"value\":0}}},\"type\":\"mathNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-463.7076089382392,\"y\":1075.4867691021484},\"selected\":false,\"positionAbsolute\":{\"x\":-463.7076089382392,\"y\":1075.4867691021484}},{\"id\":\"valueNode_guqQl\",\"data\":{\"max\":10,\"label\":\"valueNode_guqQl\",\"value\":0.3,\"variableName\":\"valueNode_guqQl\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-464.5223884885328,\"y\":1237.8351928385066},\"selected\":false,\"positionAbsolute\":{\"x\":-464.5223884885328,\"y\":1237.8351928385066}},{\"id\":\"valueNode_IoQLE\",\"data\":{\"label\":\"valueNode_IoQLE\",\"value\":1,\"variableName\":\"valueNode_IoQLE\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-17.863539448646662,\"y\":1320.6431754448995},\"selected\":false,\"positionAbsolute\":{\"x\":-17.863539448646662,\"y\":1320.6431754448995}},{\"id\":\"operatorNode_AQEgn\",\"data\":{\"label\":\"operatorNode_AQEgn\",\"operator\":1,\"variableName\":\"operatorNode_AQEgn\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":1}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-21.08156710772019,\"y\":1161.2019137615985},\"selected\":false,\"positionAbsolute\":{\"x\":-21.08156710772019,\"y\":1161.2019137615985}},{\"id\":\"subGraphOutputNode_SfAbH\",\"data\":{\"label\":\"subGraphOutputNode_SfAbH\",\"outputs\":{\"6op\":{\"name\":\"output_0\",\"type\":\"number\"},\"lb6\":{\"name\":\"output_1\",\"type\":\"number\"}},\"variableName\":\"subGraphOutputNode_SfAbH\",\"defaultValues\":{\"6op\":{\"type\":\"number\",\"value\":0},\"lb6\":{\"type\":\"number\",\"value\":0}}},\"type\":\"subGraphOutputNode\",\"width\":160,\"height\":121,\"dragging\":false,\"position\":{\"x\":363.96502225147594,\"y\":1148.3188116155889},\"selected\":false,\"positionAbsolute\":{\"x\":363.96502225147594,\"y\":1148.3188116155889}},{\"id\":\"subGraphInputNode_vvYql\",\"data\":{\"label\":\"subGraphInputNode_vvYql\",\"inputs\":{\"mt5\":{\"name\":\"input_1\",\"type\":\"number\"},\"u7m\":{\"name\":\"input_0\",\"type\":\"number\"}},\"variableName\":\"subGraphInputNode_vvYql\"},\"type\":\"subGraphInputNode\",\"width\":160,\"height\":108,\"dragging\":false,\"position\":{\"x\":-1335.6914213092207,\"y\":1111.4383989318103},\"selected\":false,\"positionAbsolute\":{\"x\":-1335.6914213092207,\"y\":1111.4383989318103}}],\"viewport\":{\"x\":1224.1540174099255,\"y\":-124.5560027222482,\"zoom\":0.6164261627319026}},\"variableName\":\"subGraphNode_BkbhM\",\"defaultValues\":{\"mt5\":{\"type\":\"number\",\"value\":0},\"u7m\":{\"type\":\"number\",\"value\":-0.11}}},\"type\":\"subGraphNode\",\"dragging\":false,\"position\":{\"x\":260.61427274818374,\"y\":531.355445501727},\"selected\":false,\"positionAbsolute\":{\"x\":260.61427274818374,\"y\":531.355445501727}},{\"width\":192,\"height\":94,\"id\":\"timeNode_dSdmT\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_dSdmT\",\"variableName\":\"timeNode_dSdmT\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-490.7295406366286,\"y\":1192.6939352196318},\"selected\":false,\"positionAbsolute\":{\"x\":-490.7295406366286,\"y\":1192.6939352196318}},{\"width\":192,\"height\":120,\"id\":\"mathNode_iIGcR\",\"data\":{\"label\":\"mathNode_iIGcR\",\"fnName\":\"sin\",\"variableName\":\"mathNode_iIGcR\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-229.53184373135403,\"y\":1189.8261153362944},\"selected\":false,\"positionAbsolute\":{\"x\":-229.53184373135403,\"y\":1189.8261153362944}},{\"width\":352,\"height\":344,\"id\":\"visualizationNode_QxRJP\",\"data\":{\"label\":\"visualizationNode_QxRJP\",\"variableName\":\"visualizationNode_QxRJP\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":1113.3451737291048,\"y\":1447.5788690310756},\"selected\":false,\"positionAbsolute\":{\"x\":1113.3451737291048,\"y\":1447.5788690310756}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_Gbkcz\",\"data\":{\"label\":\"operatorNode_Gbkcz\",\"operator\":2,\"variableName\":\"operatorNode_Gbkcz\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":2},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-494.3690454267601,\"y\":1314.8313657717454},\"selected\":false,\"positionAbsolute\":{\"x\":-494.3690454267601,\"y\":1314.8313657717454}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_nUkry\",\"data\":{\"label\":\"operatorNode_nUkry\",\"operator\":3,\"variableName\":\"operatorNode_nUkry\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":2},\"operand_2\":{\"type\":\"number\",\"value\":4}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-225.0312364529632,\"y\":1328.9580288779268},\"selected\":false,\"positionAbsolute\":{\"x\":-225.0312364529632,\"y\":1328.9580288779268}},{\"width\":196,\"height\":200,\"id\":\"conditionNode_zejtX\",\"data\":{\"label\":\"conditionNode_zejtX\",\"operator\":3,\"variableName\":\"conditionNode_zejtX\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":0},\"condition_b\":{\"type\":\"number\",\"value\":0.24},\"condition_true\":{\"type\":\"number\",\"value\":0},\"condition_false\":{\"type\":\"number\",\"value\":0}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":41.01887228618551,\"y\":1190.3288195861871},\"selected\":false,\"positionAbsolute\":{\"x\":41.01887228618551,\"y\":1190.3288195861871}},{\"width\":192,\"height\":80,\"id\":\"subGraphNode_oJSJr\",\"data\":{\"label\":\"Eyesblink\",\"subGraph\":{\"edges\":[{\"id\":\"reactflow__edge-valueNode_Biisyvalue-operatorNode_nKzQkoperand_2\",\"source\":\"valueNode_Biisy\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_lYzmYvalue-operatorNode_neoYvoperand_1\",\"source\":\"valueNode_lYzmY\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_UuJygoutput-operatorNode_neoYvoperand_2\",\"source\":\"mathNode_UuJyg\",\"target\":\"operatorNode_neoYv\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-timeNode_cLYzetime-operatorNode_nKzQkoperand_1\",\"source\":\"timeNode_cLYze\",\"target\":\"operatorNode_nKzQk\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-timeNode_jYYGztime-operatorNode_hddluoperand_2\",\"source\":\"timeNode_jYYGz\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-valueNode_gSXlEvalue-operatorNode_hddluoperand_1\",\"source\":\"valueNode_gSXlE\",\"target\":\"operatorNode_hddlu\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-mathNode_UuJygmath_fn_input_1\",\"source\":\"valueNode_rpCCe\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-easingNode_bqAhhy-mathNode_UuJygmath_fn_input_0\",\"source\":\"easingNode_bqAhh\",\"target\":\"mathNode_UuJyg\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_ARGrYvalue-operatorNode_edAktoperand_2\",\"source\":\"valueNode_ARGrY\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_a\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_b\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_edAktoutput-conditionNode_NuykUcondition_true\",\"source\":\"operatorNode_edAkt\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_cPQRAvalue-conditionNode_NuykUcondition_false\",\"source\":\"valueNode_cPQRA\",\"target\":\"conditionNode_NuykU\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_NuykUoutput-easingNode_bqAhhx\",\"source\":\"conditionNode_NuykU\",\"target\":\"easingNode_bqAhh\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-operatorNode_hddluoutput-operatorNode_edAktoperand_1\",\"source\":\"operatorNode_hddlu\",\"target\":\"operatorNode_edAkt\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_neoYvoutput-easingNode_AIbfmx\",\"source\":\"operatorNode_neoYv\",\"target\":\"easingNode_AIbfm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-visualizationNode_sYXzGvisualization_input\",\"source\":\"easingNode_AIbfm\",\"target\":\"visualizationNode_sYXzG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-valueNode_ehGvnvalue-operatorNode_dNObCoperand_2\",\"source\":\"valueNode_ehGvn\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-visualizationNode_NyUGzvisualization_input\",\"source\":\"operatorNode_dNObC\",\"target\":\"visualizationNode_NyUGz\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-timeNode_vRvnytime-operatorNode_uiGHNoperand_1\",\"source\":\"timeNode_vRvny\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"time\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_uiGHNoutput-operatorNode_dNObCoperand_1\",\"source\":\"operatorNode_uiGHN\",\"target\":\"operatorNode_dNObC\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_ZlTlmvalue-operatorNode_uiGHNoperand_2\",\"source\":\"valueNode_ZlTlm\",\"target\":\"operatorNode_uiGHN\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_dNObCoutput-conditionNode_gNWNmcondition_a\",\"source\":\"operatorNode_dNObC\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_rpCCevalue-conditionNode_gNWNmcondition_b\",\"source\":\"valueNode_rpCCe\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-easingNode_AIbfmy-conditionNode_gNWNmcondition_false\",\"source\":\"easingNode_AIbfm\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-easingNode_nGvYSy-mathNode_TdXuGmath_fn_input_0\",\"source\":\"easingNode_nGvYS\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-valueNode_UbOMovalue-mathNode_TdXuGmath_fn_input_1\",\"source\":\"valueNode_UbOMo\",\"target\":\"mathNode_TdXuG\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"math_fn_input_1\"},{\"id\":\"reactflow__edge-operatorNode_nKzQkoutput-operatorNode_rEaHgoperand_1\",\"source\":\"operatorNode_nKzQk\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-valueNode_FSQaPvalue-operatorNode_rEaHgoperand_2\",\"source\":\"valueNode_FSQaP\",\"target\":\"operatorNode_rEaHg\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_a\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_b\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_b\"},{\"id\":\"reactflow__edge-operatorNode_rEaHgoutput-conditionNode_pHuSncondition_true\",\"source\":\"operatorNode_rEaHg\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-conditionNode_pHuSncondition_false\",\"source\":\"valueNode_TpLsh\",\"target\":\"conditionNode_pHuSn\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_pHuSnoutput-easingNode_nGvYSx\",\"source\":\"conditionNode_pHuSn\",\"target\":\"easingNode_nGvYS\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-valueNode_TpLshvalue-operatorNode_oeTEroperand_1\",\"source\":\"valueNode_TpLsh\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-mathNode_TdXuGoutput-operatorNode_oeTEroperand_2\",\"source\":\"mathNode_TdXuG\",\"target\":\"operatorNode_oeTEr\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-visualizationNode_WMyHjvisualization_input\",\"source\":\"operatorNode_oeTEr\",\"target\":\"visualizationNode_WMyHj\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_oeTEroutput-conditionNode_gNWNmcondition_true\",\"source\":\"operatorNode_oeTEr\",\"target\":\"conditionNode_gNWNm\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-conditionNode_gNWNmoutput-easingNode_bdjNfx\",\"source\":\"conditionNode_gNWNm\",\"target\":\"easingNode_bdjNf\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"x\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-visualizationNode_OAILXvisualization_input\",\"source\":\"easingNode_bdjNf\",\"target\":\"visualizationNode_OAILX\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-operatorNode_AHeguoutput-visualizationNode_LYPOZvisualization_input\",\"source\":\"operatorNode_AHegu\",\"target\":\"visualizationNode_LYPOZ\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-subGraphOutputNode_dHexz6eq\",\"source\":\"easingNode_bdjNf\",\"target\":\"subGraphOutputNode_dHexz\",\"selected\":false,\"sourceHandle\":\"y\",\"targetHandle\":\"6eq\"},{\"id\":\"reactflow__edge-operatorNode_AHeguoutput-subGraphOutputNode_dHexziiw\",\"source\":\"operatorNode_AHegu\",\"target\":\"subGraphOutputNode_dHexz\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"iiw\"},{\"id\":\"reactflow__edge-valueNode_lZHtuvalue-operatorNode_AHeguoperand_1\",\"source\":\"valueNode_lZHtu\",\"target\":\"operatorNode_AHegu\",\"sourceHandle\":\"value\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-easingNode_bdjNfy-operatorNode_AHeguoperand_2\",\"source\":\"easingNode_bdjNf\",\"target\":\"operatorNode_AHegu\",\"sourceHandle\":\"y\",\"targetHandle\":\"operand_2\"}],\"nodes\":[{\"id\":\"timeNode_jYYGz\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_jYYGz\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_jYYGz\"},\"type\":\"timeNode\",\"width\":166,\"height\":94,\"dragging\":false,\"position\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344},\"selected\":false,\"positionAbsolute\":{\"x\":-2215.096903204777,\"y\":-1757.9143202810344}},{\"id\":\"easingNode_bqAhh\",\"data\":{\"label\":\"easingNode_bqAhh\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bqAhh\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274},\"selected\":false,\"positionAbsolute\":{\"x\":-1295.3233883860842,\"y\":-1825.5748953193274}},{\"id\":\"mathNode_UuJyg\",\"data\":{\"label\":\"mathNode_UuJyg\",\"fnName\":\"min\",\"variableName\":\"mathNode_UuJyg\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762},\"selected\":false,\"positionAbsolute\":{\"x\":-1289.7304819094352,\"y\":-1738.7641272834762}},{\"id\":\"valueNode_rpCCe\",\"data\":{\"max\":1,\"label\":\"valueNode_rpCCe\",\"value\":1,\"variableName\":\"valueNode_rpCCe\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466},\"selected\":false,\"positionAbsolute\":{\"x\":-1287.8128511983723,\"y\":-1582.1891169684466}},{\"id\":\"operatorNode_nKzQk\",\"data\":{\"label\":\"operatorNode_nKzQk\",\"operator\":2,\"variableName\":\"operatorNode_nKzQk\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.6}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278},\"selected\":false,\"positionAbsolute\":{\"x\":-1937.9121583954425,\"y\":-1408.4804832313278}},{\"id\":\"valueNode_Biisy\",\"data\":{\"max\":100,\"label\":\"valueNode_Biisy\",\"value\":4.6,\"variableName\":\"valueNode_Biisy\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432},\"selected\":false,\"positionAbsolute\":{\"x\":-1939.1591108662187,\"y\":-1252.0249101176432}},{\"id\":\"valueNode_gSXlE\",\"data\":{\"max\":10,\"label\":\"valueNode_gSXlE\",\"value\":4.1,\"variableName\":\"valueNode_gSXlE\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297},\"selected\":false,\"positionAbsolute\":{\"x\":-1940.3741428205074,\"y\":-1662.1814398609297}},{\"id\":\"operatorNode_hddlu\",\"data\":{\"label\":\"operatorNode_hddlu\",\"operator\":2,\"variableName\":\"operatorNode_hddlu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":4.1},\"operand_2\":{\"type\":\"number\",\"value\":122.37870000004769}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534},\"selected\":false,\"positionAbsolute\":{\"x\":-1944.385642812803,\"y\":-1820.1207764832534}},{\"id\":\"valueNode_lYzmY\",\"data\":{\"label\":\"valueNode_lYzmY\",\"value\":1,\"variableName\":\"valueNode_lYzmY\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329},\"selected\":false,\"positionAbsolute\":{\"x\":-1060.5392866871234,\"y\":-1670.701160820329}},{\"id\":\"operatorNode_neoYv\",\"data\":{\"label\":\"operatorNode_neoYv\",\"operator\":1,\"variableName\":\"operatorNode_neoYv\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077},\"selected\":false,\"positionAbsolute\":{\"x\":-1062.8882911938776,\"y\":-1830.0477144350077}},{\"id\":\"valueNode_UbOMo\",\"data\":{\"label\":\"valueNode_UbOMo\",\"value\":1,\"variableName\":\"valueNode_UbOMo\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297},\"selected\":false,\"positionAbsolute\":{\"x\":-1272.5160145210866,\"y\":-1158.9811251109297}},{\"id\":\"timeNode_cLYze\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_cLYze\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_cLYze\"},\"type\":\"timeNode\",\"width\":166,\"height\":94,\"dragging\":false,\"position\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.5347509711646,\"y\":-1405.7132906265178}},{\"id\":\"easingNode_nGvYS\",\"data\":{\"label\":\"easingNode_nGvYS\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_nGvYS\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371},\"selected\":false,\"positionAbsolute\":{\"x\":-1274.9898532798331,\"y\":-1403.969166021371}},{\"id\":\"visualizationNode_WMyHj\",\"data\":{\"label\":\"visualizationNode_WMyHj\",\"variableName\":\"visualizationNode_WMyHj\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097},\"selected\":false,\"positionAbsolute\":{\"x\":-605.855776191421,\"y\":-1442.4111770495097}},{\"id\":\"visualizationNode_sYXzG\",\"data\":{\"label\":\"visualizationNode_sYXzG\",\"variableName\":\"visualizationNode_sYXzG\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842},\"selected\":false,\"positionAbsolute\":{\"x\":-611.0656825715232,\"y\":-1837.0838443088842}},{\"id\":\"operatorNode_edAkt\",\"data\":{\"label\":\"operatorNode_edAkt\",\"operator\":4,\"variableName\":\"operatorNode_edAkt\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":501.75267000019545},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333},\"selected\":false,\"positionAbsolute\":{\"x\":-1718.9083871192793,\"y\":-1819.4503367903333}},{\"id\":\"valueNode_ARGrY\",\"data\":{\"max\":100,\"label\":\"valueNode_ARGrY\",\"value\":10,\"variableName\":\"valueNode_ARGrY\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367},\"selected\":false,\"positionAbsolute\":{\"x\":-1720.4312136920219,\"y\":-1659.4301219531367}},{\"id\":\"conditionNode_NuykU\",\"data\":{\"label\":\"conditionNode_NuykU\",\"operator\":0,\"variableName\":\"conditionNode_NuykU\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.752670000195451},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"width\":160,\"height\":200,\"dragging\":false,\"position\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.272471371014,\"y\":-1817.6278823062823}},{\"id\":\"valueNode_cPQRA\",\"data\":{\"label\":\"valueNode_cPQRA\",\"value\":1,\"variableName\":\"valueNode_cPQRA\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463},\"selected\":false,\"positionAbsolute\":{\"x\":-1504.595519266336,\"y\":-1608.716856424463}},{\"id\":\"easingNode_AIbfm\",\"data\":{\"label\":\"easingNode_AIbfm\",\"easingFn\":\"easeInOutSine\",\"variableName\":\"easingNode_AIbfm\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076},\"selected\":false,\"positionAbsolute\":{\"x\":-865.9016474628179,\"y\":-1834.2138969165076}},{\"id\":\"timeNode_vRvny\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_vRvny\",\"deltaTime\":0.03110000000148716,\"currentTime\":51.64380000000447,\"variableName\":\"timeNode_vRvny\"},\"type\":\"timeNode\",\"width\":166,\"height\":94,\"dragging\":false,\"position\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699},\"selected\":false,\"positionAbsolute\":{\"x\":-2217.6080699416543,\"y\":-1002.7218611207699}},{\"id\":\"conditionNode_gNWNm\",\"data\":{\"label\":\"conditionNode_gNWNm\",\"operator\":0,\"variableName\":\"conditionNode_gNWNm\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":3.478700000047697},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":1.1102230246251565e-16},\"condition_false\":{\"type\":\"number\",\"value\":0}}},\"type\":\"conditionNode\",\"width\":160,\"height\":200,\"dragging\":false,\"position\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818},\"selected\":false,\"positionAbsolute\":{\"x\":-192.70309911689205,\"y\":-1401.4464277727818}},{\"id\":\"operatorNode_dNObC\",\"data\":{\"label\":\"operatorNode_dNObC\",\"operator\":4,\"variableName\":\"operatorNode_dNObC\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":4.1}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.8678042129973,\"y\":-1009.1078519485195}},{\"id\":\"valueNode_ehGvn\",\"data\":{\"max\":10,\"label\":\"valueNode_ehGvn\",\"value\":4.1,\"variableName\":\"valueNode_ehGvn\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639},\"selected\":false,\"positionAbsolute\":{\"x\":-1710.7958033620419,\"y\":-845.0576689681639}},{\"id\":\"visualizationNode_NyUGz\",\"data\":{\"label\":\"visualizationNode_NyUGz\",\"variableName\":\"visualizationNode_NyUGz\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957},\"selected\":false,\"positionAbsolute\":{\"x\":-606.0319097782103,\"y\":-1057.9343104728957}},{\"id\":\"operatorNode_uiGHN\",\"data\":{\"label\":\"operatorNode_uiGHN\",\"operator\":2,\"variableName\":\"operatorNode_uiGHN\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":122.37870000004769},\"operand_2\":{\"type\":\"number\",\"value\":1}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.6840183315596,\"y\":-1005.362637191741}},{\"id\":\"valueNode_ZlTlm\",\"data\":{\"max\":10,\"label\":\"valueNode_ZlTlm\",\"value\":1,\"variableName\":\"valueNode_ZlTlm\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055},\"selected\":false,\"positionAbsolute\":{\"x\":-1947.9029283354498,\"y\":-843.744015951055}},{\"id\":\"mathNode_TdXuG\",\"data\":{\"label\":\"mathNode_TdXuG\",\"fnName\":\"min\",\"variableName\":\"mathNode_TdXuG\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0.9999999999999999},\"math_fn_input_1\":{\"type\":\"number\",\"value\":1}}},\"type\":\"mathNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757},\"selected\":false,\"positionAbsolute\":{\"x\":-1271.955443759553,\"y\":-1315.0188069857757}},{\"id\":\"valueNode_TpLsh\",\"data\":{\"label\":\"valueNode_TpLsh\",\"value\":1,\"variableName\":\"valueNode_TpLsh\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.1127873772532,\"y\":-1199.3839543177546}},{\"id\":\"operatorNode_rEaHg\",\"data\":{\"label\":\"operatorNode_rEaHg\",\"operator\":4,\"variableName\":\"operatorNode_rEaHg\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":562.9420200002193},\"operand_2\":{\"type\":\"number\",\"value\":10}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756},\"selected\":false,\"positionAbsolute\":{\"x\":-1711.6761420334294,\"y\":-1407.1333669857756}},{\"id\":\"valueNode_FSQaP\",\"data\":{\"max\":10,\"label\":\"valueNode_FSQaP\",\"value\":10,\"variableName\":\"valueNode_FSQaP\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694},\"selected\":false,\"positionAbsolute\":{\"x\":-1717.5753139268859,\"y\":-1247.3508905521694}},{\"id\":\"conditionNode_pHuSn\",\"data\":{\"label\":\"conditionNode_pHuSn\",\"operator\":0,\"variableName\":\"conditionNode_pHuSn\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":2.9420200002192587},\"condition_false\":{\"type\":\"number\",\"value\":1}}},\"type\":\"conditionNode\",\"width\":160,\"height\":200,\"dragging\":false,\"position\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558},\"selected\":false,\"positionAbsolute\":{\"x\":-1488.6353563647306,\"y\":-1408.1327295052558}},{\"id\":\"operatorNode_oeTEr\",\"data\":{\"label\":\"operatorNode_oeTEr\",\"operator\":1,\"variableName\":\"operatorNode_oeTEr\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":1},\"operand_2\":{\"type\":\"number\",\"value\":0.9999999999999999}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122},\"selected\":false,\"positionAbsolute\":{\"x\":-1044.8427898208652,\"y\":-1406.4732611045122}},{\"id\":\"easingNode_bdjNf\",\"data\":{\"label\":\"easingNode_bdjNf\",\"easingFn\":\"easeInSine\",\"variableName\":\"easingNode_bdjNf\"},\"type\":\"easingNode\",\"width\":172,\"height\":74,\"dragging\":false,\"position\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532},\"selected\":false,\"positionAbsolute\":{\"x\":68.31109414776816,\"y\":-1390.4412518380532}},{\"id\":\"visualizationNode_OAILX\",\"data\":{\"label\":\"visualizationNode_OAILX\",\"variableName\":\"visualizationNode_OAILX\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":661.6184822328263,\"y\":-1764.470845107487},\"selected\":false,\"positionAbsolute\":{\"x\":661.6184822328263,\"y\":-1764.470845107487}},{\"id\":\"operatorNode_AHegu\",\"data\":{\"label\":\"operatorNode_AHegu\",\"operator\":1,\"variableName\":\"operatorNode_AHegu\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":2.5}}},\"type\":\"operatorNode\",\"width\":160,\"height\":147,\"dragging\":false,\"position\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232},\"selected\":false,\"positionAbsolute\":{\"x\":68.18723968231467,\"y\":-1285.3365927809232}},{\"id\":\"valueNode_lZHtu\",\"data\":{\"max\":10,\"label\":\"valueNode_lZHtu\",\"value\":1,\"variableName\":\"valueNode_lZHtu\"},\"type\":\"valueNode\",\"width\":160,\"height\":66,\"dragging\":false,\"position\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635},\"selected\":false,\"positionAbsolute\":{\"x\":-195.8088968839737,\"y\":-1173.8971259472635}},{\"id\":\"visualizationNode_LYPOZ\",\"data\":{\"label\":\"visualizationNode_LYPOZ\",\"variableName\":\"visualizationNode_LYPOZ\"},\"type\":\"visualizationNode\",\"width\":328,\"height\":344,\"dragging\":false,\"position\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292},\"selected\":false,\"positionAbsolute\":{\"x\":667.9618856658795,\"y\":-1322.8291704344292}},{\"id\":\"subGraphOutputNode_dHexz\",\"data\":{\"label\":\"subGraphOutputNode_dHexz\",\"outputs\":{\"6eq\":{\"name\":\"Normal Output\",\"type\":\"number\"},\"iiw\":{\"name\":\"Reverse Output\",\"type\":\"number\"}},\"variableName\":\"subGraphOutputNode_dHexz\",\"defaultValues\":{\"6eq\":{\"type\":\"number\",\"value\":0},\"iiw\":{\"type\":\"number\",\"value\":0.11}}},\"type\":\"subGraphOutputNode\",\"width\":160,\"height\":121,\"dragging\":false,\"position\":{\"x\":649.301650118796,\"y\":-921.5106663745356},\"selected\":false,\"positionAbsolute\":{\"x\":649.301650118796,\"y\":-921.5106663745356}}],\"viewport\":{\"x\":824.535160860398,\"y\":1641.9231904708736,\"zoom\":0.9645981845841377}},\"variableName\":\"subGraphNode_oJSJr\"},\"type\":\"subGraphNode\",\"dragging\":false,\"position\":{\"x\":-498.86813011284795,\"y\":1508.0629367974332},\"selected\":false,\"positionAbsolute\":{\"x\":-498.86813011284795,\"y\":1508.0629367974332}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_jgQaY\",\"data\":{\"label\":\"operatorNode_jgQaY\",\"operator\":1,\"variableName\":\"operatorNode_jgQaY\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0.6}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-495.59649342522175,\"y\":1609.0624487892528},\"selected\":false,\"positionAbsolute\":{\"x\":-495.59649342522175,\"y\":1609.0624487892528}},{\"width\":192,\"height\":147,\"id\":\"mathNode_iAjOJ\",\"data\":{\"label\":\"mathNode_iAjOJ\",\"fnName\":\"max\",\"variableName\":\"mathNode_iAjOJ\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0},\"math_fn_input_1\":{\"type\":\"number\",\"value\":0}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-229.89802163985513,\"y\":1508.8041718538868},\"selected\":false,\"positionAbsolute\":{\"x\":-229.89802163985513,\"y\":1508.8041718538868}},{\"width\":192,\"height\":94,\"id\":\"timeNode_ElBpW\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_ElBpW\",\"variableName\":\"timeNode_ElBpW\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-493.14213680322473,\"y\":1833.6392201767603},\"selected\":false,\"positionAbsolute\":{\"x\":-493.14213680322473,\"y\":1833.6392201767603}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_VQhMz\",\"data\":{\"label\":\"operatorNode_VQhMz\",\"operator\":2,\"variableName\":\"operatorNode_VQhMz\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":4},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-492.11798564804536,\"y\":1953.5806969647022},\"selected\":false,\"positionAbsolute\":{\"x\":-492.11798564804536,\"y\":1953.5806969647022}},{\"width\":192,\"height\":120,\"id\":\"mathNode_whEFp\",\"data\":{\"label\":\"mathNode_whEFp\",\"fnName\":\"sin\",\"variableName\":\"mathNode_whEFp\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-218.53006999358354,\"y\":1829.8838308007985},\"selected\":false,\"positionAbsolute\":{\"x\":-218.53006999358354,\"y\":1829.8838308007985}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_dWblm\",\"data\":{\"label\":\"operatorNode_dWblm\",\"operator\":3,\"variableName\":\"operatorNode_dWblm\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":4}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-217.1828295504121,\"y\":1966.7076173732787},\"selected\":false,\"positionAbsolute\":{\"x\":-217.1828295504121,\"y\":1966.7076173732787}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_LLFtU\",\"data\":{\"label\":\"operatorNode_LLFtU\",\"operator\":0,\"variableName\":\"operatorNode_LLFtU\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":0.4}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":33.2847925028634,\"y\":1876.5992708268132},\"selected\":false,\"positionAbsolute\":{\"x\":33.2847925028634,\"y\":1876.5992708268132}},{\"width\":352,\"height\":344,\"id\":\"visualizationNode_NaoHI\",\"data\":{\"label\":\"visualizationNode_NaoHI\",\"variableName\":\"visualizationNode_NaoHI\"},\"type\":\"visualizationNode\",\"dragging\":false,\"position\":{\"x\":1115.7093203994443,\"y\":1844.59852329398},\"selected\":false,\"positionAbsolute\":{\"x\":1115.7093203994443,\"y\":1844.59852329398}},{\"width\":192,\"height\":94,\"id\":\"timeNode_feYGm\",\"data\":{\"time\":0,\"type\":\"currentTime\",\"label\":\"timeNode_feYGm\",\"variableName\":\"timeNode_feYGm\"},\"type\":\"timeNode\",\"dragging\":false,\"position\":{\"x\":-877.2732670613603,\"y\":654.4532310850242},\"selected\":false,\"positionAbsolute\":{\"x\":-877.2732670613603,\"y\":654.4532310850242}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_joBTr\",\"data\":{\"label\":\"operatorNode_joBTr\",\"operator\":2,\"variableName\":\"operatorNode_joBTr\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":16},\"operand_2\":{\"type\":\"number\",\"value\":0}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-621.243495541155,\"y\":645.9020046362272},\"selected\":false,\"positionAbsolute\":{\"x\":-621.243495541155,\"y\":645.9020046362272}},{\"width\":192,\"height\":120,\"id\":\"mathNode_kpKtD\",\"data\":{\"label\":\"mathNode_kpKtD\",\"fnName\":\"sin\",\"variableName\":\"mathNode_kpKtD\",\"defaultValues\":{\"math_fn_input_0\":{\"type\":\"number\",\"value\":0}}},\"type\":\"mathNode\",\"dragging\":false,\"position\":{\"x\":-878.2763850512678,\"y\":807.4085510041293},\"selected\":false,\"positionAbsolute\":{\"x\":-878.2763850512678,\"y\":807.4085510041293}},{\"width\":192,\"height\":147,\"id\":\"operatorNode_yQfpK\",\"data\":{\"label\":\"operatorNode_yQfpK\",\"operator\":3,\"variableName\":\"operatorNode_yQfpK\",\"defaultValues\":{\"operand_1\":{\"type\":\"number\",\"value\":0},\"operand_2\":{\"type\":\"number\",\"value\":3}}},\"type\":\"operatorNode\",\"dragging\":false,\"position\":{\"x\":-615.1763896587556,\"y\":818.1954524095081},\"selected\":false,\"positionAbsolute\":{\"x\":-615.1763896587556,\"y\":818.1954524095081}},{\"width\":208,\"height\":200,\"id\":\"conditionNode_XgQXb\",\"data\":{\"label\":\"conditionNode_XgQXb\",\"operator\":0,\"variableName\":\"conditionNode_XgQXb\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":0},\"condition_b\":{\"type\":\"number\",\"value\":0.05},\"condition_true\":{\"type\":\"number\",\"value\":0},\"condition_false\":{\"type\":\"number\",\"value\":0}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":809.6717517001849,\"y\":873.5759478310813},\"selected\":false,\"positionAbsolute\":{\"x\":809.6717517001849,\"y\":873.5759478310813}},{\"width\":204,\"height\":200,\"id\":\"conditionNode_nhWuo\",\"data\":{\"label\":\"conditionNode_nhWuo\",\"operator\":3,\"variableName\":\"conditionNode_nhWuo\",\"defaultValues\":{\"condition_a\":{\"type\":\"number\",\"value\":0},\"condition_b\":{\"type\":\"number\",\"value\":1},\"condition_true\":{\"type\":\"number\",\"value\":0.7},\"condition_false\":{\"type\":\"number\",\"value\":0}}},\"type\":\"conditionNode\",\"dragging\":false,\"position\":{\"x\":578.3203197832631,\"y\":567.5960512815647},\"selected\":false,\"positionAbsolute\":{\"x\":578.3203197832631,\"y\":567.5960512815647}},{\"width\":192,\"height\":64,\"id\":\"mouseDownNode_pnCxm\",\"data\":{\"label\":\"mouseDownNode_pnCxm\",\"variableName\":\"mouseDownNode_pnCxm\"},\"type\":\"mouseDownNode\",\"dragging\":false,\"position\":{\"x\":261.28350325327415,\"y\":442.97024571225745},\"selected\":false,\"positionAbsolute\":{\"x\":261.28350325327415,\"y\":442.97024571225745}}],\"edges\":[{\"id\":\"reactflow__edge-subGraphNode_bLsvu6eq-modelBlendshapesOutput_fnNmsmodel_blendshapes_EyeBlinkLeft\",\"source\":\"subGraphNode_bLsvu\",\"target\":\"modelBlendshapesOutput_fnNms\",\"selected\":false,\"sourceHandle\":\"6eq\",\"targetHandle\":\"model_blendshapes_EyeBlinkLeft\"},{\"id\":\"reactflow__edge-subGraphNode_bLsvu6eq-modelBlendshapesOutput_fnNmsmodel_blendshapes_EyeBlinkRight\",\"source\":\"subGraphNode_bLsvu\",\"target\":\"modelBlendshapesOutput_fnNms\",\"selected\":false,\"sourceHandle\":\"6eq\",\"targetHandle\":\"model_blendshapes_EyeBlinkRight\"},{\"id\":\"reactflow__edge-mp_blendshapes_input_MXRytmp_blendshapes_Mouth_Open-subGraphNode_BkbhMmt5\",\"source\":\"mp_blendshapes_input_MXRyt\",\"target\":\"subGraphNode_BkbhM\",\"selected\":false,\"sourceHandle\":\"mp_blendshapes_Mouth_Open\",\"targetHandle\":\"mt5\"},{\"id\":\"reactflow__edge-mp_blendshapes_input_MXRytmp_blendshapes_Volume-subGraphNode_BkbhMu7m\",\"source\":\"mp_blendshapes_input_MXRyt\",\"target\":\"subGraphNode_BkbhM\",\"selected\":false,\"sourceHandle\":\"mp_blendshapes_Volume\",\"targetHandle\":\"u7m\"},{\"id\":\"reactflow__edge-timeNode_dSdmTtime-operatorNode_Gbkczoperand_2\",\"source\":\"timeNode_dSdmT\",\"target\":\"operatorNode_Gbkcz\",\"sourceHandle\":\"time\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_Gbkczoutput-mathNode_iIGcRmath_fn_input_0\",\"source\":\"operatorNode_Gbkcz\",\"target\":\"mathNode_iIGcR\",\"sourceHandle\":\"output\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-mathNode_iIGcRoutput-operatorNode_nUkryoperand_1\",\"source\":\"mathNode_iIGcR\",\"target\":\"operatorNode_nUkry\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_nUkryoutput-conditionNode_zejtXcondition_a\",\"source\":\"operatorNode_nUkry\",\"target\":\"conditionNode_zejtX\",\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-operatorNode_nUkryoutput-conditionNode_zejtXcondition_true\",\"source\":\"operatorNode_nUkry\",\"target\":\"conditionNode_zejtX\",\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-conditionNode_zejtXoutput-visualizationNode_QxRJPvisualization_input\",\"source\":\"conditionNode_zejtX\",\"target\":\"visualizationNode_QxRJP\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-conditionNode_zejtXoutput-modelBlendshapesOutput_fnNmsmodel_blendshapes_LeftEar\",\"source\":\"conditionNode_zejtX\",\"target\":\"modelBlendshapesOutput_fnNms\",\"sourceHandle\":\"output\",\"targetHandle\":\"model_blendshapes_LeftEar\"},{\"id\":\"reactflow__edge-conditionNode_zejtXoutput-modelBlendshapesOutput_fnNmsmodel_blendshapes_RIghtEar\",\"source\":\"conditionNode_zejtX\",\"target\":\"modelBlendshapesOutput_fnNms\",\"selected\":false,\"sourceHandle\":\"output\",\"targetHandle\":\"model_blendshapes_RIghtEar\"},{\"id\":\"reactflow__edge-subGraphNode_oJSJr6eq-operatorNode_jgQaYoperand_1\",\"source\":\"subGraphNode_oJSJr\",\"target\":\"operatorNode_jgQaY\",\"sourceHandle\":\"6eq\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_jgQaYoutput-mathNode_iAjOJmath_fn_input_0\",\"source\":\"operatorNode_jgQaY\",\"target\":\"mathNode_iAjOJ\",\"sourceHandle\":\"output\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-mathNode_iAjOJoutput-conditionNode_zejtXcondition_false\",\"source\":\"mathNode_iAjOJ\",\"target\":\"conditionNode_zejtX\",\"sourceHandle\":\"output\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-timeNode_ElBpWtime-operatorNode_VQhMzoperand_2\",\"source\":\"timeNode_ElBpW\",\"target\":\"operatorNode_VQhMz\",\"sourceHandle\":\"time\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_VQhMzoutput-mathNode_whEFpmath_fn_input_0\",\"source\":\"operatorNode_VQhMz\",\"target\":\"mathNode_whEFp\",\"sourceHandle\":\"output\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-mathNode_whEFpoutput-operatorNode_dWblmoperand_1\",\"source\":\"mathNode_whEFp\",\"target\":\"operatorNode_dWblm\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_dWblmoutput-operatorNode_LLFtUoperand_1\",\"source\":\"operatorNode_dWblm\",\"target\":\"operatorNode_LLFtU\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_LLFtUoutput-visualizationNode_NaoHIvisualization_input\",\"source\":\"operatorNode_LLFtU\",\"target\":\"visualizationNode_NaoHI\",\"sourceHandle\":\"output\",\"targetHandle\":\"visualization_input\"},{\"id\":\"reactflow__edge-timeNode_feYGmtime-operatorNode_joBTroperand_2\",\"source\":\"timeNode_feYGm\",\"target\":\"operatorNode_joBTr\",\"sourceHandle\":\"time\",\"targetHandle\":\"operand_2\"},{\"id\":\"reactflow__edge-operatorNode_joBTroutput-mathNode_kpKtDmath_fn_input_0\",\"source\":\"operatorNode_joBTr\",\"target\":\"mathNode_kpKtD\",\"sourceHandle\":\"output\",\"targetHandle\":\"math_fn_input_0\"},{\"id\":\"reactflow__edge-mathNode_kpKtDoutput-operatorNode_yQfpKoperand_1\",\"source\":\"mathNode_kpKtD\",\"target\":\"operatorNode_yQfpK\",\"sourceHandle\":\"output\",\"targetHandle\":\"operand_1\"},{\"id\":\"reactflow__edge-operatorNode_yQfpKoutput-conditionNode_XgQXbcondition_true\",\"source\":\"operatorNode_yQfpK\",\"target\":\"conditionNode_XgQXb\",\"sourceHandle\":\"output\",\"targetHandle\":\"condition_true\"},{\"id\":\"reactflow__edge-operatorNode_nUkryoutput-modelBlendshapesOutput_fnNmsmodel_blendshapes_Body\",\"source\":\"operatorNode_nUkry\",\"target\":\"modelBlendshapesOutput_fnNms\",\"sourceHandle\":\"output\",\"targetHandle\":\"model_blendshapes_Body\"},{\"id\":\"reactflow__edge-mouseDownNode_pnCxmmouseDown-conditionNode_nhWuocondition_a\",\"source\":\"mouseDownNode_pnCxm\",\"target\":\"conditionNode_nhWuo\",\"sourceHandle\":\"mouseDown\",\"targetHandle\":\"condition_a\"},{\"id\":\"reactflow__edge-conditionNode_XgQXboutput-modelBlendshapesOutput_fnNmsmodel_blendshapes_MouthY\",\"source\":\"conditionNode_XgQXb\",\"target\":\"modelBlendshapesOutput_fnNms\",\"sourceHandle\":\"output\",\"targetHandle\":\"model_blendshapes_MouthY\"},{\"id\":\"reactflow__edge-subGraphNode_BkbhMlb6-conditionNode_nhWuocondition_false\",\"source\":\"subGraphNode_BkbhM\",\"target\":\"conditionNode_nhWuo\",\"sourceHandle\":\"lb6\",\"targetHandle\":\"condition_false\"},{\"id\":\"reactflow__edge-conditionNode_nhWuooutput-modelBlendshapesOutput_fnNmsmodel_blendshapes_Mouth_Close\",\"source\":\"conditionNode_nhWuo\",\"target\":\"modelBlendshapesOutput_fnNms\",\"sourceHandle\":\"output\",\"targetHandle\":\"model_blendshapes_Mouth_Close\"},{\"id\":\"reactflow__edge-conditionNode_nhWuooutput-conditionNode_XgQXbcondition_a\",\"source\":\"conditionNode_nhWuo\",\"target\":\"conditionNode_XgQXb\",\"sourceHandle\":\"output\",\"targetHandle\":\"condition_a\"}],\"viewport\":{\"x\":728.8115168838503,\"y\":-67.54260588794455,\"zoom\":0.5}}",
+        ""
+      ]
+    },
+    {
+      "id": 341,
+      "type": "Mesh_Delete",
+      "pos": [
+        -1191,
+        1059
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 352
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            944
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_Delete"
+      },
+      "widgets_values": [
+        "ONLY_FACE"
+      ]
+    },
+    {
+      "id": 365,
+      "type": "Reroute",
+      "pos": [
+        -1621,
+        795
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 5028
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "IMAGE",
+          "links": [
+            578,
+            580,
+            6964
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 543,
+      "type": "SAM MultiLayer",
+      "pos": [
+        -1480,
+        747
+      ],
+      "size": {
+        "0": 210,
+        "1": 250
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 6964
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SAM_PROMPT",
+          "type": "SAM_PROMPT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "LeftEye",
+          "type": "IMAGE",
+          "links": [
+            7100
+          ],
+          "slot_index": 2
+        },
+        {
+          "name": "RightEye",
+          "type": "IMAGE",
+          "links": [
+            7101
+          ],
+          "slot_index": 3
+        },
+        {
+          "name": "Mouth",
+          "type": "IMAGE",
+          "links": [
+            7102
+          ],
+          "slot_index": 4
+        },
+        {
+          "name": "LeftEar",
+          "type": "IMAGE",
+          "links": [
+            7103
+          ],
+          "slot_index": 5
+        },
+        {
+          "name": "RightEar",
+          "type": "IMAGE",
+          "links": [
+            7104
+          ],
+          "slot_index": 6
+        },
+        {
+          "name": "Body",
+          "type": "IMAGE",
+          "links": [
+            7105
+          ],
+          "slot_index": 7
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAM MultiLayer"
+      },
+      "widgets_values": [
+        "sam_vit_h_4b8939.pth",
+        "image (7).png",
+        "{\"LeftEye\":[{\"x\":418,\"y\":273,\"label\":1},{\"x\":443,\"y\":258,\"label\":1},{\"x\":448,\"y\":228,\"label\":0},{\"x\":377,\"y\":291,\"label\":0},{\"x\":423,\"y\":245,\"label\":1}],\"RightEye\":[{\"x\":523,\"y\":252,\"label\":1},{\"x\":556,\"y\":258,\"label\":1},{\"x\":543,\"y\":277,\"label\":1},{\"x\":574,\"y\":245,\"label\":0},{\"x\":511,\"y\":234,\"label\":0},{\"x\":574,\"y\":287,\"label\":0}],\"Mouth\":[{\"x\":429,\"y\":363,\"label\":1},{\"x\":521,\"y\":363,\"label\":1},{\"x\":445,\"y\":307,\"label\":0},{\"x\":417,\"y\":356,\"label\":1},{\"x\":454,\"y\":381,\"label\":1}],\"LeftEar\":[{\"x\":349,\"y\":199,\"label\":1}],\"RightEar\":[{\"x\":675,\"y\":184,\"label\":1},{\"x\":644,\"y\":213,\"label\":1},{\"x\":595,\"y\":198,\"label\":1}],\"Body\":[{\"x\":515,\"y\":778,\"label\":1},{\"x\":412,\"y\":415,\"label\":0},{\"x\":572,\"y\":405,\"label\":0},{\"x\":647,\"y\":710,\"label\":1},{\"x\":388,\"y\":698,\"label\":1},{\"x\":405,\"y\":847,\"label\":1},{\"x\":508,\"y\":576,\"label\":1},{\"x\":621,\"y\":862,\"label\":1},{\"x\":623,\"y\":896,\"label\":1},{\"x\":644,\"y\":891,\"label\":1},{\"x\":597,\"y\":891,\"label\":1},{\"x\":696,\"y\":881,\"label\":0},{\"x\":491,\"y\":899,\"label\":0},{\"x\":397,\"y\":888,\"label\":1},{\"x\":420,\"y\":891,\"label\":1}]}",
+        ""
+      ]
+    },
+    {
+      "id": 524,
+      "type": "Object_CreateMeshLayer",
+      "pos": [
+        -1190,
+        750
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7100,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            4836
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            4838
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_CreateMeshLayer"
+      },
+      "widgets_values": [
+        0.7,
+        0.7,
+        "LeftEye",
+        1.2000000000000002,
+        1.2000000000000002,
+        1.2000000000000002,
+        1.2000000000000002,
+        643428725128930,
+        "randomize"
+      ]
+    },
+    {
+      "id": 468,
+      "type": "Object_CreateMeshLayer",
+      "pos": [
+        -1190,
+        800
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7101
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            561
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            573
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_CreateMeshLayer"
+      },
+      "widgets_values": [
+        0.7,
+        0.7,
+        "RightEye",
+        1.2,
+        1.2,
+        1.2000000000000002,
+        1.2000000000000002,
+        65013922109299,
+        "randomize"
+      ]
+    },
+    {
+      "id": 469,
+      "type": "Object_CreateMeshLayer",
+      "pos": [
+        -1190,
+        850
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7102
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            564
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            574
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_CreateMeshLayer"
+      },
+      "widgets_values": [
+        0.7,
+        0.7,
+        "Mouth",
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        587317597728973,
+        "randomize"
+      ]
+    },
+    {
+      "id": 531,
+      "type": "Object_CreateMeshLayer",
+      "pos": [
+        -1190,
+        900
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7103
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            5255
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5625
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_CreateMeshLayer"
+      },
+      "widgets_values": [
+        true,
+        0.7,
+        "LeftEar",
+        1,
+        1,
+        1.2000000000000002,
+        1.2000000000000002,
+        504736365940581,
+        "randomize"
+      ]
+    },
+    {
+      "id": 532,
+      "type": "Object_CreateMeshLayer",
+      "pos": [
+        -1190,
+        950
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7104
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            5256
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5666
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_CreateMeshLayer"
+      },
+      "widgets_values": [
+        true,
+        0.7,
+        "RightEar",
+        1,
+        1,
+        1.2000000000000002,
+        1.2000000000000002,
+        222874949330143,
+        "randomize"
+      ]
+    },
+    {
+      "id": 537,
+      "type": "Object_CreateMeshLayer",
+      "pos": [
+        -1190,
+        1000
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7105
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            5738
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            6020
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_CreateMeshLayer"
+      },
+      "widgets_values": [
+        true,
+        0.7,
+        "Body",
+        1,
+        1,
+        1.1,
+        1.2000000000000002,
+        922930834683963,
+        "randomize"
+      ]
+    },
+    {
+      "id": 471,
+      "type": "PreviewImage",
+      "pos": [
+        -1750,
+        410
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4838
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 472,
+      "type": "PreviewImage",
+      "pos": [
+        -1470,
+        410
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 573
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 473,
+      "type": "PreviewImage",
+      "pos": [
+        -1200,
+        410
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 574
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 535,
+      "type": "PreviewImage",
+      "pos": [
+        -930,
+        410
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 5625
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 536,
+      "type": "PreviewImage",
+      "pos": [
+        -690,
+        410
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 5666,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 459,
+      "type": "Mesh_JoinMesh",
+      "pos": [
+        -747,
+        770
+      ],
+      "size": {
+        "0": 210,
+        "1": 202
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 4836
+        },
+        {
+          "name": "BPY_OBJ2",
+          "type": "BPY_OBJ",
+          "link": 561
+        },
+        {
+          "name": "BPY_OBJ3",
+          "type": "BPY_OBJ",
+          "link": 564
+        },
+        {
+          "name": "BPY_OBJ4",
+          "type": "BPY_OBJ",
+          "link": 944
+        },
+        {
+          "name": "BPY_OBJ5",
+          "type": "BPY_OBJ",
+          "link": 5255
+        },
+        {
+          "name": "BPY_OBJ6",
+          "type": "BPY_OBJ",
+          "link": 5256
+        },
+        {
+          "name": "BPY_OBJ7",
+          "type": "BPY_OBJ",
+          "link": 5738
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            5313
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_JoinMesh"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 539,
+      "type": "PreviewImage",
+      "pos": [
+        -440,
+        420
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 6020
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 478,
+      "type": "Reroute",
+      "pos": [
+        -187,
+        823
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 5313
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "BPY_OBJ",
+          "links": [
+            8519
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false,
+        "routeType": "input"
+      },
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 303,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        883
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8519
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8520
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "EyeBlinkLeft",
+        "LeftEye",
+        1,
+        0.25,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 361,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        923
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8520
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8521
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "EyeBlinkRight",
+        "RightEye",
+        1,
+        0.25,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 435,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        963
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8521
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8522
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "Mouth_Puck",
+        "Mouth",
+        0.5,
+        1,
+        -0.002,
+        0.03,
+        0,
+        0,
+        0,
+        -0.08,
+        0
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 433,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        1003
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8522
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8523
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "Mouth_Close",
+        "Mouth",
+        1.1,
+        0.05,
+        0,
+        0.04,
+        0,
+        0,
+        -0.03,
+        1,
+        0
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 434,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        1043
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8523
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8524
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "Mouth_Form",
+        "Mouth",
+        1,
+        0.9,
+        0,
+        0.025,
+        0,
+        0,
+        0,
+        1,
+        -0.5
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 437,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        1083
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8524
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8525
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "MouthY",
+        "Mouth",
+        0.9,
+        1.1,
+        0,
+        0,
+        0,
+        0,
+        0.1,
+        1,
+        0
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 436,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        1123
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8525
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8526
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "Mouth_wide",
+        "Mouth",
+        1.1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 533,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        1163
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8526
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8527
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "LeftEar",
+        "LeftEar",
+        1.2,
+        0.7000000000000001,
+        0,
+        0,
+        -0.3,
+        -0.1,
+        -0.1,
+        1,
+        0.1
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 534,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        1203
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8527
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8528
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "RIghtEar",
+        "RightEar",
+        1.2,
+        0.7000000000000001,
+        0,
+        0,
+        0.3,
+        0.1,
+        -0.1,
+        1,
+        0.1
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 538,
+      "type": "Mesh_ModifyShapeKey",
+      "pos": [
+        -187,
+        1243
+      ],
+      "size": {
+        "0": 253,
+        "1": 298
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 8528
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            8529
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mesh_ModifyShapeKey"
+      },
+      "widgets_values": [
+        "Body",
+        "Body",
+        1,
+        0.85,
+        0,
+        0.05,
+        0,
+        0,
+        -0.8,
+        1,
+        0
+      ],
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 479,
+      "type": "Reroute",
+      "pos": [
+        -187,
+        1253
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 8529
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "BPY_OBJ",
+          "links": [
+            4035
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false,
+        "routeType": "output"
+      },
+      "parentId": "320b26eb-e869-4d04-9e97-076844444bef"
+    },
+    {
+      "id": 476,
+      "type": "Object_MatchTextureAspectRatio",
+      "pos": [
+        225,
+        732
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 4035,
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 580
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            575
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_MatchTextureAspectRatio"
+      },
+      "widgets_values": [
+        0.001
+      ]
+    },
+    {
+      "id": 475,
+      "type": "Object_PlaneTextureUnwrap",
+      "pos": [
+        239,
+        868
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 575
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 578
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "links": [
+            7835
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Object_PlaneTextureUnwrap"
+      },
+      "widgets_values": [
+        1,
+        "Texture"
+      ]
+    },
+    {
+      "id": 521,
+      "type": "AvatarMainOutput",
+      "pos": [
+        652,
+        942
+      ],
+      "size": {
+        "0": 315,
+        "1": 218
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BPY_OBJ",
+          "type": "BPY_OBJ",
+          "link": 7835
+        },
+        {
+          "name": "BPY_OBJS",
+          "type": "BPY_OBJS",
+          "link": null
+        },
+        {
+          "name": "SHAPE_FLOW",
+          "type": "SHAPE_FLOW",
+          "link": 7489
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AvatarMainOutput"
+      },
+      "widgets_values": [
+        false,
+        false,
+        "",
+        "out",
+        "AVA",
+        "Increment"
+      ]
+    }
+  ],
+  "links": [
+    [
+      352,
+      340,
+      0,
+      341,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      561,
+      468,
+      0,
+      459,
+      1,
+      "BPY_OBJ"
+    ],
+    [
+      564,
+      469,
+      0,
+      459,
+      2,
+      "BPY_OBJ"
+    ],
+    [
+      573,
+      468,
+      1,
+      472,
+      0,
+      "IMAGE"
+    ],
+    [
+      574,
+      469,
+      1,
+      473,
+      0,
+      "IMAGE"
+    ],
+    [
+      575,
+      476,
+      0,
+      475,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      578,
+      365,
+      0,
+      475,
+      1,
+      "IMAGE"
+    ],
+    [
+      580,
+      365,
+      0,
+      476,
+      1,
+      "IMAGE"
+    ],
+    [
+      944,
+      341,
+      0,
+      459,
+      3,
+      "BPY_OBJ"
+    ],
+    [
+      4035,
+      479,
+      0,
+      476,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      4836,
+      524,
+      0,
+      459,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      4838,
+      524,
+      1,
+      471,
+      0,
+      "IMAGE"
+    ],
+    [
+      5028,
+      528,
+      0,
+      365,
+      0,
+      "*"
+    ],
+    [
+      5255,
+      531,
+      0,
+      459,
+      4,
+      "BPY_OBJ"
+    ],
+    [
+      5256,
+      532,
+      0,
+      459,
+      5,
+      "BPY_OBJ"
+    ],
+    [
+      5313,
+      459,
+      0,
+      478,
+      0,
+      "*"
+    ],
+    [
+      5625,
+      531,
+      1,
+      535,
+      0,
+      "IMAGE"
+    ],
+    [
+      5666,
+      532,
+      1,
+      536,
+      0,
+      "IMAGE"
+    ],
+    [
+      5738,
+      537,
+      0,
+      459,
+      6,
+      "BPY_OBJ"
+    ],
+    [
+      6020,
+      537,
+      1,
+      539,
+      0,
+      "IMAGE"
+    ],
+    [
+      6964,
+      365,
+      0,
+      543,
+      0,
+      "IMAGE"
+    ],
+    [
+      7100,
+      543,
+      1,
+      524,
+      0,
+      "IMAGE"
+    ],
+    [
+      7101,
+      543,
+      2,
+      468,
+      0,
+      "IMAGE"
+    ],
+    [
+      7102,
+      543,
+      3,
+      469,
+      0,
+      "IMAGE"
+    ],
+    [
+      7103,
+      543,
+      4,
+      531,
+      0,
+      "IMAGE"
+    ],
+    [
+      7104,
+      543,
+      5,
+      532,
+      0,
+      "IMAGE"
+    ],
+    [
+      7105,
+      543,
+      6,
+      537,
+      0,
+      "IMAGE"
+    ],
+    [
+      7489,
+      519,
+      0,
+      521,
+      2,
+      "SHAPE_FLOW"
+    ],
+    [
+      7835,
+      475,
+      0,
+      521,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8519,
+      478,
+      0,
+      303,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8520,
+      303,
+      0,
+      361,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8521,
+      361,
+      0,
+      435,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8522,
+      435,
+      0,
+      433,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8523,
+      433,
+      0,
+      434,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8524,
+      434,
+      0,
+      437,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8525,
+      437,
+      0,
+      436,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8526,
+      436,
+      0,
+      533,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8527,
+      533,
+      0,
+      534,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8528,
+      534,
+      0,
+      538,
+      0,
+      "BPY_OBJ"
+    ],
+    [
+      8529,
+      538,
+      0,
+      479,
+      0,
+      "*"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Shape Key",
+      "bounding": [
+        -197,
+        773,
+        273,
+        520
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "id": "320b26eb-e869-4d04-9e97-076844444bef",
+      "isStack": true
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
