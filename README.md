@@ -40,6 +40,11 @@ Download: Save the image, and drag into Comfyui or [Simple Shape Flow](https://g
 
 Download: Save the image, and drag into Comfyui
 
+| ![ComfyUI_09609_](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/caa98eec-4fb2-449d-9558-5d4a45e07580) | ![dog_480p15_high](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/9fb701c9-f25c-408f-b96c-749773a53bd2) | 
+| :--: | :--: |
+
+Download: Save the image, and drag into Comfyui or [Dog Workflow](https://github.com/avatechai/avatar-graph-comfyui/blob/main/workflow_templates/Dog_workflow.json)
+
 # Best practices for image input
 
 ### 1. Generate a new character image
