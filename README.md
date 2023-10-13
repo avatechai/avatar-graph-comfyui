@@ -121,7 +121,7 @@ Expand to see all the available nodes description
 
 | Name                 | Description                                                                                           | Preview                                                                                                                                                              |
 | -------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Avatar Main Output` | The primary output of the .ava file. The embeded Avatar View will auto update with this node's output | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270592519-6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a.png" width="300"> |
+| `Avatar Main Output` | The primary output of the .ava file. The embedded Avatar View will auto update with this node's output | <img src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270592519-6a9a8bb4-05ec-4a2e-98bf-194b6af3a62a.png" width="300"> |
 
 </details>
 
