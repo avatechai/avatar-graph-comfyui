@@ -97,7 +97,7 @@ Download: [ControlNet Gen](https://github.com/avatechai/avatar-graph-comfyui/tre
 
 # Custom Nodes
 
-Expand to see all the available nodes description
+Expand to see all the available nodes description.
 
 <details>
 <summary> All Custom Nodes </summary>
