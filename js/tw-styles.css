@@ -644,6 +644,12 @@ html {
   outline-color: hsl(var(--bc) / 1);
 }
 
+.sharebtn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
 .popup ~ .litecontextmenu {
 	transform: scale(1.3);
 }
