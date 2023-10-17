@@ -14,7 +14,7 @@ import {
   alertDialog,
   showPreview,
   shareLoading,
-  previewModelId
+  previewModelId,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -23,6 +23,7 @@ import { Container } from "./Container.js";
 import { initModel, loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 import { drawSegment, getClicks } from "./LayerEditor.js";
+import { infoDialog } from "./dialog.js";
 
 const stylesheet = document.createElement("link");
 stylesheet.setAttribute("type", "text/css");
@@ -615,6 +616,24 @@ const ext = {
   },
 };
 
+async function uploadPreview() {
+  if (fileName.val == "")
+    app.ui.dialog.show("Please create your avatar first.");
+  else {
+    const file = await fetch(fileName.val).then((e) => e.arrayBuffer());
+    const model = await fetch("http://127.0.0.1:3000/api/share", {
+      method: "POST",
+      body: file,
+    }).then((e) => e.json());
+
+    infoDialog.show(
+      "Preview your avatar: https://editor.avatech.ai/viewer?objectId=" +
+        model.model_id,
+    );
+    previewModelId.val = model.model_id;
+  }
+}
+
 function injectUIComponentToComfyuimenu() {
   const menu = document.querySelector(".comfy-menu");
   const avatarPreview = document.createElement("button");
@@ -636,38 +655,21 @@ function injectUIComponentToComfyuimenu() {
         {
           title: "Create new share link",
           callback: async () => {
-            if (fileName.val == "")
-              app.ui.dialog.show("Please create your avatar first.");
-            else {
-              if (shareLoading.val) return;
+            shareAvatar.textContent = "Loading...";
+            shareAvatar.append(dropdown);
 
-              shareLoading.val = true;
-              shareAvatar.textContent = "Loading...";
-              shareAvatar.append(dropdown);
+            await uploadPreview();
 
-              const file = await fetch(fileName.val).then((e) =>
-                e.arrayBuffer(),
-              );
-              const model = await fetch("http://127.0.0.1:3000/api/share", {
-                method: "POST",
-                body: file,
-              }).then((e) => e.json());
-              app.ui.dialog.show(
-                "Preview your avatar: https://editor.avatech.ai/viewer?objectId=" +
-                  model.model_id,
-              );
-              previewModelId.val = model.model_id;
-
-              shareLoading.val = false;
-              shareAvatar.textContent = "Share Avatar";
-              shareAvatar.append(dropdown);
-            }
+            shareLoading.val = false;
+            shareAvatar.textContent = "Share Avatar";
+            shareAvatar.append(dropdown);
           },
         },
         {
           title: "Update avatar in current share link",
           callback: async () => {
-            if (!previewModelId.val) app.ui.dialog.show("Please share your avatar first.");
+            if (!previewModelId.val)
+              app.ui.dialog.show("Please share your avatar first.");
             else {
               if (shareLoading.val) return;
 
@@ -685,9 +687,11 @@ function injectUIComponentToComfyuimenu() {
                   body: file,
                 },
               ).then((e) => e.json());
-              app.ui.dialog.show(
+
+              infoDialog.show(
                 "Preview updated: https://editor.avatech.ai/viewer?objectId=" +
-                  model.model_id,
+                  model.model_id +
+                  "\n Remember to hard refresh before checking out the new preview!",
               );
 
               shareLoading.val = false;
@@ -713,31 +717,21 @@ function injectUIComponentToComfyuimenu() {
   shareAvatar.onclick = async () => {
     if (shareLoading.val) return;
 
-    if (fileName.val == "")
-      app.ui.dialog.show("Please create your avatar first.");
-    else if (!previewModelId.val) {
+    if (!previewModelId.val) {
       shareLoading.val = true;
       shareAvatar.textContent = "Loading...";
       shareAvatar.append(dropdown);
 
-      const file = await fetch(fileName.val).then((e) => e.arrayBuffer());
-
-      const model = await fetch("http://127.0.0.1:3000/api/share", {
-        method: "POST",
-        body: file,
-      }).then((e) => e.json());
-      app.ui.dialog.show(
-        "Preview your avatar: https://editor.avatech.ai/viewer?objectId=" +
-          model.model_id,
-      );
-      previewModelId.val = model.model_id;
+      await uploadPreview();
 
       shareLoading.val = false;
       shareAvatar.textContent = "Share Avatar";
       shareAvatar.append(dropdown);
     } else {
-      app.ui.dialog.show(
-        "Preview avatar url: https://editor.avatech.ai/viewer?objectId=" + previewModelId.val,
+
+      infoDialog.show(
+        "Preview avatar url: https://editor.avatech.ai/viewer?objectId=" +
+          previewModelId.val,
       );
     }
   };
