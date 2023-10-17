@@ -13,6 +13,8 @@ import {
   loadingCaption,
   alertDialog,
   showPreview,
+  shareLoading,
+  previewModelId
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -620,7 +622,130 @@ function injectUIComponentToComfyuimenu() {
   avatarPreview.onclick = () => {
     showPreview.val = !showPreview.val;
   };
+
+  const dropdown = document.createElement("div");
+  dropdown.textContent = "▼";
+  dropdown.className = "dropdownbtn";
+  dropdown.onclick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    LiteGraph.closeAllContextMenus();
+    const menu = new LiteGraph.ContextMenu(
+      [
+        {
+          title: "Create new share link",
+          callback: async () => {
+            if (fileName.val == "")
+              app.ui.dialog.show("Please create your avatar first.");
+            else {
+              if (shareLoading.val) return;
+
+              shareLoading.val = true;
+              shareAvatar.textContent = "Loading...";
+              shareAvatar.append(dropdown);
+
+              const file = await fetch(fileName.val).then((e) =>
+                e.arrayBuffer(),
+              );
+              const model = await fetch("http://127.0.0.1:3000/api/share", {
+                method: "POST",
+                body: file,
+              }).then((e) => e.json());
+              app.ui.dialog.show(
+                "Preview your avatar: https://editor.avatech.ai/viewer?objectId=" +
+                  model.model_id,
+              );
+              previewModelId.val = model.model_id;
+
+              shareLoading.val = false;
+              shareAvatar.textContent = "Share Avatar";
+              shareAvatar.append(dropdown);
+            }
+          },
+        },
+        {
+          title: "Update avatar in current share link",
+          callback: async () => {
+            if (!previewModelId.val) app.ui.dialog.show("Please share your avatar first.");
+            else {
+              if (shareLoading.val) return;
+
+              shareLoading.val = true;
+              shareAvatar.textContent = "Loading...";
+              shareAvatar.append(dropdown);
+
+              const file = await fetch(fileName.val).then((e) =>
+                e.arrayBuffer(),
+              );
+              const model = await fetch(
+                "http://127.0.0.1:3000/api/share?id=" + previewModelId.val,
+                {
+                  method: "POST",
+                  body: file,
+                },
+              ).then((e) => e.json());
+              app.ui.dialog.show(
+                "Preview updated: https://editor.avatech.ai/viewer?objectId=" +
+                  model.model_id,
+              );
+
+              shareLoading.val = false;
+              shareAvatar.textContent = "Share Avatar";
+              shareAvatar.append(dropdown);
+            }
+          },
+        },
+      ],
+
+      {
+        event: e,
+        scale: 1.3,
+      },
+      window,
+    );
+    menu.root.classList.add("popup");
+  };
+
+  const shareAvatar = document.createElement("button");
+  shareAvatar.textContent = "Share Avatar";
+  shareAvatar.className = "sharebtn";
+  shareAvatar.onclick = async () => {
+    if (shareLoading.val) return;
+
+    if (fileName.val == "")
+      app.ui.dialog.show("Please create your avatar first.");
+    else if (!previewModelId.val) {
+      shareLoading.val = true;
+      shareAvatar.textContent = "Loading...";
+      shareAvatar.append(dropdown);
+
+      const file = await fetch(fileName.val).then((e) => e.arrayBuffer());
+
+      const model = await fetch("http://127.0.0.1:3000/api/share", {
+        method: "POST",
+        body: file,
+      }).then((e) => e.json());
+      app.ui.dialog.show(
+        "Preview your avatar: https://editor.avatech.ai/viewer?objectId=" +
+          model.model_id,
+      );
+      previewModelId.val = model.model_id;
+
+      shareLoading.val = false;
+      shareAvatar.textContent = "Share Avatar";
+      shareAvatar.append(dropdown);
+    } else {
+      app.ui.dialog.show(
+        "Preview avatar url: https://editor.avatech.ai/viewer?objectId=" + previewModelId.val,
+      );
+    }
+  };
+
   menu.append(avatarPreview);
+  menu.append(shareAvatar);
+
+  shareAvatar.append(dropdown);
 }
 
 app.registerExtension(ext);
