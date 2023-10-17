@@ -604,6 +604,47 @@ html {
   }
 }
 
+.comfy-normal-modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 100; /* Sit on top */
+	padding: 30px 30px 10px 30px;
+	background-color: var(--comfy-menu-bg); /* Modal background */
+	box-shadow: 0 0 20px #888888;
+	border-radius: 10px;
+	top: 50%;
+	left: 50%;
+	max-width: 80vw;
+	max-height: 80vh;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	justify-content: center;
+	font-family: monospace;
+	font-size: 15px;
+  color: #FFFFFF;
+}
+
+.comfy-normal-modal p {
+	overflow: auto;
+	white-space: pre-line; /* This will respect line breaks */
+	margin-bottom: 20px; /* Add some margin between the text and the close button*/
+}
+
+.comfy-normal-modal button {
+	font-size: 20px;
+	color: var(--input-text);
+	background-color: var(--comfy-input-bg);
+	border-radius: 8px;
+	border-color: var(--border-color);
+	border-style: solid;
+	margin-top: 2px;
+}
+
+.comfy-normal-modal button:hover {
+	filter: brightness(1.2);
+	cursor: pointer;
+}
+
 .btn {
   display: inline-flex;
   flex-shrink: 0;
