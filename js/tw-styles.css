@@ -605,11 +605,11 @@ html {
 }
 
 .comfy-normal-modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 100; /* Sit on top */
+	display: none; 
+	position: fixed; 
+	z-index: 100; 
 	padding: 30px 30px 10px 30px;
-	background-color: var(--comfy-menu-bg); /* Modal background */
+	background-color: var(--comfy-menu-bg); 
 	box-shadow: 0 0 20px #888888;
 	border-radius: 10px;
 	top: 50%;
@@ -626,8 +626,8 @@ html {
 
 .comfy-normal-modal p {
 	overflow: auto;
-	white-space: pre-line; /* This will respect line breaks */
-	margin-bottom: 20px; /* Add some margin between the text and the close button*/
+	white-space: pre-line; 
+	margin-bottom: 20px;
 }
 
 .comfy-normal-modal button {
