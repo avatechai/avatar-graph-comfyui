@@ -621,7 +621,7 @@ async function uploadPreview() {
     app.ui.dialog.show("Please create your avatar first.");
   else {
     const file = await fetch(fileName.val).then((e) => e.arrayBuffer());
-    const model = await fetch("http://127.0.0.1:3000/api/share", {
+    const model = await fetch("https://labs.avatech.ai/api/share", {
       method: "POST",
       body: file,
     }).then((e) => e.json());
@@ -681,7 +681,7 @@ function injectUIComponentToComfyuimenu() {
                 e.arrayBuffer(),
               );
               const model = await fetch(
-                "http://127.0.0.1:3000/api/share?id=" + previewModelId.val,
+                "https://labs.avatech.ai/api/share?id=" + previewModelId.val,
                 {
                   method: "POST",
                   body: file,
