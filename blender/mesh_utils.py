@@ -239,7 +239,7 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metad
         # print(filepath)
         if filepath.endswith('.ava.glb'):
             new_filepath = filepath.replace('.ava.glb', '.ava')
-            os.rename(filepath, new_filepath)
+            os.replace(filepath, new_filepath)
             filepath = new_filepath
 
     return filepath
