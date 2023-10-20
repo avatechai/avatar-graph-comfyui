@@ -2169,6 +2169,10 @@ details.collapse summary::-webkit-details-marker {
   /* Add some margin between the text and the close button*/
 }
 
+.comfy-normal-modal a {
+  text-decoration-line: underline;
+}
+
 .comfy-normal-modal button {
   font-size: 20px;
   color: var(--input-text);

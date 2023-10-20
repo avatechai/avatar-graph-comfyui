@@ -627,8 +627,9 @@ async function uploadPreview() {
     }).then((e) => e.json());
 
     infoDialog.show(
-      "Preview your avatar: https://editor.avatech.ai/viewer?objectId=" +
-        model.model_id,
+      `Preview avatar url: <a href='https://editor.avatech.ai/viewer?objectId=${model.model_id}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
+        model.model_id +
+        `</a>`,
     );
     previewModelId.val = model.model_id;
   }
@@ -689,9 +690,9 @@ function injectUIComponentToComfyuimenu() {
               ).then((e) => e.json());
 
               infoDialog.show(
-                "Preview updated: https://editor.avatech.ai/viewer?objectId=" +
+                `Preview updated: <a href='https://editor.avatech.ai/viewer?objectId=${model.model_id}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
                   model.model_id +
-                  "\n Remember to hard refresh before checking out the new preview!",
+                  "</a>\n Remember to hard refresh before checking out the new preview!",
               );
 
               shareLoading.val = false;
@@ -728,10 +729,10 @@ function injectUIComponentToComfyuimenu() {
       shareAvatar.textContent = "Share Avatar";
       shareAvatar.append(dropdown);
     } else {
-
       infoDialog.show(
-        "Preview avatar url: https://editor.avatech.ai/viewer?objectId=" +
-          previewModelId.val,
+        `Preview avatar url: <a href='https://editor.avatech.ai/viewer?objectId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
+          previewModelId.val +
+          `</a>`,
       );
     }
   };
