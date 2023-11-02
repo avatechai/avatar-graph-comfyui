@@ -16,7 +16,7 @@ import { van } from "./van.js";
 
 export const iframeSrc = van.state("https://editor.avatech.ai?comfyui=true");
 export const showEditor = van.state(false);
-export const showPreview = van.state(true);
+export const showPreview = van.state(localStorage.getItem("showPreview") == 'true');
 export const previewUrl = van.state("https://editor.avatech.ai/viewer?avatarId=default&hideUI=true&debug=true&width=300&height=300&showAudioControl=true&hideTrigger=true");
 // export const previewUrl = van.state("http://localhost:3006/viewer?avatarId=default&hideUI=true&debug=true&width=300&height=300&showAudioControl=true");
 export const isDirty = van.state(false);

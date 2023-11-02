@@ -652,6 +652,7 @@ function injectUIComponentToComfyuimenu() {
   avatarPreview.textContent = "Avatar Preview";
   avatarPreview.onclick = () => {
     showPreview.val = !showPreview.val;
+    localStorage.setItem("showPreview", showPreview.val);
   };
 
   const dropdown = document.createElement("div");
