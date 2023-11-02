@@ -29,7 +29,7 @@ A custom nodes module for **creating real-time interactive avatars** powered by 
 
 ### 1. Creating an eye blink and lipsync avatar
 
-![ComfyUI_00089_](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/654acbfa-3c15-46b7-8901-180923d201f2)
+![ComfyUI_00668_](https://github.com/avatechai/avatar-graph-comfyui/assets/73209427/72a0abe8-2482-4a0d-8436-8eb231fd2f6d)
 
 For optimal results, please input a character image with an open mouth and a minimum resolution of 768x768. This higher resolution will enable the tool to accurately recognize and work with facial features.
 
