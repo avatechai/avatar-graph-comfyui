@@ -131,17 +131,27 @@ Expand to see all the available nodes description.
 
 # Installation
 
-Clone the repository to custom_nodes in your [ComfyUI](https://github.com/comfyanonymous/ComfyUI) directory:
+## Method 1 - Windows
+
+1. Download Python environment from [here](https://discord.com/channels/1119223451752874085/1138015002486374521/1169913046399995937)
+
+2. Unzip it to ComfyUI directory
+
+3. Run the `run_cpu_3.10.bat` or `run_nvidia_gpu_3.10.bat`
+
+4. Install avatar-graph-comfyui from [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager)
+
+## Method 2 - macOS/Linux
+
+Make sure your Python environment is `3.10.x` as required by the [bpy](https://pypi.org/project/bpy/) package. Then go to the [ComfyUI](https://github.com/comfyanonymous/ComfyUI) directory and run:
 
 1. `cd custom_nodes`
 
 2. `git clone https://github.com/avatechgg/avatar-graph-comfyui.git`
 
-3. Install deps `cd avatar-graph-comfyui && python -m pip install -r requirements.txt`
+3. `cd avatar-graph-comfyui && python -m pip install -r requirements.txt`
 
-4. Restart comfyui
-
-5. Run comfyui with enable-cors-header `python main.py --enable-cors-header` or (mac)`python main.py --force-fp16 --enable-cors-header`
+4. Restart ComfyUI with enable-cors-header `python main.py --enable-cors-header` or (for mac) `python main.py --force-fp16 --enable-cors-header`
 
 # Development
 
