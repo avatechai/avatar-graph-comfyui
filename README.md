@@ -2,7 +2,7 @@
 
 ![image](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/github-readme/270574817-201a005b-7e00-4671-85a1-54937bf0704e.png)
 
-Wanna Animate? Join our [Discord](https://discord.gg/Xp6mZ4Ez5P)
+Wanna animate or got a question? Join our [Discord](https://discord.gg/Xp6mZ4Ez5P)
 
 A custom nodes module for **creating real-time interactive avatars** powered by blender bpy mesh api + Avatech Shape Flow runtime.
 
@@ -133,7 +133,7 @@ Expand to see all the available nodes description.
 
 ## Method 1 - Windows
 
-1. Download Python environment from [here](https://discord.com/channels/1119223451752874085/1138015002486374521/1169913046399995937)
+1. Download Python environment from [here](https://avatech-avatar-dev1.nyc3.digitaloceanspaces.com/comfyui/ComfyUI_3.10.7z)
 
 2. Unzip it to ComfyUI directory
 
@@ -194,5 +194,3 @@ To update blender operations input and output types (stored in `blender/input_ty
 ```bash
 python generate_blender_types.py
 ```
-
-Any question? Join our [Discord](https://discord.gg/Xp6mZ4Ez5P)
