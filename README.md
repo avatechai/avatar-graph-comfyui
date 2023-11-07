@@ -145,6 +145,14 @@ Expand to see all the available nodes description.
 
 Make sure your Python environment is `3.10.x` as required by the [bpy](https://pypi.org/project/bpy/) package. Then go to the [ComfyUI](https://github.com/comfyanonymous/ComfyUI) directory and run:
 
+> Suggest using conda for your comfyui python environment
+> 
+> `conda create --name comfyui python=3.10`
+> 
+> `conda activate comfyui`
+> 
+> `pip install -r requirements.txt`
+
 1. `cd custom_nodes`
 
 2. `git clone https://github.com/avatechgg/avatar-graph-comfyui.git`
