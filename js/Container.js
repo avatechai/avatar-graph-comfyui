@@ -4,6 +4,7 @@ import { van } from './van.js';
 import { AvatarPreview } from './AvatarPreview.js';
 import { Loading } from './Loading.js';
 import { Alert } from './Alert.js';
+import { AppHeader } from './AppHeader.js';
 const { button, iframe, div, img } = van.tags;
 
 export function Container() {
@@ -17,5 +18,6 @@ export function Container() {
     AvatarPreview(),
     Loading(),
     Alert(),
+    AppHeader()
   );
 }
