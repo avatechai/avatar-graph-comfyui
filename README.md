@@ -202,3 +202,12 @@ To update blender operations input and output types (stored in `blender/input_ty
 ```bash
 python generate_blender_types.py
 ```
+
+# FAQ
+
+## What is `--enable-cors-header` used for?
+It is used to enable communication between ComfyUI and our editor (https://editor.avatech.ai), which is in charge of animating static characters. The only messages exchanged between them are the character data like the meshes of eyes and mouth, and the JSON format of our editor graph.
+
+When you execute the ComfyUI graph, it sends the character data and the JSON graph to our editor for animating. When you modify and save the graph in our editor, it sends the modified graph back to ComfyUI. To validate it, you can open the `js/index.js`, and log the message in `window.addEventListener("message", ...)` and `postMessage(message)`.
+
+You can also run ComfyUI *without* the `--enable-cors-header`: execute the ComfyUI workflow, then download the .GLB or .GLTF format by right clicking the Avatar Main Output node and Save File option. Yet, this will disable the real-time character preview in the top-right corner of ComfyUI. Feel free to view it in other software like Blender.
