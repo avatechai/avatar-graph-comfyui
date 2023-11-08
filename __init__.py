@@ -53,7 +53,7 @@ def download_sam_model():
     add_model_folder_path("sams", model_dir)
 
     files = get_filename_list("sams")
-    if len(files) == 0:
+    if "sam_vit_h_4b8939.pth" not in files:
         print("Downloading sam model...")
         url = "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth"
         response = requests.get(url, stream=True)
