@@ -2055,12 +2055,20 @@ details.collapse summary::-webkit-details-marker{
   left: 0.5rem;
 }
 
+.left-4{
+  left: 1rem;
+}
+
 .right-0{
   right: 0px;
 }
 
 .right-2{
   right: 0.5rem;
+}
+
+.right-4{
+  right: 1rem;
 }
 
 .top-0{
@@ -2075,20 +2083,16 @@ details.collapse summary::-webkit-details-marker{
   top: 0.5rem;
 }
 
-.left-4{
-  left: 1rem;
-}
-
 .top-4{
   top: 1rem;
 }
 
-.right-4{
-  right: 1rem;
-}
-
 .z-\[1000\]{
   z-index: 1000;
+}
+
+.z-\[1001\]{
+  z-index: 1001;
 }
 
 .z-\[100\]{
@@ -2152,8 +2156,8 @@ details.collapse summary::-webkit-details-marker{
   height: 320px;
 }
 
-.h-\[450px\]{
-  height: 450px;
+.h-\[394px\]{
+  height: 394px;
 }
 
 .h-full{
@@ -2164,12 +2168,8 @@ details.collapse summary::-webkit-details-marker{
   height: 100vh;
 }
 
-.h-\[397px\]{
-  height: 397px;
-}
-
-.h-\[394px\]{
-  height: 394px;
+.w-24{
+  width: 6rem;
 }
 
 .w-3{
@@ -2203,14 +2203,6 @@ details.collapse summary::-webkit-details-marker{
 
 .w-full{
   width: 100%;
-}
-
-.w-24{
-  width: 6rem;
-}
-
-.w-36{
-  width: 9rem;
 }
 
 .-translate-x-1\/2{
@@ -2313,10 +2305,6 @@ details.collapse summary::-webkit-details-marker{
 .rounded-r-none{
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-}
-
-.border-0{
-  border-width: 0px;
 }
 
 .border-t-4{
@@ -2440,6 +2428,11 @@ details.collapse summary::-webkit-details-marker{
   padding: 1rem;
 }
 
+.\!px-0{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 .\!py-0{
   padding-top: 0px !important;
   padding-bottom: 0px !important;
@@ -2453,15 +2446,6 @@ details.collapse summary::-webkit-details-marker{
 .py-2{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.\!px-0{
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-
-.pb-24{
-  padding-bottom: 6rem;
 }
 
 .text-start{
