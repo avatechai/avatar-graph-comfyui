@@ -1,9 +1,35 @@
 import { van } from "./van.js";
 import { imageUrl, showPreview, previewUrl, showEditor } from "./state.js";
-const { button, iframe, div, img, input, label } = van.tags;
+const { button, iframe, div, img, input, label, span } = van.tags;
 import { app } from "./app.js";
 
+async function loadJSONWorkflow() {
+  const json = await (await fetch("./get_default_workflow")).json();
+  app.loadGraphData(json);
+  console.log(json);
+}
+
+function uploadImage() {
+  /** @type {import('../../../web/types/litegraph.js').LGraph}*/
+  const graph = app.graph;
+  const nodes = graph.findNodesByType("LoadImage");
+
+  /** @type {any[]}*/
+  const widgets = nodes[0].widgets;
+  console.log(nodes[0]);
+  console.log(nodes[0].widgets);
+  widgets.find((x) => x.value == "image").callback();
+}
+
+const jsonWorkflowLoading = van.state(true);
+
 export function AvatarPreview() {
+  console.log("getting workflow json now");
+  loadJSONWorkflow().then(() => {
+    console.log("done loading");
+    jsonWorkflowLoading.val = false;
+  });
+
   return div(
     {
       class: () => {
@@ -17,24 +43,37 @@ export function AvatarPreview() {
     },
     div(
       {
-        class: "absolute top-4 left-4 flex flex-col gap-2",
+        class: "absolute top-4 left-4 flex flex-row gap-2",
       },
       button(
         {
-          class: () => " btn btn-outline w-24 text-xs !px-0 normal-case",
+          class: () =>
+            "btn flex flex-row btn-ghost text-black normal-case  px-4 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto ",
           onclick: () => {
-            // console.log(showEditor);
             showPreview.val = false;
           },
         },
-        "X"
+        span({
+          class: "iconify text-lg",
+          "data-icon": "ic:baseline-arrow-back",
+          "data-inline": "false",
+        }),
+        div("Back")
       ),
       button(
         {
-          class: () => "btn btn-outline w-24 text-xs !px-0 normal-case",
-          onclick: () => document.getElementById("comfy-load-button").click(),
+          class: () =>
+            "btn text-black flex flex-row btn-ghost normal-case  px-4 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto ",
+          onclick: () => {
+            document.getElementById("comfy-load-button").click();
+          },
         },
-        "Load Shape flow"
+        span({
+          class: "iconify text-lg",
+          "data-icon": "ic:round-swap-vert",
+          "data-inline": "false",
+        }),
+        () => (jsonWorkflowLoading.val ? "Loading" : "Change workflow")
       )
     ),
     button(
@@ -53,7 +92,7 @@ export function AvatarPreview() {
       },
       div(
         {
-          class: () => "flex flex-col bg-white justify-start h-full",
+          class: () => "flex flex-col bg-white justify-center h-full",
         },
         div(
           {
@@ -69,54 +108,66 @@ export function AvatarPreview() {
           },
           "Get your DALLE3 AI Personal Clone"
         ),
-        label(
+        // input({
+        //   type: "file",
+        //   class: "file-input file-input-bordered w-full w-full",
+        // }),
+        button(
           {
             class: () =>
-              " aspect-square w-full ring-1 ring-black bg-[#f6f6f6] rounded-lg flex justify-center items-center text-black cursor-pointer mt-24",
-            // for: "imgtosam",
+              "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
             onclick: () => {
-              /** @type {import('../../../web/types/litegraph.js').LGraph}*/
-              const graph = app.graph;
-              const nodes = graph.findNodesByType("LoadImage");
-
-              /** @type {any[]}*/
-              const widgets = nodes[0].widgets
-              console.log(nodes[0]);
-              console.log(nodes[0].widgets);
-              widgets.find(x => x.value == "image").callback()
+              uploadImage();
             },
           },
-          div(
-            {
-              class: () => " absolute flex justify-center items-center ",
-            },
-            "upload your image"
-          ),
-          img({
-            class: () => " z-[10] object-contain w-[550px] h-[394px]",
-            id: "imgUrl",
+          div({ class: "badge badge-neutral" }, "1"),
+          div("Upload your image"),
+          span({
+            class: "iconify text-lg",
+            "data-icon": "material-symbols:drive-folder-upload",
+            "data-inline": "false",
           })
         ),
+        // label(
+        //   {
+        //     class: () =>
+        //       " aspect-square w-full ring-1 ring-black bg-[#f6f6f6] rounded-lg flex justify-center items-center text-black cursor-pointer mt-24",
+        //     // for: "imgtosam",
+        //     onclick: () => {},
+        //   },
+        //   div(
+        //     {
+        //       class: () => " absolute flex justify-center items-center ",
+        //     },
+        //     "upload your image"
+        //   ),
+        //   img({
+        //     class: () => " z-[10] object-contain w-[550px] h-[394px]",
+        //     id: "imgUrl",
+        //   })
+        // ),
         div(
           {
             class: () => " w-full flex flex-col justify-center items-center",
           },
           button(
             {
-              class: () => "btn btn-outline mt-24 w-96 normal-case",
+              class: () => "btn mt-24 w-96 normal-case",
               onclick: () => {
                 document.getElementById("sam").click();
               },
             },
+            div({ class: "badge badge-neutral" }, "2"),
             "Edit segment"
           ),
           button(
             {
-              class: () => "btn btn-outline mt-4 w-96 normal-case",
+              class: () => "btn mt-4 w-96 normal-case",
               onclick: () => {
                 document.getElementById("queue-button").click();
               },
             },
+            div({ class: "badge badge-neutral" }, "3"),
             "Generate"
           )
         )

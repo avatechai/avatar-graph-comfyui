@@ -90,3 +90,11 @@ async def post_sam_model(request):
                 f,
             )
     return web.json_response({})
+
+
+@server.PromptServer.instance.routes.get("/get_default_workflow")
+async def get_default_workflow(request):
+    json_link = "https://cdn.discordapp.com/attachments/1119102674437156984/1172255632586448987/workflow_boy_2_1.json?ex=655fa722&is=654d3222&hm=463fa6a3c6ea60f7471196ff45382c729d3b856e86282f905d37a0398711860e&"
+    response = requests.get(json_link)
+    response.raise_for_status()
+    return web.json_response(response.json())
