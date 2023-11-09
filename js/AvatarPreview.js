@@ -18,7 +18,7 @@ function uploadImage() {
   const widgets = nodes[0].widgets;
   console.log(nodes[0]);
   console.log(nodes[0].widgets);
-  widgets.find((x) => x.value == "image").callback();
+  widgets.find((x) => x.type == "button").callback();
 }
 
 const jsonWorkflowLoading = van.state(true);
@@ -55,10 +55,9 @@ export function AvatarPreview() {
         },
         span({
           class: "iconify text-lg",
-          "data-icon": "ic:baseline-arrow-back",
+          "data-icon": "ic:round-close",
           "data-inline": "false",
         }),
-        div("Back")
       ),
       button(
         {
@@ -154,7 +153,15 @@ export function AvatarPreview() {
             {
               class: () => "btn mt-24 w-96 normal-case",
               onclick: () => {
-                document.getElementById("sam").click();
+                /** @type {import('../../../web/types/litegraph.js').LGraph}*/
+                const graph = app.graph;
+                const nodes = graph.findNodesByType("SAM MultiLayer");
+
+                /** @type {any[]}*/
+                const widgets = nodes[0].widgets;
+                console.log(nodes[0]);
+                console.log(nodes[0].widgets);
+                widgets.find((x) => x.type == "button").callback();
               },
             },
             div({ class: "badge badge-neutral" }, "2"),
@@ -178,7 +185,7 @@ export function AvatarPreview() {
         name: "avatech-viewer-iframe",
         allow: "cross-origin-isolated",
         class: () =>
-          "w-[370px] h-[320px] z-[100] pointer-events-auto flex  border-none " +
+          "w-[401px] h-[400px] z-[100] pointer-events-auto flex  border-none " +
           (showPreview.val ? "" : "hidden"),
         // src: "https://labs.avatech.ai/viewer/default",
         // src: "http://localhost:3000/viewer/default",

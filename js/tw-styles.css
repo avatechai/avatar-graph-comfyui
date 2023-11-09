@@ -2353,6 +2353,10 @@ details.collapse summary::-webkit-details-marker{
   height: 100vh;
 }
 
+.h-\[400px\]{
+  height: 400px;
+}
+
 .w-24{
   width: 6rem;
 }
@@ -2388,6 +2392,14 @@ details.collapse summary::-webkit-details-marker{
 
 .w-full{
   width: 100%;
+}
+
+.w-\[400px\]{
+  width: 400px;
+}
+
+.w-\[401px\]{
+  width: 401px;
 }
 
 .max-w-xs{

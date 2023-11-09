@@ -120,7 +120,7 @@ export function LayerEditor() {
     button(
       {
         class: () =>
-          "btn btn-circle flex flex-row btn-ghost normal-case absolute p-0 rounded-md left-2 top-0 z-[200] w-fit",
+          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-2 top-0 z-[200] w-fit",
         onclick: () => {
           console.log("close");
           showImageEditor.val = false;
