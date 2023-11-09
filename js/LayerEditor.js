@@ -114,7 +114,7 @@ export function LayerEditor() {
   return div(
     {
       class: () =>
-        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto " +
+        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto z-[1000] " +
         (showImageEditor.val ? "" : "hidden"),
     },
     button(

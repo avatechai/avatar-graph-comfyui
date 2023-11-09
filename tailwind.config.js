@@ -3,6 +3,9 @@ module.exports = {
   // content: ['./js/**/*.{html,js}'],
   content: ['./js/**/*.{html,js}'],
   theme: {
+    fontFamily: {
+      'gabarito': ['Gabarito'],
+    },
     extend: {},
   },
   daisyui: {

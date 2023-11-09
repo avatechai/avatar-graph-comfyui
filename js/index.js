@@ -330,6 +330,15 @@ const ext = {
   getCustomWidgets(app) {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
+        const asd = document.createElement("div");
+        Object.assign(asd, {
+          id: "sam",
+          onclick: () => {
+            showMyImageEditor(node);
+          },
+        });
+        document.body.append(asd);
+
         const btn = node.addWidget("button", "Edit prompt", "", () => {
           showMyImageEditor(node);
           btn.serialize = false;
@@ -690,9 +699,12 @@ function injectUIComponentToComfyuimenu() {
                 .then((e) => e.arrayBuffer())
                 .then((e) => new Uint8Array(e));
 
-              const labData = await fetch("https://labs.avatech.ai/api/share?id=" + previewModelId.val, {
-                method: "GET",
-              }).then((e) => e.json());
+              const labData = await fetch(
+                "https://labs.avatech.ai/api/share?id=" + previewModelId.val,
+                {
+                  method: "GET",
+                },
+              ).then((e) => e.json());
 
               await fetch(labData.url, {
                 method: "PUT",
@@ -704,13 +716,16 @@ function injectUIComponentToComfyuimenu() {
                 body: file,
               }).catch((error) => console.error(error));
 
-              await fetch("https://labs.avatech.ai/api/purgecdn?id=" + previewModelId.val, {
-                method: "GET",
-              }).catch((error) => console.error(error));
+              await fetch(
+                "https://labs.avatech.ai/api/purgecdn?id=" + previewModelId.val,
+                {
+                  method: "GET",
+                },
+              ).catch((error) => console.error(error));
 
               infoDialog.show(
                 `Preview updated: <a href='https://editor.avatech.ai/viewer?objectId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
-                labData.modelId +
+                  labData.modelId +
                   "</a>\n Remember to hard refresh before checking out the new preview!",
               );
 
