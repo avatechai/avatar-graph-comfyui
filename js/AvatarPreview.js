@@ -29,7 +29,8 @@ async function uploadImage() {
   while (true) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     if (nodes[0]?.imgs) {
-      if (previewImg.val != '' && previewImg.val == nodes[0].imgs[0].currentSrc) continue;
+      if (previewImg.val != "" && previewImg.val == nodes[0].imgs[0].currentSrc)
+        continue;
       return nodes[0].imgs[0].currentSrc;
     }
   }
@@ -138,28 +139,7 @@ export function AvatarPreview() {
         //   type: "file",
         //   class: "file-input file-input-bordered w-full w-full",
         // }),
-        button(
-          {
-            class: () =>
-              "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
-            onclick: async () => {
-              previewImg.val = await uploadImage();
-            },
-          },
-          div({ class: "badge badge-neutral" }, "1"),
-          div("Upload your image"),
-          span({
-            class: "iconify text-lg",
-            "data-icon": "material-symbols:drive-folder-upload",
-            "data-inline": "false",
-          })
-        ),
-        () =>
-          previewImg.val != "" &&
-          img({
-            class: () => "z-[10] object-contain w-full h-[394px] border",
-            src: previewImg,
-          }),
+
         // label(
         //   {
         //     class: () =>
@@ -180,11 +160,35 @@ export function AvatarPreview() {
         // ),
         div(
           {
-            class: () => " w-full flex flex-col justify-center items-center",
+            class: () =>
+              " w-full flex flex-col justify-center items-center gap-4",
           },
           button(
             {
-              class: () => "btn mt-24 w-96 normal-case",
+              class: () =>
+                "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
+              onclick: async () => {
+                previewImg.val = await uploadImage();
+              },
+            },
+            div({ class: "badge badge-neutral" }, "1"),
+            div("Upload your image"),
+            span({
+              class: "iconify text-lg",
+              "data-icon": "material-symbols:drive-folder-upload",
+              "data-inline": "false",
+            })
+          ),
+          () =>
+            previewImg.val != ""
+              ? img({
+                  class: () => "z-[10] object-contain w-full h-[394px] border",
+                  src: previewImg,
+                })
+              : "",
+          button(
+            {
+              class: () => "btn w-96 normal-case",
               onclick: () => {
                 /** @type {import('../../../web/types/litegraph.js').LGraph}*/
                 const graph = app.graph;
@@ -205,7 +209,7 @@ export function AvatarPreview() {
           ),
           button(
             {
-              class: () => "btn mt-4 w-96 normal-case",
+              class: () => "btn w-96 normal-case",
               onclick: () => {
                 const graph = app.graph;
                 const imageNodes = graph.findNodesByType("LoadImage");
@@ -248,7 +252,7 @@ export function AvatarPreview() {
             input({
               type: "text",
               class: () =>
-                "border !border-r-0 border-black rounded-l-lg ring-black/30 p-1 text-black h-12 text-xl",
+                "border !border-r-0 border-black rounded-l-lg ring-black/30 p-1 text-black h-12   ",
               onchange: (e) => {
                 email.val = e.target.value;
               },
