@@ -196,7 +196,7 @@ export function AvatarPreview() {
           name: "avatech-viewer-iframe",
           allow: "cross-origin-isolated",
           class: () =>
-            "w-[401px] h-[400px] z-[100] pointer-events-auto flex  border-none " +
+            "w-[450px] h-[450px] z-[100] pointer-events-auto flex  border-none overflow-hidden" +
             (showPreview.val ? "" : "hidden"),
           // src: "https://labs.avatech.ai/viewer/default",
           // src: "http://localhost:3000/viewer/default",
@@ -217,6 +217,7 @@ export function AvatarPreview() {
               onchange: (e) => {
                 email.val = e.target.value;
               },
+              placeholder: "Enter your email",
             }),
             button(
               {
