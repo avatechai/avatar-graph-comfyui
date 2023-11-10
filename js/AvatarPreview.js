@@ -33,6 +33,7 @@ export function AvatarPreview() {
   });
 
   const loading = van.state(false);
+  const shareLoading = van.state(false);
 
   api.addEventListener("execution_start", (evt) => {
     loading.val = true;
@@ -71,7 +72,7 @@ export function AvatarPreview() {
           class: "iconify text-lg",
           "data-icon": "ic:round-close",
           "data-inline": "false",
-        }),
+        })
       ),
       button(
         {
@@ -86,8 +87,8 @@ export function AvatarPreview() {
           "data-icon": "ic:round-swap-vert",
           "data-inline": "false",
         }),
-        () => (jsonWorkflowLoading.val ? "Loading" : "Change workflow"),
-      ),
+        () => (jsonWorkflowLoading.val ? "Loading" : "Change workflow")
+      )
     ),
     button(
       {
@@ -95,7 +96,7 @@ export function AvatarPreview() {
           "absolute top-4 right-4 btn text-black btn-ghost w-24 text-xs !px-0 normal-case",
         onclick: () => window.open("https://twitter.com/avatech_gg", "_blank"),
       },
-      "Twitter",
+      "Twitter"
     ),
     div(
       {
@@ -112,14 +113,14 @@ export function AvatarPreview() {
             class: () =>
               " bg-gradient-to-b from-black via-[#5F5F5F] via-60% to-white text-transparent bg-clip-text font-gabarito text-4xl",
           },
-          "Avatech v1",
+          "Avatech v1"
         ),
         div(
           {
             class: () =>
               " bg-gradient-to-b from-black via-[#5F5F5F] via-50% to-white text-transparent bg-clip-text font-gabarito text-2xl",
           },
-          "Get your DALLE3 AI Personal Clone",
+          "Get your DALLE3 AI Personal Clone"
         ),
         // input({
         //   type: "file",
@@ -139,7 +140,7 @@ export function AvatarPreview() {
             class: "iconify text-lg",
             "data-icon": "material-symbols:drive-folder-upload",
             "data-inline": "false",
-          }),
+          })
         ),
         // label(
         //   {
@@ -182,7 +183,7 @@ export function AvatarPreview() {
               },
             },
             div({ class: "badge badge-neutral" }, "2"),
-            "Edit segment",
+            "Edit segment"
           ),
           button(
             {
@@ -200,9 +201,9 @@ export function AvatarPreview() {
                 ? span({
                     class: "loading loading-spinner loading-lg",
                   })
-                : "Generate",
-          ),
-        ),
+                : "Generate"
+          )
+        )
       ),
       div(
         { class: () => "flex flex-col" },
@@ -222,7 +223,7 @@ export function AvatarPreview() {
           { class: () => "w-full flex flex-col gap-2 justify-center mt-24" },
           div(
             { class: () => "flex text-black font-bold" },
-            div({}, "We are launching OpenAI Assistant API integration soon"),
+            div({}, "We are launching OpenAI Assistant API integration soon")
           ),
           div(
             { class: () => "flex justify-center" },
@@ -240,6 +241,7 @@ export function AvatarPreview() {
                 class: () =>
                   "btn btn-outline !rounded-l-none !rounded-r-lg p-1 normal-case",
                 onclick: async () => {
+                  shareLoading.val = true;
                   const url = await (await fetch("./get_webhook")).json();
                   await uploadPreview();
                   await fetch(url, {
@@ -254,13 +256,19 @@ export function AvatarPreview() {
                       content: "New register! \n" + email.val,
                     }),
                   });
+                  shareLoading.val = false;
                 },
               },
-              "Get Avatar Link",
-            ),
-          ),
-        ),
-      ),
-    ),
+              () =>
+                shareLoading.val
+                  ? span({
+                      class: "loading loading-spinner loading-lg",
+                    })
+                  : "Get Avatar Link"
+            )
+          )
+        )
+      )
+    )
   );
 }
