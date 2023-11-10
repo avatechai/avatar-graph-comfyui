@@ -5,6 +5,7 @@ import {
   previewUrl,
   showEditor,
   previewImg,
+  previewImgLoading,
 } from "./state.js";
 const { button, iframe, div, img, input, label, span } = van.tags;
 import { app } from "./app.js";
@@ -21,6 +22,8 @@ async function uploadImage() {
   /** @type {import('../../../web/types/litegraph.js').LGraph}*/
   const graph = app.graph;
   const nodes = graph.findNodesByType("LoadImage");
+  previewImgLoading.val = true;
+  console.log(previewImgLoading.val);
 
   /** @type {any[]}*/
   const widgets = nodes[0].widgets;
@@ -31,6 +34,7 @@ async function uploadImage() {
     if (nodes[0]?.imgs) {
       if (previewImg.val != "" && previewImg.val == nodes[0].imgs[0].currentSrc)
         continue;
+      previewImgLoading.val = false;
       return nodes[0].imgs[0].currentSrc;
     }
   }
@@ -177,7 +181,12 @@ export function AvatarPreview() {
               class: "iconify text-lg",
               "data-icon": "material-symbols:drive-folder-upload",
               "data-inline": "false",
-            })
+            }),
+            () => (previewImgLoading.val
+                ? span({
+                    class: "loading loading-spinner loading-lg",
+                  })
+                : '')
           ),
           () =>
             previewImg.val != ""
