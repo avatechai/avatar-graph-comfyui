@@ -1,4 +1,5 @@
 import { SideBar } from "./SideBar.js";
+import { api } from "./api.js";
 import { runONNX } from "./onnx.js";
 import {
   showImageEditor,
@@ -11,6 +12,7 @@ import {
   selectedLayer,
   imagePromptsMulti,
   embeddings,
+  embeddingID,
 } from "./state.js";
 import { van } from "./van.js";
 const { button, div, img, canvas, span } = van.tags;
@@ -26,6 +28,18 @@ export function updateImagePrompts() {
 
     targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePromptsMulti.val);
+
+    const canvas = document.getElementById("mask-canvas");
+    const base64Image = canvas.toDataURL();
+    api.fetchApi("/segments", {
+      method: "POST",
+      body: JSON.stringify({
+        name: embeddingID.val,
+        segments: {
+          [selectedLayer.val]: base64Image,
+        },
+      }),
+    });
   } else {
     targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePrompts.val);
@@ -33,7 +47,7 @@ export function updateImagePrompts() {
   targetNode.val.graph.change();
 }
 
-function handleClick(e) {
+async function handleClick(e) {
   const rect = e.target.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
@@ -49,18 +63,17 @@ function handleClick(e) {
     ...imagePrompts.val,
     { x: relativeX, y: relativeY, label: e.isRight ? 0 : 1 },
   ];
-
+  await drawSegment(getClicks());
   updateImagePrompts();
-  drawSegment(getClicks());
 }
 
-function handlePointClick(e, point) {
+async function handlePointClick(e, point) {
   e.preventDefault();
   imagePrompts.val = imagePrompts.val.filter(
     (x) => !(x.x === point.x && x.y === point.y)
   );
+  await drawSegment(getClicks());
   updateImagePrompts();
-  drawSegment(getClicks());
 }
 
 function handleImageSize(image) {
@@ -82,7 +95,7 @@ export function getClicks() {
   }));
 }
 
-export function drawSegment(clicks) {
+export async function drawSegment(clicks) {
   const canvas = document.getElementById("mask-canvas");
   const ctx = canvas.getContext("2d");
   if (clicks.length === 0) {
@@ -90,12 +103,11 @@ export function drawSegment(clicks) {
     return;
   }
   if (embeddings.val) {
-    runONNX(clicks, embeddings.val).then((mask) => {
-      if (mask) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(mask, 0, 0);
-      }
-    });
+    const mask = await runONNX(clicks, embeddings.val);
+    if (mask) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(mask, 0, 0);
+    }
   }
 }
 
@@ -124,6 +136,13 @@ export function LayerEditor() {
         onclick: () => {
           console.log("close");
           showImageEditor.val = false;
+          api.fetchApi("/segments_order", {
+            method: "POST",
+            body: JSON.stringify({
+              name: embeddingID.val,
+              order: Object.keys(imagePromptsMulti.val),
+            }),
+          });
         },
       },
       span({
@@ -181,13 +200,13 @@ export function LayerEditor() {
           canvas.width = e.target.naturalWidth;
           canvas.height = e.target.naturalHeight;
         },
-        oncontextmenu: (e) => {
+        oncontextmenu: async (e) => {
           e.preventDefault();
           e.isRight = true;
-          handleClick(e);
+          await handleClick(e);
         },
-        onclick: (e) => {
-          handleClick(e);
+        onclick: async (e) => {
+          await handleClick(e);
         },
         onmouseleave: (e) => {
           drawSegment(getClicks());
@@ -247,11 +266,11 @@ export function LayerEditor() {
                   point.label === 1 ? "bg-green-500" : "bg-red-500"
                 }`,
 
-              oncontextmenu: (e) => {
-                handlePointClick(e, point);
+              oncontextmenu: async (e) => {
+                await handlePointClick(e, point);
               },
-              onclick: (e) => {
-                handlePointClick(e, point);
+              onclick: async (e) => {
+                await handlePointClick(e, point);
               },
             });
           })

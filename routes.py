@@ -8,6 +8,7 @@ import json
 import numpy as np
 import server
 import re
+import base64
 
 # For speeding up ONNX model, see https://github.com/facebookresearch/segment-anything/tree/main/demo#onnx-multithreading-with-sharedarraybuffer
 def inject_headers(original_handler):
@@ -89,4 +90,35 @@ async def post_sam_model(request):
                 },
                 f,
             )
+    return web.json_response({})
+
+@server.PromptServer.instance.routes.get("/get_default_workflow")
+async def get_default_workflow(request):
+    json_link = "https://cdn.discordapp.com/attachments/1119102674437156984/1172255632586448987/workflow_boy_2_1.json?ex=655fa722&is=654d3222&hm=463fa6a3c6ea60f7471196ff45382c729d3b856e86282f905d37a0398711860e&"
+    response = requests.get(json_link)
+    response.raise_for_status()
+    return web.json_response(response.json())
+
+@server.PromptServer.instance.routes.post("/segments")
+async def post_segments(request):
+    post = await request.json()
+    name = post.get("name")
+    segments = post.get("segments")
+    os.makedirs(os.path.join(folder_paths.base_path, f"output/{name}"), exist_ok=True)
+    for key, value in segments.items():
+        filename = os.path.join(folder_paths.base_path, f"output/{name}/{key}.png")
+        with open(filename, "wb") as f:
+            f.write(base64.b64decode(value.split(",")[1]))
+    return web.json_response({})
+
+
+@server.PromptServer.instance.routes.post("/segments_order")
+async def post_segments(request):
+    post = await request.json()
+    name = post.get("name")
+    order = post.get("order")
+    output_dir = os.path.join(folder_paths.base_path, f"output/{name}")
+    os.makedirs(output_dir, exist_ok=True)
+    with open(os.path.join(output_dir, "order.json") , "w") as f:
+        json.dump(order, f)
     return web.json_response({})

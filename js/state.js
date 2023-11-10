@@ -52,3 +52,4 @@ export const targetNode = van.state();
 
 export const imageSize = van.state({ width: 0, height: 0, samScale: 0 });
 export const embeddings = van.state();
+export const embeddingID = van.state("Test");
