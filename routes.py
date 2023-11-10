@@ -1,6 +1,7 @@
 from aiohttp import web
 from segment_anything import sam_model_registry, SamPredictor
 from PIL import Image, ImageOps
+from dotenv import load_dotenv
 import os
 import requests
 import folder_paths
@@ -9,6 +10,8 @@ import numpy as np
 import server
 import re
 import base64
+
+load_dotenv()
 
 # For speeding up ONNX model, see https://github.com/facebookresearch/segment-anything/tree/main/demo#onnx-multithreading-with-sharedarraybuffer
 def inject_headers(original_handler):
@@ -124,3 +127,8 @@ async def post_segments(request):
     with open(os.path.join(output_dir, "order.json") , "w") as f:
         json.dump(order, f)
     return web.json_response({})
+
+@server.PromptServer.instance.routes.get("/get_webhook")
+async def get_webhook(request):
+    url = os.getenv('DISCORD_WEBHOOK_URL')
+    return web.json_response(url)

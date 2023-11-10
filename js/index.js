@@ -634,7 +634,7 @@ const ext = {
   },
 };
 
-async function uploadPreview() {
+export async function uploadPreview() {
   if (fileName.val == "")
     app.ui.dialog.show("Please create your avatar first.");
   else {
