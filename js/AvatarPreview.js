@@ -1,5 +1,11 @@
 import { van } from "./van.js";
-import { imageUrl, showPreview, previewUrl, showEditor } from "./state.js";
+import {
+  imageUrl,
+  showPreview,
+  previewUrl,
+  showEditor,
+  previewImg,
+} from "./state.js";
 const { button, iframe, div, img, input, label, span } = van.tags;
 import { app } from "./app.js";
 import { uploadPreview } from "./index.js";
@@ -11,7 +17,7 @@ async function loadJSONWorkflow() {
   console.log(json);
 }
 
-function uploadImage() {
+async function uploadImage() {
   /** @type {import('../../../web/types/litegraph.js').LGraph}*/
   const graph = app.graph;
   const nodes = graph.findNodesByType("LoadImage");
@@ -19,8 +25,14 @@ function uploadImage() {
   /** @type {any[]}*/
   const widgets = nodes[0].widgets;
   console.log(nodes[0]);
-  console.log(nodes[0].widgets);
   widgets.find((x) => x.type == "button").callback();
+  while (true) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (nodes[0]?.imgs) {
+      if (previewImg.val != '' && previewImg.val == nodes[0].imgs[0].currentSrc) continue;
+      return nodes[0].imgs[0].currentSrc;
+    }
+  }
 }
 
 const jsonWorkflowLoading = van.state(true);
@@ -130,8 +142,8 @@ export function AvatarPreview() {
           {
             class: () =>
               "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
-            onclick: () => {
-              uploadImage();
+            onclick: async () => {
+              previewImg.val = await uploadImage();
             },
           },
           div({ class: "badge badge-neutral" }, "1"),
@@ -142,6 +154,12 @@ export function AvatarPreview() {
             "data-inline": "false",
           })
         ),
+        () =>
+          previewImg.val != "" &&
+          img({
+            class: () => "z-[10] object-contain w-full h-[394px] border",
+            src: previewImg,
+          }),
         // label(
         //   {
         //     class: () =>

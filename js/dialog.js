@@ -8,7 +8,6 @@ export class InfoDialog extends ComfyDialog {
 	createButtons() {
 		return [
 			$el("button", {
-				class: 'z-[999]',
 				type: "button",
 				textContent: "Close",
 				onclick: () => this.close(),
