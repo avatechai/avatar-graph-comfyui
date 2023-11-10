@@ -40,7 +40,7 @@ export function AvatarPreview() {
 
         return (
           (showPreview.val ? "" : "hidden ") +
-          "w-full h-screen absolute left-0 top-0 z-[100] pointer-events-auto flex border-none "
+          "w-full h-screen absolute left-0 top-0 z-[99] pointer-events-auto flex border-none "
         );
       },
     },
