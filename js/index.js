@@ -452,6 +452,13 @@ const ext = {
           } else {
             showImageEditor.val = false;
             showEditor.val = false;
+            api.fetchApi("/segments_order", {
+              method: "POST",
+              body: JSON.stringify({
+                name: embeddingID.val,
+                order: Object.keys(imagePromptsMulti.val),
+              }),
+            });
           }
         }
       },
