@@ -15,6 +15,7 @@ import {
   showPreview,
   shareLoading,
   previewModelId,
+  embeddingID,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -273,6 +274,7 @@ function showMyImageEditor(node) {
     if (split.length > 1) id = split[1];
 
     node.widgets.find((x) => x.name === "embedding_id").value = id;
+    embeddingID.val = id;
 
     api
       .fetchApi("/sam_model", {
