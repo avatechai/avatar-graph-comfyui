@@ -2,7 +2,8 @@ import { van } from "./van.js";
 import { imageUrl, showPreview, previewUrl, showEditor } from "./state.js";
 const { button, iframe, div, img, input, label, span } = van.tags;
 import { app } from "./app.js";
-import { uploadPreview } from './index.js';
+import { uploadPreview } from "./index.js";
+import { api } from "./api.js";
 
 async function loadJSONWorkflow() {
   const json = await (await fetch("./get_default_workflow")).json();
@@ -29,6 +30,16 @@ export function AvatarPreview() {
   loadJSONWorkflow().then(() => {
     console.log("done loading");
     jsonWorkflowLoading.val = false;
+  });
+
+  const loading = van.state(false);
+
+  api.addEventListener("execution_start", (evt) => {
+    loading.val = true;
+  });
+
+  api.addEventListener("executed", (evt) => {
+    loading.val = false;
   });
 
   const email = van.state("");
@@ -159,7 +170,7 @@ export function AvatarPreview() {
                 /** @type {import('../../../web/types/litegraph.js').LGraph}*/
                 const graph = app.graph;
                 const imageNodes = graph.findNodesByType("LoadImage");
-                if(!imageNodes[0].imgs) return
+                if (!imageNodes[0].imgs) return;
 
                 const nodes = graph.findNodesByType("SAM MultiLayer");
 
@@ -179,12 +190,17 @@ export function AvatarPreview() {
               onclick: () => {
                 const graph = app.graph;
                 const imageNodes = graph.findNodesByType("LoadImage");
-                if(!imageNodes[0].imgs) return
+                if (!imageNodes[0].imgs) return;
                 document.getElementById("queue-button").click();
               },
             },
             div({ class: "badge badge-neutral" }, "3"),
-            "Generate",
+            () =>
+              loading.val
+                ? span({
+                    class: "loading loading-spinner loading-lg",
+                  })
+                : "Generate",
           ),
         ),
       ),
@@ -225,7 +241,7 @@ export function AvatarPreview() {
                   "btn btn-outline !rounded-l-none !rounded-r-lg p-1 normal-case",
                 onclick: async () => {
                   const url = await (await fetch("./get_webhook")).json();
-                  await uploadPreview()
+                  await uploadPreview();
                   await fetch(url, {
                     method: "POST",
                     headers: {
