@@ -129,7 +129,7 @@ export function AvatarPreview() {
           () =>
             previewImgLoading.val
               ? span({
-                  class: "loading loading-spinner loading-lg",
+                  class: "loading loading-spinner loading-md",
                 })
               : ""
         ),
@@ -203,17 +203,20 @@ export function AvatarPreview() {
 
   const renderShareLink = () => {
     return div(
-      { class: () => "w-full flex flex-col gap-2 justify-center mt-8" },
+      {
+        class: () =>
+          "w-full flex flex-col gap-2 justify-center items-center mt-8",
+      },
       div(
-        { class: () => "w-full flex justify-center text-black font-bold" },
-        span("We are launching OpenAI Assistant API integration soon")
+        { class: () => "w-full flex justify-center text-black font-bold italic text-gray-500" },
+        span("We are launching OpenAI Assistant API integration soon!")
       ),
       div(
-        { class: () => "flex justify-center" },
+        { class: () => "w-[24rem] flex justify-center items-center" },
         input({
           type: "text",
           class: () =>
-            "border !border-r-0 border-black rounded-l-lg ring-black/30 p-1 text-black h-12   ",
+            "w-full input input-bordered text-black rounded rounded-l-md rounded-r-none !outline-none",
           onchange: (e) => {
             email.val = e.target.value;
           },
@@ -222,7 +225,7 @@ export function AvatarPreview() {
         button(
           {
             class: () =>
-              "btn btn-outline !rounded-l-none !rounded-r-lg p-1 normal-case",
+              "btn rounded rounded-l-none rounded-r-md no-animation bg-neutral hover:bg-neutral-focus text-white border-none normal-case",
             onclick: async () => {
               shareLoading.val = true;
               const url = await (await fetch("./get_webhook")).json();
