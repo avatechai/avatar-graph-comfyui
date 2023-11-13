@@ -656,7 +656,7 @@ export async function uploadPreview() {
     }).catch((error) => console.error(error));
 
     infoDialog.show(
-      `Preview avatar url: <a href='https://editor.avatech.ai/viewer?objectId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
+      `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
         labData.modelId +
         `</a>`,
     );
@@ -733,7 +733,7 @@ function injectUIComponentToComfyuimenu() {
               ).catch((error) => console.error(error));
 
               infoDialog.show(
-                `Preview updated: <a href='https://editor.avatech.ai/viewer?objectId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
+                `Preview updated: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
                   labData.modelId +
                   "</a>\n Remember to hard refresh before checking out the new preview!",
               );
@@ -773,7 +773,7 @@ function injectUIComponentToComfyuimenu() {
       shareAvatar.append(dropdown);
     } else {
       infoDialog.show(
-        `Preview avatar url: <a href='https://editor.avatech.ai/viewer?objectId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
+        `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
           previewModelId.val +
           `</a>`,
       );
