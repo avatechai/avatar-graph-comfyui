@@ -27,7 +27,8 @@ van.derive(() => {
   if (
     showImageEditor.val &&
     targetNode.val != undefined &&
-    targetNode.val.outputs && targetNode.val.type === 'SAM MultiLayer'
+    targetNode.val.outputs &&
+    targetNode.val.type === "SAM MultiLayer"
   ) {
     const outputNames = targetNode.val.outputs.map((x) => x.name).slice(1);
     const record = Object.keys(imagePromptsMulti.val);
@@ -64,13 +65,24 @@ export function SideBar() {
       class:
         "ml-2 z-100 w-fit flex-col flex justify-center absolute top-0 left-0 bottom-0 items-start gap-2",
     },
-
     () => {
       const layers = Object.entries(imagePromptsMulti.val);
       return ul(
         {
           class: "menu bg-base-200 w-56 rounded-box text-base-content ",
         },
+        button({
+          onclick: () => {
+            const layers = Object.entries(imagePromptsMulti.val);
+            layers.map(([key, value]) => {
+              imagePrompts.val = [];
+              imagePromptsMulti.val[key] = [];
+            });
+            drawSegment([]);
+            updateImagePrompts();
+          },
+          class: "btn btn-ghost normal-case flex",
+        }, "Clear ALL"),
         layers.length === 0 ? li(a("Empty layer")) : null,
         ...layers.map(([key, value]) => {
           return li(
