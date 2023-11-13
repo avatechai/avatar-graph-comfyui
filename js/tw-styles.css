@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
 
 /*
-! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -803,7 +803,7 @@ html{
   display: inline-block;
 }
 
-.dropdown > *:not(summary):focus{
+.dropdown > *:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
@@ -993,7 +993,8 @@ html{
 .file-input::file-selector-button{
   margin-right: 1rem;
   display: inline-flex;
-  height: 100%;
+  height: 2.875rem;
+  min-height: 2.875rem;
   flex-shrink: 0;
   cursor: pointer;
   -webkit-user-select: none;
@@ -1071,8 +1072,8 @@ html{
 
 .join .dropdown .join-item:first-child:not(:last-child),
   .join *:first-child:not(:last-child) .dropdown .join-item{
-  border-start-end-radius: inherit;
-  border-end-end-radius: inherit;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 
 .link{
@@ -1648,11 +1649,6 @@ details.collapse summary::-webkit-details-marker{
   --tw-text-opacity: 0.2;
 }
 
-.input input:focus{
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
 .input[list]::-webkit-calendar-picker-indicator{
   line-height: 1em;
 }
@@ -1661,8 +1657,7 @@ details.collapse summary::-webkit-details-marker{
   --tw-border-opacity: 0.2;
 }
 
-.input:focus,
-  .input:focus-within{
+.input:focus{
   outline-style: solid;
   outline-width: 2px;
   outline-offset: 2px;
@@ -1735,9 +1730,9 @@ details.collapse summary::-webkit-details-marker{
 
 .menu :where(li ul):before{
   position: absolute;
-  bottom: 0.75rem;
   left: 0px;
   top: 0.75rem;
+  bottom: 0.75rem;
   width: 1px;
   background-color: hsl(var(--bc) / 0.1);
   content: "";
@@ -1834,8 +1829,8 @@ details.collapse summary::-webkit-details-marker{
 .mockup-browser .mockup-browser-toolbar .input:before{
   content: "";
   position: absolute;
-  left: 0.5rem;
   top: 50%;
+  left: 0.5rem;
   aspect-ratio: 1 / 1;
   height: 0.75rem;
   --tw-translate-y: -50%;
@@ -1849,8 +1844,8 @@ details.collapse summary::-webkit-details-marker{
 .mockup-browser .mockup-browser-toolbar .input:after{
   content: "";
   position: absolute;
-  left: 1.25rem;
   top: 50%;
+  left: 1.25rem;
   height: 0.5rem;
   --tw-translate-y: 25%;
   --tw-rotate: -45deg;
@@ -2080,8 +2075,8 @@ details.collapse summary::-webkit-details-marker{
 }
 
 .btn-group .btn:first-child:not(:last-child){
-  margin-left: -1px;
   margin-top: -0px;
+  margin-left: -1px;
   border-top-left-radius: var(--rounded-btn, 0.5rem);
   border-top-right-radius: 0;
   border-bottom-left-radius: var(--rounded-btn, 0.5rem);
@@ -2103,8 +2098,8 @@ details.collapse summary::-webkit-details-marker{
 }
 
 .btn-group-horizontal .btn:first-child:not(:last-child){
-  margin-left: -1px;
   margin-top: -0px;
+  margin-left: -1px;
   border-top-left-radius: var(--rounded-btn, 0.5rem);
   border-top-right-radius: 0;
   border-bottom-left-radius: var(--rounded-btn, 0.5rem);
@@ -2119,8 +2114,8 @@ details.collapse summary::-webkit-details-marker{
 }
 
 .btn-group-vertical .btn:first-child:not(:last-child){
-  margin-left: -0px;
   margin-top: -1px;
+  margin-left: -0px;
   border-top-left-radius: var(--rounded-btn, 0.5rem);
   border-top-right-radius: var(--rounded-btn, 0.5rem);
   border-bottom-left-radius: 0;
@@ -2282,6 +2277,11 @@ details.collapse summary::-webkit-details-marker{
   margin-bottom: 0px;
 }
 
+.mx-4{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mb-2{
   margin-bottom: 0.5rem;
 }
@@ -2300,6 +2300,22 @@ details.collapse summary::-webkit-details-marker{
 
 .mt-4{
   margin-top: 1rem;
+}
+
+.mt-8{
+  margin-top: 2rem;
+}
+
+.mt-\[48rem\]{
+  margin-top: 48rem;
+}
+
+.mt-\[12rem\]{
+  margin-top: 12rem;
+}
+
+.mt-\[16rem\]{
+  margin-top: 16rem;
 }
 
 .block{
@@ -2342,6 +2358,22 @@ details.collapse summary::-webkit-details-marker{
   height: 100vh;
 }
 
+.h-\[24rem\]{
+  height: 24rem;
+}
+
+.\!h-\[450px\]{
+  height: 450px !important;
+}
+
+.h-\[110\%\]{
+  height: 110%;
+}
+
+.max-h-\[450px\]{
+  max-height: 450px;
+}
+
 .w-24{
   width: 6rem;
 }
@@ -2377,6 +2409,14 @@ details.collapse summary::-webkit-details-marker{
 
 .w-full{
   width: 100%;
+}
+
+.w-auto{
+  width: auto;
+}
+
+.max-w-\[450px\]{
+  max-width: 450px;
 }
 
 .-translate-x-1\/2{
@@ -2439,6 +2479,22 @@ details.collapse summary::-webkit-details-marker{
 
 .overflow-hidden{
   overflow: hidden;
+}
+
+.overflow-visible{
+  overflow: visible;
+}
+
+.\!overflow-visible{
+  overflow: visible !important;
+}
+
+.\!overflow-x-hidden{
+  overflow-x: hidden !important;
+}
+
+.\!overflow-y-scroll{
+  overflow-y: scroll !important;
 }
 
 .rounded{
@@ -2652,6 +2708,30 @@ details.collapse summary::-webkit-details-marker{
 .py-2{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.py-12{
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.py-24{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.px-12{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.text-center{
+  text-align: center;
 }
 
 .text-start{
