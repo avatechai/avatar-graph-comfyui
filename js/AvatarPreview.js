@@ -61,6 +61,7 @@ export function AvatarPreview() {
   });
 
   const email = van.state("");
+  const stage = van.state(0); // 0: upload image, 1: edit segment, 2: generate
 
   const renderSteps = () => {
     return div(
@@ -115,6 +116,7 @@ export function AvatarPreview() {
               "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
             onclick: async () => {
               previewImg.val = await uploadImage();
+              stage.val = 1;
             },
           },
           div({ class: "badge badge-neutral" }, "1"),
@@ -140,7 +142,8 @@ export function AvatarPreview() {
             : "",
         button(
           {
-            class: () => "btn w-96 normal-case",
+            class: () =>
+              "btn w-96 normal-case " + (stage.val < 1 ? "btn-disabled" : ""),
             onclick: () => {
               /** @type {import('../../../web/types/litegraph.js').LGraph}*/
               const graph = app.graph;
@@ -154,6 +157,7 @@ export function AvatarPreview() {
               console.log(nodes[0]);
               console.log(nodes[0].widgets);
               widgets.find((x) => x.type == "button").callback();
+              stage.val = 2;
             },
           },
           div({ class: "badge badge-neutral" }, "2"),
@@ -161,7 +165,8 @@ export function AvatarPreview() {
         ),
         button(
           {
-            class: () => "btn w-96 normal-case",
+            class: () =>
+              "btn w-96 normal-case " + (stage.val < 2 ? "btn-disabled" : ""),
             onclick: () => {
               const graph = app.graph;
               const imageNodes = graph.findNodesByType("LoadImage");
