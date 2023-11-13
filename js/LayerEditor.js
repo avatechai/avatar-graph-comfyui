@@ -240,13 +240,16 @@ export function LayerEditor() {
           }
         },
       }),
-      canvas({
-        class:
-          "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80",
-        id: "mask-canvas",
-      }),
-      () => {
-        return div(
+      () =>
+        canvas({
+          class:
+            "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80",
+          style: () =>
+            `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
+          id: "mask-canvas",
+        }),
+      () =>
+        div(
           {
             class: "absolute w-full h-full pointer-events-none",
             style: () =>
@@ -274,8 +277,7 @@ export function LayerEditor() {
               },
             });
           })
-        );
-      }
+        )
     ),
     SideBar()
   );
