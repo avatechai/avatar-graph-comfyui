@@ -193,7 +193,7 @@ export function AvatarPreview() {
       name: "avatech-viewer-iframe",
       allow: "cross-origin-isolated",
       class: () =>
-        "w-[450px] h-[450px] z-[100] pointer-events-auto flex border-none overflow-hidden" +
+        "w-full h-full min-w-[300px] min-h-[600px] z-[100] pointer-events-auto flex border-none overflow-hidden" +
         (showPreview.val ? "" : "hidden"),
       // src: "https://labs.avatech.ai/viewer/default",
       // src: "http://localhost:3000/viewer/default",
@@ -208,7 +208,10 @@ export function AvatarPreview() {
           "w-full flex flex-col gap-2 justify-center items-center mt-8",
       },
       div(
-        { class: () => "w-full flex justify-center text-black font-bold italic text-gray-500" },
+        {
+          class: () =>
+            "w-full flex justify-center font-bold italic text-gray-500",
+        },
         span("We are launching OpenAI Assistant API integration soon!")
       ),
       div(
@@ -313,45 +316,48 @@ export function AvatarPreview() {
 
         return (
           (showPreview.val ? "" : "hidden ") +
-          "w-full h-screen absolute left-0 top-0 z-[99] pointer-events-auto flex border-none"
+          "w-full h-full absolute left-0 top-0 z-[99] pointer-events-auto flex border-none"
         );
       },
     },
     div(
-      {
-        class: "absolute top-4 left-4 flex flex-row gap-2",
-      },
-      renderCloseButton(),
-      renderChangeWorkflowButton()
-    ),
-    renderTwitter(),
-    () => {
-      if (isMobileDevice()) {
-        return div(
-          {
-            class: () =>
-              "flex flex-col w-full h-[110%] bg-white justify-center items-center py-16 px-4 gap-2" +
-              (showPreview.val ? "" : "hidden"),
-          },
-          renderIFrame(),
-          renderSteps(),
-          renderShareLink()
-        );
-      } else {
-        return div(
-          {
-            class: () =>
-              "flex w-full h-full bg-white justify-around items-center p-24" +
-              (showPreview.val ? "" : "hidden"),
-          },
-          renderSteps(),
-          div(
-            { class: () => "flex flex-col" },
+      { class: "overflow-y-auto overflow-x-hidden w-full h-full" },
+      div(
+        {
+          class: "absolute top-4 left-4 flex flex-row gap-2",
+        },
+        renderCloseButton(),
+        renderChangeWorkflowButton()
+      ),
+      renderTwitter(),
+      () => {
+        if (isMobileDevice()) {
+          return div(
+            {
+              class: () =>
+                "flex flex-col w-full h-fit bg-white justify-center items-center py-16 px-4 gap-2" +
+                (showPreview.val ? "" : "hidden"),
+            },
             renderIFrame(),
+            renderSteps(),
             renderShareLink()
-          )
-        );
+          );
+        } else {
+          return div(
+            {
+              class: () =>
+                "flex w-full h-full bg-white justify-around items-center p-24" +
+                (showPreview.val ? "" : "hidden"),
+            },
+            renderSteps(),
+            div(
+              { class: () => "flex flex-col" },
+              renderIFrame(),
+              renderShareLink()
+            )
+          );
+        }
       }
-    }
+    )
   );
 }

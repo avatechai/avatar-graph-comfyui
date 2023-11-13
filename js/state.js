@@ -18,7 +18,7 @@ export const iframeSrc = van.state("https://editor.avatech.ai?comfyui=true");
 export const showEditor = van.state(false);
 // localStorage.getItem("showPreview") == 'true'
 export const showPreview = van.state(true);
-export const previewUrl = van.state("https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=400&height=400&hideTrigger=true&voiceSelection=true");
+export const previewUrl = van.state("https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=300&height=300&hideTrigger=true&voiceSelection=true");
 export const previewImg = van.state("");
 export const previewImgLoading = van.state(false);
 // export const previewUrl = van.state("http://localhost:3006/viewer?avatarId=default&hideUI=true&debug=true&width=300&height=300&showAudioControl=true");
