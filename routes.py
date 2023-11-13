@@ -98,8 +98,9 @@ async def post_sam_model(request):
 
 @server.PromptServer.instance.routes.get("/get_default_workflow")
 async def get_default_workflow(request):
-    # json_link = "https://cdn.discordapp.com/attachments/1119102674437156984/1172255632586448987/workflow_boy_2_1.json?ex=655fa722&is=654d3222&hm=463fa6a3c6ea60f7471196ff45382c729d3b856e86282f905d37a0398711860e&"
-    json_link = "https://cdn.discordapp.com/attachments/729003657483518063/1172504658812608572/workflow_15.json?ex=65608f0e&is=654e1a0e&hm=f707d887b9294c1e9b26e54856b1e516d1725a1b25d044b46229cea6e5c804a1&"
+    # json_link = "https://cdn.discordapp.com/attachments/1119102674437156984/1172255632586448987/workflow_boy_2_1.json?ex=655fa722&is=654d3222&hm=463fa6a3c6ea60f7471196ff45382c729d3b856e86282f905d37a0398711860e&" # YP workflow
+    # json_link = "https://cdn.discordapp.com/attachments/729003657483518063/1172504658812608572/workflow_15.json?ex=65608f0e&is=654e1a0e&hm=f707d887b9294c1e9b26e54856b1e516d1725a1b25d044b46229cea6e5c804a1&" # Benny workflow
+    json_link = 'https://cdn.discordapp.com/attachments/1110859802701221898/1173524740577693767/1113_2.json?ex=65644515&is=6551d015&hm=b857628ee83d0006f88d1076851cc077c7a9e0bc0ba9e7647d3cce30b8ad7758&' # Deepwoo workflow
     response = requests.get(json_link)
     response.raise_for_status()
     return web.json_response(response.json())
