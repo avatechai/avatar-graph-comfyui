@@ -139,3 +139,9 @@ async def post_segments(request):
 async def get_webhook(request):
     url = os.getenv('DISCORD_WEBHOOK_URL')
     return web.json_response(url)
+
+@server.PromptServer.instance.routes.post("/input_file")
+async def post_input_file(request):
+    post = await request.json()
+    uuid = post.get("uuid")
+    return web.json_response({'uuid': uuid})
