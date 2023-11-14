@@ -345,7 +345,7 @@ export function AvatarPreview() {
 
         return (
           (showPreview.val ? "" : "hidden ") +
-          "w-full h-full absolute left-0 top-0 z-[99] pointer-events-auto flex border-none"
+          "w-full h-full absolute left-0 top-0 z-[99] pointer-events-auto flex border-none bg-white"
         );
       },
     },
