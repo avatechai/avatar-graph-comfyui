@@ -116,8 +116,26 @@ export function AvatarPreview() {
             class: () =>
               "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
             onclick: async () => {
-              previewImg.val = await uploadImage();
-              stage.val = 1;
+              // previewImg.val = await uploadImage();
+              // stage.val = 1;
+              var input = document.createElement("input");
+              input.type = "file";
+
+              document.body.appendChild(input);
+
+              // when the input content changes, do something
+              input.onchange = async function (e) {
+                stage.val = 1;
+                if (Object.entries(e.target.files).length) {
+                  await uploadFile(e.target.files[0], true);
+                }
+                previewImg.val = URL.createObjectURL(e.target.files[0]);
+                // upload files
+                document.body.removeChild(input);
+              };
+
+              // Trigger file browser
+              input.click();
             },
           },
           div({ class: "badge badge-neutral" }, "1"),
@@ -364,4 +382,62 @@ export function AvatarPreview() {
       }
     )
   );
+}
+
+function showImage(name) {
+  const graph = app.graph;
+  const node = graph.findNodesByType("LoadImage");
+  const img = new Image();
+  img.onload = () => {
+    node[0].imgs = [img];
+    app.graph.setDirtyCanvas(true);
+  };
+  let folder_separator = name.lastIndexOf("/");
+  let subfolder = "";
+  if (folder_separator > -1) {
+    subfolder = name.substring(0, folder_separator);
+    name = name.substring(folder_separator + 1);
+  }
+  img.src = api.apiURL(
+    `/view?filename=${encodeURIComponent(
+      name
+    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`
+  );
+  node.setSizeForImage?.();
+}
+
+async function uploadFile(file, updateNode, pasted = false) {
+  try {
+    // Wrap file in formdata so it includes filename
+    const graph = app.graph;
+    const nodes = graph.findNodesByType("LoadImage");
+    const widgets = nodes[0].widgets.find((w) => w.name === "image");
+    const body = new FormData();
+    body.append("image", file);
+    if (pasted) body.append("subfolder", "pasted");
+    const resp = await api.fetchApi("/upload/image", {
+      method: "POST",
+      body,
+    });
+
+    if (resp.status === 200) {
+      const data = await resp.json();
+      // Add the file to the dropdown list and update the widget value
+      let path = data.name;
+      if (data.subfolder) path = data.subfolder + "/" + path;
+
+      if (!widgets.options.values.includes(path)) {
+        widgets.options.values.push(path);
+      }
+
+      if (updateNode) {
+        showImage(path);
+        widgets.value = path;
+      }
+    } else {
+      alert(resp.status + " - " + resp.statusText);
+    }
+  } catch (error) {
+    alert(error);
+  }
 }
