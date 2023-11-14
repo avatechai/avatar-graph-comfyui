@@ -142,6 +142,13 @@ async def get_webhook(request):
 
 @server.PromptServer.instance.routes.post("/input_file")
 async def post_input_file(request):
-    post = await request.json()
-    uuid = post.get("uuid")
-    return web.json_response({'uuid': uuid})
+    post = await request.read()
+    
+    output_dir = os.path.join(folder_paths.base_path, "input")
+    os.makedirs(output_dir, exist_ok=True)
+    
+    filename = os.path.join(output_dir, "imagefromai.png")
+    with open(filename, "wb") as f:
+        f.write(post)
+    
+    return web.json_response({})
