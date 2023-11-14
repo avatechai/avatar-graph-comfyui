@@ -11,7 +11,7 @@ export let model = null;
 export const initModel = async (modelType) => {
   try {
     model = await ort.InferenceSession.create(
-      `http://127.0.0.1:8188/sam_model?type=${modelType}`
+      `${location.protocol}//${location.host}/sam_model?type=${modelType}`
     );
   } catch (e) {
     console.log(e);
