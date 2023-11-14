@@ -103,8 +103,12 @@ class SAMMultiLayer:
         
         image_prompts = json.loads(image_prompts_json)
         result = [image_prompts]
+        
+        order_file = f"{self.output_dir}/{embedding_id}/order.json"
+        if not os.path.exists(order_file):
+            raise FileNotFoundError("Segments order file not found. Please click the 'Edit prompt' in the graph first.")
 
-        with open(f"{self.output_dir}/{embedding_id}/order.json") as f:
+        with open(order_file) as f:
             order = json.load(f)
 
         for segment in order:

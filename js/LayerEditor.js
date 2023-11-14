@@ -166,9 +166,10 @@ export function LayerEditor() {
       {
         class: () =>
           "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-2 top-0 z-[200] w-fit",
-        onclick: () => {
+        onclick: async () => {
           console.log("close");
           showImageEditor.val = false;
+          await uploadSegments();
           // api.fetchApi("/segments_order", {
           //   method: "POST",
           //   body: JSON.stringify({
