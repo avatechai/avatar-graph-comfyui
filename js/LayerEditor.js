@@ -13,6 +13,7 @@ import {
   imagePromptsMulti,
   embeddings,
   embeddingID,
+  alertDialog,
 } from "./state.js";
 import { van } from "./van.js";
 const { button, div, img, canvas, span } = van.tags;
@@ -29,22 +30,54 @@ export function updateImagePrompts() {
     targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePromptsMulti.val);
 
-    const canvas = document.getElementById("mask-canvas");
-    const base64Image = canvas.toDataURL();
-    api.fetchApi("/segments", {
-      method: "POST",
-      body: JSON.stringify({
-        name: embeddingID.val,
-        segments: {
-          [selectedLayer.val]: base64Image,
-        },
-      }),
-    });
+    // const canvas = document.getElementById("mask-canvas");
+    // const base64Image = canvas.toDataURL();
+    // api.fetchApi("/segments", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     name: embeddingID.val,
+    //     segments: {
+    //       [selectedLayer.val]: base64Image,
+    //     },
+    //   }),
+    // });
   } else {
     targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePrompts.val);
   }
   targetNode.val.graph.change();
+}
+
+export async function uploadSegments() {
+  const emptyLayers = [];
+  Object.entries(imagePromptsMulti.val).forEach(([key, value]) => {
+    if (value.length === 0) {
+      emptyLayers.push(key);
+    }
+  });
+  if (emptyLayers.length > 0) {
+    alertDialog.val = {
+      text: "The following layers have no segments: " + emptyLayers.join(", "),
+      time: 5000,
+    };
+    return false;
+  }
+
+  const segments = {};
+  for (const [layer, prompts] of Object.entries(imagePromptsMulti.val)) {
+    await drawSegment(getClicks(prompts));
+    const canvas = document.getElementById("mask-canvas");
+    const base64Image = canvas.toDataURL();
+    segments[layer] = base64Image;
+  }
+  await api.fetchApi("/segments", {
+    method: "POST",
+    body: JSON.stringify({
+      name: embeddingID.val,
+      segments,
+    }),
+  });
+  return true;
 }
 
 async function handleClick(e) {
@@ -87,8 +120,8 @@ function handleImageSize(image) {
   return { height: h, width: w, samScale, imgScale };
 }
 
-export function getClicks() {
-  return imagePrompts.val.map((point) => ({
+export function getClicks(prompts) {
+  return (prompts || imagePrompts.val).map((point) => ({
     x: point.x,
     y: point.y,
     clickType: point.label,
@@ -136,13 +169,13 @@ export function LayerEditor() {
         onclick: () => {
           console.log("close");
           showImageEditor.val = false;
-          api.fetchApi("/segments_order", {
-            method: "POST",
-            body: JSON.stringify({
-              name: embeddingID.val,
-              order: Object.keys(imagePromptsMulti.val),
-            }),
-          });
+          // api.fetchApi("/segments_order", {
+          //   method: "POST",
+          //   body: JSON.stringify({
+          //     name: embeddingID.val,
+          //     order: Object.keys(imagePromptsMulti.val),
+          //   }),
+          // });
         },
       },
       span({

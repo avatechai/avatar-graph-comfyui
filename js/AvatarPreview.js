@@ -11,6 +11,7 @@ const { button, iframe, div, img, input, label, span } = van.tags;
 import { app } from "./app.js";
 import { uploadPreview } from "./index.js";
 import { api } from "./api.js";
+import { uploadSegments } from "./LayerEditor.js";
 
 async function loadJSONWorkflow() {
   const json = await (await fetch("./get_default_workflow")).json();
@@ -167,7 +168,10 @@ export function AvatarPreview() {
           {
             class: () =>
               "btn w-96 normal-case " + (stage.val < 2 ? "btn-disabled" : ""),
-            onclick: () => {
+            onclick: async () => {
+              const uploaded = await uploadSegments();
+              if (!uploaded) return;
+
               const graph = app.graph;
               const imageNodes = graph.findNodesByType("LoadImage");
               if (!imageNodes[0].imgs) return;

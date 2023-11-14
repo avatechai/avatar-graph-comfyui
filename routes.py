@@ -111,24 +111,29 @@ async def post_segments(request):
     post = await request.json()
     name = post.get("name")
     segments = post.get("segments")
-    os.makedirs(os.path.join(folder_paths.base_path, f"output/{name}"), exist_ok=True)
-    for key, value in segments.items():
-        filename = os.path.join(folder_paths.base_path, f"output/{name}/{key}.png")
-        with open(filename, "wb") as f:
-            f.write(base64.b64decode(value.split(",")[1]))
-    return web.json_response({})
-
-
-@server.PromptServer.instance.routes.post("/segments_order")
-async def post_segments(request):
-    post = await request.json()
-    name = post.get("name")
-    order = post.get("order")
     output_dir = os.path.join(folder_paths.base_path, f"output/{name}")
     os.makedirs(output_dir, exist_ok=True)
+    for key, value in segments.items():
+        filename = os.path.join(output_dir, f"{key}.png")
+        with open(filename, "wb") as f:
+            f.write(base64.b64decode(value.split(",")[1]))
+
+    order = list(segments.keys())
     with open(os.path.join(output_dir, "order.json") , "w") as f:
         json.dump(order, f)
     return web.json_response({})
+
+
+# @server.PromptServer.instance.routes.post("/segments_order")
+# async def post_segments(request):
+#     post = await request.json()
+#     name = post.get("name")
+#     order = post.get("order")
+#     output_dir = os.path.join(folder_paths.base_path, f"output/{name}")
+#     os.makedirs(output_dir, exist_ok=True)
+#     with open(os.path.join(output_dir, "order.json") , "w") as f:
+#         json.dump(order, f)
+#     return web.json_response({})
 
 @server.PromptServer.instance.routes.get("/get_webhook")
 async def get_webhook(request):

@@ -14,7 +14,7 @@ export function Alert() {
   return div(
     {
       class: () =>
-        "absolute bottom-8 flex justify-center w-full " +
+        "absolute z-[100] bottom-8 flex justify-center w-full " +
         (alertDialog.val.text ? "" : "hidden"),
     },
     div(
