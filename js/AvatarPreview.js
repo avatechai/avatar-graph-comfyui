@@ -151,7 +151,7 @@ export function AvatarPreview() {
         () =>
           previewImg.val != ""
             ? img({
-                class: () => "z-[10] object-contain w-full h-[394px] border",
+                class: () => "z-[10] object-contain w-[400px] h-[400px] border",
                 src: previewImg,
               })
             : "",
