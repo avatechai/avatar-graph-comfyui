@@ -73,15 +73,15 @@ LGraphGroup.prototype.repositionNodes = function () {
   let sortedNodes = this._nodes.sort((a, b) => a.pos[1] - b.pos[1]);
   // Separate input and output nodes from the rest
   const inputNodes = sortedNodes.filter(
-    (node) => node.properties.routeType === "input",
+    (node) => node.properties.routeType === "input"
   );
   const outputNodes = sortedNodes.filter(
-    (node) => node.properties.routeType === "output",
+    (node) => node.properties.routeType === "output"
   );
   const otherNodes = sortedNodes.filter(
     (node) =>
       node.properties.routeType !== "input" &&
-      node.properties.routeType !== "output",
+      node.properties.routeType !== "output"
   );
 
   // Concatenate the arrays so that input nodes are first and output nodes are last
@@ -215,7 +215,7 @@ function openInAvatechEditor(url, fileName) {
       blendshapes: targetNode.val.widgets.find((x) => x.name === "shape_flow")
         .value,
     },
-    "*",
+    "*"
   );
 }
 
@@ -288,7 +288,7 @@ function showMyImageEditor(node) {
       .then(() => {
         showLoading.val = false;
         const v = JSON.parse(
-          node.widgets.find((x) => x.name === "image_prompts_json").value,
+          node.widgets.find((x) => x.name === "image_prompts_json").value
         );
 
         if (!Array.isArray(v)) {
@@ -305,13 +305,13 @@ function showMyImageEditor(node) {
         showImageEditor.val = true;
         imageUrl.val = api.apiURL(
           `/view?filename=${encodeURIComponent(
-            connectedImageFileName,
-          )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`,
+            connectedImageFileName
+          )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`
         );
         const embeedingUrl = api.apiURL(
           `/view?filename=${encodeURIComponent(
-            `${id}_${modelType}.npy`,
-          )}&type=output&subfolder=`,
+            `${id}_${modelType}.npy`
+          )}&type=output&subfolder=`
         );
         loadNpyTensor(embeedingUrl).then((tensor) => {
           embeddings.val = tensor;
@@ -354,7 +354,7 @@ const ext = {
           targetNode.val = node;
           openInAvatechEditor(
             "https://editor.avatech.ai?comfyui=true",
-            fileName.val,
+            fileName.val
           );
           // openInAvatechEditor("http://localhost:3006?comfyui=true", fileName.val);
         });
@@ -387,6 +387,24 @@ const ext = {
           widget: btn,
         };
       },
+      GROUP_OPS(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Add OBJ", "", () => {
+          node.addInput("BPY_OBJ" + (node.inputs.length + 1), "BPY_OBJ");
+          node.graph.change();
+        });
+        return {
+          widget: btn,
+        };
+      },
+      GROUP_OPS_DELETE(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Delete OBJ", "", () => {
+          node.removeInput(node.inputs.length - 1);
+          node.graph.change();
+        });
+        return {
+          widget: btn,
+        };
+      },
     };
   },
 
@@ -412,13 +430,13 @@ const ext = {
     window.addEventListener("message", (event) => {
       if (!event.data.flow || Object.entries(event.data.flow).length <= 0)
         return;
-      updateBlendshapesPrompts(event.data.flow);
+            updateBlendshapesPrompts(event.data.flow);
     });
 
     api.addEventListener("executed", (evt) => {
       if (evt.detail?.output.gltfFilename) {
         const viewer = document.getElementById(
-          "avatech-viewer-iframe",
+          "avatech-viewer-iframe"
         ).contentWindow;
 
         const gltfFilename =
@@ -446,7 +464,7 @@ const ext = {
             avatarURL: gltfFilename,
             blendshapes: evt.detail?.output.SHAPE_FLOW[0],
           }),
-          "*",
+          "*"
         );
       }
     });
@@ -474,7 +492,7 @@ const ext = {
       },
       {
         capture: true,
-      },
+      }
     );
 
     graphCanvas.addEventListener("keydown", (event) => {
@@ -550,7 +568,7 @@ const ext = {
               a.href = url;
               a.setAttribute(
                 "download",
-                new URLSearchParams(url.search).get("filename"),
+                new URLSearchParams(url.search).get("filename")
               );
               document.body.append(a);
               a.click();
@@ -580,7 +598,7 @@ const ext = {
               a.href = url;
               a.setAttribute(
                 "download",
-                new URLSearchParams(url.search).get("filename"),
+                new URLSearchParams(url.search).get("filename")
               );
               document.body.append(a);
               a.click();
@@ -593,7 +611,7 @@ const ext = {
             callback: () => {
               openInAvatechEditor(
                 "http://localhost:3006?comfyui=true",
-                gltfFilename,
+                gltfFilename
               );
             },
           });
@@ -603,7 +621,7 @@ const ext = {
             callback: () => {
               openInAvatechEditor(
                 "https://editor.avatech.ai?comfyui=true",
-                gltfFilename,
+                gltfFilename
               );
             },
           });
@@ -629,6 +647,9 @@ const ext = {
         nodeData.input.required.obj = ["MESH_GROUP_CONFIG"];
         nodeData.input.required.del_obj = ["MESH_GROUP_DELETE"];
         break;
+      case "GroupOps":
+        nodeData.input.required.obj = ["GROUP_OPS"];
+        nodeData.input.required.del_obj = ["GROUP_OPS_DELETE"];
       default:
         break;
     }
@@ -659,7 +680,7 @@ export async function uploadPreview() {
     infoDialog.show(
       `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
         labData.modelId +
-        `</a>`,
+        `</a>`
     );
     previewModelId.val = labData.modelId;
   }
@@ -713,7 +734,7 @@ function injectUIComponentToComfyuimenu() {
                 "https://labs.avatech.ai/api/share?id=" + previewModelId.val,
                 {
                   method: "GET",
-                },
+                }
               ).then((e) => e.json());
 
               await fetch(labData.url, {
@@ -730,13 +751,13 @@ function injectUIComponentToComfyuimenu() {
                 "https://labs.avatech.ai/api/purgecdn?id=" + previewModelId.val,
                 {
                   method: "GET",
-                },
+                }
               ).catch((error) => console.error(error));
 
               infoDialog.show(
                 `Preview updated: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
                   labData.modelId +
-                  "</a>\n Remember to hard refresh before checking out the new preview!",
+                  "</a>\n Remember to hard refresh before checking out the new preview!"
               );
 
               shareLoading.val = false;
@@ -751,7 +772,7 @@ function injectUIComponentToComfyuimenu() {
         event: e,
         scale: 1.3,
       },
-      window,
+      window
     );
     menu.root.classList.add("popup");
   };
@@ -776,7 +797,7 @@ function injectUIComponentToComfyuimenu() {
       infoDialog.show(
         `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
           previewModelId.val +
-          `</a>`,
+          `</a>`
       );
     }
   };
