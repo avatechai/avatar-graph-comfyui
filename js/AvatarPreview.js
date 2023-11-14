@@ -117,24 +117,20 @@ export function AvatarPreview() {
               "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
             onclick: async () => {
               // previewImg.val = await uploadImage();
-              // stage.val = 1;
-              var input = document.createElement("input");
+              stage.val = 1;
+              let input = document.createElement("input");
               input.type = "file";
-
+              input.accept = "image/jpeg,image/png,image/webp";
               document.body.appendChild(input);
 
               // when the input content changes, do something
               input.onchange = async function (e) {
-                stage.val = 1;
                 if (Object.entries(e.target.files).length) {
                   await uploadFile(e.target.files[0], true);
                 }
                 previewImg.val = URL.createObjectURL(e.target.files[0]);
-                // upload files
                 document.body.removeChild(input);
               };
-
-              // Trigger file browser
               input.click();
             },
           },
@@ -302,9 +298,20 @@ export function AvatarPreview() {
     return button(
       {
         class: () =>
-          "btn text-black flex flex-row btn-ghost normal-case  px-4 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto ",
+          "btn text-black flex flex-row btn-ghost normal-case px-4 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto ",
         onclick: () => {
-          document.getElementById("comfy-load-button").click();
+          let input = document.createElement("input");
+          input.type = "file";
+          document.body.appendChild(input);
+          input.accept = ".json,image/png,.latent,.safetensors";
+          input.onchange = async function (e) {
+            if (Object.entries(e.target.files).length) {
+              app.handleFile(e.target.files[0]);
+            }
+            document.body.removeChild(input);
+          };
+          input.click();
+          // document.getElementById("comfy-load-button").click();
         },
       },
       span({
