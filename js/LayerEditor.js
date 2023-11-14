@@ -146,6 +146,9 @@ export async function drawSegment(clicks) {
 
 export function LayerEditor() {
   let realTimeSegment = true;
+
+  const showSidebar = van.state(true)
+
   document.addEventListener("keydown", (e) => {
     if (showImageEditor.val && e.code === "Tab") {
       e.preventDefault();
@@ -185,6 +188,15 @@ export function LayerEditor() {
         "data-inline": "false",
       }),
       div("Back")
+    ),
+    button(
+      {
+        class: () =>
+          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-28 top-0 z-[200] w-fit",
+        onclick: () => showSidebar.val = !showSidebar.val
+        ,
+      },
+      div(() => showSidebar.val ? "Hide UI" : "Show UI")
     ),
     div(
       {
@@ -313,6 +325,6 @@ export function LayerEditor() {
           })
         )
     ),
-    SideBar()
+    () => showSidebar.val ? SideBar() : div()
   );
 }
