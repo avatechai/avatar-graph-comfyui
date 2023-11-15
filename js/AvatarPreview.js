@@ -95,21 +95,21 @@ export function AvatarPreview() {
   const renderSteps = () => {
     return div(
       {
-        class: () => "flex flex-col bg-white justify-center",
+        class: () => "flex flex-col bg-white justify-center w-[32rem]",
       },
       div(
         {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-60% to-white text-transparent bg-clip-text font-gabarito text-4xl",
         },
-        "Avatech v1"
+        "Avatech v1",
       ),
       div(
         {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-50% to-white text-transparent bg-clip-text font-gabarito text-2xl",
         },
-        "Get your DALLE3 AI Personal Clone"
+        "Get your DALLE3 AI Personal Clone",
       ),
       // input({
       //   type: "file",
@@ -139,99 +139,231 @@ export function AvatarPreview() {
           class: () =>
             " w-full flex flex-col justify-center items-center gap-4",
         },
-        button(
-          {
-            class: () =>
-              "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
-            onclick: async () => {
-              // previewImg.val = await uploadImage();
-              stage.val = 1;
-              let input = document.createElement("input");
-              input.type = "file";
-              input.accept = "image/jpeg,image/png,image/webp";
-              document.body.appendChild(input);
-
-              // when the input content changes, do something
-              input.onchange = async function (e) {
-                if (Object.entries(e.target.files).length) {
-                  await uploadFile(e.target.files[0], true);
-                }
-                previewImg.val = URL.createObjectURL(e.target.files[0]);
-                document.body.removeChild(input);
-              };
-              input.click();
-            },
-          },
-          div({ class: "badge badge-neutral" }, "1"),
-          div("Upload your image"),
-          span({
-            class: "iconify text-lg",
-            "data-icon": "material-symbols:drive-folder-upload",
-            "data-inline": "false",
+        div(
+          { class: () => "tabs tabs-lifted tabs-lg w-full" },
+          input({
+            type: "radio",
+            name: "my_tabs_1",
+            class: () => "tab w-full",
+            checked: true,
+            ariaLabel: "Custom avatar",
           }),
-          () =>
-            previewImgLoading.val
-              ? span({
-                  class: "loading loading-spinner loading-md",
-                })
-              : ""
+          div(
+            { class: () => "tab-content text-black w-full" },
+            div(
+              {
+                class: () => "flex flex-col justify-center items-center gap-4",
+              },
+              button(
+                {
+                  class: () =>
+                    "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
+                  onclick: async () => {
+                    // previewImg.val = await uploadImage();
+                    // stage.val = 1;
+                    var input = document.createElement("input");
+                    input.type = "file";
+
+                    document.body.appendChild(input);
+
+                    // when the input content changes, do something
+                    input.onchange = async function (e) {
+                      stage.val = 1;
+                      if (Object.entries(e.target.files).length) {
+                        await uploadFile(e.target.files[0], true);
+                      }
+                      previewImg.val = URL.createObjectURL(e.target.files[0]);
+                      // upload files
+                      document.body.removeChild(input);
+                    };
+
+                    // Trigger file browser
+                    input.click();
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "1"),
+                div("Upload your image"),
+                span({
+                  class: "iconify text-lg",
+                  "data-icon": "material-symbols:drive-folder-upload",
+                  "data-inline": "false",
+                }),
+                () =>
+                  previewImgLoading.val
+                    ? span({
+                        class: "loading loading-spinner loading-md",
+                      })
+                    : "",
+              ),
+              () =>
+                previewImg.val != ""
+                  ? img({
+                      class: () =>
+                        "z-[10] object-contain w-full h-[394px] border",
+                      src: previewImg,
+                    })
+                  : "",
+              button(
+                {
+                  class: () =>
+                    "btn w-full normal-case " +
+                    (stage.val < 1 ? "btn-disabled" : ""),
+                  onclick: () => {
+                    /** @type {import('../../../web/types/litegraph.js').LGraph}*/
+                    const graph = app.graph;
+                    const imageNodes = graph.findNodesByType("LoadImage");
+                    if (!imageNodes[0].imgs) return;
+
+                    const nodes = graph.findNodesByType("SAM MultiLayer");
+
+                    /** @type {any[]}*/
+                    const widgets = nodes[0].widgets;
+                    console.log(nodes[0]);
+                    console.log(nodes[0].widgets);
+                    widgets.find((x) => x.type == "button").callback();
+                    stage.val = 2;
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "2"),
+                "Edit segment",
+              ),
+              button(
+                {
+                  class: () =>
+                    "btn w-full normal-case " +
+                    (stage.val < 2 ? "btn-disabled" : ""),
+                  onclick: async () => {
+                    // const uploaded = await uploadSegments();
+                    // if (!uploaded) return;
+
+                    const graph = app.graph;
+                    const imageNodes = graph.findNodesByType("LoadImage");
+                    if (!imageNodes[0].imgs) return;
+                    document.getElementById("queue-button").click();
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "3"),
+                () =>
+                  loading.val
+                    ? span({
+                        class: "loading loading-spinner loading-lg",
+                      })
+                    : "Generate",
+              ),
+            ),
+          ),
+          input({
+            type: "radio",
+            name: "my_tabs_1",
+            class: () => "tab",
+            ariaLabel: "Generate avatar",
+          }),
+          div(
+            { class: () => "tab-content text-black w-full" },
+            div(
+              {
+                class: () => "flex flex-col justify-center items-center gap-4",
+              },
+              button(
+                {
+                  class: () =>
+                    "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
+                  onclick: async () => {
+                    // previewImg.val = await uploadImage();
+                    // stage.val = 1;
+                    var input = document.createElement("input");
+                    input.type = "file";
+
+                    document.body.appendChild(input);
+
+                    // when the input content changes, do something
+                    input.onchange = async function (e) {
+                      stage.val = 1;
+                      if (Object.entries(e.target.files).length) {
+                        await uploadFile(e.target.files[0], true);
+                      }
+                      previewImg.val = URL.createObjectURL(e.target.files[0]);
+                      // upload files
+                      document.body.removeChild(input);
+                    };
+
+                    // Trigger file browser
+                    input.click();
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "1"),
+                div("Generate image"),
+                span({
+                  class: "iconify text-lg",
+                  "data-icon": "material-symbols:drive-folder-upload",
+                  "data-inline": "false",
+                }),
+                () =>
+                  previewImgLoading.val
+                    ? span({
+                        class: "loading loading-spinner loading-md",
+                      })
+                    : "",
+              ),
+              () =>
+                previewImg.val != ""
+                  ? img({
+                      class: () =>
+                        "z-[10] object-contain w-full h-[394px] border",
+                      src: previewImg,
+                    })
+                  : "",
+              button(
+                {
+                  class: () =>
+                    "btn w-full normal-case " +
+                    (stage.val < 1 ? "btn-disabled" : ""),
+                  onclick: () => {
+                    /** @type {import('../../../web/types/litegraph.js').LGraph}*/
+                    const graph = app.graph;
+                    const imageNodes = graph.findNodesByType("LoadImage");
+                    if (!imageNodes[0].imgs) return;
+
+                    const nodes = graph.findNodesByType("SAM MultiLayer");
+
+                    /** @type {any[]}*/
+                    const widgets = nodes[0].widgets;
+                    console.log(nodes[0]);
+                    console.log(nodes[0].widgets);
+                    widgets.find((x) => x.type == "button").callback();
+                    stage.val = 2;
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "2"),
+                "Auto segment",
+              ),
+              button(
+                {
+                  class: () =>
+                    "btn w-full normal-case " +
+                    (stage.val < 2 ? "btn-disabled" : ""),
+                  onclick: async () => {
+                    // const uploaded = await uploadSegments();
+                    // if (!uploaded) return;
+
+                    const graph = app.graph;
+                    const imageNodes = graph.findNodesByType("LoadImage");
+                    if (!imageNodes[0].imgs) return;
+                    document.getElementById("queue-button").click();
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "3"),
+                () =>
+                  loading.val
+                    ? span({
+                        class: "loading loading-spinner loading-lg",
+                      })
+                    : "Generate",
+              ),
+            ),
+          ),
         ),
-        () =>
-          previewImg.val != ""
-            ? img({
-                class: () => "z-[10] object-contain w-[400px] h-[400px] border",
-                src: previewImg,
-              })
-            : "",
-        button(
-          {
-            class: () =>
-              "btn w-96 normal-case " + (stage.val < 1 ? "btn-disabled" : ""),
-            onclick: () => {
-              /** @type {import('../../../web/types/litegraph.js').LGraph}*/
-              const graph = app.graph;
-              const imageNodes = graph.findNodesByType("LoadImage");
-              if (!imageNodes[0].imgs) return;
-
-              const nodes = graph.findNodesByType("SAM MultiLayer");
-
-              /** @type {any[]}*/
-              const widgets = nodes[0].widgets;
-              console.log(nodes[0]);
-              console.log(nodes[0].widgets);
-              widgets.find((x) => x.type == "button").callback();
-              stage.val = 2;
-            },
-          },
-          div({ class: "badge badge-neutral" }, "2"),
-          "Edit segment"
-        ),
-        button(
-          {
-            class: () =>
-              "btn w-96 normal-case " + (stage.val < 2 ? "btn-disabled" : ""),
-            onclick: async () => {
-              // const uploaded = await uploadSegments();
-              // if (!uploaded) return;
-
-              const graph = app.graph;
-              const imageNodes = graph.findNodesByType("LoadImage");
-              if (!imageNodes[0].imgs) return;
-              document.getElementById("queue-button").click();
-              console.log("scrolling???");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              console.log("hi???");
-            },
-          },
-          div({ class: "badge badge-neutral" }, "3"),
-          () =>
-            loading.val
-              ? span({
-                  class: "loading loading-spinner loading-lg",
-                })
-              : "Generate"
-        )
-      )
+      ),
     );
   };
 
@@ -261,7 +393,7 @@ export function AvatarPreview() {
           class: () =>
             "w-full flex justify-center font-bold italic text-gray-500",
         },
-        span("We are launching OpenAI Assistant API integration soon!")
+        span("We are launching OpenAI Assistant API integration soon!"),
       ),
       div(
         { class: () => "w-[24rem] flex justify-center items-center" },
@@ -302,9 +434,9 @@ export function AvatarPreview() {
               ? span({
                   class: "loading loading-spinner loading-lg",
                 })
-              : "Get Avatar Link"
-        )
-      )
+              : "Get Avatar Link",
+        ),
+      ),
     );
   };
 
@@ -321,7 +453,7 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "ic:round-close",
         "data-inline": "false",
-      })
+      }),
     );
   };
 
@@ -380,7 +512,7 @@ export function AvatarPreview() {
           "absolute top-4 right-4 btn sm:w-10 w-32 text-black btn-ghost text-xs !px-0 normal-case sm:btn-md btn-sm",
         onclick: () => window.open("https://twitter.com/avatech_gg", "_blank"),
       },
-      "Twitter"
+      "Twitter",
     );
   };
 
@@ -420,7 +552,7 @@ export function AvatarPreview() {
             },
             renderIFrame(),
             renderSteps(),
-            renderShareLink()
+            renderShareLink(),
           );
         } else {
           return div(
@@ -433,12 +565,12 @@ export function AvatarPreview() {
             div(
               { class: () => "flex flex-col" },
               renderIFrame(),
-              renderShareLink()
-            )
+              renderShareLink(),
+            ),
           );
         }
-      }
-    )
+      },
+    ),
   );
 }
 
@@ -458,8 +590,8 @@ function showImage(name) {
   }
   img.src = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      name
-    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`
+      name,
+    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`,
   );
   node.setSizeForImage?.();
 }
