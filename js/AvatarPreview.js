@@ -6,11 +6,14 @@ import {
   showEditor,
   previewImg,
   previewImgLoading,
+  alertDialog,
 } from "./state.js";
-const { button, iframe, div, img, input, label, span } = van.tags;
+const { button, iframe, div, img, input, label, span, textarea } = van.tags;
 import { app } from "./app.js";
 import { uploadPreview } from "./index.js";
 import { api } from "./api.js";
+import { uploadSegments } from "./LayerEditor.js";
+import { initModel } from "./onnx.js";
 // import { uploadSegments } from "./LayerEditor.js";
 
 async function loadJSONWorkflow() {
@@ -59,8 +62,8 @@ async function prepareImageFromUrlRedirect(stage) {
     graph.change();
     previewImg.val = api.apiURL(
       `/view?filename=${encodeURIComponent(
-        imageName,
-      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`,
+        imageName
+      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`
     );
     console.log(previewImg);
   }
@@ -131,14 +134,14 @@ export function AvatarPreview() {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-60% to-white text-transparent bg-clip-text font-gabarito text-4xl",
         },
-        "Avatech v1",
+        "Avatech v1"
       ),
       div(
         {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-50% to-white text-transparent bg-clip-text font-gabarito text-2xl",
         },
-        "Get your DALLE3 AI Personal Clone",
+        "Get your DALLE3 AI Personal Clone"
       ),
       // input({
       //   type: "file",
@@ -188,7 +191,9 @@ export function AvatarPreview() {
                 button(
                   {
                     class: () =>
-                      `${previewImg.val != "" && 'w-full'} h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto`,
+                      `${
+                        previewImg.val != "" && "w-full"
+                      } h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto`,
                     onclick: async () => {
                       // previewImg.val = await uploadImage();
                       // stage.val = 1;
@@ -224,10 +229,13 @@ export function AvatarPreview() {
                       ? span({
                           class: "loading loading-spinner loading-md",
                         })
-                      : "",
+                      : ""
                 ),
                 previewImg.val == ""
-                  ? div({ class: () => "divider divider-horizontal !gap-0" }, "OR")
+                  ? div(
+                      { class: () => "divider divider-horizontal !gap-0" },
+                      "OR"
+                    )
                   : "",
                 previewImg.val == ""
                   ? div(
@@ -236,9 +244,9 @@ export function AvatarPreview() {
                         class: () =>
                           "w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center",
                       },
-                      "Drag and drop the image here",
+                      "Drag and drop the image here"
                     )
-                  : "",
+                  : ""
               ),
               () =>
                 previewImg.val != ""
@@ -271,7 +279,7 @@ export function AvatarPreview() {
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "Edit segment",
+                "Edit segment"
               ),
               button(
                 {
@@ -292,84 +300,110 @@ export function AvatarPreview() {
                 () =>
                   loading.val
                     ? span({
-                        class: "loading loading-spinner loading-lg",
+                        class: "loading loading-spinner loading-md",
                       })
-                    : "Generate",
-              ),
-            ),
+                    : "Make it alive!"
+              )
+            )
           ),
           input({
             type: "radio",
             name: "my_tabs_1",
-            class: () => "tab",
+            class: "tab",
             ariaLabel: "Generate avatar",
           }),
           div(
-            { class: () => "tab-content text-black w-full" },
+            { class: "tab-content text-black w-full" },
             div(
-              {
-                class: () => "flex flex-col justify-center items-center gap-4",
-              },
+              { class: "flex flex-col justify-center items-center gap-4" },
+              div(
+                {
+                  class:
+                    "w-full mt-2 flex flex-col rounded-md left-0 top-0 z-[200] flex",
+                },
+                textarea({
+                  class:
+                    "textarea textarea-bordered border-gray-300 border-b-0 focus:outline-none resize-none rounded-t-md rounded-b-none text-md h-36",
+                  placeholder: "Enter your prompt",
+                  defaultValue:
+                    "1girl, looking at viewer, open mouth, simple background, white background, smile",
+                  id: "positivePromptProxy",
+                }),
+                div(
+                  {
+                    class:
+                      "flex flex-row gap-2 border border-gray-300 rounded-b-md text-md items-center",
+                  },
+                  span({ class: "ml-4" }, "Seed"),
+                  div({ class: "divider divider-horizontal m-0" }),
+                  input({
+                    type: "text",
+                    class: "input border-none focus:outline-none w-full p-0",
+                    placeholder: "Seed",
+                    defaultValue: "1234",
+                    id: "seedProxy",
+                  })
+                )
+              ),
               button(
                 {
-                  class: () =>
-                    "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
+                  class: "btn w-full normal-case ",
                   onclick: async () => {
-                    // previewImg.val = await uploadImage();
-                    // stage.val = 1;
-                    var input = document.createElement("input");
-                    input.type = "file";
+                    const positivePrompt = app.graph
+                      .findNodesByType("CLIPTextEncode")
+                      .find((x) => x.color == "#232");
+                    if (!positivePrompt) {
+                      alertDialog.val = {
+                        text: "Cannot find the CLIPTextEncode node. Please make sure the workflow is correct.",
+                        time: 5000,
+                      };
+                      return;
+                    }
+                    const kSampler = app.graph.findNodesByType("KSampler")[0];
+                    if (!kSampler) {
+                      alertDialog.val = {
+                        text: "Cannot find the KSampler node. Please make sure the workflow is correct.",
+                        time: 5000,
+                      };
+                      return;
+                    }
 
-                    document.body.appendChild(input);
+                    positivePrompt.widgets[0].inputEl.value =
+                      document.getElementById("positivePromptProxy").value;
+                    kSampler.widgets[0].value =
+                      document.getElementById("seedProxy").value;
+                    kSampler.widgets[1].value = "fixed";
 
-                    // when the input content changes, do something
-                    input.onchange = async function (e) {
-                      stage.val = 1;
-                      if (Object.entries(e.target.files).length) {
-                        await uploadFile(e.target.files[0], true);
-                      }
-                      previewImg.val = URL.createObjectURL(e.target.files[0]);
-                      // upload files
-                      document.body.removeChild(input);
-                    };
+                    loading.val = true;
 
-                    // Trigger file browser
-                    input.click();
+                    const sam = app.graph.findNodesByType("SAM MultiLayer")[0];
+                    if (!sam) {
+                      alertDialog.val = {
+                        text: "Cannot find the SAM node. Please make sure the workflow is correct.",
+                        time: 5000,
+                      };
+                      return;
+                    }
+                    const ckpt = sam.widgets[0].value;
+                    const modelType = ckpt.match(/vit_[lbh]/)?.[0];
+                    await initModel(modelType);
+                    await uploadSegments();
+
+                    document.getElementById("queue-button").click();
                   },
                 },
                 div({ class: "badge badge-neutral" }, "1"),
-                div("Generate image"),
-                span({
-                  class: "iconify text-lg",
-                  "data-icon": "material-symbols:drive-folder-upload",
-                  "data-inline": "false",
-                }),
                 () =>
-                  previewImgLoading.val
-                    ? span({
-                        class: "loading loading-spinner loading-md",
-                      })
-                    : "",
+                  loading.val
+                    ? span({ class: "loading loading-spinner loading-md" })
+                    : "Make It Alive!"
               ),
-              () =>
-                previewImg.val != ""
-                  ? img({
-                      class: () =>
-                        "z-[10] object-contain w-full h-[394px] border",
-                      src: previewImg,
-                    })
-                  : "",
               button(
                 {
-                  class: () =>
-                    "btn w-full normal-case " +
-                    (stage.val < 1 ? "btn-disabled" : ""),
+                  class: "btn w-full normal-case",
                   onclick: () => {
                     /** @type {import('../../../web/types/litegraph.js').LGraph}*/
                     const graph = app.graph;
-                    const imageNodes = graph.findNodesByType("LoadImage");
-                    if (!imageNodes[0].imgs) return;
-
                     const nodes = graph.findNodesByType("SAM MultiLayer");
 
                     /** @type {any[]}*/
@@ -377,39 +411,15 @@ export function AvatarPreview() {
                     console.log(nodes[0]);
                     console.log(nodes[0].widgets);
                     widgets.find((x) => x.type == "button").callback();
-                    stage.val = 2;
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "Auto segment",
-              ),
-              button(
-                {
-                  class: () =>
-                    "btn w-full normal-case " +
-                    (stage.val < 2 ? "btn-disabled" : ""),
-                  onclick: async () => {
-                    // const uploaded = await uploadSegments();
-                    // if (!uploaded) return;
-
-                    const graph = app.graph;
-                    const imageNodes = graph.findNodesByType("LoadImage");
-                    if (!imageNodes[0].imgs) return;
-                    document.getElementById("queue-button").click();
-                  },
-                },
-                div({ class: "badge badge-neutral" }, "3"),
-                () =>
-                  loading.val
-                    ? span({
-                        class: "loading loading-spinner loading-lg",
-                      })
-                    : "Generate",
-              ),
-            ),
-          ),
-        ),
-      ),
+                "(Optional) Edit Segment"
+              )
+            )
+          )
+        )
+      )
     );
   };
 
@@ -420,7 +430,7 @@ export function AvatarPreview() {
       name: "avatech-viewer-iframe",
       allow: "cross-origin-isolated",
       class: () =>
-        "w-full h-full min-w-[300px] min-h-[600px] z-[100] pointer-events-auto flex border-none overflow-hidden" +
+        "w-full h-full min-w-[300px] min-h-[400px] z-[100] pointer-events-auto flex border-none overflow-hidden" +
         (showPreview.val ? "" : "hidden"),
       // src: "https://labs.avatech.ai/viewer/default",
       // src: "http://localhost:3000/viewer/default",
@@ -439,7 +449,7 @@ export function AvatarPreview() {
           class: () =>
             "w-full flex justify-center font-bold italic text-gray-500",
         },
-        span("We are launching OpenAI Assistant API integration soon!"),
+        span("We are launching OpenAI Assistant API integration soon!")
       ),
       div(
         { class: () => "w-[24rem] flex justify-center items-center" },
@@ -478,11 +488,11 @@ export function AvatarPreview() {
           () =>
             shareLoading.val
               ? span({
-                  class: "loading loading-spinner loading-lg",
+                  class: "loading loading-spinner loading-md",
                 })
-              : "Get Avatar Link",
-        ),
-      ),
+              : "Get Avatar Link"
+        )
+      )
     );
   };
 
@@ -499,7 +509,7 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "ic:round-close",
         "data-inline": "false",
-      }),
+      })
     );
   };
 
@@ -516,7 +526,7 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "mdi:restart",
         "data-inline": "false",
-      }),
+      })
     );
   };
 
@@ -546,8 +556,8 @@ export function AvatarPreview() {
         "data-inline": "false",
       }),
       span({ class: "sm:flex hidden" }, () =>
-        jsonWorkflowLoading.val ? "Loading" : "Change workflow",
-      ),
+        jsonWorkflowLoading.val ? "Loading" : "Change workflow"
+      )
     );
   };
 
@@ -558,7 +568,7 @@ export function AvatarPreview() {
           "absolute top-4 right-4 btn sm:w-10 w-32 text-black btn-ghost text-xs !px-0 normal-case sm:btn-md btn-sm",
         onclick: () => window.open("https://twitter.com/avatech_gg", "_blank"),
       },
-      "Twitter",
+      "Twitter"
     );
   };
 
@@ -585,7 +595,7 @@ export function AvatarPreview() {
         },
         renderCloseButton(),
         renderRestartButton(),
-        renderChangeWorkflowButton(),
+        renderChangeWorkflowButton()
       ),
       renderTwitter(),
       () => {
@@ -598,7 +608,7 @@ export function AvatarPreview() {
             },
             renderIFrame(),
             renderSteps(),
-            renderShareLink(),
+            renderShareLink()
           );
         } else {
           return div(
@@ -611,12 +621,12 @@ export function AvatarPreview() {
             div(
               { class: () => "flex flex-col" },
               renderIFrame(),
-              renderShareLink(),
-            ),
+              renderShareLink()
+            )
           );
         }
-      },
-    ),
+      }
+    )
   );
 }
 
@@ -636,8 +646,8 @@ function showImage(name) {
   }
   img.src = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      name,
-    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`,
+      name
+    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`
   );
   node.setSizeForImage?.();
 }

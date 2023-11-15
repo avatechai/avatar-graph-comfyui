@@ -10,9 +10,11 @@ export let model = null;
 // Initialize the ONNX model
 export const initModel = async (modelType) => {
   try {
-    model = await ort.InferenceSession.create(
-      `${location.protocol}//${location.host}/sam_model?type=${modelType}`
-    );
+    if (!model) {
+      model = await ort.InferenceSession.create(
+        `${location.protocol}//${location.host}/sam_model?type=${modelType}`
+      );
+    }
   } catch (e) {
     console.log(e);
   }
