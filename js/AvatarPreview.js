@@ -68,12 +68,12 @@ async function prepareImageFromUrlRedirect(stage) {
   dragndrop.addEventListener("dragenter", (evt) => {
     evt.preventDefault();
     dragndrop.className =
-      "w-full border-2 border-purple-500 text-purple-500 border-dashed py-4 rounded-lg flex justify-center";
+      "w-full border-2 border-purple-500 text-purple-500 border-dashed rounded-lg flex justify-center items-center";
   });
   dragndrop.addEventListener("dragleave", (evt) => {
     evt.preventDefault();
     dragndrop.className =
-      "w-full border-2 border-black border-dashed py-4 rounded-lg flex justify-center";
+      "w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center";
   });
   dragndrop.addEventListener("dragover", (evt) => {
     evt.preventDefault();
@@ -81,7 +81,7 @@ async function prepareImageFromUrlRedirect(stage) {
   dragndrop.addEventListener("drop", async (evt) => {
     evt.preventDefault();
     dragndrop.className =
-      "w-full border-2 border-black border-dashed py-4 rounded-lg flex justify-center";
+      "w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center";
     if (evt.dataTransfer.files.length > 1) return;
     if (
       evt.dataTransfer.files[0].type != "image/jpeg" &&
@@ -109,13 +109,6 @@ export function AvatarPreview() {
 
   api.addEventListener("execution_start", (evt) => {
     loading.val = true;
-  });
-
-  document.addEventListener("dragenter", (evt) => {
-    console.log("asdasd");
-  });
-  window.addEventListener("drop", (evt) => {
-    console.log("zxczxc");
   });
 
   api.addEventListener("executed", (evt) => {
@@ -195,7 +188,7 @@ export function AvatarPreview() {
                 button(
                   {
                     class: () =>
-                      "h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
+                      `${previewImg.val != "" && 'w-full'} h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto`,
                     onclick: async () => {
                       // previewImg.val = await uploadImage();
                       // stage.val = 1;
