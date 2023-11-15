@@ -311,7 +311,7 @@ function showMyImageEditor(node) {
         }
         showImageEditor.val = true;
         const isGeneratedImage = connectedImageFileName.startsWith("avatar");
-        const subfolder = isGeneratedImage || split.length == 0 ? "" : split[0];
+        const subfolder = isGeneratedImage || split.length === 1 ? "" : split[0];
         imageUrl.val = api.apiURL(
           `/view?filename=${encodeURIComponent(connectedImageFileName)}&type=${
             isGeneratedImage ? "output" : "input"
