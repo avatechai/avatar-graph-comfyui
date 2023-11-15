@@ -44,28 +44,57 @@ async function uploadImage() {
 const jsonWorkflowLoading = van.state(true);
 
 async function prepareImageFromUrlRedirect(stage) {
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  const queue_id = new URLSearchParams(window.location.search).get('queue-id')
-  if (
-    queue_id && queue_id != ""
-  ) {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  const queue_id = new URLSearchParams(window.location.search).get("queue-id");
+  if (queue_id && queue_id != "") {
     console.log(queue_id);
-    stage.val = 1
+    stage.val = 1;
     const graph = app.graph;
     const node = graph.findNodesByType("LoadImage");
-    const imageName = queue_id + ".png"
+    const imageName = queue_id + ".png";
     console.log(node[0]);
-    node[0].widgets_values[0] = imageName
-    node[0].widgets[0].value = imageName
-    node[0].widgets[0]._value = imageName
-    graph.change()
+    node[0].widgets_values[0] = imageName;
+    node[0].widgets[0].value = imageName;
+    node[0].widgets[0]._value = imageName;
+    graph.change();
     previewImg.val = api.apiURL(
       `/view?filename=${encodeURIComponent(
-        imageName
-      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`
+        imageName,
+      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`,
     );
     console.log(previewImg);
   }
+  const dragndrop = document.getElementById("dnd");
+  dragndrop.addEventListener("dragenter", (evt) => {
+    evt.preventDefault();
+    dragndrop.className =
+      "w-full border-2 border-purple-500 text-purple-500 border-dashed py-4 rounded-lg flex justify-center";
+  });
+  dragndrop.addEventListener("dragleave", (evt) => {
+    evt.preventDefault();
+    dragndrop.className =
+      "w-full border-2 border-black border-dashed py-4 rounded-lg flex justify-center";
+  });
+  dragndrop.addEventListener("dragover", (evt) => {
+    evt.preventDefault();
+  });
+  dragndrop.addEventListener("drop", async (evt) => {
+    evt.preventDefault();
+    dragndrop.className =
+      "w-full border-2 border-black border-dashed py-4 rounded-lg flex justify-center";
+    if (evt.dataTransfer.files.length > 1) return;
+    if (
+      evt.dataTransfer.files[0].type != "image/jpeg" &&
+      evt.dataTransfer.files[0].type != "image/png" &&
+      evt.dataTransfer.files[0].type != "image/webp"
+    )
+      return;
+    stage.val = 1;
+    previewImg.val = URL.createObjectURL(evt.dataTransfer.files[0]);
+    if (Object.entries(evt.dataTransfer.files).length) {
+      await uploadFile(evt.dataTransfer.files[0], true);
+    }
+  });
 }
 
 export function AvatarPreview() {
@@ -82,6 +111,13 @@ export function AvatarPreview() {
     loading.val = true;
   });
 
+  document.addEventListener("dragenter", (evt) => {
+    console.log("asdasd");
+  });
+  window.addEventListener("drop", (evt) => {
+    console.log("zxczxc");
+  });
+
   api.addEventListener("executed", (evt) => {
     loading.val = false;
   });
@@ -90,7 +126,7 @@ export function AvatarPreview() {
   const stage = van.state(0); // 0: upload image, 1: edit segment, 2: generate
 
   // This will wait 2 seconds until the everything is loaded
-  prepareImageFromUrlRedirect(stage)
+  prepareImageFromUrlRedirect(stage);
 
   const renderSteps = () => {
     return div(
@@ -154,46 +190,62 @@ export function AvatarPreview() {
               {
                 class: () => "flex flex-col justify-center items-center gap-4",
               },
-              button(
-                {
-                  class: () =>
-                    "w-full mt-2 btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
-                  onclick: async () => {
-                    // previewImg.val = await uploadImage();
-                    // stage.val = 1;
-                    var input = document.createElement("input");
-                    input.type = "file";
+              div(
+                { class: () => "w-full flex mt-2" },
+                button(
+                  {
+                    class: () =>
+                      "h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto ",
+                    onclick: async () => {
+                      // previewImg.val = await uploadImage();
+                      // stage.val = 1;
+                      var input = document.createElement("input");
+                      input.type = "file";
 
-                    document.body.appendChild(input);
+                      document.body.appendChild(input);
 
-                    // when the input content changes, do something
-                    input.onchange = async function (e) {
-                      stage.val = 1;
-                      if (Object.entries(e.target.files).length) {
-                        await uploadFile(e.target.files[0], true);
-                      }
-                      previewImg.val = URL.createObjectURL(e.target.files[0]);
-                      // upload files
-                      document.body.removeChild(input);
-                    };
+                      // when the input content changes, do something
+                      input.onchange = async function (e) {
+                        stage.val = 1;
+                        if (Object.entries(e.target.files).length) {
+                          await uploadFile(e.target.files[0], true);
+                        }
+                        previewImg.val = URL.createObjectURL(e.target.files[0]);
+                        // upload files
+                        document.body.removeChild(input);
+                      };
 
-                    // Trigger file browser
-                    input.click();
+                      // Trigger file browser
+                      input.click();
+                    },
                   },
-                },
-                div({ class: "badge badge-neutral" }, "1"),
-                div("Upload your image"),
-                span({
-                  class: "iconify text-lg",
-                  "data-icon": "material-symbols:drive-folder-upload",
-                  "data-inline": "false",
-                }),
-                () =>
-                  previewImgLoading.val
-                    ? span({
-                        class: "loading loading-spinner loading-md",
-                      })
-                    : "",
+                  div({ class: "badge badge-neutral" }, "1"),
+                  div("Upload your image"),
+                  span({
+                    class: "iconify text-lg",
+                    "data-icon": "material-symbols:drive-folder-upload",
+                    "data-inline": "false",
+                  }),
+                  () =>
+                    previewImgLoading.val
+                      ? span({
+                          class: "loading loading-spinner loading-md",
+                        })
+                      : "",
+                ),
+                previewImg.val == ""
+                  ? div({ class: () => "divider divider-horizontal !gap-0" }, "OR")
+                  : "",
+                previewImg.val == ""
+                  ? div(
+                      {
+                        id: "dnd",
+                        class: () =>
+                          "w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center",
+                      },
+                      "Drag and drop the image here",
+                    )
+                  : "",
               ),
               () =>
                 previewImg.val != ""
@@ -203,6 +255,7 @@ export function AvatarPreview() {
                       src: previewImg,
                     })
                   : "",
+
               button(
                 {
                   class: () =>
@@ -470,7 +523,7 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "mdi:restart",
         "data-inline": "false",
-      })
+      }),
     );
   };
 
@@ -500,8 +553,8 @@ export function AvatarPreview() {
         "data-inline": "false",
       }),
       span({ class: "sm:flex hidden" }, () =>
-        jsonWorkflowLoading.val ? "Loading" : "Change workflow"
-      )
+        jsonWorkflowLoading.val ? "Loading" : "Change workflow",
+      ),
     );
   };
 
@@ -539,7 +592,7 @@ export function AvatarPreview() {
         },
         renderCloseButton(),
         renderRestartButton(),
-        renderChangeWorkflowButton()
+        renderChangeWorkflowButton(),
       ),
       renderTwitter(),
       () => {

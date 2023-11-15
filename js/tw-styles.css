@@ -2246,6 +2246,20 @@ details.collapse summary::-webkit-details-marker{
   padding: 0px;
 }
 
+.divider-horizontal{
+  flex-direction: column;
+}
+
+.divider-horizontal:before{
+  height: 100%;
+  width: 0.125rem;
+}
+
+.divider-horizontal:after{
+  height: 100%;
+  width: 0.125rem;
+}
+
 .join.join-vertical{
   flex-direction: column;
 }
@@ -2352,6 +2366,15 @@ details.collapse summary::-webkit-details-marker{
   height: 15%;
   top: 7%;
   right: 7%;
+}
+
+.divider-horizontal{
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: auto;
+  width: 1rem;
 }
 
 .join.join-vertical > :where(*:not(:first-child)){
@@ -2580,6 +2603,10 @@ details.collapse summary::-webkit-details-marker{
   height: 400px;
 }
 
+.h-24{
+  height: 6rem;
+}
+
 .min-h-\[600px\]{
   min-height: 600px;
 }
@@ -2687,6 +2714,10 @@ details.collapse summary::-webkit-details-marker{
   gap: 1rem;
 }
 
+.\!gap-0{
+  gap: 0px !important;
+}
+
 .place-self-end{
   place-self: end;
 }
@@ -2751,8 +2782,16 @@ details.collapse summary::-webkit-details-marker{
   border-width: 1px;
 }
 
+.border-2{
+  border-width: 2px;
+}
+
 .border-t-4{
   border-top-width: 4px;
+}
+
+.border-dashed{
+  border-style: dashed;
 }
 
 .border-none{
@@ -2762,6 +2801,16 @@ details.collapse summary::-webkit-details-marker{
 .border-orange-500{
   --tw-border-opacity: 1;
   border-color: rgb(249 115 22 / var(--tw-border-opacity));
+}
+
+.border-black{
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-purple-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(168 85 247 / var(--tw-border-opacity));
 }
 
 .bg-\[\#f6f6f6\]{
@@ -2901,6 +2950,11 @@ details.collapse summary::-webkit-details-marker{
   padding-bottom: 0.5rem;
 }
 
+.py-4{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .text-start{
   text-align: start;
 }
@@ -2978,6 +3032,11 @@ details.collapse summary::-webkit-details-marker{
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-purple-500{
+  --tw-text-opacity: 1;
+  color: rgb(168 85 247 / var(--tw-text-opacity));
 }
 
 .opacity-80{
