@@ -26,6 +26,8 @@ import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 import { drawSegment, getClicks } from "./LayerEditor.js";
 import { infoDialog } from "./dialog.js";
 
+export let generatedImagePath = null;
+
 const stylesheet = document.createElement("link");
 stylesheet.setAttribute("type", "text/css");
 stylesheet.setAttribute("rel", "stylesheet");
@@ -243,6 +245,10 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
   console.log(targetLink, nodea);
   console.log(nodea.getInputNode(0, true));
 
+  if (nodea.type !== "IMAGE") {
+    return;
+  }
+
   /** @type {string} */
   return nodea.widgets.find((x) => x.name === widgetName).value;
 }
@@ -252,7 +258,8 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
  * @param {LGraphNode} node
  */
 function showMyImageEditor(node) {
-  let connectedImageFileName = getInputWidgetValue(node, 0, "image");
+  let connectedImageFileName =
+    getInputWidgetValue(node, 0, "image") || generatedImagePath;
   if (!connectedImageFileName) {
     alertDialog.val = {
       text: "Please connect an image first",
@@ -303,10 +310,12 @@ function showMyImageEditor(node) {
           imagePrompts.val = v;
         }
         showImageEditor.val = true;
+        const isGeneratedImage = connectedImageFileName.startsWith("avatar");
+        const subfolder = isGeneratedImage || split.length == 0 ? "" : split[0];
         imageUrl.val = api.apiURL(
-          `/view?filename=${encodeURIComponent(
-            connectedImageFileName
-          )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`
+          `/view?filename=${encodeURIComponent(connectedImageFileName)}&type=${
+            isGeneratedImage ? "output" : "input"
+          }&subfolder=${subfolder}`
         );
         const embeedingUrl = api.apiURL(
           `/view?filename=${encodeURIComponent(
@@ -430,10 +439,18 @@ const ext = {
     window.addEventListener("message", (event) => {
       if (!event.data.flow || Object.entries(event.data.flow).length <= 0)
         return;
-            updateBlendshapesPrompts(event.data.flow);
+      updateBlendshapesPrompts(event.data.flow);
     });
 
     api.addEventListener("executed", (evt) => {
+      const images = evt.detail?.output.images;
+      if (
+        images?.length > 0 &&
+        images[0].type === "output" &&
+        images[0].filename.startsWith("avatar")
+      ) {
+        generatedImagePath = images[0].filename;
+      }
       if (evt.detail?.output.gltfFilename) {
         const viewer = document.getElementById(
           "avatech-viewer-iframe"

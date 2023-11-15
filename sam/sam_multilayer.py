@@ -45,7 +45,7 @@ class SAMMultiLayer:
     def load_image(self, image, ckpt, embedding_id, image_prompts_json):
         image_prompts = json.loads(image_prompts_json)
         
-        order_file = f"{self.output_dir}/{embedding_id}/order.json"
+        order_file = f"{self.output_dir}/segments_{embedding_id}/order.json"
         if os.path.exists(order_file):
             # Frontend uploads segments images to backend => backend reads all segments images and passes them to next nodes
             with open(order_file) as f:
@@ -54,7 +54,7 @@ class SAMMultiLayer:
             result = [image_prompts]
 
             for segment in order:
-                image = Image.open(f"{self.output_dir}/{embedding_id}/{segment}.png")
+                image = Image.open(f"{self.output_dir}/segments_{embedding_id}/{segment}.png")
                 image = np.array(image).astype(np.float32) / 255.0
                 image = torch.from_numpy(image)[None,]
                 result.append(image)
