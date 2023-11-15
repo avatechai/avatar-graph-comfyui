@@ -245,7 +245,7 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
   console.log(targetLink, nodea);
   console.log(nodea.getInputNode(0, true));
 
-  if (nodea.type !== "IMAGE") {
+  if (nodea.type !== "LoadImage") {
     return;
   }
 
