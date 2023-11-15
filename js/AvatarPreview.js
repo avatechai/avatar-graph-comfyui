@@ -53,7 +53,7 @@ async function prepareImageFromUrlRedirect(stage) {
     stage.val = 1
     const graph = app.graph;
     const node = graph.findNodesByType("LoadImage");
-    const imageName = "create_avatar_endpoint_" + queue_id + ".png"
+    const imageName = queue_id + ".png"
     console.log(node[0]);
     node[0].widgets_values[0] = imageName
     node[0].widgets[0].value = imageName
@@ -62,7 +62,7 @@ async function prepareImageFromUrlRedirect(stage) {
     previewImg.val = api.apiURL(
       `/view?filename=${encodeURIComponent(
         imageName
-      )}&type=input&subfolder=${""}${app.getPreviewFormatParam()}`
+      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`
     );
     console.log(previewImg);
   }
@@ -218,6 +218,9 @@ export function AvatarPreview() {
               const imageNodes = graph.findNodesByType("LoadImage");
               if (!imageNodes[0].imgs) return;
               document.getElementById("queue-button").click();
+              console.log("scrolling???");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              console.log("hi???");
             },
           },
           div({ class: "badge badge-neutral" }, "3"),
@@ -309,7 +312,7 @@ export function AvatarPreview() {
     return button(
       {
         class: () =>
-          "btn flex flex-row btn-ghost text-black normal-case  px-4 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto ",
+          "btn flex flex-row btn-ghost text-black normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
         onclick: () => {
           showPreview.val = false;
         },
@@ -322,11 +325,28 @@ export function AvatarPreview() {
     );
   };
 
+  const renderRestartButton = () => {
+    return button(
+      {
+        class: () =>
+          "btn flex flex-row btn-ghost text-black normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
+        onclick: () => {
+          fetch("https://7a49f4ad27be4dcf.ngrok.app/restart");
+        },
+      },
+      span({
+        class: "iconify text-lg",
+        "data-icon": "mdi:restart",
+        "data-inline": "false",
+      })
+    );
+  };
+
   const renderChangeWorkflowButton = () => {
     return button(
       {
         class: () =>
-          "btn text-black flex flex-row btn-ghost normal-case px-4 rounded-md left-0 top-0 z-[200] w-fit pointer-events-auto ",
+          "btn text-black flex flex-row btn-ghost normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
         onclick: () => {
           let input = document.createElement("input");
           input.type = "file";
@@ -347,7 +367,9 @@ export function AvatarPreview() {
         "data-icon": "ic:round-swap-vert",
         "data-inline": "false",
       }),
-      () => (jsonWorkflowLoading.val ? "Loading" : "Change workflow")
+      span({ class: "sm:flex hidden" }, () =>
+        jsonWorkflowLoading.val ? "Loading" : "Change workflow"
+      )
     );
   };
 
@@ -355,7 +377,7 @@ export function AvatarPreview() {
     return button(
       {
         class: () =>
-          "absolute top-4 right-4 btn text-black btn-ghost w-24 text-xs !px-0 normal-case",
+          "absolute top-4 right-4 btn sm:w-10 w-32 text-black btn-ghost text-xs !px-0 normal-case sm:btn-md btn-sm",
         onclick: () => window.open("https://twitter.com/avatech_gg", "_blank"),
       },
       "Twitter"
@@ -384,6 +406,7 @@ export function AvatarPreview() {
           class: "absolute top-4 left-4 flex flex-row gap-2",
         },
         renderCloseButton(),
+        renderRestartButton(),
         renderChangeWorkflowButton()
       ),
       renderTwitter(),

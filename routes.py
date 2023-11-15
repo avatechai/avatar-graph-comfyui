@@ -164,15 +164,22 @@ async def post_input_file(request):
     if not post:
         raise web.HTTPBadRequest(reason="No image data received")
 
-    queue_id = uuid.uuid4()
+    try:
+        queue_id = uuid.uuid4()
     
-    output_dir = os.path.join(folder_paths.base_path, "input")
-    os.makedirs(output_dir, exist_ok=True)
-    
-    filename = os.path.join(output_dir, "create_avatar_endpoint_" + str(queue_id) + ".png")
-    with open(filename, "wb") as f:
-        f.write(post)
-    
-    return web.json_response({
-        "redirect_url": "https://ai-assistant.avatech.ai?queue-id=" + str(queue_id)
-    })
+        output_dir = os.path.join(folder_paths.base_path, "input","create_avatar_endpoint")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        filename = os.path.join(output_dir,str(queue_id) + ".png")
+        with open(filename, "wb") as f:
+            f.write(post)
+        
+        return web.json_response({
+            "redirect_url": "https://ai-assistant.avatech.ai?queue-id=" + str(queue_id)
+        })
+    except Exception as e:
+        print(e)
+        return web.json_response({
+            "error": e
+        })
+
