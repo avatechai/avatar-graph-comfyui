@@ -43,6 +43,31 @@ async function uploadImage() {
 
 const jsonWorkflowLoading = van.state(true);
 
+async function prepareImageFromUrlRedirect(stage) {
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  const queue_id = new URLSearchParams(window.location.search).get('queue-id')
+  if (
+    queue_id && queue_id != ""
+  ) {
+    console.log(queue_id);
+    stage.val = 1
+    const graph = app.graph;
+    const node = graph.findNodesByType("LoadImage");
+    const imageName = "create_avatar_endpoint_" + queue_id + ".png"
+    console.log(node[0]);
+    node[0].widgets_values[0] = imageName
+    node[0].widgets[0].value = imageName
+    node[0].widgets[0]._value = imageName
+    graph.change()
+    previewImg.val = api.apiURL(
+      `/view?filename=${encodeURIComponent(
+        imageName
+      )}&type=input&subfolder=${""}${app.getPreviewFormatParam()}`
+    );
+    console.log(previewImg);
+  }
+}
+
 export function AvatarPreview() {
   console.log("getting workflow json now");
   loadJSONWorkflow().then(() => {
@@ -63,6 +88,9 @@ export function AvatarPreview() {
 
   const email = van.state("");
   const stage = van.state(0); // 0: upload image, 1: edit segment, 2: generate
+
+  // This will wait 2 seconds until the everything is loaded
+  prepareImageFromUrlRedirect(stage)
 
   const renderSteps = () => {
     return div(

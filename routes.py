@@ -153,3 +153,26 @@ async def post_input_file(request):
         f.write(post)
     
     return web.json_response({})
+
+import uuid
+
+@server.PromptServer.instance.routes.post("/create_avatar_from_image")
+async def post_input_file(request):
+    post = await request.read()
+
+    # Doesn't seems working when file isnt png / or nothing is uploaded
+    if not post:
+        raise web.HTTPBadRequest(reason="No image data received")
+
+    queue_id = uuid.uuid4()
+    
+    output_dir = os.path.join(folder_paths.base_path, "input")
+    os.makedirs(output_dir, exist_ok=True)
+    
+    filename = os.path.join(output_dir, "create_avatar_endpoint_" + str(queue_id) + ".png")
+    with open(filename, "wb") as f:
+        f.write(post)
+    
+    return web.json_response({
+        "redirect_url": "https://ai-assistant.avatech.ai?queue-id=" + str(queue_id)
+    })
