@@ -144,24 +144,6 @@ async def get_webhook(request):
     url = os.getenv('DISCORD_WEBHOOK_URL')
     return web.json_response(url)
 
-@server.PromptServer.instance.routes.post("/input_file")
-async def post_input_file(request):
-    post = await request.json()
-    image_url = post.get("image_url")
-    
-    input_dir = os.path.join(folder_paths.base_path, "input")
-    os.makedirs(output_dir, exist_ok=True)
-    
-    filename = os.path.join(input_dir, "imagefromai.png")
-    
-    response = requests.get(image_url)
-    response.raise_for_status()
-    
-    with open(filename, "wb") as f:
-        f.write(response.content)  # Save the image from the URL to the output directory
-    
-    return web.json_response({})
-
 import uuid
 
 @server.PromptServer.instance.routes.post("/create_avatar_from_image")
