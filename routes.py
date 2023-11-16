@@ -113,14 +113,17 @@ async def post_sam_model(request):
 @server.PromptServer.instance.routes.get("/get_workflow")
 async def get_workflow(request):
     name = request.rel_url.query.get("name", "default")
+    # if name == "default":
+    #     json_link = 'https://cdn.discordapp.com/attachments/729003657483518063/1174045115757633596/girl1114.json?ex=656629b8&is=6553b4b8&hm=df3d7798b887e2b3b6b06ea438f1bc4ba041dd0f9daf54ea48101845ec7f4243&'
+    #     response = requests.get(json_link)
+    #     response.raise_for_status()
+    #     workflow = response.json()
+    # else:
     if name == "default":
-        json_link = 'https://cdn.discordapp.com/attachments/729003657483518063/1174045115757633596/girl1114.json?ex=656629b8&is=6553b4b8&hm=df3d7798b887e2b3b6b06ea438f1bc4ba041dd0f9daf54ea48101845ec7f4243&'
-        response = requests.get(json_link)
-        response.raise_for_status()
-        workflow = response.json()
-    else:
-        workflows_path = os.path.join(os.path.dirname(__file__), "workflow_templates")
-        workflow = json.load(open(f"{workflows_path}/{name}.json"))
+        name = "Auto_segment_workflow"
+        
+    workflows_path = os.path.join(os.path.dirname(__file__), "workflow_templates")
+    workflow = json.load(open(f"{workflows_path}/{name}.json"))
     return web.json_response(workflow)
 
 
