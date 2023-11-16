@@ -152,7 +152,11 @@ export function AvatarPreview() {
   });
 
   api.addEventListener("executed", (evt) => {
-    loading.val = false;
+    const nodeId = evt.detail.node;
+    const targetNode = graph._nodes_by_id[nodeId];
+    if (targetNode.type === "AvatarMainOutput") {
+      loading.val = false;
+    }
   });
 
   const email = van.state("");
