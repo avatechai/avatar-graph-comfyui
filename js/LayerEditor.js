@@ -42,44 +42,72 @@ const faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
 const layerMapping = {
   L_eye: {
     useMiddle: false,
-    positiveOffset: 0,
-    negativeOffset: 0.5,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
   },
   R_eye: {
     useMiddle: false,
-    positiveOffset: 0,
-    negativeOffset: 0.5,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
   },
   L_iris: {
     useMiddle: false,
-    positiveOffset: 0,
-    negativeOffset: 0.1,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
   },
   R_iris: {
     useMiddle: false,
-    positiveOffset: 0,
-    negativeOffset: 0.1,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
   },
   face: {
     useMiddle: false,
-    positiveOffset: -0.1,
-    negativeOffset: 0.1,
+    positiveOffsetX: 0,
+    positiveOffsetY: 40,
+    negativeOffsetX: 0,
+    negativeOffsetY: 60,
+    positiveScale: 0.2,
+    negativeScale: 0.6,
     indices: FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
   },
   mouth: {
     useMiddle: true,
-    positiveOffset: 0,
-    negativeOffset: 0.2,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_LIPS,
   },
   mouth_in: {
     useMiddle: true,
-    positiveOffset: 0,
-    negativeOffset: 0.2,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_LIPS,
   },
 };
@@ -156,26 +184,34 @@ export async function autoSegment() {
             directionVector.y * directionVector.y
         );
         const negativePointDistance =
-          value.negativeOffset * directionVectorLength;
+          value.negativeScale * directionVectorLength;
         const negativePoint = {
           x:
             startX -
-            (negativePointDistance * directionVector.x) / directionVectorLength,
+            (negativePointDistance * directionVector.x) /
+              directionVectorLength -
+            value.negativeOffsetX,
           y:
             startY -
-            (negativePointDistance * directionVector.y) / directionVectorLength,
+            (negativePointDistance * directionVector.y) /
+              directionVectorLength -
+            value.negativeOffsetY,
           label: 0,
         };
 
         const positivePointDistance =
-          value.positiveOffset * directionVectorLength;
+          value.positiveScale * directionVectorLength;
         positivePoints[i] = {
           x:
             positivePoints[i].x -
-            (positivePointDistance * directionVector.x) / directionVectorLength,
+            (positivePointDistance * directionVector.x) /
+              directionVectorLength -
+            value.positiveOffsetX,
           y:
             positivePoints[i].y -
-            (positivePointDistance * directionVector.y) / directionVectorLength,
+            (positivePointDistance * directionVector.y) /
+              directionVectorLength -
+            value.positiveOffsetY,
           label: 1,
         };
 
