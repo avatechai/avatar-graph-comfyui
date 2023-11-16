@@ -20,6 +20,9 @@ const { button, div, img, canvas, span } = van.tags;
 
 let throttle = false;
 const positivePrompt = van.state(true);
+const isMobileDevice = () => {
+  return window.screen.width < 768;
+};
 
 export function updateImagePrompts() {
   if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
@@ -93,9 +96,16 @@ async function handleClick(e) {
       imageSize.val.imgScale
   );
 
+  let label;
+  if (isMobileDevice()) {
+    label = positivePrompt.val ? 1 : 0;
+  } else {
+    label = e.isRight ? 0 : 1;
+  }
+
   imagePrompts.val = [
     ...imagePrompts.val,
-    { x: relativeX, y: relativeY, label: !positivePrompt.val ? 0 : 1 },
+    { x: relativeX, y: relativeY, label },
   ];
   await drawSegment(getClicks());
   updateImagePrompts();
@@ -148,7 +158,7 @@ export async function drawSegment(clicks) {
 export function LayerEditor() {
   let realTimeSegment = true;
 
-  const showSidebar = van.state(true)
+  const showSidebar = van.state(true);
 
   document.addEventListener("keydown", (e) => {
     if (showImageEditor.val && e.code === "Tab") {
@@ -194,18 +204,19 @@ export function LayerEditor() {
       {
         class: () =>
           "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-28 top-0 z-[200] w-fit",
-        onclick: () => showSidebar.val = !showSidebar.val
-        ,
+        onclick: () => (showSidebar.val = !showSidebar.val),
       },
-      div(() => showSidebar.val ? "Hide UI" : "Show UI")
+      div(() => (showSidebar.val ? "Hide UI" : "Show UI"))
     ),
     button(
       {
         class: () =>
-          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-52 top-0 z-[200] w-fit",
-        onclick: () => positivePrompt.val = !positivePrompt.val
+          `btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-52 top-0 z-[200] w-fit ${
+            isMobileDevice() ? "" : "hidden"
+          }`,
+        onclick: () => (positivePrompt.val = !positivePrompt.val),
       },
-      div(() => positivePrompt.val ? "Positive" : "Negative")
+      div(() => (positivePrompt.val ? "Positive" : "Negative"))
     ),
     div(
       {
@@ -334,6 +345,6 @@ export function LayerEditor() {
           })
         )
     ),
-    () => showSidebar.val ? SideBar() : div()
+    () => (showSidebar.val ? SideBar() : div())
   );
 }

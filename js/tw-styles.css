@@ -2517,6 +2517,10 @@ details.collapse summary::-webkit-details-marker{
   left: 1rem;
 }
 
+.left-56{
+  left: 14rem;
+}
+
 .right-0{
   right: 0px;
 }
@@ -2547,10 +2551,6 @@ details.collapse summary::-webkit-details-marker{
 
 .left-52{
   left: 13rem;
-}
-
-.left-56{
-  left: 14rem;
 }
 
 .z-\[1000\]{
