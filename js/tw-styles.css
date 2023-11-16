@@ -913,6 +913,46 @@ html{
   transition-duration: 200ms;
 }
 
+.dropdown-end .dropdown-content{
+  inset-inline-end: 0px;
+}
+
+.dropdown-left .dropdown-content{
+  bottom: auto;
+  inset-inline-end: 100%;
+  top: 0px;
+  transform-origin: right;
+}
+
+.dropdown-right .dropdown-content{
+  bottom: auto;
+  inset-inline-start: 100%;
+  top: 0px;
+  transform-origin: left;
+}
+
+.dropdown-bottom .dropdown-content{
+  bottom: auto;
+  top: 100%;
+  transform-origin: top;
+}
+
+.dropdown-top .dropdown-content{
+  bottom: 100%;
+  top: auto;
+  transform-origin: bottom;
+}
+
+.dropdown-end.dropdown-right .dropdown-content{
+  bottom: 0px;
+  top: auto;
+}
+
+.dropdown-end.dropdown-left .dropdown-content{
+  bottom: 0px;
+  top: auto;
+}
+
 .dropdown.dropdown-open .dropdown-content,
 .dropdown:not(.dropdown-hover):focus .dropdown-content,
 .dropdown:focus-within .dropdown-content{
@@ -2594,6 +2634,14 @@ details.collapse summary::-webkit-details-marker{
   z-index: 99;
 }
 
+.z-\[2000\]{
+  z-index: 2000;
+}
+
+.z-\[3000\]{
+  z-index: 3000;
+}
+
 .m-0{
   margin: 0px;
 }
@@ -2601,6 +2649,11 @@ details.collapse summary::-webkit-details-marker{
 .my-0{
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.\!my-0{
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
 }
 
 .mb-2{
@@ -2641,6 +2694,10 @@ details.collapse summary::-webkit-details-marker{
 
 .flex{
   display: flex;
+}
+
+.\!flex{
+  display: flex !important;
 }
 
 .hidden{
@@ -2745,6 +2802,14 @@ details.collapse summary::-webkit-details-marker{
   width: 9rem;
 }
 
+.w-52{
+  width: 13rem;
+}
+
+.w-64{
+  width: 16rem;
+}
+
 .min-w-\[300px\]{
   min-width: 300px;
 }
@@ -2789,6 +2854,14 @@ details.collapse summary::-webkit-details-marker{
 
 .items-center{
   align-items: center;
+}
+
+.justify-start{
+  justify-content: flex-start;
+}
+
+.\!justify-start{
+  justify-content: flex-start !important;
 }
 
 .justify-center{
@@ -3080,6 +3153,10 @@ details.collapse summary::-webkit-details-marker{
   text-align: start;
 }
 
+.\!text-start{
+  text-align: start !important;
+}
+
 .font-gabarito{
   font-family: Gabarito;
 }
@@ -3162,6 +3239,12 @@ details.collapse summary::-webkit-details-marker{
 
 .opacity-80{
   opacity: 0.8;
+}
+
+.shadow{
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .\!outline-none{

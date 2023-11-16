@@ -33,6 +33,8 @@ export const alertDialog = van.state({
 export const shareLoading = van.state(false);
 export const previewModelId = van.state('');
 
+export const isGenerateFlow = van.state(false)
+
 export const loadingCaption = van.state("");
 export const imageUrl = van.state("");
 export const point_label = van.state(1);

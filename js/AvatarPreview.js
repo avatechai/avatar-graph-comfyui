@@ -7,14 +7,23 @@ import {
   previewImg,
   previewImgLoading,
   alertDialog,
+  isGenerateFlow,
 } from "./state.js";
-const { button, iframe, div, img, input, label, span, textarea } = van.tags;
+const { button, iframe, div, img, input, label, span, textarea, ul, li } =
+  van.tags;
 import { app } from "./app.js";
 import { uploadPreview } from "./index.js";
 import { api } from "./api.js";
 import { uploadSegments } from "./LayerEditor.js";
 import { initModel } from "./onnx.js";
 // import { uploadSegments } from "./LayerEditor.js";
+
+const workflowList = [
+  "SilverWolfLora_withhand",
+  "SilverWolfLora",
+  "BronyaZaychikLora_withhand",
+  "BronyaZaychikLora",
+];
 
 async function loadJSONWorkflow(name) {
   const json = await (await fetch(`./get_workflow?name=${name}`)).json();
@@ -90,8 +99,8 @@ async function prepareImageFromUrlRedirect(stage) {
     graph.change();
     previewImg.val = api.apiURL(
       `/view?filename=${encodeURIComponent(
-        imageName
-      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`
+        imageName,
+      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`,
     );
     console.log(previewImg);
   }
@@ -163,18 +172,18 @@ export function AvatarPreview() {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-60% to-white text-transparent bg-clip-text font-gabarito text-4xl",
         },
-        "Avatech v1"
+        "Avatech v1",
       ),
       div(
         {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-50% to-white text-transparent bg-clip-text font-gabarito text-2xl",
         },
-        "Get your DALLE3 AI Personal Clone"
+        "Get your DALLE3 AI Personal Clone",
       ),
       // input({
       //   type: "file",
-      //   class: "file-input file-input-bordered w-full w-full",
+      //   class: "file-input file-input-bordered w-full",
       // }),
 
       // label(
@@ -200,34 +209,17 @@ export function AvatarPreview() {
           class: () =>
             " w-full flex flex-col justify-center items-center gap-4",
         },
-        div(
-          { class: () => "tabs tabs-lifted md:w-full" },
-          input({
-            type: "radio",
-            name: "my_tabs_1",
-            class: () => "tab w-40",
-            checked: true,
-            ariaLabel: "Custom avatar",
-            onclick: () => {
-              jsonWorkflowLoading.val = true;
-              loadJSONWorkflow("default").then(() => {
-                console.log("done loading");
-                jsonWorkflowLoading.val = false;
-              });
-            },
-          }),
-          div(
-            { class: () => "tab-content text-black w-full" },
-            div(
+        !isGenerateFlow.val
+          ? div(
               {
-                class: () => "flex flex-col justify-center items-center gap-4 ",
+                class: () =>
+                  "flex flex-col justify-center items-center gap-4 w-full",
               },
               div(
                 { class: () => "w-full flex mt-2" },
                 button(
                   {
-                    class: () =>
-                      `btn w-full normal-case`,
+                    class: () => `btn w-full normal-case`,
                     onclick: async () => {
                       // previewImg.val = await uploadImage();
                       // stage.val = 1;
@@ -263,17 +255,17 @@ export function AvatarPreview() {
                       ? span({
                           class: "loading loading-spinner loading-md",
                         })
-                      : ""
-                )
+                      : "",
+                ),
               ),
               () => {
                 const dnd = div(
                   {
                     id: "dnd",
                     class: () =>
-                      "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center",
+                      "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center text-black",
                   },
-                  "or drag and drop the image here"
+                  "or drag and drop the image here",
                 );
                 const image = img({
                   class: () => "z-[10] object-contain w-full h-[394px] border",
@@ -308,7 +300,7 @@ export function AvatarPreview() {
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "Edit Segment"
+                "Edit Segment",
               ),
               button(
                 {
@@ -331,31 +323,18 @@ export function AvatarPreview() {
                     ? span({
                         class: "loading loading-spinner loading-md",
                       })
-                    : "Make It Alive!"
-              )
+                    : "Make It Alive!",
+              ),
             )
-          ),
-          input({
-            type: "radio",
-            name: "my_tabs_1",
-            class: "tab w-40",
-            ariaLabel: "Generate avatar",
-            onclick: () => {
-              jsonWorkflowLoading.val = true;
-              loadJSONWorkflow("Lora").then(() => {
-                console.log("done loading");
-                jsonWorkflowLoading.val = false;
-              });
-            },
-          }),
-          div(
-            { class: "tab-content text-black w-full" },
-            div(
-              { class: "flex flex-col justify-center items-center gap-4" },
+          : div(
+              {
+                class:
+                  "flex flex-col justify-center items-center gap-4 w-full text-black",
+              },
               div(
                 {
                   class:
-                    "w-full mt-2 flex flex-col rounded-md left-0 top-0 z-[200] flex",
+                    "w-full mt-2 flex flex-col rounded-md left-0 top-0 z-[200]",
                 },
                 textarea({
                   class:
@@ -386,7 +365,7 @@ export function AvatarPreview() {
                           Math.floor(Math.random() * 9000) + 1000;
                         console.log(
                           random4Digits,
-                          document.getElementById("seedProxy").value
+                          document.getElementById("seedProxy").value,
                         );
                         document.getElementById("seedProxy").value =
                           random4Digits.toString();
@@ -396,9 +375,9 @@ export function AvatarPreview() {
                       class: "iconify text-2xl mr-4 hover:cursor-pointer",
                       "data-icon": "fad:random-1dice",
                       "data-inline": "false",
-                    })
-                  )
-                )
+                    }),
+                  ),
+                ),
               ),
               button(
                 {
@@ -408,11 +387,11 @@ export function AvatarPreview() {
 
                     updatePositivePrompt(
                       app,
-                      document.getElementById("positivePromptProxy").value
+                      document.getElementById("positivePromptProxy").value,
                     );
                     updateSeedValue(
                       app,
-                      document.getElementById("seedProxy").value
+                      document.getElementById("seedProxy").value,
                     );
 
                     const sam = app.graph.findNodesByType("SAM MultiLayer")[0];
@@ -435,7 +414,7 @@ export function AvatarPreview() {
                 () =>
                   loading.val
                     ? span({ class: "loading loading-spinner loading-md" })
-                    : "Make It Alive!"
+                    : "Make It Alive!",
               ),
               button(
                 {
@@ -453,12 +432,10 @@ export function AvatarPreview() {
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "(Optional) Edit Segment"
-              )
-            )
-          )
-        )
-      )
+                "(Optional) Edit Segment",
+              ),
+            ),
+      ),
     );
   };
 
@@ -488,7 +465,7 @@ export function AvatarPreview() {
           class: () =>
             "w-full flex justify-center font-bold italic text-gray-500",
         },
-        span("We are launching OpenAI Assistant API integration soon!")
+        span("We are launching OpenAI Assistant API integration soon!"),
       ),
       div(
         { class: () => "w-[24rem] flex justify-center items-center" },
@@ -529,9 +506,9 @@ export function AvatarPreview() {
               ? span({
                   class: "loading loading-spinner loading-md",
                 })
-              : "Get Avatar Link"
-        )
-      )
+              : "Get Avatar Link",
+        ),
+      ),
     );
   };
 
@@ -548,7 +525,7 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "ic:round-close",
         "data-inline": "false",
-      })
+      }),
     );
   };
 
@@ -565,39 +542,112 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "mdi:restart",
         "data-inline": "false",
-      })
+      }),
     );
   };
 
   const renderChangeWorkflowButton = () => {
-    return button(
+    return div(
       {
         class: () =>
-          "btn text-black flex flex-row btn-ghost normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
-        onclick: () => {
-          let input = document.createElement("input");
-          input.type = "file";
-          document.body.appendChild(input);
-          input.accept = ".json,image/png,.latent,.safetensors";
-          input.onchange = async function (e) {
-            if (Object.entries(e.target.files).length) {
-              app.handleFile(e.target.files[0]);
-            }
-            document.body.removeChild(input);
-          };
-          input.click();
-          // document.getElementById("comfy-load-button").click();
-        },
+          "dropdown dropdown-hover left-0 top-0 z-[200] pointer-events-auto text-black ",
       },
-      span({
-        class: "iconify text-lg",
-        "data-icon": "ic:round-swap-vert",
-        "data-inline": "false",
-      }),
-      span({ class: "sm:flex hidden" }, () =>
-        jsonWorkflowLoading.val ? "Loading" : "Change workflow"
-      )
+      label(
+        {
+          class: () =>
+            "btn flex flex-row btn-ghost normal-case rounded-md sm:btn-md btn-sm",
+          tabIndex: () => 0,
+        },
+        span({
+          class: "iconify text-lg",
+          "data-icon": "ic:round-swap-vert",
+          "data-inline": "false",
+        }),
+        span({ class: "sm:flex hidden" }, () =>
+          jsonWorkflowLoading.val ? "Loading" : "Change workflow",
+        ),
+      ),
+      ul(
+        {
+          class: () =>
+            "dropdown-content z-[200] menu p-2 shadow rounded-box w-64 bg-white",
+          tabIndex: () => 0,
+        },
+        workflowList.map((val, index) => {
+          return li(
+            {
+              class: () => "p-4 btn btn-ghost items-start",
+              onclick: async (e) => {
+                e.preventDefault();
+                await loadJSONWorkflow("");
+                await new Promise((resolve) => setTimeout(resolve, 200));
+                const kSampler = app.graph.findNodesByType("KSampler")[0];
+                if (!kSampler) isGenerateFlow.val = false;
+                else isGenerateFlow.val = true;
+              },
+            },
+            () => val,
+          );
+        }),
+        div({ class: () => "divider !my-0" }),
+        li(
+          {
+            class: () => "p-4 btn btn-ghost items-start",
+            onclick: (e) => {
+              let input = document.createElement("input");
+              input.type = "file";
+              document.body.appendChild(input);
+              input.accept = ".json,image/png,.latent,.safetensors";
+              input.onchange = async function (e) {
+                if (Object.entries(e.target.files).length) {
+                  await app.handleFile(e.target.files[0]);
+                }
+                await new Promise((resolve) => setTimeout(resolve, 200));
+                const kSampler = app.graph.findNodesByType("KSampler")[0];
+                if (!kSampler) isGenerateFlow.val = false;
+                else isGenerateFlow.val = true;
+                document.body.removeChild(input);
+              };
+              input.click();
+              // document.getElementById("comfy-load-button").click();
+            },
+          },
+          "Import...",
+        ),
+      ),
     );
+    // return button(
+    //   {
+    //     class: () =>
+    //       "btn text-black flex flex-row btn-ghost normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
+    //     onclick: () => {
+    //   let input = document.createElement("input");
+    //   input.type = "file";
+    //   document.body.appendChild(input);
+    //   input.accept = ".json,image/png,.latent,.safetensors";
+    //   input.onchange = async function (e) {
+    //     if (Object.entries(e.target.files).length) {
+    //       await app.handleFile(e.target.files[0]);
+    //     }
+    //     await new Promise((resolve) => setTimeout(resolve, 200));
+    //     const kSampler = app.graph.findNodesByType("KSampler")[0];
+    //     if (!kSampler) isGenerateFlow.val = false;
+    //     else isGenerateFlow.val = true;
+    //     document.body.removeChild(input);
+    //   };
+    //   input.click();
+    //   // document.getElementById("comfy-load-button").click();
+    // },
+    //   },
+    //   span({
+    //     class: "iconify text-lg",
+    //     "data-icon": "ic:round-swap-vert",
+    //     "data-inline": "false",
+    //   }),
+    // span({ class: "sm:flex hidden" }, () =>
+    //   jsonWorkflowLoading.val ? "Loading" : "Change workflow",
+    // ),
+    // );
   };
 
   const renderTwitter = () => {
@@ -607,7 +657,7 @@ export function AvatarPreview() {
           "absolute top-4 right-4 btn sm:w-10 w-32 text-black btn-ghost text-xs !px-0 normal-case sm:btn-md btn-sm",
         onclick: () => window.open("https://twitter.com/avatech_gg", "_blank"),
       },
-      "Twitter"
+      "Twitter",
     );
   };
 
@@ -634,7 +684,7 @@ export function AvatarPreview() {
         },
         renderCloseButton(),
         renderRestartButton(),
-        renderChangeWorkflowButton()
+        renderChangeWorkflowButton(),
       ),
       renderTwitter(),
       () => {
@@ -647,7 +697,7 @@ export function AvatarPreview() {
             },
             renderIFrame(),
             renderSteps(),
-            renderShareLink()
+            renderShareLink(),
           );
         } else {
           return div(
@@ -660,12 +710,12 @@ export function AvatarPreview() {
             div(
               { class: () => "flex flex-col" },
               renderIFrame(),
-              renderShareLink()
-            )
+              renderShareLink(),
+            ),
           );
         }
-      }
-    )
+      },
+    ),
   );
 }
 
@@ -685,8 +735,8 @@ function showImage(name) {
   }
   img.src = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      name
-    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`
+      name,
+    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`,
   );
   node.setSizeForImage?.();
 }
