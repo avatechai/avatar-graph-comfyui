@@ -201,7 +201,7 @@ export function AvatarPreview() {
             " w-full flex flex-col justify-center items-center gap-4",
         },
         div(
-          { class: () => "tabs tabs-lifted w-full" },
+          { class: () => "tabs tabs-lifted md:w-full" },
           input({
             type: "radio",
             name: "my_tabs_1",
