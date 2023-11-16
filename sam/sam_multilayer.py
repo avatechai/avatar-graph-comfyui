@@ -72,7 +72,10 @@ class SAMMultiLayer:
                 global_predictor = predictor
             
             predictor = global_predictor
-            
+
+            if image.shape[3] == 4:
+                image = image[:, :, :, :3]
+
             emb_filename = f"{self.output_dir}/{embedding_id}_{model_type}.npy"
             if not os.path.exists(emb_filename):
                 image_np = (image[0].numpy() * 255).astype(np.uint8)
