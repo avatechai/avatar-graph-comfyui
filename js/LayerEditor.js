@@ -19,6 +19,7 @@ import { van } from "./van.js";
 const { button, div, img, canvas, span } = van.tags;
 
 let throttle = false;
+const positivePrompt = van.state(true);
 
 export function updateImagePrompts() {
   if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
@@ -94,7 +95,7 @@ async function handleClick(e) {
 
   imagePrompts.val = [
     ...imagePrompts.val,
-    { x: relativeX, y: relativeY, label: e.isRight ? 0 : 1 },
+    { x: relativeX, y: relativeY, label: !positivePrompt.val ? 0 : 1 },
   ];
   await drawSegment(getClicks());
   updateImagePrompts();
@@ -197,6 +198,14 @@ export function LayerEditor() {
         ,
       },
       div(() => showSidebar.val ? "Hide UI" : "Show UI")
+    ),
+    button(
+      {
+        class: () =>
+          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-52 top-0 z-[200] w-fit",
+        onclick: () => positivePrompt.val = !positivePrompt.val
+      },
+      div(() => positivePrompt.val ? "Positive" : "Negative")
     ),
     div(
       {

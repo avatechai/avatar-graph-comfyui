@@ -695,9 +695,8 @@ export async function uploadPreview() {
     }).catch((error) => console.error(error));
 
     infoDialog.show(
-      `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
-        labData.modelId +
-        `</a>`
+      `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=${labData.modelId}</a>` +
+        `\nChat url: <a href='https://labs.avatech.ai?avatarId=${labData.modelId}' target="_blank">https://labs.avatech.ai?avatarId=${labData.modelId}</a>`
     );
     previewModelId.val = labData.modelId;
   }
@@ -812,9 +811,8 @@ function injectUIComponentToComfyuimenu() {
       shareAvatar.append(dropdown);
     } else {
       infoDialog.show(
-        `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
-          previewModelId.val +
-          `</a>`
+        `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?avatarId=${previewModelId.val}</a>` +
+          `\nChat url: <a href='https://labs.avatech.ai?avatarId=${previewModelId.val}' target="_blank">https://labs.avatech.ai?avatarId=${previewModelId.val}</a>`
       );
     }
   };
