@@ -16,10 +16,38 @@ import { uploadSegments } from "./LayerEditor.js";
 import { initModel } from "./onnx.js";
 // import { uploadSegments } from "./LayerEditor.js";
 
-async function loadJSONWorkflow() {
-  const json = await (await fetch("./get_default_workflow")).json();
+async function loadJSONWorkflow(name) {
+  const json = await (await fetch(`./get_workflow?name=${name}`)).json();
   app.loadGraphData(json);
   console.log(json);
+}
+
+async function updatePositivePrompt(app, prompt) {
+  const positivePrompt = app.graph
+    .findNodesByType("CLIPTextEncode")
+    .find((x) => x.color == "#232");
+  if (!positivePrompt) {
+    alertDialog.val = {
+      text: "Cannot find the CLIPTextEncode node. Please make sure the workflow is correct.",
+      time: 5000,
+    };
+    return;
+  }
+
+  positivePrompt.widgets[0].inputEl.value = prompt;
+}
+
+async function updateSeedValue(app, seed) {
+  const kSampler = app.graph.findNodesByType("KSampler")[0];
+  if (!kSampler) {
+    alertDialog.val = {
+      text: "Cannot find the KSampler node. Please make sure the workflow is correct.",
+      time: 5000,
+    };
+    return;
+  }
+  kSampler.widgets[0].value = seed;
+  kSampler.widgets[1].value = "fixed";
 }
 
 async function uploadImage() {
@@ -102,7 +130,7 @@ async function prepareImageFromUrlRedirect(stage) {
 
 export function AvatarPreview() {
   console.log("getting workflow json now");
-  loadJSONWorkflow().then(() => {
+  loadJSONWorkflow("default").then(() => {
     console.log("done loading");
     jsonWorkflowLoading.val = false;
   });
@@ -179,6 +207,13 @@ export function AvatarPreview() {
             class: () => "tab w-full",
             checked: true,
             ariaLabel: "Custom avatar",
+            onclick: () => {
+              jsonWorkflowLoading.val = true;
+              loadJSONWorkflow("default").then(() => {
+                console.log("done loading");
+                jsonWorkflowLoading.val = false;
+              });
+            },
           }),
           div(
             { class: () => "tab-content text-black w-full" },
@@ -266,7 +301,7 @@ export function AvatarPreview() {
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "Edit segment"
+                "Edit Segment"
               ),
               button(
                 {
@@ -289,7 +324,7 @@ export function AvatarPreview() {
                     ? span({
                         class: "loading loading-spinner loading-md",
                       })
-                    : "Make it alive!"
+                    : "Make It Alive!"
               )
             )
           ),
@@ -298,6 +333,13 @@ export function AvatarPreview() {
             name: "my_tabs_1",
             class: "tab",
             ariaLabel: "Generate avatar",
+            onclick: () => {
+              jsonWorkflowLoading.val = true;
+              loadJSONWorkflow("Lora").then(() => {
+                console.log("done loading");
+                jsonWorkflowLoading.val = false;
+              });
+            },
           }),
           div(
             { class: "tab-content text-black w-full" },
@@ -329,39 +371,42 @@ export function AvatarPreview() {
                     placeholder: "Seed",
                     defaultValue: "1234",
                     id: "seedProxy",
-                  })
+                  }),
+                  div(
+                    {
+                      onclick: () => {
+                        const random4Digits =
+                          Math.floor(Math.random() * 9000) + 1000;
+                        console.log(
+                          random4Digits,
+                          document.getElementById("seedProxy").value
+                        );
+                        document.getElementById("seedProxy").value =
+                          random4Digits.toString();
+                      },
+                    },
+                    span({
+                      class: "iconify text-2xl mr-4 hover:cursor-pointer",
+                      "data-icon": "fad:random-1dice",
+                      "data-inline": "false",
+                    })
+                  )
                 )
               ),
               button(
                 {
                   class: "btn w-full normal-case ",
                   onclick: async () => {
-                    const positivePrompt = app.graph
-                      .findNodesByType("CLIPTextEncode")
-                      .find((x) => x.color == "#232");
-                    if (!positivePrompt) {
-                      alertDialog.val = {
-                        text: "Cannot find the CLIPTextEncode node. Please make sure the workflow is correct.",
-                        time: 5000,
-                      };
-                      return;
-                    }
-                    const kSampler = app.graph.findNodesByType("KSampler")[0];
-                    if (!kSampler) {
-                      alertDialog.val = {
-                        text: "Cannot find the KSampler node. Please make sure the workflow is correct.",
-                        time: 5000,
-                      };
-                      return;
-                    }
-
-                    positivePrompt.widgets[0].inputEl.value =
-                      document.getElementById("positivePromptProxy").value;
-                    kSampler.widgets[0].value =
-                      document.getElementById("seedProxy").value;
-                    kSampler.widgets[1].value = "fixed";
-
                     loading.val = true;
+
+                    updatePositivePrompt(
+                      app,
+                      document.getElementById("positivePromptProxy").value
+                    );
+                    updateSeedValue(
+                      app,
+                      document.getElementById("seedProxy").value
+                    );
 
                     const sam = app.graph.findNodesByType("SAM MultiLayer")[0];
                     if (!sam) {
@@ -523,17 +568,18 @@ export function AvatarPreview() {
         class: () =>
           "btn text-black flex flex-row btn-ghost normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
         onclick: () => {
-          let input = document.createElement("input");
-          input.type = "file";
-          document.body.appendChild(input);
-          input.accept = ".json,image/png,.latent,.safetensors";
-          input.onchange = async function (e) {
-            if (Object.entries(e.target.files).length) {
-              app.handleFile(e.target.files[0]);
-            }
-            document.body.removeChild(input);
-          };
-          input.click();
+          fetch("");
+          // let input = document.createElement("input");
+          // input.type = "file";
+          // document.body.appendChild(input);
+          // input.accept = ".json,image/png,.latent,.safetensors";
+          // input.onchange = async function (e) {
+          //   if (Object.entries(e.target.files).length) {
+          //     app.handleFile(e.target.files[0]);
+          //   }
+          //   document.body.removeChild(input);
+          // };
+          // input.click();
           // document.getElementById("comfy-load-button").click();
         },
       },
@@ -560,7 +606,7 @@ export function AvatarPreview() {
   };
 
   const isMobileDevice = () => {
-    return window.screen.width < 640;
+    return window.screen.width < 768;
   };
 
   return div(

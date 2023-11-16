@@ -2627,6 +2627,10 @@ details.collapse summary::-webkit-details-marker{
   margin-left: 1rem;
 }
 
+.mr-4{
+  margin-right: 1rem;
+}
+
 .block{
   display: block;
 }
@@ -3089,6 +3093,11 @@ details.collapse summary::-webkit-details-marker{
   line-height: 1rem;
 }
 
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -3349,6 +3358,10 @@ img[src] {
     border-bottom-right-radius: var(--rounded-box, 1rem);
     border-bottom-left-radius: var(--rounded-box, 1rem);
   }
+}
+
+.hover\:cursor-pointer:hover{
+  cursor: pointer;
 }
 
 .hover\:text-red-500:hover{
