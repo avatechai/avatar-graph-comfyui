@@ -16,6 +16,7 @@ import {
   shareLoading,
   previewModelId,
   embeddingID,
+  enableAutoSegment
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -344,7 +345,8 @@ function showMyImageEditor(node) {
         );
         loadNpyTensor(embeedingUrl).then(async (tensor) => {
           embeddings.val = tensor;
-          await autoSegment();
+          if (enableAutoSegment.val)
+            await autoSegment();
           drawSegment(getClicks());
         });
         targetNode.val = node;

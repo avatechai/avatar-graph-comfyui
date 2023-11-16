@@ -21,6 +21,7 @@ export const showPreview = van.state(true);
 export const previewUrl = van.state("https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=300&height=300&hideTrigger=true&voiceSelection=true");
 export const previewImg = van.state("");
 export const previewImgLoading = van.state(false);
+export const enableAutoSegment = van.state(false);
 // export const previewUrl = van.state("http://localhost:3006/viewer?avatarId=default&hideUI=true&debug=true&width=300&height=300&showAudioControl=true");
 export const isDirty = van.state(false);
 export const fileName = van.state('');

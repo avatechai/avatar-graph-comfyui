@@ -8,6 +8,7 @@ import {
   previewImgLoading,
   alertDialog,
   isGenerateFlow,
+  enableAutoSegment
 } from "./state.js";
 const { button, iframe, div, img, input, label, span, textarea, ul, li } =
   van.tags;
@@ -30,7 +31,16 @@ const workflowList = [
 ];
 
 // const workflowList = ["Auto_segment_workflow"];
+/**
+ * Load JSON workflow
+ * @param {string} name - The name of the workflow to load
+ */
 async function loadJSONWorkflow(name) {
+  if (name === 'default' || name.toLowerCase().startsWith("Auto_segment")) {
+    enableAutoSegment.val = true
+  } else {
+    enableAutoSegment.val = false
+  }
   const json = await (await fetch(`./get_workflow?name=${name}`)).json();
   app.loadGraphData(json);
   console.log(json);
@@ -286,7 +296,7 @@ export function AvatarPreview() {
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "Edit Segment",
+                () => enableAutoSegment.val ? "Edit Segment (Auto)" : "Edit Segment",
               ),
               button(
                 {
