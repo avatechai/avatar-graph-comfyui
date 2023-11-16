@@ -155,7 +155,8 @@ export function AvatarPreview() {
   const renderSteps = () => {
     return div(
       {
-        class: () => "flex flex-col bg-white justify-center w-[32rem]",
+        class: () =>
+          "flex flex-col bg-white justify-center w-[32rem] max-w-[100%]",
       },
       div(
         {
@@ -265,20 +266,26 @@ export function AvatarPreview() {
                       : ""
                 )
               ),
-                () => previewImg.val == ""
-                  ? div(
-                      {
-                        id: "dnd",
-                        class: () =>
-                          "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center",
-                      },
-                      "or drag and drop the image here"
-                    )
-                  : img({
+              () => {
+                const dnd = div(
+                  {
+                    id: "dnd",
                     class: () =>
-                      "z-[10] object-contain w-full h-[394px] border",
-                    src: previewImg,
-                  }),
+                      "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center",
+                  },
+                  "or drag and drop the image here"
+                );
+                const image = img({
+                  class: () => "z-[10] object-contain w-full h-[394px] border",
+                  src: previewImg,
+                });
+
+                if (isMobileDevice()) {
+                  if (previewImg.val) return image;
+                } else {
+                  return previewImg.val === "" ? dnd : image;
+                }
+              },
               button(
                 {
                   class: () =>
