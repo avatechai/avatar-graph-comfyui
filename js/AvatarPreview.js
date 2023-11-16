@@ -19,12 +19,18 @@ import { initModel } from "./onnx.js";
 // import { uploadSegments } from "./LayerEditor.js";
 
 const workflowList = [
-  "SilverWolfLora_withhand",
-  "SilverWolfLora",
+  "Auto_segment_workflow",
+  "BronyaZaychik_(ChinaDress)",
+  "BronyaZaychik_(Default_Silverwing)",
+  "BronyaZaychik_(Non-official_office_ladysuit)",
+  "BronyaZaychik_(Official_office_ladysuit)",
   "BronyaZaychikLora_withhand",
-  "BronyaZaychikLora",
+  "SilverWolf_(Default)",
+  "SilverWolf_(Maid)",
+  "SilverWolf_(Maid)",
 ];
 
+// const workflowList = ["Auto_segment_workflow"];
 async function loadJSONWorkflow(name) {
   const json = await (await fetch(`./get_workflow?name=${name}`)).json();
   app.loadGraphData(json);
@@ -185,29 +191,6 @@ export function AvatarPreview() {
         },
         "Get your DALLE3 AI Personal Clone",
       ),
-      // input({
-      //   type: "file",
-      //   class: "file-input file-input-bordered w-full",
-      // }),
-
-      // label(
-      //   {
-      //     class: () =>
-      //       " aspect-square w-full ring-1 ring-black bg-[#f6f6f6] rounded-lg flex justify-center items-center text-black cursor-pointer mt-24",
-      //     // for: "imgtosam",
-      //     onclick: () => {},
-      //   },
-      //   div(
-      //     {
-      //       class: () => " absolute flex justify-center items-center ",
-      //     },
-      //     "upload your image"
-      //   ),
-      //   img({
-      //     class: () => " z-[10] object-contain w-[550px] h-[394px]",
-      //     id: "imgUrl",
-      //   })
-      // ),
       div(
         {
           class: () =>
@@ -583,7 +566,7 @@ export function AvatarPreview() {
               class: () => "p-4 btn btn-ghost items-start",
               onclick: async (e) => {
                 e.preventDefault();
-                await loadJSONWorkflow("");
+                await loadJSONWorkflow(val);
                 await new Promise((resolve) => setTimeout(resolve, 200));
                 const kSampler = app.graph.findNodesByType("KSampler")[0];
                 if (!kSampler) isGenerateFlow.val = false;
@@ -658,7 +641,7 @@ export function AvatarPreview() {
     return button(
       {
         class: () =>
-          "absolute top-4 right-4 btn sm:w-10 w-32 text-black btn-ghost text-xs !px-0 normal-case sm:btn-md btn-sm",
+          "absolute top-4 right-4 btn sm:w-32 w-20 text-black btn-ghost text-xs z-[200] !px-0 normal-case sm:btn-md btn-sm",
         onclick: () => window.open("https://twitter.com/avatech_gg", "_blank"),
       },
       "Twitter",
