@@ -36,7 +36,7 @@ const workflowList = [
  * @param {string} name - The name of the workflow to load
  */
 async function loadJSONWorkflow(name) {
-  if (name === 'default' || name.toLowerCase().startsWith("Auto_segment")) {
+  if (name === 'default' || name.toLowerCase().startsWith("auto_segment")) {
     enableAutoSegment.val = true
   } else {
     enableAutoSegment.val = false
@@ -330,7 +330,7 @@ export function AvatarPreview() {
               div(
                 {
                   class:
-                    "w-full mt-2 flex flex-col rounded-md left-0 top-0 z-[200]",
+                    "w-full mt-2 flex flex-col rounded-md left-0 top-0",
                 },
                 textarea({
                   class:
