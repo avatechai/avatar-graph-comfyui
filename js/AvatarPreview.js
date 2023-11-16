@@ -586,7 +586,7 @@ export function AvatarPreview() {
             document.body.removeChild(input);
           };
           input.click();
-          document.getElementById("comfy-load-button").click();
+          // document.getElementById("comfy-load-button").click();
         },
       },
       span({
