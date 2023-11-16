@@ -201,11 +201,11 @@ export function AvatarPreview() {
             " w-full flex flex-col justify-center items-center gap-4",
         },
         div(
-          { class: () => "tabs tabs-lifted tabs-lg w-full" },
+          { class: () => "tabs tabs-lifted w-full" },
           input({
             type: "radio",
             name: "my_tabs_1",
-            class: () => "tab w-full",
+            class: () => "tab w-40",
             checked: true,
             ariaLabel: "Custom avatar",
             onclick: () => {
@@ -220,14 +220,14 @@ export function AvatarPreview() {
             { class: () => "tab-content text-black w-full" },
             div(
               {
-                class: () => "flex flex-col justify-center items-center gap-4",
+                class: () => "flex flex-col justify-center items-center gap-4 ",
               },
               div(
                 { class: () => "w-full flex mt-2" },
                 button(
                   {
                     class: () =>
-                      `w-full h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto`,
+                      `btn w-full normal-case`,
                     onclick: async () => {
                       // previewImg.val = await uploadImage();
                       // stage.val = 1;
@@ -281,7 +281,7 @@ export function AvatarPreview() {
                 });
 
                 if (isMobileDevice()) {
-                  if (previewImg.val) return image;
+                  return previewImg.val !== "" ? image : "";
                 } else {
                   return previewImg.val === "" ? dnd : image;
                 }
@@ -338,7 +338,7 @@ export function AvatarPreview() {
           input({
             type: "radio",
             name: "my_tabs_1",
-            class: "tab",
+            class: "tab w-40",
             ariaLabel: "Generate avatar",
             onclick: () => {
               jsonWorkflowLoading.val = true;
