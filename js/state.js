@@ -9,7 +9,7 @@
  * @typedef {Object} Point
  * @property {number} x - The x coordinate
  * @property {number} y - The y coordinate
- * @property {number} label - The label
+ * @property {>} label - The label
  */
 
 import { van } from "./van.js";
@@ -18,7 +18,7 @@ export const iframeSrc = van.state("https://editor.avatech.ai?comfyui=true");
 export const showEditor = van.state(false);
 // localStorage.getItem("showPreview") == 'true'
 export const showPreview = van.state(true);
-export const previewUrl = van.state("https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=300&height=300&hideTrigger=true&voiceSelection=true");
+export const previewUrl = van.state("https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=400&height=400&hideTrigger=true&voiceSelection=true");
 export const previewImg = van.state("");
 export const previewImgLoading = van.state(false);
 export const enableAutoSegment = van.state(false);
