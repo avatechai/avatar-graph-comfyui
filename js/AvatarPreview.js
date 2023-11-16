@@ -16,8 +16,8 @@ import { uploadSegments } from "./LayerEditor.js";
 import { initModel } from "./onnx.js";
 // import { uploadSegments } from "./LayerEditor.js";
 
-async function loadJSONWorkflow() {
-  const json = await (await fetch("./get_default_workflow")).json();
+async function loadJSONWorkflow(name) {
+  const json = await (await fetch(`./get_workflow?name=${name}`)).json();
   app.loadGraphData(json);
   console.log(json);
 }
@@ -102,7 +102,7 @@ async function prepareImageFromUrlRedirect(stage) {
 
 export function AvatarPreview() {
   console.log("getting workflow json now");
-  loadJSONWorkflow().then(() => {
+  loadJSONWorkflow("default").then(() => {
     console.log("done loading");
     jsonWorkflowLoading.val = false;
   });
@@ -179,6 +179,13 @@ export function AvatarPreview() {
             class: () => "tab w-full",
             checked: true,
             ariaLabel: "Custom avatar",
+            onclick: () => {
+              jsonWorkflowLoading.val = true;
+              loadJSONWorkflow("default").then(() => {
+                console.log("done loading");
+                jsonWorkflowLoading.val = false;
+              });
+            },
           }),
           div(
             { class: () => "tab-content text-black w-full" },
@@ -311,6 +318,13 @@ export function AvatarPreview() {
             name: "my_tabs_1",
             class: "tab",
             ariaLabel: "Generate avatar",
+            onclick: () => {
+              jsonWorkflowLoading.val = true;
+              loadJSONWorkflow("Lora").then(() => {
+                console.log("done loading");
+                jsonWorkflowLoading.val = false;
+              });
+            },
           }),
           div(
             { class: "tab-content text-black w-full" },
@@ -536,17 +550,18 @@ export function AvatarPreview() {
         class: () =>
           "btn text-black flex flex-row btn-ghost normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
         onclick: () => {
-          let input = document.createElement("input");
-          input.type = "file";
-          document.body.appendChild(input);
-          input.accept = ".json,image/png,.latent,.safetensors";
-          input.onchange = async function (e) {
-            if (Object.entries(e.target.files).length) {
-              app.handleFile(e.target.files[0]);
-            }
-            document.body.removeChild(input);
-          };
-          input.click();
+          fetch("");
+          // let input = document.createElement("input");
+          // input.type = "file";
+          // document.body.appendChild(input);
+          // input.accept = ".json,image/png,.latent,.safetensors";
+          // input.onchange = async function (e) {
+          //   if (Object.entries(e.target.files).length) {
+          //     app.handleFile(e.target.files[0]);
+          //   }
+          //   document.body.removeChild(input);
+          // };
+          // input.click();
           // document.getElementById("comfy-load-button").click();
         },
       },
