@@ -22,6 +22,34 @@ async function loadJSONWorkflow(name) {
   console.log(json);
 }
 
+async function updatePositivePrompt(app, prompt) {
+  const positivePrompt = app.graph
+    .findNodesByType("CLIPTextEncode")
+    .find((x) => x.color == "#232");
+  if (!positivePrompt) {
+    alertDialog.val = {
+      text: "Cannot find the CLIPTextEncode node. Please make sure the workflow is correct.",
+      time: 5000,
+    };
+    return;
+  }
+
+  positivePrompt.widgets[0].inputEl.value = prompt;
+}
+
+async function updateSeedValue(app, seed) {
+  const kSampler = app.graph.findNodesByType("KSampler")[0];
+  if (!kSampler) {
+    alertDialog.val = {
+      text: "Cannot find the KSampler node. Please make sure the workflow is correct.",
+      time: 5000,
+    };
+    return;
+  }
+  kSampler.widgets[0].value = seed;
+  kSampler.widgets[1].value = "fixed";
+}
+
 async function uploadImage() {
   /** @type {import('../../../web/types/litegraph.js').LGraph}*/
   const graph = app.graph;
@@ -356,39 +384,42 @@ export function AvatarPreview() {
                     placeholder: "Seed",
                     defaultValue: "1234",
                     id: "seedProxy",
-                  })
+                  }),
+                  div(
+                    {
+                      onclick: () => {
+                        const random4Digits =
+                          Math.floor(Math.random() * 9000) + 1000;
+                        console.log(
+                          random4Digits,
+                          document.getElementById("seedProxy").value
+                        );
+                        document.getElementById("seedProxy").value =
+                          random4Digits.toString();
+                      },
+                    },
+                    span({
+                      class: "iconify text-2xl mr-4 hover:cursor-pointer",
+                      "data-icon": "fad:random-1dice",
+                      "data-inline": "false",
+                    })
+                  )
                 )
               ),
               button(
                 {
                   class: "btn w-full normal-case ",
                   onclick: async () => {
-                    const positivePrompt = app.graph
-                      .findNodesByType("CLIPTextEncode")
-                      .find((x) => x.color == "#232");
-                    if (!positivePrompt) {
-                      alertDialog.val = {
-                        text: "Cannot find the CLIPTextEncode node. Please make sure the workflow is correct.",
-                        time: 5000,
-                      };
-                      return;
-                    }
-                    const kSampler = app.graph.findNodesByType("KSampler")[0];
-                    if (!kSampler) {
-                      alertDialog.val = {
-                        text: "Cannot find the KSampler node. Please make sure the workflow is correct.",
-                        time: 5000,
-                      };
-                      return;
-                    }
-
-                    positivePrompt.widgets[0].inputEl.value =
-                      document.getElementById("positivePromptProxy").value;
-                    kSampler.widgets[0].value =
-                      document.getElementById("seedProxy").value;
-                    kSampler.widgets[1].value = "fixed";
-
                     loading.val = true;
+
+                    updatePositivePrompt(
+                      app,
+                      document.getElementById("positivePromptProxy").value
+                    );
+                    updateSeedValue(
+                      app,
+                      document.getElementById("seedProxy").value
+                    );
 
                     const sam = app.graph.findNodesByType("SAM MultiLayer")[0];
                     if (!sam) {
