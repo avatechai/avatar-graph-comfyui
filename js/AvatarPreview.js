@@ -71,12 +71,12 @@ async function prepareImageFromUrlRedirect(stage) {
   dragndrop.addEventListener("dragenter", (evt) => {
     evt.preventDefault();
     dragndrop.className =
-      "w-full border-2 border-purple-500 text-purple-500 border-dashed rounded-lg flex justify-center items-center";
+      "h-96 w-full border-2 border-purple-500 text-purple-500 border-dashed rounded-lg flex justify-center items-center";
   });
   dragndrop.addEventListener("dragleave", (evt) => {
     evt.preventDefault();
     dragndrop.className =
-      "w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center";
+      "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center";
   });
   dragndrop.addEventListener("dragover", (evt) => {
     evt.preventDefault();
@@ -84,7 +84,7 @@ async function prepareImageFromUrlRedirect(stage) {
   dragndrop.addEventListener("drop", async (evt) => {
     evt.preventDefault();
     dragndrop.className =
-      "w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center";
+      "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center";
     if (evt.dataTransfer.files.length > 1) return;
     if (
       evt.dataTransfer.files[0].type != "image/jpeg" &&
@@ -191,9 +191,7 @@ export function AvatarPreview() {
                 button(
                   {
                     class: () =>
-                      `${
-                        previewImg.val != "" && "w-full"
-                      } h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto`,
+                      `w-full h-full btn flex flex-row normal-case px-4 rounded-md left-0 top-0 z-[200] pointer-events-auto`,
                     onclick: async () => {
                       // previewImg.val = await uploadImage();
                       // stage.val = 1;
@@ -230,33 +228,22 @@ export function AvatarPreview() {
                           class: "loading loading-spinner loading-md",
                         })
                       : ""
-                ),
-                previewImg.val == ""
-                  ? div(
-                      { class: () => "divider divider-horizontal !gap-0" },
-                      "OR"
-                    )
-                  : "",
-                previewImg.val == ""
+                )
+              ),
+                () => previewImg.val == ""
                   ? div(
                       {
                         id: "dnd",
                         class: () =>
-                          "w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center",
+                          "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center",
                       },
-                      "Drag and drop the image here"
+                      "or drag and drop the image here"
                     )
-                  : ""
-              ),
-              () =>
-                previewImg.val != ""
-                  ? img({
-                      class: () =>
-                        "z-[10] object-contain w-full h-[394px] border",
-                      src: previewImg,
-                    })
-                  : "",
-
+                  : img({
+                    class: () =>
+                      "z-[10] object-contain w-full h-[394px] border",
+                    src: previewImg,
+                  }),
               button(
                 {
                   class: () =>
