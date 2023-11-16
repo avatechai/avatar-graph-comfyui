@@ -44,25 +44,25 @@ const layerMapping = {
     useMiddle: false,
     positiveOffset: 0,
     negativeOffset: 0.5,
-    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
+    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
   },
   R_eye: {
     useMiddle: false,
     positiveOffset: 0,
     negativeOffset: 0.5,
-    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
+    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
   },
   L_iris: {
     useMiddle: false,
     positiveOffset: 0,
     negativeOffset: 0.1,
-    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
+    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
   },
   R_iris: {
     useMiddle: false,
     positiveOffset: 0,
     negativeOffset: 0.1,
-    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
+    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
   },
   face: {
     useMiddle: false,
@@ -87,9 +87,9 @@ const layerMapping = {
 export async function autoSegment() {
   const image = document.getElementById("image");
   const landmarks = faceLandmarker.detect(image).faceLandmarks[0];
-  // Object.entries(layerMapping).forEach(([key, value]) => {
-  //   imagePromptsMulti.val[key] = [];
-  // });
+  Object.entries(layerMapping).forEach(([key, value]) => {
+    imagePromptsMulti.val[key] = [];
+  });
 
   Object.entries(layerMapping).forEach(([key, value]) => {
     const positivePoints = [];
