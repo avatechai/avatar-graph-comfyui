@@ -17,7 +17,6 @@ export function Container() {
     LayerEditor(),
     AvatarPreview(),
     Loading(),
-    Alert(),
-    AppHeader()
+    Alert()
   );
 }
