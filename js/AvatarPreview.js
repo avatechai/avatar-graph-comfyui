@@ -314,7 +314,7 @@ export function AvatarPreview() {
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "Edit segment"
+                "Edit Segment"
               ),
               button(
                 {
@@ -337,7 +337,7 @@ export function AvatarPreview() {
                     ? span({
                         class: "loading loading-spinner loading-md",
                       })
-                    : "Make it alive!"
+                    : "Make It Alive!"
               )
             )
           ),
@@ -619,7 +619,7 @@ export function AvatarPreview() {
   };
 
   const isMobileDevice = () => {
-    return window.screen.width < 640;
+    return window.screen.width < 768;
   };
 
   return div(
