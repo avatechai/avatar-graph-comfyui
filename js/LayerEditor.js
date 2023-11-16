@@ -16,6 +16,8 @@ import {
   alertDialog,
 } from "./state.js";
 import { van } from "./van.js";
+import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+const { FaceLandmarker, FilesetResolver } = vision;
 const { button, div, img, canvas, span } = van.tags;
 
 let throttle = false;
@@ -23,6 +25,173 @@ const positivePrompt = van.state(true);
 const isMobileDevice = () => {
   return window.screen.width < 768;
 };
+
+// Auto segmentation
+const filesetResolver = await FilesetResolver.forVisionTasks(
+  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+);
+const faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+  baseOptions: {
+    modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+    delegate: "GPU",
+  },
+  outputFaceBlendshapes: true,
+  runningMode: "IMAGE",
+  numFaces: 1,
+});
+const layerMapping = {
+  L_eye: {
+    useMiddle: false,
+    positiveOffset: 0.1,
+    negativeOffset: 0.5,
+    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
+  },
+  R_eye: {
+    useMiddle: false,
+    positiveOffset: 0.1,
+    negativeOffset: 0.5,
+    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
+  },
+  L_iris: {
+    useMiddle: false,
+    positiveOffset: 0,
+    negativeOffset: 0.1,
+    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
+  },
+  R_iris: {
+    useMiddle: false,
+    positiveOffset: 0,
+    negativeOffset: 0.1,
+    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
+  },
+  face: {
+    useMiddle: false,
+    positiveOffset: -0.1,
+    negativeOffset: 0.1,
+    indices: FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
+  },
+  mouth: {
+    useMiddle: true,
+    positiveOffset: 0,
+    negativeOffset: 0.2,
+    indices: FaceLandmarker.FACE_LANDMARKS_LIPS,
+  },
+  mouth_in: {
+    useMiddle: true,
+    positiveOffset: 0,
+    negativeOffset: 0.2,
+    indices: FaceLandmarker.FACE_LANDMARKS_LIPS,
+  },
+};
+
+async function drawPoints(part) {}
+
+async function autoSegment() {
+  const image = document.getElementById("image");
+  const landmarks = faceLandmarker.detect(image).faceLandmarks[0];
+  Object.entries(layerMapping).forEach(([key, value]) => {
+    imagePromptsMulti.val[key] = [];
+  });
+
+  Object.entries(layerMapping).forEach(([key, value]) => {
+    const positivePoints = [];
+    const middlePoints = [];
+    const negativePoints = [];
+
+    // Positive points
+    for (const { start, end } of value.indices) {
+      const startPoint = landmarks[start];
+      const endPoint = landmarks[end];
+
+      const startX = startPoint.x * imageSize.val.width;
+      const startY = startPoint.y * imageSize.val.height;
+
+      // const endX = endPoint.x * imageSize.val.width;
+      // const endY = endPoint.y * imageSize.val.height;
+
+      if (middlePoints.length === 0) {
+        middlePoints.push({ x: startX, y: startY, label: 1 });
+        // middlePoints.push({ x: endX, y: endY, label: 1 });
+      } else {
+        middlePoints[0].x += startX;
+        middlePoints[0].y += startY;
+        // middlePoints[1].x += endX;
+        // middlePoints[1].y += endY;
+      }
+      positivePoints.push({ x: startX, y: startY, label: 1 });
+      // positivePoints.push({ x: endX, y: endY, label: 1 });
+
+      // imagePrompts.val = [...imagePrompts.val, { x, y, label: 1 }];
+    }
+
+    // Middle points
+    const len = value.indices.length;
+    middlePoints[0].x /= len;
+    middlePoints[0].y /= len;
+    // middlePoints[1].x /= len;
+    // middlePoints[1].y /= len;
+
+    if (value.useMiddle) {
+      imagePromptsMulti.val[key] = [
+        ...imagePromptsMulti.val[key],
+        ...middlePoints,
+      ];
+    } else {
+      // Negative points
+      for (const [i, { start, end }] of value.indices.entries()) {
+        const startPoint = landmarks[start];
+        // const endPoint = landmarks[end];
+
+        const startX = startPoint.x * imageSize.val.width;
+        const startY = startPoint.y * imageSize.val.height;
+
+        // const endX = endPoint.x * imageSize.val.width;
+        // const endY = endPoint.y * imageSize.val.height;
+
+        const middlePoint = middlePoints[0];
+        const directionVector = {
+          x: middlePoint.x - startX,
+          y: middlePoint.y - startY,
+        };
+        const directionVectorLength = Math.sqrt(
+          directionVector.x * directionVector.x +
+            directionVector.y * directionVector.y
+        );
+        const negativePointDistance =
+          value.negativeOffset * directionVectorLength;
+        const negativePoint = {
+          x:
+            startX -
+            (negativePointDistance * directionVector.x) / directionVectorLength,
+          y:
+            startY -
+            (negativePointDistance * directionVector.y) / directionVectorLength,
+          label: 0,
+        };
+
+        const positivePointDistance =
+          value.positiveOffset * directionVectorLength;
+        positivePoints[i] = {
+          x:
+            positivePoints[i].x -
+            (positivePointDistance * directionVector.x) / directionVectorLength,
+          y:
+            positivePoints[i].y -
+            (positivePointDistance * directionVector.y) / directionVectorLength,
+          label: 1,
+        };
+
+        negativePoints.push(negativePoint);
+      }
+      imagePromptsMulti.val[key] = [
+        ...imagePromptsMulti.val[key],
+        ...positivePoints,
+        ...negativePoints,
+      ];
+    }
+  });
+  console.log("Done");
+}
 
 export function updateImagePrompts() {
   if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
@@ -248,10 +417,11 @@ export function LayerEditor() {
         id: "image-container",
       },
       img({
+        id: "image",
         class:
           "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
         src: imageUrl,
-        onload: (e) => {
+        onload: async (e) => {
           imageSize.val = handleImageSize(e.target);
 
           document.getElementById("image-container").style.scale =
@@ -265,6 +435,8 @@ export function LayerEditor() {
           const canvas = document.getElementById("mask-canvas");
           canvas.width = e.target.naturalWidth;
           canvas.height = e.target.naturalHeight;
+
+          await autoSegment();
         },
         oncontextmenu: async (e) => {
           e.preventDefault();
