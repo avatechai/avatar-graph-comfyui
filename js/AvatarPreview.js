@@ -27,7 +27,6 @@ const workflowList = [
   "BronyaZaychikLora_withhand",
   "SilverWolf_(Default)",
   "SilverWolf_(Maid)",
-  "SilverWolf_(Maid)",
 ];
 
 // const workflowList = ["Auto_segment_workflow"];
@@ -537,7 +536,7 @@ export function AvatarPreview() {
     return div(
       {
         class: () =>
-          "dropdown dropdown-hover left-0 top-0 z-[200] pointer-events-auto text-black ",
+          "dropdown dropdown-hover dropdown-bottom z-[200] pointer-events-auto text-black ",
       },
       label(
         {
@@ -557,7 +556,7 @@ export function AvatarPreview() {
       ul(
         {
           class: () =>
-            "dropdown-content z-[200] menu p-2 shadow rounded-box w-64 bg-white",
+            "dropdown-content -left-[100px] z-[200] menu p-2 shadow rounded-box w-96 bg-white",
           tabIndex: () => 0,
         },
         workflowList.map((val, index) => {
