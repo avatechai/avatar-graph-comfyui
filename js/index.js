@@ -26,7 +26,7 @@ import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 import { drawSegment, getClicks } from "./LayerEditor.js";
 import { infoDialog } from "./dialog.js";
 
-export let generatedImagePath = null;
+export const generatedImages = {};
 
 const stylesheet = document.createElement("link");
 stylesheet.setAttribute("type", "text/css");
@@ -243,14 +243,30 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
   }
 
   console.log(targetLink, nodea);
-  console.log(nodea.getInputNode(0, true));
 
-  if (nodea.type !== "LoadImage") {
-    return;
+  if (nodea.type === "LoadImage") {
+    /** @type {string} */
+    const isGeneratedImage = false;
+    return [
+      isGeneratedImage,
+      nodea.widgets.find((x) => x.name === widgetName).value,
+    ];
   }
 
+  const saveImageNodeLink = nodea.outputs
+    .find((x) => x.type === "IMAGE")
+    .links.find((link) => {
+      const targetLink = graph.links[link];
+      const targetNode = graph._nodes_by_id[targetLink.target_id];
+      if (targetNode.type === "SaveImage") {
+        return true;
+      }
+    });
+  const saveImageNode =
+    graph._nodes_by_id[graph.links[saveImageNodeLink].target_id];
   /** @type {string} */
-  return nodea.widgets.find((x) => x.name === widgetName).value;
+  const isGeneratedImage = true;
+  return [isGeneratedImage, generatedImages[saveImageNode.id]];
 }
 
 /**
@@ -258,11 +274,10 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
  * @param {LGraphNode} node
  */
 function showMyImageEditor(node) {
-  let connectedImageFileName =
-    getInputWidgetValue(node, 0, "image") || generatedImagePath;
+  let [isGeneratedImage, connectedImageFileName] = getInputWidgetValue(node, 0, "image");
   if (!connectedImageFileName) {
     alertDialog.val = {
-      text: "Please connect an image first",
+      text: "Please connect or generate an image first",
       time: 3000,
     };
     return;
@@ -288,6 +303,7 @@ function showMyImageEditor(node) {
         method: "POST",
         body: JSON.stringify({
           image: connectedImageFileName,
+          isGeneratedImage,
           embedding_id: id,
           ckpt,
         }),
@@ -310,8 +326,8 @@ function showMyImageEditor(node) {
           imagePrompts.val = v;
         }
         showImageEditor.val = true;
-        const isGeneratedImage = connectedImageFileName.startsWith("avatar");
-        const subfolder = isGeneratedImage || split.length === 1 ? "" : split[0];
+        const subfolder =
+          isGeneratedImage || split.length === 1 ? "" : split[0];
         imageUrl.val = api.apiURL(
           `/view?filename=${encodeURIComponent(connectedImageFileName)}&type=${
             isGeneratedImage ? "output" : "input"
@@ -444,12 +460,8 @@ const ext = {
 
     api.addEventListener("executed", (evt) => {
       const images = evt.detail?.output.images;
-      if (
-        images?.length > 0 &&
-        images[0].type === "output" &&
-        images[0].filename.startsWith("avatar")
-      ) {
-        generatedImagePath = images[0].filename;
+      if (images?.length > 0 && images[0].type === "output") {
+        generatedImages[evt.detail.node] = images[0].filename;
       }
       if (evt.detail?.output.gltfFilename) {
         const viewer = document.getElementById(

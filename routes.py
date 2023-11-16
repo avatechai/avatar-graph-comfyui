@@ -58,8 +58,8 @@ async def get_sam_model(request):
     return web.FileResponse(filename)
 
 
-def load_image(image):
-    if image.startswith("avatar"):
+def load_image(image, is_generated_image):
+    if is_generated_image:
         image_path = f"{folder_paths.get_output_directory()}/{image}"
     else:
         image_path = folder_paths.get_annotated_filepath(image)
@@ -73,13 +73,14 @@ def load_image(image):
 @server.PromptServer.instance.routes.post("/sam_model")
 async def post_sam_model(request):
     post = await request.json()
+    is_generated_image = post.get("isGeneratedImage")
     emb_id = post.get("embedding_id")
     ckpt = post.get("ckpt")
     ckpt = folder_paths.get_full_path("sams", ckpt)
     model_type = re.findall(r'vit_[lbh]', ckpt)[0]
     emb_filename = f"{folder_paths.get_output_directory()}/{emb_id}_{model_type}.npy"
     if not os.path.exists(emb_filename):
-        image = load_image(post.get("image"))
+        image = load_image(post.get("image"), is_generated_image)
 
         sam = sam_model_registry[model_type](checkpoint=ckpt)
         predictor = SamPredictor(sam)
