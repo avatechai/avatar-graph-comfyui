@@ -565,6 +565,7 @@ export function AvatarPreview() {
               class: () => "p-4 btn btn-ghost items-start",
               onclick: async (e) => {
                 e.preventDefault();
+                document.activeElement.blur()
                 await loadJSONWorkflow(val);
                 await new Promise((resolve) => setTimeout(resolve, 200));
                 const kSampler = app.graph.findNodesByType("KSampler")[0];
