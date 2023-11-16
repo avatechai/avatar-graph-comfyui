@@ -42,13 +42,13 @@ const faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
 const layerMapping = {
   L_eye: {
     useMiddle: false,
-    positiveOffset: 0.1,
+    positiveOffset: 0,
     negativeOffset: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
   },
   R_eye: {
     useMiddle: false,
-    positiveOffset: 0.1,
+    positiveOffset: 0,
     negativeOffset: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
   },
@@ -84,14 +84,12 @@ const layerMapping = {
   },
 };
 
-async function drawPoints(part) {}
-
-async function autoSegment() {
+export async function autoSegment() {
   const image = document.getElementById("image");
   const landmarks = faceLandmarker.detect(image).faceLandmarks[0];
-  Object.entries(layerMapping).forEach(([key, value]) => {
-    imagePromptsMulti.val[key] = [];
-  });
+  // Object.entries(layerMapping).forEach(([key, value]) => {
+  //   imagePromptsMulti.val[key] = [];
+  // });
 
   Object.entries(layerMapping).forEach(([key, value]) => {
     const positivePoints = [];
@@ -101,7 +99,7 @@ async function autoSegment() {
     // Positive points
     for (const { start, end } of value.indices) {
       const startPoint = landmarks[start];
-      const endPoint = landmarks[end];
+      // const endPoint = landmarks[end];
 
       const startX = startPoint.x * imageSize.val.width;
       const startY = startPoint.y * imageSize.val.height;
@@ -190,6 +188,7 @@ async function autoSegment() {
       ];
     }
   });
+  imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
   console.log("Done");
 }
 
@@ -435,8 +434,6 @@ export function LayerEditor() {
           const canvas = document.getElementById("mask-canvas");
           canvas.width = e.target.naturalWidth;
           canvas.height = e.target.naturalHeight;
-
-          await autoSegment();
         },
         oncontextmenu: async (e) => {
           e.preventDefault();

@@ -23,7 +23,7 @@ import { api } from "./api.js";
 import { Container } from "./Container.js";
 import { initModel, loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
-import { drawSegment, getClicks } from "./LayerEditor.js";
+import { autoSegment, drawSegment, getClicks } from "./LayerEditor.js";
 import { infoDialog } from "./dialog.js";
 
 export const generatedImages = {};
@@ -274,7 +274,11 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
  * @param {LGraphNode} node
  */
 function showMyImageEditor(node) {
-  let [isGeneratedImage, connectedImageFileName] = getInputWidgetValue(node, 0, "image");
+  let [isGeneratedImage, connectedImageFileName] = getInputWidgetValue(
+    node,
+    0,
+    "image"
+  );
   if (!connectedImageFileName) {
     alertDialog.val = {
       text: "Please connect or generate an image first",
@@ -338,8 +342,9 @@ function showMyImageEditor(node) {
             `${id}_${modelType}.npy`
           )}&type=output&subfolder=`
         );
-        loadNpyTensor(embeedingUrl).then((tensor) => {
+        loadNpyTensor(embeedingUrl).then(async (tensor) => {
           embeddings.val = tensor;
+          await autoSegment();
           drawSegment(getClicks());
         });
         targetNode.val = node;
