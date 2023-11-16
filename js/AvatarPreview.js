@@ -575,19 +575,18 @@ export function AvatarPreview() {
         class: () =>
           "btn text-black flex flex-row btn-ghost normal-case rounded-md left-0 top-0 z-[200] pointer-events-auto sm:btn-md btn-sm ",
         onclick: () => {
-          fetch("");
-          // let input = document.createElement("input");
-          // input.type = "file";
-          // document.body.appendChild(input);
-          // input.accept = ".json,image/png,.latent,.safetensors";
-          // input.onchange = async function (e) {
-          //   if (Object.entries(e.target.files).length) {
-          //     app.handleFile(e.target.files[0]);
-          //   }
-          //   document.body.removeChild(input);
-          // };
-          // input.click();
-          // document.getElementById("comfy-load-button").click();
+          let input = document.createElement("input");
+          input.type = "file";
+          document.body.appendChild(input);
+          input.accept = ".json,image/png,.latent,.safetensors";
+          input.onchange = async function (e) {
+            if (Object.entries(e.target.files).length) {
+              app.handleFile(e.target.files[0]);
+            }
+            document.body.removeChild(input);
+          };
+          input.click();
+          document.getElementById("comfy-load-button").click();
         },
       },
       span({
