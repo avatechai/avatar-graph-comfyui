@@ -26,6 +26,7 @@ import { initModel, loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 import { autoSegment, drawSegment, getClicks } from "./LayerEditor.js";
 import { infoDialog } from "./dialog.js";
+import { sharedAvatarLink } from "./AvatarPreview.js";
 
 export const generatedImages = {};
 
@@ -713,11 +714,9 @@ export async function uploadPreview() {
       body: file,
     }).catch((error) => console.error(error));
 
-    infoDialog.show(
-      `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=${labData.modelId}</a>` +
-        `\nChat url: <a href='https://labs.avatech.ai?avatarId=${labData.modelId}' target="_blank">https://labs.avatech.ai?avatarId=${labData.modelId}</a>`
-    );
+    sharedAvatarLink.val = `https://editor.avatech.ai/viewer?avatarId=${labData?.modelId}`;
     previewModelId.val = labData.modelId;
+    return labData;
   }
 }
 

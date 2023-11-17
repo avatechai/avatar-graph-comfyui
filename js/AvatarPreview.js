@@ -113,6 +113,7 @@ async function uploadImage() {
 }
 
 const jsonWorkflowLoading = van.state(true);
+export const sharedAvatarLink = van.state("");
 
 async function prepareImageFromUrlRedirect(stage) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -130,8 +131,8 @@ async function prepareImageFromUrlRedirect(stage) {
     graph.change();
     previewImg.val = api.apiURL(
       `/view?filename=${encodeURIComponent(
-        imageName,
-      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`,
+        imageName
+      )}&type=input&subfolder=create_avatar_endpoint${app.getPreviewFormatParam()}`
     );
     console.log(previewImg);
   }
@@ -176,7 +177,7 @@ export function AvatarPreview() {
   });
 
   const loading = van.state(false);
-  const shareLoading = van.state(false);
+  const shareLoading = van.state("share"); // share, loading, shared
 
   api.addEventListener("execution_start", (evt) => {
     loading.val = true;
@@ -207,14 +208,14 @@ export function AvatarPreview() {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-60% to-white text-transparent bg-clip-text font-gabarito text-4xl",
         },
-        "Avatech v1",
+        "Avatech v1"
       ),
       div(
         {
           class: () =>
             " bg-gradient-to-b from-black via-[#5F5F5F] via-50% to-white text-transparent bg-clip-text font-gabarito text-2xl",
         },
-        "Get your DALLE3 AI Personal Clone",
+        "Get your DALLE3 AI Personal Clone"
       ),
       div(
         {
@@ -305,7 +306,7 @@ export function AvatarPreview() {
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "Edit Segment",
+                "Edit Segment"
               ),
               button(
                 {
@@ -513,7 +514,7 @@ export function AvatarPreview() {
           class: () =>
             "w-full flex justify-center font-bold italic text-gray-500",
         },
-        span("We are launching OpenAI Assistant API integration soon!"),
+        span("We are launching OpenAI Assistant API integration soon!")
       ),
       div(
         { class: () => "w-[24rem] flex justify-center items-center" },
@@ -529,34 +530,52 @@ export function AvatarPreview() {
         button(
           {
             class: () =>
-              "btn rounded rounded-l-none rounded-r-md no-animation bg-neutral hover:bg-neutral-focus text-white border-none normal-case",
+              "btn rounded rounded-l-none rounded-r-md no-animation bg-neutral-800 hover:bg-neutral-950 text-white border-none normal-case",
             onclick: async () => {
-              shareLoading.val = true;
-              const url = await (await fetch("./get_webhook")).json();
-              await uploadPreview();
-              await fetch(url, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  username: "Avabot",
-                  avatar_url:
-                    "https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatechai.png",
-                  content: "New register! \n" + email.val,
-                }),
-              });
-              shareLoading.val = false;
+              if (shareLoading.val === "share") {
+                shareLoading.val = "loading";
+                const url = await (await fetch("./get_webhook")).json();
+                await uploadPreview();
+                await fetch(url, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    username: "Avabot",
+                    avatar_url:
+                      "https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatechai.png",
+                    content: "New register! \n" + email.val,
+                  }),
+                });
+                shareLoading.val = "shared";
+              }
+              if (sharedAvatarLink.val) {
+                await navigator.clipboard.writeText(sharedAvatarLink.val);
+                alertDialog.val = {
+                  text: "Avatar link copied to clipboard!",
+                  time: 5000,
+                };
+              }
             },
           },
-          () =>
-            shareLoading.val
-              ? span({
-                class: "loading loading-spinner loading-md",
-              })
-              : "Get Avatar Link",
-        ),
-      ),
+          () => {
+            switch (shareLoading.val) {
+              case "share":
+                return "Get Avatar Link";
+              case "loading":
+                return span({
+                  class: "loading loading-spinner loading-md",
+                });
+              case "shared":
+                return span({
+                  class: "iconify text-xl",
+                  "data-icon": "lucide:copy-check",
+                });
+            }
+          }
+        )
+      )
     );
   };
 
@@ -573,7 +592,7 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "ic:round-close",
         "data-inline": "false",
-      }),
+      })
     );
   };
 
@@ -590,7 +609,7 @@ export function AvatarPreview() {
         class: "iconify text-lg",
         "data-icon": "mdi:restart",
         "data-inline": "false",
-      }),
+      })
     );
   };
 
@@ -612,8 +631,8 @@ export function AvatarPreview() {
           "data-inline": "false",
         }),
         span({ class: "sm:flex hidden" }, () =>
-          jsonWorkflowLoading.val ? "Loading" : "Change workflow",
-        ),
+          jsonWorkflowLoading.val ? "Loading" : "Change workflow"
+        )
       ),
       ul(
         {
@@ -635,7 +654,7 @@ export function AvatarPreview() {
                 else isGenerateFlow.val = true;
               },
             },
-            () => val,
+            () => val
           );
         }),
         div({ class: () => "divider !my-0" }),
@@ -661,9 +680,9 @@ export function AvatarPreview() {
               // document.getElementById("comfy-load-button").click();
             },
           },
-          "Import...",
-        ),
-      ),
+          "Import..."
+        )
+      )
     );
     // return button(
     //   {
@@ -706,7 +725,7 @@ export function AvatarPreview() {
           "absolute top-4 right-4 btn sm:w-32 w-20 text-black btn-ghost text-xs z-[200] !px-0 normal-case sm:btn-md btn-sm",
         onclick: () => window.open("https://twitter.com/avatech_gg", "_blank"),
       },
-      "Twitter",
+      "Twitter"
     );
   };
 
@@ -733,7 +752,7 @@ export function AvatarPreview() {
         },
         renderCloseButton(),
         renderRestartButton(),
-        renderChangeWorkflowButton(),
+        renderChangeWorkflowButton()
       ),
       renderTwitter(),
       () => {
@@ -746,7 +765,7 @@ export function AvatarPreview() {
             },
             renderIFrame(),
             renderSteps(),
-            renderShareLink(),
+            renderShareLink()
           );
         } else {
           return div(
@@ -759,12 +778,12 @@ export function AvatarPreview() {
             div(
               { class: () => "flex flex-col" },
               renderIFrame(),
-              renderShareLink(),
-            ),
+              renderShareLink()
+            )
           );
         }
-      },
-    ),
+      }
+    )
   );
 }
 
@@ -784,8 +803,8 @@ function showImage(name) {
   }
   img.src = api.apiURL(
     `/view?filename=${encodeURIComponent(
-      name,
-    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`,
+      name
+    )}&type=input&subfolder=${subfolder}${app.getPreviewFormatParam()}`
   );
   node.setSizeForImage?.();
 }
