@@ -16,7 +16,7 @@ import {
   shareLoading,
   previewModelId,
   embeddingID,
-  enableAutoSegment
+  enableAutoSegment,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -240,7 +240,10 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
   /** @type {LGraphNode} */
   let nodea = graph._nodes_by_id[targetLink.origin_id];
 
-  while (nodea.type == "Reroute") {
+  while (
+    nodea.type === "Reroute" ||
+    nodea.type === "Image Rembg (Remove Background)"
+  ) {
     nodea = nodea.getInputNode(0);
   }
 
@@ -346,8 +349,7 @@ function showMyImageEditor(node) {
         );
         loadNpyTensor(embeedingUrl).then(async (tensor) => {
           embeddings.val = tensor;
-          if (enableAutoSegment.val)
-            await autoSegment();
+          if (enableAutoSegment.val) await autoSegment();
           drawSegment(getClicks());
         });
         targetNode.val = node;

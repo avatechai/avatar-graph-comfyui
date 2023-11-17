@@ -1,5 +1,6 @@
 import { SideBar } from "./SideBar.js";
 import { api } from "./api.js";
+import { app } from "./app.js";
 import { runONNX } from "./onnx.js";
 import {
   showImageEditor,
@@ -22,6 +23,7 @@ const { button, div, img, canvas, span } = van.tags;
 
 let throttle = false;
 const positivePrompt = van.state(true);
+const enableBackgroundRemover = van.state(true);
 const isMobileDevice = () => {
   return window.screen.width < 768;
 };
@@ -228,6 +230,23 @@ export async function autoSegment() {
   console.log("Done");
 }
 
+export function setRemoveBackgroundNode() {
+  const rmBgNodes = app.graph.findNodesByType(
+    "Image Rembg (Remove Background)"
+  );
+  if (!rmBgNodes?.length) {
+    alertDialog.val = {
+      text: "Remove background node not found. Please ensure the workflow is correct.",
+      time: 5000,
+    };
+    return;
+  }
+  rmBgNodes.forEach((node) => {
+    // node is bypassed if mode is 4
+    node.mode = enableBackgroundRemover.val ? 0 : 4;
+  });
+}
+
 export function updateImagePrompts() {
   if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
     imagePromptsMulti.val = {
@@ -411,6 +430,20 @@ export function LayerEditor() {
         onclick: () => (showSidebar.val = !showSidebar.val),
       },
       div(() => (showSidebar.val ? "Hide UI" : "Show UI"))
+    ),
+    button(
+      {
+        class: () =>
+          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-52 top-0 z-[200] w-fit",
+        onclick: () => {
+          enableBackgroundRemover.val = !enableBackgroundRemover.val;
+          setRemoveBackgroundNode();
+        },
+      },
+      () =>
+        enableBackgroundRemover.val
+          ? "Background Remover On"
+          : "Background Remover Off"
     ),
     button(
       {
