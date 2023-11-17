@@ -554,6 +554,7 @@ export function AvatarPreview() {
                 await navigator.clipboard.writeText(sharedAvatarLink.val);
                 alertDialog.val = {
                   text: "Avatar link copied to clipboard!",
+                  type: "success",
                   time: 5000,
                 };
               }
