@@ -495,7 +495,7 @@ export function AvatarPreview() {
       name: "avatech-viewer-iframe",
       allow: "cross-origin-isolated",
       class: () =>
-        "w-full h-full min-w-[300px] min-h-[400px] z-[100] pointer-events-auto flex border-none overflow-hidden" +
+        "w-full h-full min-w-[400px] min-h-[400px] z-[100] pointer-events-auto flex border-none overflow-hidden" +
         (showPreview.val ? "" : "hidden"),
       // src: "https://labs.avatech.ai/viewer/default",
       // src: "http://localhost:3000/viewer/default",
