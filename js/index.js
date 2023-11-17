@@ -24,7 +24,7 @@ import { api } from "./api.js";
 import { Container } from "./Container.js";
 import { initModel, loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
-import { autoSegment, drawSegment, getClicks } from "./LayerEditor.js";
+import { autoSegment, drawSegment, getClicks, segmented } from "./LayerEditor.js";
 import { infoDialog } from "./dialog.js";
 import { sharedAvatarLink } from "./AvatarPreview.js";
 
@@ -349,7 +349,7 @@ function showMyImageEditor(node) {
         );
         loadNpyTensor(embeedingUrl).then(async (tensor) => {
           embeddings.val = tensor;
-          if (enableAutoSegment.val) await autoSegment();
+          if (enableAutoSegment.val && !segmented.val) await autoSegment();
           drawSegment(getClicks());
         });
         targetNode.val = node;

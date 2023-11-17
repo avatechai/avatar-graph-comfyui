@@ -2292,10 +2292,6 @@ details.collapse summary::-webkit-details-marker{
   display: flex;
 }
 
-.grid{
-  display: grid;
-}
-
 .hidden{
   display: none;
 }
@@ -2362,8 +2358,8 @@ details.collapse summary::-webkit-details-marker{
   width: 100%;
 }
 
-.min-w-\[300px\]{
-  min-width: 300px;
+.min-w-\[400px\]{
+  min-width: 400px;
 }
 
 .max-w-\[100\%\]{
@@ -2386,10 +2382,6 @@ details.collapse summary::-webkit-details-marker{
 
 .resize-none{
   resize: none;
-}
-
-.grid-cols-2{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .flex-row{

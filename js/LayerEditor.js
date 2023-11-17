@@ -114,6 +114,8 @@ const layerMapping = {
   },
 };
 
+export const segmented = van.state(false);
+
 export async function autoSegment() {
   const image = document.getElementById("image");
   const landmarks = faceLandmarker.detect(image).faceLandmarks[0];
@@ -227,6 +229,7 @@ export async function autoSegment() {
     }
   });
   imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
+  segmented.val = true;
   console.log("Done");
 }
 

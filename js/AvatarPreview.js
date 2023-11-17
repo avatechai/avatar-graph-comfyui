@@ -15,7 +15,7 @@ const { button, iframe, div, img, input, label, span, textarea, ul, li } =
 import { app } from "./app.js";
 import { uploadPreview } from "./index.js";
 import { api } from "./api.js";
-import { uploadSegments } from "./LayerEditor.js";
+import { segmented, uploadSegments } from "./LayerEditor.js";
 import { initModel } from "./onnx.js";
 // import { uploadSegments } from "./LayerEditor.js";
 
@@ -283,6 +283,9 @@ export function AvatarPreview() {
               const image = img({
                 class: () => "z-[10] object-contain w-full h-[394px] border",
                 src: previewImg,
+                onload: () => {
+                  segmented.val = false;
+                }
               });
 
               if (isMobileDevice()) {
@@ -291,36 +294,18 @@ export function AvatarPreview() {
                 return previewImg.val === "" ? dnd : image;
               }
             },
-            div(
+            button(
               {
-                class: "grid grid-cols-2 gap-2 w-full",
+                class: () =>
+                  "btn w-full normal-case " +
+                  (stage.val < 1 ? "btn-disabled" : ""),
+                onclick: () => {
+                  enableAutoSegment.val = true;
+                  editSegment(stage)
+                },
               },
-              button(
-                {
-                  class: () =>
-                    "btn normal-case " +
-                    (stage.val < 1 ? "btn-disabled" : ""),
-                  onclick: () => {
-                    enableAutoSegment.val = false;
-                    editSegment(stage)
-                  },
-                },
-                div({ class: "badge badge-neutral" }, "2"),
-                "Edit Segment"
-              ),
-              button(
-                {
-                  class: () =>
-                    "btn normal-case " +
-                    (stage.val < 1 ? "btn-disabled" : ""),
-                  onclick: () => {
-                    enableAutoSegment.val = true;
-                    editSegment(stage)
-                  },
-                },
-                div({ class: "badge badge-neutral" }, "2"),
-                "Edit Segment (Auto)",
-              ),
+              div({ class: "badge badge-neutral" }, "2"),
+              "Edit Segment",
             ),
             button(
               {
@@ -436,35 +421,18 @@ export function AvatarPreview() {
                   ? span({ class: "loading loading-spinner loading-md" })
                   : "Make It Alive!",
             ),
-            div(
+            button(
               {
-                class: "grid grid-cols-2 gap-2 w-full"
+                class: () =>
+                  "btn w-full normal-case ",
+                onclick: () => {
+                  enableAutoSegment.val = false;
+                  editSegment(stage)
+                },
               },
-              button(
-                {
-                  class: () =>
-                    "btn normal-case ",
-                  onclick: () => {
-                    enableAutoSegment.val = false;
-                    editSegment(stage)
-                  },
-                },
-                div({ class: "badge badge-neutral" }, "2"),
-                "Edit Segment",
-              ),
-              button(
-                {
-                  class: () =>
-                    "btn normal-case ",
-                  onclick: () => {
-                    enableAutoSegment.val = true;
-                    editSegment(stage)
-                  },
-                },
-                div({ class: "badge badge-neutral" }, "2"),
-                "Edit Segment (Auto)",
-              ),
-            )
+              div({ class: "badge badge-neutral" }, "2"),
+              "Edit Segment",
+            ),
             // button(
             //   {
             //     class: "btn w-full normal-case",
