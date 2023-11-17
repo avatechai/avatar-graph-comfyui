@@ -30,6 +30,22 @@ const workflowList = [
   "SilverWolf_(Maid)",
 ];
 
+function editSegment(stage) {
+  /** @type {import('../../../web/types/litegraph.js').LGraph}*/
+  const graph = app.graph;
+  const imageNodes = graph.findNodesByType("LoadImage");
+  if (!imageNodes[0].imgs) return;
+
+  const nodes = graph.findNodesByType("SAM MultiLayer");
+
+  /** @type {any[]}*/
+  const widgets = nodes[0].widgets;
+  console.log(nodes[0]);
+  console.log(nodes[0].widgets);
+  widgets.find((x) => x.type == "button").callback();
+  stage.val = 2;
+}
+
 // const workflowList = ["Auto_segment_workflow"];
 /**
  * Load JSON workflow
@@ -207,230 +223,266 @@ export function AvatarPreview() {
         },
         !isGenerateFlow.val
           ? div(
-              {
-                class: () =>
-                  "flex flex-col justify-center items-center gap-4 w-full",
-              },
-              div(
-                { class: () => "w-full flex mt-2" },
-                button(
-                  {
-                    class: () => `btn w-full normal-case`,
-                    onclick: async () => {
-                      // previewImg.val = await uploadImage();
-                      // stage.val = 1;
-                      var input = document.createElement("input");
-                      input.type = "file";
-
-                      document.body.appendChild(input);
-
-                      // when the input content changes, do something
-                      input.onchange = async function (e) {
-                        stage.val = 1;
-                        if (Object.entries(e.target.files).length) {
-                          await uploadFile(e.target.files[0], true);
-                        }
-                        previewImg.val = URL.createObjectURL(e.target.files[0]);
-                        // upload files
-                        document.body.removeChild(input);
-                      };
-
-                      // Trigger file browser
-                      input.click();
-                    },
-                  },
-                  div({ class: "badge badge-neutral" }, "1"),
-                  div("Upload your image"),
-                  span({
-                    class: "iconify text-lg",
-                    "data-icon": "material-symbols:drive-folder-upload",
-                    "data-inline": "false",
-                  }),
-                  () =>
-                    previewImgLoading.val
-                      ? span({
-                          class: "loading loading-spinner loading-md",
-                        })
-                      : "",
-                ),
-              ),
-              () => {
-                const dnd = div(
-                  {
-                    id: "dnd",
-                    class: () =>
-                      "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center text-black",
-                  },
-                  "or drag and drop the image here",
-                );
-                const image = img({
-                  class: () => "z-[10] object-contain w-full h-[394px] border",
-                  src: previewImg,
-                });
-
-                if (isMobileDevice()) {
-                  return previewImg.val !== "" ? image : "";
-                } else {
-                  return previewImg.val === "" ? dnd : image;
-                }
-              },
+            {
+              class: () =>
+                "flex flex-col justify-center items-center gap-4 w-full",
+            },
+            div(
+              { class: () => "w-full flex mt-2" },
               button(
                 {
-                  class: () =>
-                    "btn w-full normal-case " +
-                    (stage.val < 1 ? "btn-disabled" : ""),
-                  onclick: () => {
-                    /** @type {import('../../../web/types/litegraph.js').LGraph}*/
-                    const graph = app.graph;
-                    const imageNodes = graph.findNodesByType("LoadImage");
-                    if (!imageNodes[0].imgs) return;
-
-                    const nodes = graph.findNodesByType("SAM MultiLayer");
-
-                    /** @type {any[]}*/
-                    const widgets = nodes[0].widgets;
-                    console.log(nodes[0]);
-                    console.log(nodes[0].widgets);
-                    widgets.find((x) => x.type == "button").callback();
-                    stage.val = 2;
-                  },
-                },
-                div({ class: "badge badge-neutral" }, "2"),
-                () => enableAutoSegment.val ? "Edit Segment (Auto)" : "Edit Segment",
-              ),
-              button(
-                {
-                  class: () =>
-                    "btn w-full normal-case " +
-                    (stage.val < 2 ? "btn-disabled" : ""),
+                  class: () => `btn w-full normal-case`,
                   onclick: async () => {
-                    // const uploaded = await uploadSegments();
-                    // if (!uploaded) return;
+                    // previewImg.val = await uploadImage();
+                    // stage.val = 1;
+                    var input = document.createElement("input");
+                    input.type = "file";
 
-                    const graph = app.graph;
-                    const imageNodes = graph.findNodesByType("LoadImage");
-                    if (!imageNodes[0].imgs) return;
-                    document.getElementById("queue-button").click();
-                  },
-                },
-                div({ class: "badge badge-neutral" }, "3"),
-                () =>
-                  loading.val
-                    ? span({
-                        class: "loading loading-spinner loading-md",
-                      })
-                    : "Make It Alive!",
-              ),
-            )
-          : div(
-              {
-                class:
-                  "flex flex-col justify-center items-center gap-4 w-full text-black",
-              },
-              div(
-                {
-                  class:
-                    "w-full mt-2 flex flex-col rounded-md left-0 top-0",
-                },
-                textarea({
-                  class:
-                    "textarea textarea-bordered border-gray-300 border-b-0 focus:outline-none resize-none rounded-t-md rounded-b-none text-md h-36",
-                  placeholder: "Enter your prompt",
-                  defaultValue:
-                    "1girl, looking at viewer, open mouth, simple background, white background, smile",
-                  id: "positivePromptProxy",
-                }),
-                div(
-                  {
-                    class:
-                      "flex flex-row gap-2 border border-gray-300 rounded-b-md text-md items-center",
-                  },
-                  span({ class: "ml-4" }, "Seed"),
-                  div({ class: "divider divider-horizontal m-0" }),
-                  input({
-                    type: "text",
-                    class: "input border-none focus:outline-none w-full p-0",
-                    placeholder: "Seed",
-                    defaultValue: "1234",
-                    id: "seedProxy",
-                  }),
-                  div(
-                    {
-                      onclick: () => {
-                        const random4Digits =
-                          Math.floor(Math.random() * 9000) + 1000;
-                        console.log(
-                          random4Digits,
-                          document.getElementById("seedProxy").value,
-                        );
-                        document.getElementById("seedProxy").value =
-                          random4Digits.toString();
-                      },
-                    },
-                    span({
-                      class: "iconify text-2xl mr-4 hover:cursor-pointer",
-                      "data-icon": "fad:random-1dice",
-                      "data-inline": "false",
-                    }),
-                  ),
-                ),
-              ),
-              button(
-                {
-                  class: "btn w-full normal-case ",
-                  onclick: async () => {
-                    loading.val = true;
+                    document.body.appendChild(input);
 
-                    updatePositivePrompt(
-                      app,
-                      document.getElementById("positivePromptProxy").value,
-                    );
-                    updateSeedValue(
-                      app,
-                      document.getElementById("seedProxy").value,
-                    );
+                    // when the input content changes, do something
+                    input.onchange = async function (e) {
+                      stage.val = 1;
+                      if (Object.entries(e.target.files).length) {
+                        await uploadFile(e.target.files[0], true);
+                      }
+                      previewImg.val = URL.createObjectURL(e.target.files[0]);
+                      // upload files
+                      document.body.removeChild(input);
+                    };
 
-                    const sam = app.graph.findNodesByType("SAM MultiLayer")[0];
-                    if (!sam) {
-                      alertDialog.val = {
-                        text: "Cannot find the SAM node. Please make sure the workflow is correct.",
-                        time: 5000,
-                      };
-                      return;
-                    }
-                    const ckpt = sam.widgets[0].value;
-                    const modelType = ckpt.match(/vit_[lbh]/)?.[0];
-                    await initModel(modelType);
-                    await uploadSegments();
-
-                    document.getElementById("queue-button").click();
+                    // Trigger file browser
+                    input.click();
                   },
                 },
                 div({ class: "badge badge-neutral" }, "1"),
+                div("Upload your image"),
+                span({
+                  class: "iconify text-lg",
+                  "data-icon": "material-symbols:drive-folder-upload",
+                  "data-inline": "false",
+                }),
                 () =>
-                  loading.val
-                    ? span({ class: "loading loading-spinner loading-md" })
-                    : "Make It Alive!",
+                  previewImgLoading.val
+                    ? span({
+                      class: "loading loading-spinner loading-md",
+                    })
+                    : "",
               ),
+            ),
+            () => {
+              const dnd = div(
+                {
+                  id: "dnd",
+                  class: () =>
+                    "h-96 w-full border-2 border-black border-dashed items-center rounded-lg flex justify-center text-black",
+                },
+                "or drag and drop the image here",
+              );
+              const image = img({
+                class: () => "z-[10] object-contain w-full h-[394px] border",
+                src: previewImg,
+              });
+
+              if (isMobileDevice()) {
+                return previewImg.val !== "" ? image : "";
+              } else {
+                return previewImg.val === "" ? dnd : image;
+              }
+            },
+            div(
+              {
+                class: "grid grid-cols-2 gap-2 w-full",
+              },
               button(
                 {
-                  class: "btn w-full normal-case",
+                  class: () =>
+                    "btn normal-case " +
+                    (stage.val < 1 ? "btn-disabled" : ""),
                   onclick: () => {
-                    /** @type {import('../../../web/types/litegraph.js').LGraph}*/
-                    const graph = app.graph;
-                    const nodes = graph.findNodesByType("SAM MultiLayer");
-
-                    /** @type {any[]}*/
-                    const widgets = nodes[0].widgets;
-                    console.log(nodes[0]);
-                    console.log(nodes[0].widgets);
-                    widgets.find((x) => x.type == "button").callback();
+                    enableAutoSegment.val = false;
+                    editSegment(stage)
                   },
                 },
                 div({ class: "badge badge-neutral" }, "2"),
-                "(Optional) Edit Segment",
+                "Edit Segment",
+              ),
+              button(
+                {
+                  class: () =>
+                    "btn normal-case " +
+                    (stage.val < 1 ? "btn-disabled" : ""),
+                  onclick: () => {
+                    enableAutoSegment.val = true;
+                    editSegment(stage)
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "2"),
+                "Edit Segment (Auto)",
               ),
             ),
+            button(
+              {
+                class: () =>
+                  "btn w-full normal-case " +
+                  (stage.val < 2 ? "btn-disabled" : ""),
+                onclick: async () => {
+                  // const uploaded = await uploadSegments();
+                  // if (!uploaded) return;
+
+                  const graph = app.graph;
+                  const imageNodes = graph.findNodesByType("LoadImage");
+                  if (!imageNodes[0].imgs) return;
+                  document.getElementById("queue-button").click();
+                },
+              },
+              div({ class: "badge badge-neutral" }, "3"),
+              () =>
+                loading.val
+                  ? span({
+                    class: "loading loading-spinner loading-md",
+                  })
+                  : "Make It Alive!",
+            ),
+          )
+          : div(
+            {
+              class:
+                "flex flex-col justify-center items-center gap-4 w-full text-black",
+            },
+            div(
+              {
+                class:
+                  "w-full mt-2 flex flex-col rounded-md left-0 top-0",
+              },
+              textarea({
+                class:
+                  "textarea textarea-bordered border-gray-300 border-b-0 focus:outline-none resize-none rounded-t-md rounded-b-none text-md h-36",
+                placeholder: "Enter your prompt",
+                defaultValue:
+                  "1girl, looking at viewer, open mouth, simple background, white background, smile",
+                id: "positivePromptProxy",
+              }),
+              div(
+                {
+                  class:
+                    "flex flex-row gap-2 border border-gray-300 rounded-b-md text-md items-center",
+                },
+                span({ class: "ml-4" }, "Seed"),
+                div({ class: "divider divider-horizontal m-0" }),
+                input({
+                  type: "text",
+                  class: "input border-none focus:outline-none w-full p-0",
+                  placeholder: "Seed",
+                  defaultValue: "1234",
+                  id: "seedProxy",
+                }),
+                div(
+                  {
+                    onclick: () => {
+                      const random4Digits =
+                        Math.floor(Math.random() * 9000) + 1000;
+                      console.log(
+                        random4Digits,
+                        document.getElementById("seedProxy").value,
+                      );
+                      document.getElementById("seedProxy").value =
+                        random4Digits.toString();
+                    },
+                  },
+                  span({
+                    class: "iconify text-2xl mr-4 hover:cursor-pointer",
+                    "data-icon": "fad:random-1dice",
+                    "data-inline": "false",
+                  }),
+                ),
+              ),
+            ),
+            button(
+              {
+                class: "btn w-full normal-case ",
+                onclick: async () => {
+                  loading.val = true;
+
+                  updatePositivePrompt(
+                    app,
+                    document.getElementById("positivePromptProxy").value,
+                  );
+                  updateSeedValue(
+                    app,
+                    document.getElementById("seedProxy").value,
+                  );
+
+                  const sam = app.graph.findNodesByType("SAM MultiLayer")[0];
+                  if (!sam) {
+                    alertDialog.val = {
+                      text: "Cannot find the SAM node. Please make sure the workflow is correct.",
+                      time: 5000,
+                    };
+                    return;
+                  }
+                  const ckpt = sam.widgets[0].value;
+                  const modelType = ckpt.match(/vit_[lbh]/)?.[0];
+                  await initModel(modelType);
+                  await uploadSegments();
+
+                  document.getElementById("queue-button").click();
+                },
+              },
+              div({ class: "badge badge-neutral" }, "1"),
+              () =>
+                loading.val
+                  ? span({ class: "loading loading-spinner loading-md" })
+                  : "Make It Alive!",
+            ),
+            div(
+              {
+                class: "grid grid-cols-2 gap-2 w-full"
+              },
+              button(
+                {
+                  class: () =>
+                    "btn normal-case ",
+                  onclick: () => {
+                    enableAutoSegment.val = false;
+                    editSegment(stage)
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "2"),
+                "Edit Segment",
+              ),
+              button(
+                {
+                  class: () =>
+                    "btn normal-case ",
+                  onclick: () => {
+                    enableAutoSegment.val = true;
+                    editSegment(stage)
+                  },
+                },
+                div({ class: "badge badge-neutral" }, "2"),
+                "Edit Segment (Auto)",
+              ),
+            )
+            // button(
+            //   {
+            //     class: "btn w-full normal-case",
+            //     onclick: () => {
+            //       /** @type {import('../../../web/types/litegraph.js').LGraph}*/
+            //       const graph = app.graph;
+            //       const nodes = graph.findNodesByType("SAM MultiLayer");
+
+            //       /** @type {any[]}*/
+            //       const widgets = nodes[0].widgets;
+            //       console.log(nodes[0]);
+            //       console.log(nodes[0].widgets);
+            //       widgets.find((x) => x.type == "button").callback();
+            //     },
+            //   },
+            //   div({ class: "badge badge-neutral" }, "2"),
+            //   "(Optional) Edit Segment",
+            // ),
+          ),
       ),
     );
   };
@@ -500,8 +552,8 @@ export function AvatarPreview() {
           () =>
             shareLoading.val
               ? span({
-                  class: "loading loading-spinner loading-md",
-                })
+                class: "loading loading-spinner loading-md",
+              })
               : "Get Avatar Link",
         ),
       ),
