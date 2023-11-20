@@ -15,6 +15,7 @@ import {
   embeddings,
   embeddingID,
   alertDialog,
+  allImagePrompts,
 } from "./state.js";
 import { van } from "./van.js";
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
@@ -410,6 +411,15 @@ export function LayerEditor() {
           console.log("close");
           showImageEditor.val = false;
           await uploadSegments();
+
+          // allImagePrompts.val = [
+          //   ...allImagePrompts.val,
+          //   {
+          //     version: "v" + allImagePrompts.val.length,
+          //     prompt: imagePromptsMulti.val,
+          //   },
+          // ];
+
           // api.fetchApi("/segments_order", {
           //   method: "POST",
           //   body: JSON.stringify({
@@ -461,7 +471,7 @@ export function LayerEditor() {
     div(
       {
         class:
-          "hidden w-full flex justify-center absolute top-0 left-0 right-0 items-center",
+          "hidden w-full justify-center absolute top-0 left-0 right-0 items-center",
       },
       button(
         {

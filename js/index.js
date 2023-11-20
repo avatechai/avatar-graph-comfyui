@@ -27,6 +27,7 @@ import "https://code.iconify.design/3/3.1.0/iconify.min.js";
 import { autoSegment, drawSegment, getClicks, segmented } from "./LayerEditor.js";
 import { infoDialog } from "./dialog.js";
 import { sharedAvatarLink } from "./AvatarPreview.js";
+import { updateImagePrompts } from './LayerEditor.js';
 
 export const generatedImages = {};
 
@@ -351,6 +352,7 @@ function showMyImageEditor(node) {
           embeddings.val = tensor;
           if (enableAutoSegment.val && !segmented.val) await autoSegment();
           drawSegment(getClicks());
+          updateImagePrompts()
         });
         targetNode.val = node;
       })

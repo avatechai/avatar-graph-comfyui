@@ -20,6 +20,7 @@ import { initModel } from "./onnx.js";
 // import { uploadSegments } from "./LayerEditor.js";
 
 const workflowList = [
+  "idle_avatar_(trigger)",
   "Auto_segment_workflow",
   "BronyaZaychik_(ChinaDress)",
   "BronyaZaychik_(Default_Silverwing)",
@@ -28,6 +29,7 @@ const workflowList = [
   "BronyaZaychikLora_withhand",
   "SilverWolf_(Default)",
   "SilverWolf_(Maid)",
+  "SilverWolfLora_withhand",
 ];
 
 function editSegment(stage) {
