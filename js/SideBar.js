@@ -257,34 +257,37 @@ export function SideBar() {
           )
         )
     ),
-    // div(
-    //   {
-    //     class:
-    //       "ml-2 z-100 w-fit flex-col flex justify-center absolute top-0 right-0 bottom-0 items-start gap-2 bg-transparent",
-    //   },
-    //   () => {
-    //     return ul(
-    //       {
-    //         class: "menu bg-base-200 w-56 rounded-box text-base-content ",
-    //       },
-    //       ...allImagePrompts.val.map((e) =>
-    //         button(
-    //           {
-    //             class:
-    //               "normal-case text-start flex items-center justify-center",
-    //             onclick: async () => {
-    //               imagePromptsMulti.val = e.prompt;
-    //               imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
-    //               drawSegment(getClicks());
-    //               updateImagePrompts()
-    //             },
-    //           },
-    //           e.version
-    //         )
-    //       )
-    //     );
-    //   }
-    // )
+    div(
+      {
+        class:
+          "ml-2 z-100 w-fit flex-col flex justify-center absolute top-0 right-0 bottom-0 items-start gap-2 bg-transparent",
+      },
+      () => {
+        return ul(
+          {
+            class: "menu bg-base-200 w-56 rounded-box text-base-content ",
+          },
+          span("Segment History"),
+          ...allImagePrompts.val.map((e) =>
+            li(
+              a(
+                {
+                  class:
+                    "normal-case text-start flex items-center justify-between",
+                  onclick: async () => {
+                    imagePromptsMulti.val = e.prompt;
+                    imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
+                    drawSegment(getClicks());
+                    updateImagePrompts();
+                  },
+                },
+                e.version
+              )
+            )
+          )
+        );
+      }
+    )
   );
 }
 

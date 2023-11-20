@@ -412,13 +412,18 @@ export function LayerEditor() {
           showImageEditor.val = false;
           await uploadSegments();
 
-          // allImagePrompts.val = [
-          //   ...allImagePrompts.val,
-          //   {
-          //     version: "v" + allImagePrompts.val.length,
-          //     prompt: imagePromptsMulti.val,
-          //   },
-          // ];
+          const isEqual = allImagePrompts.val.map(
+            (x) =>
+              JSON.stringify(imagePromptsMulti.val) === JSON.stringify(x.prompt)
+          );
+          if (!isEqual.includes(true))
+            allImagePrompts.val = [
+              ...allImagePrompts.val,
+              {
+                version: "v" + allImagePrompts.val.length,
+                prompt: imagePromptsMulti.val,
+              },
+            ];
 
           // api.fetchApi("/segments_order", {
           //   method: "POST",
