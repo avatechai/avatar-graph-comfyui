@@ -20,7 +20,7 @@ import {
 } from "./state.js";
 import { van } from "./van.js";
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
-const { FaceLandmarker, FilesetResolver } = vision;
+const { PoseLandmarker, FaceLandmarker, FilesetResolver } = vision;
 const { button, div, img, canvas, span } = van.tags;
 
 let throttle = false;
@@ -39,9 +39,17 @@ const faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
     modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
     delegate: "GPU",
   },
-  outputFaceBlendshapes: true,
+  // outputFaceBlendshapes: true,
   runningMode: "IMAGE",
   numFaces: 1,
+});
+const poseLandmarker = await PoseLandmarker.createFromOptions(filesetResolver, {
+  baseOptions: {
+    modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task`,
+    delegate: "GPU",
+  },
+  runningMode: "IMAGE",
+  numPoses: 1,
 });
 const layerMapping = {
   L_eye: {
@@ -121,6 +129,7 @@ export const segmented = van.state(false);
 export async function autoSegment() {
   const image = document.getElementById("image");
   const landmarks = faceLandmarker.detect(image).faceLandmarks[0];
+
   Object.entries(layerMapping).forEach(([key, value]) => {
     imagePromptsMulti.val[key] = [];
   });
@@ -238,6 +247,12 @@ export async function autoSegment() {
       boxesMulti.val[key] = box;
     }
   });
+  const poseLandmarks = poseLandmarker.detect(image).landmarks[0];
+  const breathX =
+    ((poseLandmarks[11].x + poseLandmarks[12].x) / 2) * imageSize.val.width;
+  const breathY =
+    ((poseLandmarks[11].y + poseLandmarks[12].y) / 2) * imageSize.val.height;
+  imagePromptsMulti.val["breath"] = [{ x: breathX, y: breathY, label: 1 }];
   imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
   segmented.val = true;
   console.log("Done");
