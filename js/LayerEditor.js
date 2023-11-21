@@ -71,7 +71,7 @@ const layerMapping = {
     negativeOffsetX: 0,
     negativeOffsetY: 0,
     positiveScale: -0.2,
-    negativeScale: 1.0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
   },
   R_iris: {
@@ -81,7 +81,7 @@ const layerMapping = {
     negativeOffsetX: 0,
     negativeOffsetY: 0,
     positiveScale: -0.2,
-    negativeScale: 1.0,
+    negativeScale: 0.5,
     indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
   },
   face: {
@@ -230,10 +230,10 @@ export async function autoSegment() {
       ];
       // Find bounding box of positive points
       const box = {
-        x1: Math.min(...negativePoints.map((x) => x.x)) - 10,
-        y1: Math.min(...negativePoints.map((x) => x.y)) - 10,
-        x2: Math.max(...negativePoints.map((x) => x.x)) + 10,
-        y2: Math.max(...negativePoints.map((x) => x.y)) + 10,
+        x1: Math.min(...negativePoints.map((x) => x.x)),
+        y1: Math.min(...negativePoints.map((x) => x.y)),
+        x2: Math.max(...negativePoints.map((x) => x.x)),
+        y2: Math.max(...negativePoints.map((x) => x.y)),
       };
       boxesMulti.val[key] = box;
     }
