@@ -109,7 +109,7 @@ const layerMapping = {
     negativeOffsetX: 0,
     negativeOffsetY: 0,
     positiveScale: 0,
-    negativeScale: 0.5,
+    negativeScale: 0,
     indices: FaceLandmarker.FACE_LANDMARKS_LIPS,
   },
   mouth_in: {
@@ -119,7 +119,7 @@ const layerMapping = {
     negativeOffsetX: 0,
     negativeOffsetY: 0,
     positiveScale: 0,
-    negativeScale: 0.5,
+    negativeScale: 0,
     indices: FaceLandmarker.FACE_LANDMARKS_LIPS,
   },
 };
@@ -198,21 +198,25 @@ export async function autoSegment() {
           directionVector.x * directionVector.x +
             directionVector.y * directionVector.y
         );
-        const negativePointDistance =
-          value.negativeScale * directionVectorLength;
-        const negativePoint = {
-          x:
-            startX -
-            (negativePointDistance * directionVector.x) /
-              directionVectorLength -
-            value.negativeOffsetX,
-          y:
-            startY -
-            (negativePointDistance * directionVector.y) /
-              directionVectorLength -
-            value.negativeOffsetY,
-          label: 0,
-        };
+
+        if (value.negativeScale !== 0) {
+          const negativePointDistance =
+            value.negativeScale * directionVectorLength;
+          const negativePoint = {
+            x:
+              startX -
+              (negativePointDistance * directionVector.x) /
+                directionVectorLength -
+              value.negativeOffsetX,
+            y:
+              startY -
+              (negativePointDistance * directionVector.y) /
+                directionVectorLength -
+              value.negativeOffsetY,
+            label: 0,
+          };
+          negativePoints.push(negativePoint);
+        }
 
         const positivePointDistance =
           value.positiveScale * directionVectorLength;
@@ -229,24 +233,25 @@ export async function autoSegment() {
             value.positiveOffsetY,
           label: 1,
         };
-
-        negativePoints.push(negativePoint);
       }
       imagePromptsMulti.val[key] = [
         ...imagePromptsMulti.val[key],
         ...positivePoints,
         ...negativePoints,
       ];
-      // Find bounding box of positive points
-      const box = {
-        x1: Math.min(...negativePoints.map((x) => x.x)),
-        y1: Math.min(...negativePoints.map((x) => x.y)),
-        x2: Math.max(...negativePoints.map((x) => x.x)),
-        y2: Math.max(...negativePoints.map((x) => x.y)),
-      };
-      boxesMulti.val[key] = box;
     }
+
+    // Find bounding box of positive/negative points
+    const points = negativePoints.length > 0 ? negativePoints : positivePoints;
+    const box = {
+      x1: Math.min(...points.map((x) => x.x)),
+      y1: Math.min(...points.map((x) => x.y)),
+      x2: Math.max(...points.map((x) => x.x)),
+      y2: Math.max(...points.map((x) => x.y)),
+    };
+    boxesMulti.val[key] = box;
   });
+
   const poseLandmarks = poseLandmarker.detect(image).landmarks[0];
   const breathX =
     ((poseLandmarks[11].x + poseLandmarks[12].x) / 2) * imageSize.val.width;
