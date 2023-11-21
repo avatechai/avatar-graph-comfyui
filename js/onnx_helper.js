@@ -30,13 +30,13 @@ const modelData = ({ clicks, tensor, modelScale, box }) => {
     }
 
     if (box) {
-      pointCoords[2 * n] = box.x1;
-      pointCoords[2 * n + 1] = box.y1;
+      pointCoords[2 * n] = box.x1 * modelScale.samScale;
+      pointCoords[2 * n + 1] = box.y1 * modelScale.samScale;
       pointLabels[n] = 2;
 
-      pointCoords[2 * n + 2] = box.x2;
-      pointCoords[2 * n + 3] = box.y2;
-      pointLabels[n] = 3;
+      pointCoords[2 * n + 2] = box.x2 * modelScale.samScale;
+      pointCoords[2 * n + 3] = box.y2 * modelScale.samScale;
+      pointLabels[n + 1] = 3;
     } else {
       // Add in the extra point/label when only clicks and no box
       // The extra point is at (0, 0) with label -1
