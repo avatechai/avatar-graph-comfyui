@@ -10,6 +10,12 @@
  * @property {number} x - The x coordinate
  * @property {number} y - The y coordinate
  * @property {>} label - The label
+ *
+ * @typedef {Object} Box
+ * @property {number} x1
+ * @property {number} y1
+ * @property {number} x2
+ * @property {number} y2
  */
 
 import { van } from "./van.js";
@@ -18,13 +24,15 @@ export const iframeSrc = van.state("https://editor.avatech.ai?comfyui=true");
 export const showEditor = van.state(false);
 // localStorage.getItem("showPreview") == 'true'
 export const showPreview = van.state(true);
-export const previewUrl = van.state("https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=400&height=400&hideTrigger=true&voiceSelection=true&hideUI=true");
+export const previewUrl = van.state(
+  "https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=400&height=400&hideTrigger=true&voiceSelection=true&hideUI=true"
+);
 export const previewImg = van.state("");
 export const previewImgLoading = van.state(false);
 export const enableAutoSegment = van.state(false);
 // export const previewUrl = van.state("http://localhost:3006/viewer?avatarId=default&hideUI=true&debug=true&width=300&height=300&showAudioControl=true");
 export const isDirty = van.state(false);
-export const fileName = van.state('');
+export const fileName = van.state("");
 export const showImageEditor = van.state(false);
 export const showLoading = van.state(false);
 export const alertDialog = van.state({
@@ -32,9 +40,9 @@ export const alertDialog = van.state({
   time: 0,
 });
 export const shareLoading = van.state(false);
-export const previewModelId = van.state('');
+export const previewModelId = van.state("");
 
-export const isGenerateFlow = van.state(false)
+export const isGenerateFlow = van.state(false);
 
 export const loadingCaption = van.state("");
 export const imageUrl = van.state("");
@@ -43,6 +51,12 @@ export const imageContainerSize = van.state({
   width: 0,
   height: 0,
 });
+
+/** @type {State<Box>} */
+export const boxes = van.state();
+
+/** @type {State<Record<string, Box>>} */
+export const boxesMulti = van.state({});
 
 /** @type {State<Point[]>} */
 export const imagePrompts = van.state([]);

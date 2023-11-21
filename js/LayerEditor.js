@@ -16,6 +16,7 @@ import {
   embeddingID,
   alertDialog,
   allImagePrompts,
+  boxesMulti,
 } from "./state.js";
 import { van } from "./van.js";
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
@@ -227,6 +228,14 @@ export async function autoSegment() {
         ...positivePoints,
         ...negativePoints,
       ];
+      // Find bounding box of positive points
+      const box = {
+        x1: Math.min(...negativePoints.map((x) => x.x)),
+        y1: Math.min(...negativePoints.map((x) => x.y)),
+        x2: Math.max(...negativePoints.map((x) => x.x)),
+        y2: Math.max(...negativePoints.map((x) => x.y)),
+      };
+      boxesMulti.val[key] = box;
     }
   });
   imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
@@ -374,7 +383,11 @@ export async function drawSegment(clicks) {
     return;
   }
   if (embeddings.val) {
-    const mask = await runONNX(clicks, embeddings.val);
+    const mask = await runONNX(
+      clicks,
+      embeddings.val,
+      boxesMulti.val[selectedLayer.val]
+    );
     if (mask) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(mask, 0, 0);

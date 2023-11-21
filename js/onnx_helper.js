@@ -4,7 +4,7 @@
 // This source code is licensed under the license found in the
 // LICENSE file in the root directory of this source tree.
 
-const modelData = ({ clicks, tensor, modelScale }) => {
+const modelData = ({ clicks, tensor, modelScale, box }) => {
   const imageEmbedding = tensor;
   let pointCoords;
   let pointLabels;
@@ -18,8 +18,9 @@ const modelData = ({ clicks, tensor, modelScale }) => {
     // If there is no box input, a single padding point with
     // label -1 and coordinates (0.0, 0.0) should be concatenated
     // so initialize the array to support (n + 1) points.
-    pointCoords = new Float32Array(2 * (n + 1));
-    pointLabels = new Float32Array(n + 1);
+    const numPoints = box ? n + 3 : n + 1;
+    pointCoords = new Float32Array(2 * numPoints);
+    pointLabels = new Float32Array(numPoints);
 
     // Add clicks and scale to what SAM expects
     for (let i = 0; i < n; i++) {
@@ -28,15 +29,25 @@ const modelData = ({ clicks, tensor, modelScale }) => {
       pointLabels[i] = clicks[i].clickType;
     }
 
-    // Add in the extra point/label when only clicks and no box
-    // The extra point is at (0, 0) with label -1
-    pointCoords[2 * n] = 0.0;
-    pointCoords[2 * n + 1] = 0.0;
-    pointLabels[n] = -1.0;
+    if (box) {
+      pointCoords[2 * n] = box.x1;
+      pointCoords[2 * n + 1] = box.y1;
+      pointLabels[n] = 2;
+
+      pointCoords[2 * n + 2] = box.x2;
+      pointCoords[2 * n + 3] = box.y2;
+      pointLabels[n] = 3;
+    } else {
+      // Add in the extra point/label when only clicks and no box
+      // The extra point is at (0, 0) with label -1
+      pointCoords[2 * n] = 0.0;
+      pointCoords[2 * n + 1] = 0.0;
+      pointLabels[n] = -1.0;
+    }
 
     // Create the tensor
-    pointCoordsTensor = new ort.Tensor("float32", pointCoords, [1, n + 1, 2]);
-    pointLabelsTensor = new ort.Tensor("float32", pointLabels, [1, n + 1]);
+    pointCoordsTensor = new ort.Tensor("float32", pointCoords, [1, numPoints, 2]);
+    pointLabelsTensor = new ort.Tensor("float32", pointLabels, [1, numPoints]);
   }
   const imageSizeTensor = new ort.Tensor("float32", [
     modelScale.height,

@@ -27,7 +27,7 @@ export const loadNpyTensor = async (tensorFile, dType = "float32") => {
   return tensor;
 };
 
-export const runONNX = async (clicks, tensor) => {
+export const runONNX = async (clicks, tensor, box) => {
   // console.log('tensor', tensor);
   try {
     if (
@@ -44,6 +44,7 @@ export const runONNX = async (clicks, tensor) => {
         clicks,
         tensor,
         modelScale: imageSize.val,
+        box,
       });
       if (feeds === undefined) return;
       // Run the SAM ONNX model with the feeds returned from modelData()
