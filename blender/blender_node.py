@@ -100,14 +100,14 @@ class ObjectOps:
         import global_bpy
         bpy = global_bpy.get_bpy()
 
-        if props.get("BPY_OBJ") != None:
+        if props.get("BPY_OBJ") is not None:
             bpy.context.view_layer.objects.active = props["BPY_OBJ"]
 
         results = self.blender_process(bpy, **props)
 
         if results is None:
             # print(results)
-            if props.get("BPY_OBJ") != None:
+            if props.get("BPY_OBJ") is not None:
                 return (props["BPY_OBJ"], )
             else:
                 return (bpy.context.view_layer.objects.active, )
