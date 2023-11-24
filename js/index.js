@@ -321,7 +321,7 @@ function showMyImageEditor(node) {
           isGeneratedImage,
           embedding_id: id,
           ckpt,
-          remote: true,
+          // remote: true,
         }),
       })
       .then(() => {

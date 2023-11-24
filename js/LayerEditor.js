@@ -325,10 +325,15 @@ export async function uploadSegments() {
 
   const segments = {};
   for (const [layer, prompts] of Object.entries(imagePromptsMulti.val)) {
-    await drawSegment(getClicks(prompts));
+    await drawSegment(getClicks(prompts), layer, false);
     const canvas = document.getElementById("mask-canvas");
     const base64Image = canvas.toDataURL();
     segments[layer] = base64Image;
+    // download image
+    // const a = document.createElement("a");
+    // a.href = base64Image;
+    // a.download = layer + ".png";
+    // a.click();
   }
   await api.fetchApi("/segments", {
     method: "POST",
@@ -395,7 +400,7 @@ export function getClicks(prompts) {
   }));
 }
 
-export async function drawSegment(clicks) {
+export async function drawSegment(clicks, layer, withBox = true) {
   const canvas = document.getElementById("mask-canvas");
   const ctx = canvas.getContext("2d");
   if (clicks.length === 0) {
@@ -403,12 +408,12 @@ export async function drawSegment(clicks) {
     return;
   }
   if (embeddings.val) {
-    const box = boxesMulti.val[selectedLayer.val];
+    const box = boxesMulti.val[layer || selectedLayer.val];
     const mask = await runONNX(clicks, embeddings.val, box);
     if (mask) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(mask, 0, 0);
-      if (box) {
+      if (box && withBox) {
         ctx.strokeStyle = "green";
         ctx.lineWidth = 5;
         ctx.strokeRect(box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1);
