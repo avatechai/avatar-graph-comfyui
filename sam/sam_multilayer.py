@@ -124,7 +124,7 @@ class SAMMultiLayer:
         sam = sam_model_registry[model_type](checkpoint=ckpt)  # .to("cuda")
         global_predictor = SamPredictor(sam)
 
-        model_path = "/home/avatech/Desktop/projects/ComfyUI/custom_nodes/avatar-graph-comfyui/sam/face_landmarker.task"
+        model_path = os.path.join(os.path.dirname(__file__), "../mediapipe_models/face_landmarker.task")
         options = FaceLandmarkerOptions(
             base_options=BaseOptions(model_asset_path=model_path),
             running_mode=VisionRunningMode.IMAGE,
@@ -217,12 +217,14 @@ class SAMMultiLayer:
                 imagePromptsMulti[key] = positivePoints + negativePoints
 
             points = negativePoints if len(negativePoints) > 0 else positivePoints
-            box = np.array([
-                min(x["x"] for x in points),
-                min(x["y"] for x in points),
-                max(x["x"] for x in points),
-                max(x["y"] for x in points),
-            ])
+            box = np.array(
+                [
+                    min(x["x"] for x in points),
+                    min(x["y"] for x in points),
+                    max(x["x"] for x in points),
+                    max(x["y"] for x in points),
+                ]
+            )
             boxesMulti[key] = box
 
         return imagePromptsMulti, boxesMulti
@@ -294,9 +296,7 @@ class SAMMultiLayer:
                     global_predictor.is_image_set = True
                     global_predictor.original_size = data["original_size"]
 
-            imagePromptsMulti, boxesMulti = self.detect_face(
-                image[0].numpy().astype(np.float32)
-            )
+            imagePromptsMulti, boxesMulti = self.detect_face(image[0].numpy())
 
             image_prompts = json.loads(image_prompts_json)
             result = [image_prompts]
