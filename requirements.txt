@@ -7,4 +7,5 @@ bpy
 segment-anything
 tqdm
 python-dotenv
+mediapipe
 # -e git+https://github.com/facebookresearch/segment-anything.git#egg=segment_anything
