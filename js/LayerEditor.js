@@ -17,6 +17,7 @@ import {
   alertDialog,
   allImagePrompts,
   boxesMulti,
+  enableAutoSegment,
 } from "./state.js";
 import { van } from "./van.js";
 import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
@@ -151,7 +152,7 @@ export async function autoSegment() {
       // const endY = endPoint.y * imageSize.val.height;
 
       if (middlePoints.length === 0) {
-        middlePoints.push({ x: startX, y: startY, label: 1 });
+        middlePoints.push({ x: startX, y: startY, label: 1, isAuto: true });
         // middlePoints.push({ x: endX, y: endY, label: 1 });
       } else {
         middlePoints[0].x += startX;
@@ -159,7 +160,7 @@ export async function autoSegment() {
         // middlePoints[1].x += endX;
         // middlePoints[1].y += endY;
       }
-      positivePoints.push({ x: startX, y: startY, label: 1 });
+      positivePoints.push({ x: startX, y: startY, label: 1, isAuto: true });
       // positivePoints.push({ x: endX, y: endY, label: 1 });
 
       // imagePrompts.val = [...imagePrompts.val, { x, y, label: 1 }];
@@ -214,6 +215,7 @@ export async function autoSegment() {
                 directionVectorLength -
               value.negativeOffsetY,
             label: 0,
+            isAuto: true,
           };
           negativePoints.push(negativePoint);
         }
@@ -232,6 +234,7 @@ export async function autoSegment() {
               directionVectorLength -
             value.positiveOffsetY,
           label: 1,
+          isAuto: true,
         };
       }
       imagePromptsMulti.val[key] = [
@@ -257,7 +260,9 @@ export async function autoSegment() {
     ((poseLandmarks[11].x + poseLandmarks[12].x) / 2) * imageSize.val.width;
   const breathY =
     ((poseLandmarks[11].y + poseLandmarks[12].y) / 2) * imageSize.val.height;
-  imagePromptsMulti.val["breath"] = [{ x: breathX, y: breathY, label: 1 }];
+  imagePromptsMulti.val["breath"] = [
+    { x: breathX, y: breathY, label: 1, isAuto: true },
+  ];
   imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
   segmented.val = true;
   console.log("Done");
@@ -397,10 +402,11 @@ export function getClicks(prompts) {
     x: point.x,
     y: point.y,
     clickType: point.label,
+    isAuto: point.isAuto,
   }));
 }
 
-export async function drawSegment(clicks, layer, withBox = true) {
+export async function drawSegment(clicks, layer, drawBox = true) {
   const canvas = document.getElementById("mask-canvas");
   const ctx = canvas.getContext("2d");
   if (clicks.length === 0) {
@@ -408,12 +414,21 @@ export async function drawSegment(clicks, layer, withBox = true) {
     return;
   }
   if (embeddings.val) {
-    const box = boxesMulti.val[layer || selectedLayer.val];
-    const mask = await runONNX(clicks, embeddings.val, box);
+    const box = enableAutoSegment.val
+      ? boxesMulti.val[layer || selectedLayer.val]
+      : null;
+    const filteredClicks = enableAutoSegment.val
+      ? clicks
+      : clicks.filter((click) => !click.isAuto);
+    if (filteredClicks.length === 0) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    const mask = await runONNX(filteredClicks, embeddings.val, box);
     if (mask) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(mask, 0, 0);
-      if (box && withBox) {
+      if (box && drawBox) {
         ctx.strokeStyle = "green";
         ctx.lineWidth = 5;
         ctx.strokeRect(box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1);
@@ -443,75 +458,89 @@ export function LayerEditor() {
         "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto z-[1000] " +
         (showImageEditor.val ? "" : "hidden"),
     },
-    button(
+    div(
       {
-        class: () =>
-          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-2 top-0 z-[200] w-fit",
-        onclick: async () => {
-          console.log("close");
-          showImageEditor.val = false;
-          await uploadSegments();
+        class:
+          "absolute top-4 left-4 right-0 flex w-full gap-2 justify-start z-[200]",
+      },
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: async () => {
+            console.log("close");
+            showImageEditor.val = false;
+            await uploadSegments();
 
-          const isEqual = allImagePrompts.val.map(
-            (x) =>
-              JSON.stringify(imagePromptsMulti.val) === JSON.stringify(x.prompt)
-          );
-          if (!isEqual.includes(true))
-            allImagePrompts.val = [
-              ...allImagePrompts.val,
-              {
-                version: "v" + allImagePrompts.val.length,
-                prompt: imagePromptsMulti.val,
-              },
-            ];
+            const isEqual = allImagePrompts.val.map(
+              (x) =>
+                JSON.stringify(imagePromptsMulti.val) ===
+                JSON.stringify(x.prompt)
+            );
+            if (!isEqual.includes(true))
+              allImagePrompts.val = [
+                ...allImagePrompts.val,
+                {
+                  version: "v" + allImagePrompts.val.length,
+                  prompt: imagePromptsMulti.val,
+                },
+              ];
 
-          // api.fetchApi("/segments_order", {
-          //   method: "POST",
-          //   body: JSON.stringify({
-          //     name: embeddingID.val,
-          //     order: Object.keys(imagePromptsMulti.val),
-          //   }),
-          // });
+            // api.fetchApi("/segments_order", {
+            //   method: "POST",
+            //   body: JSON.stringify({
+            //     name: embeddingID.val,
+            //     order: Object.keys(imagePromptsMulti.val),
+            //   }),
+            // });
+          },
         },
-      },
-      span({
-        class: "iconify text-lg",
-        "data-icon": "ic:baseline-arrow-back",
-        "data-inline": "false",
-      }),
-      div("Back")
-    ),
-    button(
-      {
-        class: () =>
-          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-28 top-0 z-[200] w-fit",
-        onclick: () => (showSidebar.val = !showSidebar.val),
-      },
-      div(() => (showSidebar.val ? "Hide UI" : "Show UI"))
-    ),
-    button(
-      {
-        class: () =>
-          "btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-52 top-0 z-[200] w-fit",
-        onclick: () => {
-          enableBackgroundRemover.val = !enableBackgroundRemover.val;
-          setRemoveBackgroundNode();
+        span({
+          class: "iconify text-lg",
+          "data-icon": "ic:baseline-arrow-back",
+          "data-inline": "false",
+        }),
+        div("Back")
+      ),
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: () => (showSidebar.val = !showSidebar.val),
         },
-      },
-      () =>
-        enableBackgroundRemover.val
-          ? "Background Remover On"
-          : "Background Remover Off"
-    ),
-    button(
-      {
-        class: () =>
-          `btn btn-neutral flex flex-row normal-case absolute mt-4 rounded-md left-52 top-0 z-[200] w-fit ${
-            isMobileDevice() ? "" : "hidden"
-          }`,
-        onclick: () => (positivePrompt.val = !positivePrompt.val),
-      },
-      div(() => (positivePrompt.val ? "Positive" : "Negative"))
+        div(() => (showSidebar.val ? "Hide UI" : "Show UI"))
+      ),
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: () => {
+            enableAutoSegment.val = !enableAutoSegment.val;
+            drawSegment(getClicks());
+          },
+        },
+        () => (enableAutoSegment.val ? "Auto Segment On" : "Auto Segment Off")
+      ),
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: () => {
+            enableBackgroundRemover.val = !enableBackgroundRemover.val;
+            setRemoveBackgroundNode();
+          },
+        },
+        () =>
+          enableBackgroundRemover.val
+            ? "Background Remover On"
+            : "Background Remover Off"
+      ),
+      button(
+        {
+          class: () =>
+            `btn btn-neutral flex flex-row normal-case rounded-md ${
+              isMobileDevice() ? "" : "hidden"
+            }`,
+          onclick: () => (positivePrompt.val = !positivePrompt.val),
+        },
+        div(() => (positivePrompt.val ? "Positive" : "Negative"))
+      )
     ),
     div(
       {
@@ -617,7 +646,10 @@ export function LayerEditor() {
             style: () =>
               `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
           },
-          ...imagePrompts.val?.map((point) => {
+          ...(enableAutoSegment.val
+            ? imagePrompts.val
+            : imagePrompts.val?.filter((click) => !click.isAuto)
+          ).map((point) => {
             return button({
               style: () =>
                 `left: ${

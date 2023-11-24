@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
 
 /*
-! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -501,7 +501,7 @@ html{
 :root{
   color-scheme: light;
   --in: 0.7206 0.191 231.6;
-  --su: 64.8% 0.150 160;
+  --su: 0.7441 0.213 164.75;
   --wa: 0.8471 0.199 83.87;
   --er: 0.7176 0.221 22.18;
   --pc: 0.89824 0.06192 275.75;
@@ -870,7 +870,8 @@ html{
   flex-grow: 1;
   --tw-content: '';
   content: var(--tw-content);
-  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
 }
 
 .dropdown{
@@ -1151,8 +1152,10 @@ html{
 .menu :where(li ul){
   position: relative;
   white-space: nowrap;
-  margin-inline-start: 1rem;
-  padding-inline-start: 0.5rem;
+  -webkit-margin-start: 1rem;
+          margin-inline-start: 1rem;
+  -webkit-padding-start: 0.5rem;
+          padding-inline-start: 0.5rem;
 }
 
 .menu :where(li:not(.menu-title) > *:not(ul):not(details):not(.menu-title)),
@@ -1482,7 +1485,8 @@ details.collapse summary::-webkit-details-marker{
 :where(.collapse > input[type="radio"]){
   width: 100%;
   padding: 1rem;
-  padding-inline-end: 3rem;
+  -webkit-padding-end: 3rem;
+          padding-inline-end: 3rem;
   min-height: 3.75rem;
   transition: background-color 0.2s ease-out;
 }
@@ -1576,7 +1580,8 @@ details.collapse summary::-webkit-details-marker{
 .join > :where(*:not(:first-child)){
   margin-top: 0px;
   margin-bottom: 0px;
-  margin-inline-start: -1px;
+  -webkit-margin-start: -1px;
+          margin-inline-start: -1px;
 }
 
 .link:focus{
@@ -2078,7 +2083,8 @@ details.collapse summary::-webkit-details-marker{
 .join.join-horizontal > :where(*:not(:first-child)){
   margin-top: 0px;
   margin-bottom: 0px;
-  margin-inline-start: -1px;
+  -webkit-margin-start: -1px;
+          margin-inline-start: -1px;
 }
 
 .modal-top :where(.modal-box){
@@ -2168,20 +2174,12 @@ details.collapse summary::-webkit-details-marker{
   left: 50%;
 }
 
-.left-2{
-  left: 0.5rem;
-}
-
 .left-28{
   left: 7rem;
 }
 
 .left-4{
   left: 1rem;
-}
-
-.left-52{
-  left: 13rem;
 }
 
 .right-0{
@@ -2392,6 +2390,10 @@ details.collapse summary::-webkit-details-marker{
 
 .items-center{
   align-items: center;
+}
+
+.justify-start{
+  justify-content: flex-start;
 }
 
 .justify-center{
