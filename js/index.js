@@ -246,10 +246,7 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
   /** @type {LGraphNode} */
   let nodea = graph._nodes_by_id[targetLink.origin_id];
 
-  while (
-    nodea.type === "Reroute" ||
-    nodea.type === "Image Rembg (Remove Background)"
-  ) {
+  while (nodea.type === "Reroute") {
     nodea = nodea.getInputNode(0);
   }
 
