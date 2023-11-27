@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,python,react
 
 js/output.css
+*.task
 
 ### Node ###
 # Logs
