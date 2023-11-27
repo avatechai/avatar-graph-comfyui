@@ -217,7 +217,7 @@ with open(
         os.path.dirname(__file__), "workflow_templates/api/avatar_generation_api.json"
     )
 ) as f:
-    api_prompt_string = "\n".join(f.readlines())
+    default_workflow = "\n".join(f.readlines())
 
 
 @server.PromptServer.instance.routes.post("/avatar_generation")
@@ -227,9 +227,10 @@ async def post_prompt_block(request):
     image = post.get("image")
     image_name = save_image(image)
 
-    api_prompt = json.loads(api_prompt_string.replace("IMAGE_REFERENCE", image_name))
-    json_data = {"prompt": api_prompt}
-    res = post_prompt(json_data)
+    workflow = post.get("workflow")
+    workflow = default_workflow if workflow is None else workflow
+    api_prompt = json.loads(workflow.replace("IMAGE_REFERENCE", image_name))
+    res = post_prompt({"prompt": api_prompt})
     prompt_id = json.loads(res.text)["prompt_id"]
     while True:
         history = prompt_server.prompt_queue.get_history(prompt_id=prompt_id)
