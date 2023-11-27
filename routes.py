@@ -212,6 +212,35 @@ def get_avatar_file(outputs):
                 return f.read()
 
 
+def upload_avatar_file(outputs):
+    file = get_avatar_file(outputs)
+    response = requests.get("https://labs.avatech.ai/api/share")
+    labData = response.json()
+    modelId = labData["modelId"]
+
+    # upload model
+    headers = {
+        "x-amz-acl": "public-read",
+        "Content-Type": "model/gltf-binary",
+        "Content-Length": str(len(file)),
+    }
+    requests.put(labData["url"], headers=headers, data=file)
+
+    # send notification
+    webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+    data = {
+        "username": "Avabot",
+        "avatar_url": "https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatechai.png",
+        "content": "[API Call] New register!",
+    }
+    headers = {
+        "Content-Type": "application/json",
+    }
+    response = requests.post(webhook_url, headers=headers, data=json.dumps(data))
+
+    return modelId
+
+
 with open(
     os.path.join(
         os.path.dirname(__file__), "workflow_templates/api/avatar_generation_api.json"
@@ -235,8 +264,11 @@ async def post_prompt_block(request):
     while True:
         history = prompt_server.prompt_queue.get_history(prompt_id=prompt_id)
         if history:
-            file = get_avatar_file(history[prompt_id]["outputs"])
-            return web.Response(body=file)
+            # file = get_avatar_file(history[prompt_id]["outputs"])
+            # return web.Response(body=file)
+
+            modelId = upload_avatar_file(history[prompt_id]["outputs"])
+            return web.json_response({"id": modelId}, status=200)
         time.sleep(0.5)
 
 
