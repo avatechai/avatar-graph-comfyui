@@ -14,6 +14,7 @@ from PIL import Image
 import io
 import time
 import execution
+import random
 
 load_dotenv()
 
@@ -241,6 +242,12 @@ def upload_avatar_file(outputs):
     return modelId
 
 
+def randomSeed(num_digits=15):
+    range_start = 10 ** (num_digits - 1)
+    range_end = (10**num_digits) - 1
+    return random.randint(range_start, range_end)
+
+
 with open(
     os.path.join(
         os.path.dirname(__file__), "workflow_templates/api/avatar_generation_api.json"
@@ -258,7 +265,11 @@ async def post_prompt_block(request):
 
     workflow = post.get("workflow")
     workflow = default_workflow if workflow is None else workflow
-    api_prompt = json.loads(workflow.replace("IMAGE_REFERENCE", image_name))
+    api_prompt = json.loads(
+        workflow.replace("IMAGE_REFERENCE", image_name).replace(
+            "SEED", str(randomSeed())
+        )
+    )
     res = post_prompt({"prompt": api_prompt})
     prompt_id = json.loads(res.text)["prompt_id"]
     while True:
