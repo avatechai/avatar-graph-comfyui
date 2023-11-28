@@ -13,10 +13,13 @@ from math import sqrt
 BaseOptions = mp.tasks.BaseOptions
 FaceLandmarker = mp.tasks.vision.FaceLandmarker
 FaceLandmarkerOptions = mp.tasks.vision.FaceLandmarkerOptions
+PoseLandmarker = mp.tasks.vision.PoseLandmarker
+PoseLandmarkerOptions = mp.tasks.vision.PoseLandmarkerOptions
 VisionRunningMode = mp.tasks.vision.RunningMode
 
 global_predictor = None
 face_landmarker = None
+pose_landmarker = None
 
 # For auto-segmentation
 layerMapping = {
@@ -118,22 +121,32 @@ class SAMMultiLayer:
     FUNCTION = "load_image"
 
     def load_models(self, ckpt, model_type):
-        global global_predictor, face_landmarker
+        global global_predictor, face_landmarker, pose_landmarker
 
         ckpt = folder_paths.get_full_path("sams", ckpt)
         sam = sam_model_registry[model_type](checkpoint=ckpt)  # .to("cuda")
         global_predictor = SamPredictor(sam)
 
-        model_path = os.path.join(os.path.dirname(__file__), "../mediapipe_models/face_landmarker.task")
-        options = FaceLandmarkerOptions(
-            base_options=BaseOptions(model_asset_path=model_path),
+        face_landmarker_model_path = os.path.join(
+            os.path.dirname(__file__), "../mediapipe_models/face_landmarker.task"
+        )
+        face_landmarker_options = FaceLandmarkerOptions(
+            base_options=BaseOptions(model_asset_path=face_landmarker_model_path),
             running_mode=VisionRunningMode.IMAGE,
         )
-        face_landmarker = FaceLandmarker.create_from_options(options)
+        face_landmarker = FaceLandmarker.create_from_options(face_landmarker_options)
 
-        return global_predictor, face_landmarker
+        pose_landmarker_model_path = os.path.join(
+            os.path.dirname(__file__), "../mediapipe_models/pose_landmarker_full.task"
+        )
+        pose_landmarker_options = PoseLandmarkerOptions(
+            base_options=BaseOptions(model_asset_path=pose_landmarker_model_path),
+            running_mode=VisionRunningMode.IMAGE,
+        )
+        pose_landmarker = PoseLandmarker.create_from_options(pose_landmarker_options)
+        return global_predictor, face_landmarker, pose_landmarker
 
-    def auto_segment(self, image, face_landmarks):
+    def auto_segment(self, image, face_landmarks, pose_landmarks):
         H, W, C = image.shape
         imagePromptsMulti = {}
         boxesMulti = {}
@@ -227,15 +240,25 @@ class SAMMultiLayer:
             )
             boxesMulti[key] = box
 
+            if pose_landmarks is not None:
+                breathX = ((pose_landmarks[11].x + pose_landmarks[12].x) / 2) * W
+                breathY = ((pose_landmarks[11].y + pose_landmarks[12].y) / 2) * H
+                imagePromptsMulti["breath"] = [{"x": breathX, "y": breathY, "label": 1}]
+
         return imagePromptsMulti, boxesMulti
 
     def detect_face(self, np_image):
-        global face_landmarker
+        global face_landmarker, pose_landmarker
         mp_image = mp.Image(
             image_format=mp.ImageFormat.SRGB, data=(np_image * 255).astype(np.uint8)
         )
-        face_landmarks = face_landmarker.detect(mp_image).face_landmarks[0]
-        imagePromptsMulti, boxesMulti = self.auto_segment(np_image, face_landmarks)
+        face_landmarks = face_landmarker.detect(mp_image).face_landmarks
+        face_landmarks = face_landmarks[0] if len(face_landmarks) > 0 else None
+        pose_landmarks = pose_landmarker.detect(mp_image).pose_landmarks
+        pose_landmarks = pose_landmarks[0] if len(pose_landmarks) > 0 else None
+        imagePromptsMulti, boxesMulti = self.auto_segment(
+            np_image, face_landmarks, pose_landmarks
+        )
 
         return imagePromptsMulti, boxesMulti
 
@@ -263,10 +286,9 @@ class SAMMultiLayer:
             # Frontend uploads clicks coordinates to backend => backend runs SAM and passes the segments to next nodes
             model_type = re.findall(r"vit_[lbh]", ckpt)[0]
 
-            global global_predictor, face_landmarker
+            global global_predictor
             if global_predictor is None:
-                global_predictor, face_landmarker = self.load_models(ckpt, model_type)
-                print(face_landmarker)
+                global_predictor, _, _ = self.load_models(ckpt, model_type)
 
             if image.shape[3] == 4:
                 image = image[:, :, :, :3]

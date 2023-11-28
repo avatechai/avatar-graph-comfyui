@@ -84,19 +84,25 @@ def download_sam_model():
 download_sam_model()
 
 
-def download_face_landmarker():
+def download_face_and_pose_landmarker():
     model_dir = os.path.join(ag_path, "mediapipe_models")
     if not os.path.isdir(model_dir):
         os.makedirs(model_dir)
 
     model_path = os.path.join(model_dir, "face_landmarker.task")
     if not os.path.isfile(model_path):
-        print("Downloading mediapipe model...")
+        print("Downloading face landmarker model...")
         url = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task"
         download_model(url, model_path)
 
+    model_path = os.path.join(model_dir, "pose_landmarker_full.task")
+    if not os.path.isfile(model_path):
+        print("Downloading pose landmarker model...")
+        url = "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/latest/pose_landmarker_full.task"
+        download_model(url, model_path)
 
-download_face_landmarker()
+
+download_face_and_pose_landmarker()
 
 paths = ["blender", "sam"]
 files = []
