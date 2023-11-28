@@ -256,12 +256,22 @@ export async function autoSegment() {
   });
 
   const poseLandmarks = poseLandmarker.detect(image).landmarks[0];
-  const breathX =
+  const positiveBreathX =
     ((poseLandmarks[11].x + poseLandmarks[12].x) / 2) * imageSize.val.width;
-  const breathY =
+  const positiveBreathY =
     ((poseLandmarks[11].y + poseLandmarks[12].y) / 2) * imageSize.val.height;
+  const negativeBreathX1 = poseLandmarks[0].x * imageSize.val.width;
+  const negativeBreathY1 = poseLandmarks[0].y * imageSize.val.height;
+  const negativeBreathX2 = poseLandmarks[9].x * imageSize.val.width;
+  const negativeBreathY2 = poseLandmarks[9].y * imageSize.val.height;
+  const negativeBreathX3 = poseLandmarks[10].x * imageSize.val.width;
+  const negativeBreathY3 = poseLandmarks[10].y * imageSize.val.height;
+
   imagePromptsMulti.val["breath"] = [
-    { x: breathX, y: breathY, label: 1, isAuto: true },
+    { x: positiveBreathX, y: positiveBreathY, label: 1, isAuto: true },
+    { x: negativeBreathX1, y: negativeBreathY1, label: 0, isAuto: true },
+    { x: negativeBreathX2, y: negativeBreathY2, label: 0, isAuto: true },
+    { x: negativeBreathX3, y: negativeBreathY3, label: 0, isAuto: true },
   ];
   imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
   segmented.val = true;

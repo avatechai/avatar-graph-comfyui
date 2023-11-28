@@ -241,9 +241,24 @@ class SAMMultiLayer:
             boxesMulti[key] = box
 
             if pose_landmarks is not None:
-                breathX = ((pose_landmarks[11].x + pose_landmarks[12].x) / 2) * W
-                breathY = ((pose_landmarks[11].y + pose_landmarks[12].y) / 2) * H
-                imagePromptsMulti["breath"] = [{"x": breathX, "y": breathY, "label": 1}]
+                positiveBreathX = (
+                    (pose_landmarks[11].x + pose_landmarks[12].x) / 2
+                ) * W
+                positiveBreathY = (
+                    (pose_landmarks[11].y + pose_landmarks[12].y) / 2
+                ) * H
+                negativeBreathX1 = pose_landmarks[0].x * W
+                negativeBreathY1 = pose_landmarks[0].y * H
+                negativeBreathX2 = pose_landmarks[9].x * W
+                negativeBreathY2 = pose_landmarks[9].y * H
+                negativeBreathX3 = pose_landmarks[10].x * W
+                negativeBreathY3 = pose_landmarks[10].y * H
+                imagePromptsMulti["breath"] = [
+                    {"x": positiveBreathX, "y": positiveBreathY, "label": 1},
+                    {"x": negativeBreathX1, "y": negativeBreathY1, "label": 0},
+                    {"x": negativeBreathX2, "y": negativeBreathY2, "label": 0},
+                    {"x": negativeBreathX3, "y": negativeBreathY3, "label": 0},
+                ]
 
         return imagePromptsMulti, boxesMulti
 
