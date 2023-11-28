@@ -250,7 +250,8 @@ def randomSeed(num_digits=15):
 
 with open(
     os.path.join(
-        os.path.dirname(__file__), "workflow_templates/api/avatar_generation_api.json"
+        os.path.dirname(__file__),
+        "workflow_templates/api/avatar_generation_mask_api.json",
     )
 ) as f:
     default_workflow = "\n".join(f.readlines())
@@ -279,6 +280,7 @@ async def post_prompt_block(request):
             # return web.Response(body=file)
 
             modelId = upload_avatar_file(history[prompt_id]["outputs"])
+            print("model id", modelId)
             return web.json_response({"id": modelId}, status=200)
         time.sleep(0.5)
 
