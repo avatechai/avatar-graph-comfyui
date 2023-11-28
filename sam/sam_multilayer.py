@@ -348,9 +348,7 @@ class SAMMultiLayer:
                         continue
 
                     points = (
-                        item + imagePromptsMulti[key]
-                        if key in imagePromptsMulti
-                        else item
+                        imagePromptsMulti[key] if key in imagePromptsMulti else item
                     )
                     point_coords = np.array([[p["x"], p["y"]] for p in points])
                     point_labels = np.array([p["label"] for p in points])
