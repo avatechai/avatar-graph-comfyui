@@ -74,24 +74,26 @@ layerMapping = {
         "indices": mp.solutions.face_mesh.FACEMESH_FACE_OVAL,
     },
     "mouth": {
-        "useMiddle": True,
+        "useMiddle": False,
         "positiveOffsetX": 0,
         "positiveOffsetY": 0,
         "negativeOffsetX": 0,
         "negativeOffsetY": 0,
-        "positiveScale": 0,
-        "negativeScale": 0,
-        "indices": mp.solutions.face_mesh.FACEMESH_LIPS,
+        "positiveScale": -0.3,
+        "negativeScale": 0.3,
+        # https://stackoverflow.com/questions/66649492/how-to-get-specific-landmark-of-face-like-lips-or-eyes-using-tensorflow-js-face
+        "indices": [[x, x] for x in [61, 37, 270, 91, 314]],
     },
     "mouth_in": {
-        "useMiddle": True,
+        "useMiddle": False,
         "positiveOffsetX": 0,
         "positiveOffsetY": 0,
         "negativeOffsetX": 0,
         "negativeOffsetY": 0,
-        "positiveScale": 0,
-        "negativeScale": 0,
-        "indices": mp.solutions.face_mesh.FACEMESH_LIPS,
+        "positiveScale": -0.5,
+        "negativeScale": 0.5,
+        # https://stackoverflow.com/questions/66649492/how-to-get-specific-landmark-of-face-like-lips-or-eyes-using-tensorflow-js-face
+        "indices": [[x, x] for x in [310, 88]],
     },
 }
 
