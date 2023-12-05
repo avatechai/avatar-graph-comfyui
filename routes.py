@@ -125,7 +125,7 @@ async def post_sam_model(request):
                 }
                 json.dump(data, f)
         else:
-            sam = sam_model_registry[model_type](checkpoint=ckpt)
+            sam = sam_model_registry[model_type](checkpoint=ckpt).to("cuda")
             predictor = SamPredictor(sam)
 
             image_np = (image * 255).astype(np.uint8)
@@ -144,14 +144,16 @@ async def post_sam_model(request):
     return web.json_response({})
 
 
-def save_image(image):
+def save_image(image, save_name=None):
     input_folder = folder_paths.get_input_directory()
     name, extension = os.path.splitext(image.filename)
-    save_name = f"{name}{extension}"
-    i = 1
-    while os.path.exists(f"{input_folder}/{save_name}"):
-        save_name = f"{name}_{i}{extension}"
-        i += 1
+
+    if save_name == None:
+        save_name = f"{name}{extension}"
+        i = 1
+        while os.path.exists(f"{input_folder}/{save_name}"):
+            save_name = f"{name}_{i}{extension}"
+            i += 1
 
     with open(f"{input_folder}/{save_name}", "wb") as f:
         f.write(image.file.read())
@@ -261,16 +263,22 @@ with open(
 async def post_prompt_block(request):
     prompt_server = server.PromptServer.instance
     post = await request.post()
-    image = post.get("image")
-    image_name = save_image(image)
-
     workflow = post.get("workflow")
     workflow = default_workflow if workflow is None else workflow
-    api_prompt = json.loads(
-        workflow.replace("IMAGE_REFERENCE", image_name).replace(
-            "SEED", str(randomSeed())
-        )
+
+    image = post.get("image")
+    image_path = save_image(image)
+    image_name, image_ext = os.path.splitext(image_path)
+    workflow = workflow.replace("IMAGE_REFERENCE", image_path).replace(
+        "SEED", str(randomSeed())
     )
+    for key, value in post.items():
+        if key.startswith("mask_"):
+            mask_name = image_name + "_" + key.replace("mask_", "") + image_ext
+            mask_path = save_image(value, save_name=mask_name)
+            workflow = workflow.replace(key, mask_path)
+
+    api_prompt = json.loads(workflow)
     res = post_prompt({"prompt": api_prompt})
     prompt_id = json.loads(res.text)["prompt_id"]
     while True:
