@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,python,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,python,react
 
+workflow_templates/
 js/output.css
 *.task
 
