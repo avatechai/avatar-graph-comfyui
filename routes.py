@@ -276,7 +276,7 @@ async def post_prompt_block(request):
         image_path = save_image(base_image)
         image_name, image_ext = os.path.splitext(image_path)
         workflow = workflow.replace("base_image", image_path)
-        workflow = workflow.replace("reference_image", image_path) # TMP
+        workflow = workflow.replace("reference_image", image_path)  # TMP
 
     for key, value in post.items():
         if key.startswith("mask_"):
@@ -285,8 +285,22 @@ async def post_prompt_block(request):
             workflow = workflow.replace(key, mask_path)
 
     workflow = workflow.replace("SEED", str(randomSeed()))
-
     api_prompt = json.loads(workflow)
+
+    # skip generation part if base_image is provided
+    if base_image is not None:
+        for value in api_prompt.values():
+            if (
+                value["class_type"] == "LoadImageFromRequest"
+                and value["inputs"]["name"] == image_path
+            ):
+                del value["inputs"]["image"]
+            elif (
+                value["class_type"] == "PreviewImage"
+                or value["class_type"] == "SaveImage"
+            ):
+                del value["inputs"]["images"]
+
     res = post_prompt({"prompt": api_prompt})
     prompt_id = json.loads(res.text)["prompt_id"]
     while True:

@@ -8,12 +8,14 @@ class LoadImageFromRequest:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "image": ("IMAGE",),
                 "name": (
                     "STRING",
                     {"multiline": False, "default": "face.png"},
                 ),
             },
+            "optional": {
+                "image": ("IMAGE",),
+            }
         }
 
     RETURN_TYPES = ("IMAGE",)
@@ -23,7 +25,7 @@ class LoadImageFromRequest:
 
     CATEGORY = "image"
 
-    def run(self, image, name):
+    def run(self, name, image=None):
         try:
             image_path = folder_paths.get_annotated_filepath(name)
             i = Image.open(image_path)
