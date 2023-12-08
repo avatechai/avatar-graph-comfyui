@@ -250,21 +250,31 @@ def randomSeed(num_digits=15):
     return random.randint(range_start, range_end)
 
 
-with open(
-    os.path.join(
-        os.path.dirname(__file__),
-        "workflow_templates/api/avatar_generation_mask_api_v2.json",
-    )
-) as f:
-    default_workflow = "\n".join(f.readlines())
+def load_workflow(workflow_name):
+    with open(
+        os.path.join(
+            os.path.dirname(__file__),
+            f"workflow_templates/api/{workflow_name}.json",
+        )
+    ) as f:
+        return "\n".join(f.readlines())
+
+
+default_workflow = load_workflow("avatar_generation_mask_api_v11(FaceToon)")
 
 
 @server.PromptServer.instance.routes.post("/avatar_generation")
 async def post_prompt_block(request):
     prompt_server = server.PromptServer.instance
     post = await request.post()
-    workflow = post.get("workflow")
-    workflow = default_workflow if workflow is None else workflow
+    uploaded_workflow = post.get("workflow")
+    workflow_name = post.get("workflow_name")
+    if uploaded_workflow is not None:
+        workflow = uploaded_workflow
+    elif workflow_name is not None:
+        workflow = load_workflow(workflow_name)
+    else:
+        workflow = default_workflow
 
     ref_image = post.get("ref_image")
     base_image = post.get("base_image")
