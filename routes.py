@@ -281,12 +281,12 @@ async def post_prompt_block(request):
     if ref_image is not None:
         image_path = save_image(ref_image)
         image_name, image_ext = os.path.splitext(image_path)
-        workflow = workflow.replace("reference_image", image_path)
+        workflow = workflow.replace("reference_image_avatech", image_path)
     elif base_image is not None:
         image_path = save_image(base_image)
         image_name, image_ext = os.path.splitext(image_path)
         workflow = workflow.replace("base_image", image_path)
-        workflow = workflow.replace("reference_image", image_path)  # TMP
+        workflow = workflow.replace("reference_image_avatech", image_path)  # TMP
 
     for key, value in post.items():
         if key.startswith("mask_"):
