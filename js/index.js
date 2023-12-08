@@ -736,6 +736,33 @@ function injectUIComponentToComfyuimenu() {
     localStorage.setItem("showPreview", showPreview.val);
   };
 
+  const apiFormat = document.createElement("button");
+  const a = document.createElement("a");
+  apiFormat.textContent = "Save API Format (Avatech)";
+  apiFormat.onclick = () => {
+    let filename = "workflow_api.json";
+    filename = prompt("Save workflow (API) as:", filename);
+    if (!filename) return;
+    if (!filename.toLowerCase().endsWith(".json")) {
+      filename += ".json";
+    }
+    app.graphToPrompt().then(p=>{
+      console.log('fkfk');
+      let json = JSON.stringify(p.output, null, 2); // convert the data to a JSON string
+      json = json.replace(/"seed": (\d+)/g, `"seed": "SEED"`).replace(/"image": "(?!.*mask.*\.png).*"/g, '"image": "reference_image_avatech"');
+      const blob = new Blob([json], {type: "application/json"});
+      const url = URL.createObjectURL(blob);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    });
+  };
+
   const dropdown = document.createElement("div");
   dropdown.textContent = "▼";
   dropdown.className = "dropdownbtn";
@@ -844,6 +871,7 @@ function injectUIComponentToComfyuimenu() {
 
   menu.append(avatarPreview);
   menu.append(shareAvatar);
+  menu.append(apiFormat);
 
   shareAvatar.append(dropdown);
 }
