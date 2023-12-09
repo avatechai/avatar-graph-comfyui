@@ -294,6 +294,7 @@ async def post_prompt_block(request):
             mask_path = save_image(value, save_name=mask_name)
             workflow = workflow.replace(key, mask_path)
 
+    workflow = workflow.replace("embedding_id_avatech", image_path)
     workflow = workflow.replace("SEED", str(randomSeed()))
     api_prompt = json.loads(workflow)
 
