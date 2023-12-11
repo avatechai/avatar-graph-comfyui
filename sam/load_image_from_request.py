@@ -28,9 +28,9 @@ class LoadImageFromRequest:
     def run(self, name, image=None):
         try:
             image_path = folder_paths.get_annotated_filepath(name)
-            i = Image.open(image_path)
-            i = ImageOps.exif_transpose(i)
-            image = i.convert("RGB")
+            image = Image.open(image_path)
+            image = ImageOps.exif_transpose(image)
+            # image = image.convert("RGB")
             image = np.array(image).astype(np.float32) / 255.0
             image = torch.from_numpy(image)[None,]
             return [image]
