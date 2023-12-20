@@ -16,6 +16,7 @@ import {
   shareLoading,
   previewModelId,
   embeddingID,
+  enableAutoSegment,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -23,8 +24,17 @@ import { api } from "./api.js";
 import { Container } from "./Container.js";
 import { initModel, loadNpyTensor } from "./onnx.js";
 import "https://code.iconify.design/3/3.1.0/iconify.min.js";
-import { drawSegment, getClicks } from "./LayerEditor.js";
+import {
+  autoSegment,
+  drawSegment,
+  getClicks,
+  segmented,
+} from "./LayerEditor.js";
 import { infoDialog } from "./dialog.js";
+import { sharedAvatarLink } from "./AvatarPreview.js";
+import { updateImagePrompts } from "./LayerEditor.js";
+
+export const generatedImages = {};
 
 const stylesheet = document.createElement("link");
 stylesheet.setAttribute("type", "text/css");
@@ -73,15 +83,15 @@ LGraphGroup.prototype.repositionNodes = function () {
   let sortedNodes = this._nodes.sort((a, b) => a.pos[1] - b.pos[1]);
   // Separate input and output nodes from the rest
   const inputNodes = sortedNodes.filter(
-    (node) => node.properties.routeType === "input",
+    (node) => node.properties.routeType === "input"
   );
   const outputNodes = sortedNodes.filter(
-    (node) => node.properties.routeType === "output",
+    (node) => node.properties.routeType === "output"
   );
   const otherNodes = sortedNodes.filter(
     (node) =>
       node.properties.routeType !== "input" &&
-      node.properties.routeType !== "output",
+      node.properties.routeType !== "output"
   );
 
   // Concatenate the arrays so that input nodes are first and output nodes are last
@@ -215,7 +225,7 @@ function openInAvatechEditor(url, fileName) {
       blendshapes: targetNode.val.widgets.find((x) => x.name === "shape_flow")
         .value,
     },
-    "*",
+    "*"
   );
 }
 
@@ -236,15 +246,35 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
   /** @type {LGraphNode} */
   let nodea = graph._nodes_by_id[targetLink.origin_id];
 
-  while (nodea.type == "Reroute") {
+  while (nodea.type === "Reroute") {
     nodea = nodea.getInputNode(0);
   }
 
   console.log(targetLink, nodea);
-  console.log(nodea.getInputNode(0, true));
 
+  if (nodea.type === "LoadImage") {
+    /** @type {string} */
+    const isGeneratedImage = false;
+    return [
+      isGeneratedImage,
+      nodea.widgets.find((x) => x.name === widgetName).value,
+    ];
+  }
+
+  const saveImageNodeLink = nodea.outputs
+    .find((x) => x.type === "IMAGE")
+    .links.find((link) => {
+      const targetLink = graph.links[link];
+      const targetNode = graph._nodes_by_id[targetLink.target_id];
+      if (targetNode.type === "SaveImage") {
+        return true;
+      }
+    });
+  const saveImageNode =
+    graph._nodes_by_id[graph.links[saveImageNodeLink].target_id];
   /** @type {string} */
-  return nodea.widgets.find((x) => x.name === widgetName).value;
+  const isGeneratedImage = true;
+  return [isGeneratedImage, generatedImages[saveImageNode.id]];
 }
 
 /**
@@ -252,10 +282,14 @@ function getInputWidgetValue(node, inputIndex, widgetName) {
  * @param {LGraphNode} node
  */
 function showMyImageEditor(node) {
-  let connectedImageFileName = getInputWidgetValue(node, 0, "image");
+  let [isGeneratedImage, connectedImageFileName] = getInputWidgetValue(
+    node,
+    0,
+    "image"
+  );
   if (!connectedImageFileName) {
     alertDialog.val = {
-      text: "Please connect an image first",
+      text: "Please connect or generate an image first",
       time: 3000,
     };
     return;
@@ -281,14 +315,16 @@ function showMyImageEditor(node) {
         method: "POST",
         body: JSON.stringify({
           image: connectedImageFileName,
+          isGeneratedImage,
           embedding_id: id,
           ckpt,
+          // remote: true,
         }),
       })
       .then(() => {
         showLoading.val = false;
         const v = JSON.parse(
-          node.widgets.find((x) => x.name === "image_prompts_json").value,
+          node.widgets.find((x) => x.name === "image_prompts_json").value
         );
 
         if (!Array.isArray(v)) {
@@ -303,19 +339,23 @@ function showMyImageEditor(node) {
           imagePrompts.val = v;
         }
         showImageEditor.val = true;
+        const subfolder =
+          isGeneratedImage || split.length === 1 ? "" : split[0];
         imageUrl.val = api.apiURL(
-          `/view?filename=${encodeURIComponent(
-            connectedImageFileName,
-          )}&type=input&subfolder=${split.length > 1 ? split[0] : ""}`,
+          `/view?filename=${encodeURIComponent(connectedImageFileName)}&type=${
+            isGeneratedImage ? "output" : "input"
+          }&subfolder=${subfolder}`
         );
         const embeedingUrl = api.apiURL(
           `/view?filename=${encodeURIComponent(
-            `${id}_${modelType}.npy`,
-          )}&type=output&subfolder=`,
+            `${id}_${modelType}.npy`
+          )}&type=output&subfolder=`
         );
-        loadNpyTensor(embeedingUrl).then((tensor) => {
+        loadNpyTensor(embeedingUrl).then(async (tensor) => {
           embeddings.val = tensor;
+          if (enableAutoSegment.val && !segmented.val) await autoSegment();
           drawSegment(getClicks());
+          updateImagePrompts();
         });
         targetNode.val = node;
       })
@@ -332,6 +372,15 @@ const ext = {
   getCustomWidgets(app) {
     return {
       SAM_PROMPTS(node, inputName, inputData, app) {
+        const asd = document.createElement("div");
+        Object.assign(asd, {
+          id: "sam",
+          onclick: () => {
+            showMyImageEditor(node);
+          },
+        });
+        document.body.append(asd);
+
         const btn = node.addWidget("button", "Edit prompt", "", () => {
           showMyImageEditor(node);
           btn.serialize = false;
@@ -345,7 +394,7 @@ const ext = {
           targetNode.val = node;
           openInAvatechEditor(
             "https://editor.avatech.ai?comfyui=true",
-            fileName.val,
+            fileName.val
           );
           // openInAvatechEditor("http://localhost:3006?comfyui=true", fileName.val);
         });
@@ -374,6 +423,24 @@ const ext = {
         });
         btn.serialize = false;
 
+        return {
+          widget: btn,
+        };
+      },
+      GROUP_OPS(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Add OBJ", "", () => {
+          node.addInput("BPY_OBJ" + (node.inputs.length + 1), "BPY_OBJ");
+          node.graph.change();
+        });
+        return {
+          widget: btn,
+        };
+      },
+      GROUP_OPS_DELETE(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Delete OBJ", "", () => {
+          node.removeInput(node.inputs.length - 1);
+          node.graph.change();
+        });
         return {
           widget: btn,
         };
@@ -407,9 +474,13 @@ const ext = {
     });
 
     api.addEventListener("executed", (evt) => {
+      const images = evt.detail?.output.images;
+      if (images?.length > 0 && images[0].type === "output") {
+        generatedImages[evt.detail.node] = images[0].filename;
+      }
       if (evt.detail?.output.gltfFilename) {
         const viewer = document.getElementById(
-          "avatech-viewer-iframe",
+          "avatech-viewer-iframe"
         ).contentWindow;
 
         const gltfFilename =
@@ -437,14 +508,14 @@ const ext = {
             avatarURL: gltfFilename,
             blendshapes: evt.detail?.output.SHAPE_FLOW[0],
           }),
-          "*",
+          "*"
         );
       }
     });
 
     window.addEventListener(
       "keydown",
-      (event) => {
+      async (event) => {
         if (event.key === "Escape") {
           event.preventDefault();
           if (my_modal_3.open) {
@@ -452,19 +523,20 @@ const ext = {
           } else {
             showImageEditor.val = false;
             showEditor.val = false;
-            api.fetchApi("/segments_order", {
-              method: "POST",
-              body: JSON.stringify({
-                name: embeddingID.val,
-                order: Object.keys(imagePromptsMulti.val),
-              }),
-            });
+            await uploadSegments();
+            // api.fetchApi("/segments_order", {
+            //   method: "POST",
+            //   body: JSON.stringify({
+            //     name: embeddingID.val,
+            //     order: Object.keys(imagePromptsMulti.val),
+            //   }),
+            // });
           }
         }
       },
       {
         capture: true,
-      },
+      }
     );
 
     graphCanvas.addEventListener("keydown", (event) => {
@@ -540,7 +612,7 @@ const ext = {
               a.href = url;
               a.setAttribute(
                 "download",
-                new URLSearchParams(url.search).get("filename"),
+                new URLSearchParams(url.search).get("filename")
               );
               document.body.append(a);
               a.click();
@@ -570,7 +642,7 @@ const ext = {
               a.href = url;
               a.setAttribute(
                 "download",
-                new URLSearchParams(url.search).get("filename"),
+                new URLSearchParams(url.search).get("filename")
               );
               document.body.append(a);
               a.click();
@@ -583,7 +655,7 @@ const ext = {
             callback: () => {
               openInAvatechEditor(
                 "http://localhost:3006?comfyui=true",
-                gltfFilename,
+                gltfFilename
               );
             },
           });
@@ -593,7 +665,7 @@ const ext = {
             callback: () => {
               openInAvatechEditor(
                 "https://editor.avatech.ai?comfyui=true",
-                gltfFilename,
+                gltfFilename
               );
             },
           });
@@ -619,13 +691,16 @@ const ext = {
         nodeData.input.required.obj = ["MESH_GROUP_CONFIG"];
         nodeData.input.required.del_obj = ["MESH_GROUP_DELETE"];
         break;
+      case "GroupOps":
+        nodeData.input.required.obj = ["GROUP_OPS"];
+        nodeData.input.required.del_obj = ["GROUP_OPS_DELETE"];
       default:
         break;
     }
   },
 };
 
-async function uploadPreview() {
+export async function uploadPreview() {
   if (fileName.val == "")
     app.ui.dialog.show("Please create your avatar first.");
   else {
@@ -646,12 +721,9 @@ async function uploadPreview() {
       body: file,
     }).catch((error) => console.error(error));
 
-    infoDialog.show(
-      `Preview avatar url: <a href='https://editor.avatech.ai/viewer?objectId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
-        labData.modelId +
-        `</a>`,
-    );
+    sharedAvatarLink.val = `https://editor.avatech.ai/viewer?avatarId=${labData?.modelId}`;
     previewModelId.val = labData.modelId;
+    return labData;
   }
 }
 
@@ -662,6 +734,33 @@ function injectUIComponentToComfyuimenu() {
   avatarPreview.onclick = () => {
     showPreview.val = !showPreview.val;
     localStorage.setItem("showPreview", showPreview.val);
+  };
+
+  const apiFormat = document.createElement("button");
+  const a = document.createElement("a");
+  apiFormat.textContent = "Save API Format (Avatech)";
+  apiFormat.onclick = () => {
+    let filename = "workflow_api.json";
+    filename = prompt("Save workflow (API) as:", filename);
+    if (!filename) return;
+    if (!filename.toLowerCase().endsWith(".json")) {
+      filename += ".json";
+    }
+    app.graphToPrompt().then(p=>{
+      console.log('fkfk');
+      let json = JSON.stringify(p.output, null, 2); // convert the data to a JSON string
+      json = json.replace(/"seed": (\d+)/g, `"seed": "SEED"`).replace(/"image": "(?!.*mask.*\.png).*"/g, '"image": "reference_image_avatech"').replace(/"embedding_id": ".*"/g, '"embedding_id": "embedding_id_avatech"');
+      const blob = new Blob([json], {type: "application/json"});
+      const url = URL.createObjectURL(blob);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    });
   };
 
   const dropdown = document.createElement("div");
@@ -699,9 +798,12 @@ function injectUIComponentToComfyuimenu() {
                 .then((e) => e.arrayBuffer())
                 .then((e) => new Uint8Array(e));
 
-              const labData = await fetch("https://labs.avatech.ai/api/share?id=" + previewModelId.val, {
-                method: "GET",
-              }).then((e) => e.json());
+              const labData = await fetch(
+                "https://labs.avatech.ai/api/share?id=" + previewModelId.val,
+                {
+                  method: "GET",
+                }
+              ).then((e) => e.json());
 
               await fetch(labData.url, {
                 method: "PUT",
@@ -713,14 +815,17 @@ function injectUIComponentToComfyuimenu() {
                 body: file,
               }).catch((error) => console.error(error));
 
-              await fetch("https://labs.avatech.ai/api/purgecdn?id=" + previewModelId.val, {
-                method: "GET",
-              }).catch((error) => console.error(error));
+              await fetch(
+                "https://labs.avatech.ai/api/purgecdn?id=" + previewModelId.val,
+                {
+                  method: "GET",
+                }
+              ).catch((error) => console.error(error));
 
               infoDialog.show(
-                `Preview updated: <a href='https://editor.avatech.ai/viewer?objectId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
-                labData.modelId +
-                  "</a>\n Remember to hard refresh before checking out the new preview!",
+                `Preview updated: <a href='https://editor.avatech.ai/viewer?avatarId=${labData.modelId}' target="_blank">https://editor.avatech.ai/viewer?avatarId=` +
+                  labData.modelId +
+                  "</a>\n Remember to hard refresh before checking out the new preview!"
               );
 
               shareLoading.val = false;
@@ -735,7 +840,7 @@ function injectUIComponentToComfyuimenu() {
         event: e,
         scale: 1.3,
       },
-      window,
+      window
     );
     menu.root.classList.add("popup");
   };
@@ -758,15 +863,15 @@ function injectUIComponentToComfyuimenu() {
       shareAvatar.append(dropdown);
     } else {
       infoDialog.show(
-        `Preview avatar url: <a href='https://editor.avatech.ai/viewer?objectId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?objectId=` +
-          previewModelId.val +
-          `</a>`,
+        `Preview avatar url: <a href='https://editor.avatech.ai/viewer?avatarId=${previewModelId.val}' target="_blank">https://editor.avatech.ai/viewer?avatarId=${previewModelId.val}</a>` +
+          `\nChat url: <a href='https://labs.avatech.ai?avatarId=${previewModelId.val}' target="_blank">https://labs.avatech.ai?avatarId=${previewModelId.val}</a>`
       );
     }
   };
 
   menu.append(avatarPreview);
   menu.append(shareAvatar);
+  menu.append(apiFormat);
 
   shareAvatar.append(dropdown);
 }

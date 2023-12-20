@@ -8,5 +8,6 @@ class GroupOps(blender_node.ObjectOps):
     RETURN_TYPES = (blender_node.BPY_OBJS,)
 
     def blender_process(self, bpy, BPY_OBJ, BPY_OBJ2, **props):
-        return ([BPY_OBJ, BPY_OBJ2],)
+        prop_values = props.values()
+        return ([BPY_OBJ, BPY_OBJ2, *prop_values],)
 

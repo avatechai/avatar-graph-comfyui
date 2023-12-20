@@ -9,8 +9,8 @@ devDependencies:
     specifier: ^3.5.3
     version: 3.5.3
   daisyui:
-    specifier: ^3.7.5
-    version: 3.7.5
+    specifier: ^4.0.7
+    version: 4.0.7(postcss@8.4.29)
   tailwindcss:
     specifier: ^3.3.3
     version: 3.3.3
@@ -132,10 +132,6 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /colord@2.9.3:
-    resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
-    dev: true
-
   /commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
@@ -158,17 +154,21 @@ packages:
     hasBin: true
     dev: true
 
-  /daisyui@3.7.5:
-    resolution: {integrity: sha512-udhiBJYVvcPGXa+mL5IElke6EdddKecjbbz6m43+9IVqzK8GBwetg092Edclo42TkNboLD9nzodeesJygqZt2A==}
+  /culori@3.2.0:
+    resolution: {integrity: sha512-HIEbTSP7vs1mPq/2P9In6QyFE0Tkpevh0k9a+FkjhD+cwsYm9WRSbn4uMdW9O0yXlNYC3ppxL3gWWPOcvEl57w==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dev: true
+
+  /daisyui@4.0.7(postcss@8.4.29):
+    resolution: {integrity: sha512-D84DnNDZKcamwNsxCMrwYaddyz5kC6VO6oe30nM1x67GzCAfarfd3Ar1rpLGXCIqSsEoNZUHO8EcXvX93W2ZkA==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      colord: 2.9.3
       css-selector-tokenizer: 0.8.0
-      postcss: 8.4.29
+      culori: 3.2.0
+      picocolors: 1.0.0
       postcss-js: 4.0.1(postcss@8.4.29)
-      tailwindcss: 3.3.3
     transitivePeerDependencies:
-      - ts-node
+      - postcss
     dev: true
 
   /didyoumean@1.2.2:

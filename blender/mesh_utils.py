@@ -14,6 +14,9 @@ def genreate_mesh_from_texture(bpy, image):
     contours, _ = cv2.findContours(
         gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+    if len(contours) == 0:
+        raise Exception("No contours found. Please ensure that the image has the correct segments (e.g. when you click on the mouth, it should display a proper blue area over the mouth region).")
+
     # Get the largest contour
     areas = [cv2.contourArea(contour) for contour in contours]
 

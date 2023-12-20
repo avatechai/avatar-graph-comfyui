@@ -10,9 +10,11 @@ export let model = null;
 // Initialize the ONNX model
 export const initModel = async (modelType) => {
   try {
-    model = await ort.InferenceSession.create(
-      `http://127.0.0.1:8188/sam_model?type=${modelType}`
-    );
+    if (!model) {
+      model = await ort.InferenceSession.create(
+        `${location.protocol}//${location.host}/sam_model?type=${modelType}`
+      );
+    }
   } catch (e) {
     console.log(e);
   }
@@ -25,7 +27,7 @@ export const loadNpyTensor = async (tensorFile, dType = "float32") => {
   return tensor;
 };
 
-export const runONNX = async (clicks, tensor) => {
+export const runONNX = async (clicks, tensor, box) => {
   // console.log('tensor', tensor);
   try {
     if (
@@ -42,6 +44,7 @@ export const runONNX = async (clicks, tensor) => {
         clicks,
         tensor,
         modelScale: imageSize.val,
+        box,
       });
       if (feeds === undefined) return;
       // Run the SAM ONNX model with the feeds returned from modelData()

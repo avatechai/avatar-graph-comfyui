@@ -1,5 +1,6 @@
 import { SideBar } from "./SideBar.js";
 import { api } from "./api.js";
+import { app } from "./app.js";
 import { runONNX } from "./onnx.js";
 import {
   showImageEditor,
@@ -13,11 +14,294 @@ import {
   imagePromptsMulti,
   embeddings,
   embeddingID,
+  alertDialog,
+  allImagePrompts,
+  boxesMulti,
+  enableAutoSegment,
 } from "./state.js";
 import { van } from "./van.js";
+import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+const { PoseLandmarker, FaceLandmarker, FilesetResolver } = vision;
 const { button, div, img, canvas, span } = van.tags;
 
 let throttle = false;
+const positivePrompt = van.state(true);
+const enableBackgroundRemover = van.state(true);
+const isMobileDevice = () => {
+  return window.screen.width < 768;
+};
+
+// Auto segmentation
+const filesetResolver = await FilesetResolver.forVisionTasks(
+  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+);
+const faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+  baseOptions: {
+    modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+    delegate: "GPU",
+  },
+  // outputFaceBlendshapes: true,
+  runningMode: "IMAGE",
+  numFaces: 1,
+});
+const poseLandmarker = await PoseLandmarker.createFromOptions(filesetResolver, {
+  baseOptions: {
+    modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task`,
+    delegate: "GPU",
+  },
+  runningMode: "IMAGE",
+  numPoses: 1,
+});
+const layerMapping = {
+  L_eye: {
+    useMiddle: false,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0.25,
+    negativeScale: 0.5,
+    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
+  },
+  R_eye: {
+    useMiddle: false,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0.25,
+    negativeScale: 0.5,
+    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
+  },
+  L_iris: {
+    useMiddle: false,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: -0.2,
+    negativeScale: 0.5,
+    indices: FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
+  },
+  R_iris: {
+    useMiddle: false,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: -0.2,
+    negativeScale: 0.5,
+    indices: FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
+  },
+  face: {
+    useMiddle: false,
+    positiveOffsetX: 0,
+    positiveOffsetY: 60,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: 0.5,
+    negativeScale: 0,
+    indices: FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
+  },
+  mouth: {
+    useMiddle: false,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: -0.3,
+    negativeScale: 0.3,
+    // https://stackoverflow.com/questions/66649492/how-to-get-specific-landmark-of-face-like-lips-or-eyes-using-tensorflow-js-face
+    indices: [61, 37, 270, 91, 314].map((x) => ({
+      start: x,
+      end: x,
+    })),
+  },
+  mouth_in: {
+    useMiddle: false,
+    positiveOffsetX: 0,
+    positiveOffsetY: 0,
+    negativeOffsetX: 0,
+    negativeOffsetY: 0,
+    positiveScale: -0.5,
+    negativeScale: 0.5,
+    // https://stackoverflow.com/questions/66649492/how-to-get-specific-landmark-of-face-like-lips-or-eyes-using-tensorflow-js-face
+    indices: [310, 88].map((x) => ({
+      start: x,
+      end: x,
+    })),
+  },
+};
+
+export const segmented = van.state(false);
+
+export async function autoSegment() {
+  const image = document.getElementById("image");
+  const landmarks = faceLandmarker.detect(image).faceLandmarks[0];
+
+  Object.entries(layerMapping).forEach(([key, value]) => {
+    imagePromptsMulti.val[key] = [];
+  });
+
+  Object.entries(layerMapping).forEach(([key, value]) => {
+    const positivePoints = [];
+    const middlePoints = [];
+    const negativePoints = [];
+
+    // Positive points
+    for (const { start, end } of value.indices) {
+      const startPoint = landmarks[start];
+      // const endPoint = landmarks[end];
+
+      const startX = startPoint.x * imageSize.val.width;
+      const startY = startPoint.y * imageSize.val.height;
+
+      // const endX = endPoint.x * imageSize.val.width;
+      // const endY = endPoint.y * imageSize.val.height;
+
+      if (middlePoints.length === 0) {
+        middlePoints.push({ x: startX, y: startY, label: 1, isAuto: true });
+        // middlePoints.push({ x: endX, y: endY, label: 1 });
+      } else {
+        middlePoints[0].x += startX;
+        middlePoints[0].y += startY;
+        // middlePoints[1].x += endX;
+        // middlePoints[1].y += endY;
+      }
+      positivePoints.push({ x: startX, y: startY, label: 1, isAuto: true });
+      // positivePoints.push({ x: endX, y: endY, label: 1 });
+
+      // imagePrompts.val = [...imagePrompts.val, { x, y, label: 1 }];
+    }
+
+    // Middle points
+    const len = value.indices.length;
+    middlePoints[0].x /= len;
+    middlePoints[0].y /= len;
+    // middlePoints[1].x /= len;
+    // middlePoints[1].y /= len;
+
+    if (value.useMiddle) {
+      imagePromptsMulti.val[key] = [
+        ...imagePromptsMulti.val[key],
+        ...middlePoints,
+      ];
+    } else {
+      // Negative points
+      for (const [i, { start, end }] of value.indices.entries()) {
+        const startPoint = landmarks[start];
+        // const endPoint = landmarks[end];
+
+        const startX = startPoint.x * imageSize.val.width;
+        const startY = startPoint.y * imageSize.val.height;
+
+        // const endX = endPoint.x * imageSize.val.width;
+        // const endY = endPoint.y * imageSize.val.height;
+
+        const middlePoint = middlePoints[0];
+        const directionVector = {
+          x: middlePoint.x - startX,
+          y: middlePoint.y - startY,
+        };
+        const directionVectorLength = Math.sqrt(
+          directionVector.x * directionVector.x +
+            directionVector.y * directionVector.y
+        );
+
+        if (value.negativeScale !== 0) {
+          const negativePointDistance =
+            value.negativeScale * directionVectorLength;
+          const negativePoint = {
+            x:
+              startX -
+              (negativePointDistance * directionVector.x) /
+                directionVectorLength -
+              value.negativeOffsetX,
+            y:
+              startY -
+              (negativePointDistance * directionVector.y) /
+                directionVectorLength -
+              value.negativeOffsetY,
+            label: 0,
+            isAuto: true,
+          };
+          negativePoints.push(negativePoint);
+        }
+
+        const positivePointDistance =
+          value.positiveScale * directionVectorLength;
+        positivePoints[i] = {
+          x:
+            positivePoints[i].x -
+            (positivePointDistance * directionVector.x) /
+              directionVectorLength -
+            value.positiveOffsetX,
+          y:
+            positivePoints[i].y -
+            (positivePointDistance * directionVector.y) /
+              directionVectorLength -
+            value.positiveOffsetY,
+          label: 1,
+          isAuto: true,
+        };
+      }
+      imagePromptsMulti.val[key] = [
+        ...imagePromptsMulti.val[key],
+        ...positivePoints,
+        ...negativePoints,
+      ];
+    }
+
+    // Find bounding box of positive/negative points
+    const points = negativePoints.length > 0 ? negativePoints : positivePoints;
+    const box = {
+      x1: Math.min(...points.map((x) => x.x)),
+      y1: Math.min(...points.map((x) => x.y)),
+      x2: Math.max(...points.map((x) => x.x)),
+      y2: Math.max(...points.map((x) => x.y)),
+    };
+    boxesMulti.val[key] = box;
+  });
+
+  const poseLandmarks = poseLandmarker.detect(image).landmarks[0];
+  const positiveBreathX =
+    ((poseLandmarks[11].x + poseLandmarks[12].x) / 2) * imageSize.val.width;
+  const positiveBreathY =
+    ((poseLandmarks[11].y + poseLandmarks[12].y) / 2) * imageSize.val.height;
+  const negativeBreathX1 = poseLandmarks[0].x * imageSize.val.width;
+  const negativeBreathY1 = poseLandmarks[0].y * imageSize.val.height;
+  const negativeBreathX2 = poseLandmarks[9].x * imageSize.val.width;
+  const negativeBreathY2 = poseLandmarks[9].y * imageSize.val.height;
+  const negativeBreathX3 = poseLandmarks[10].x * imageSize.val.width;
+  const negativeBreathY3 = poseLandmarks[10].y * imageSize.val.height;
+
+  imagePromptsMulti.val["breath"] = [
+    { x: positiveBreathX, y: positiveBreathY, label: 1, isAuto: true },
+    { x: negativeBreathX1, y: negativeBreathY1, label: 0, isAuto: true },
+    { x: negativeBreathX2, y: negativeBreathY2, label: 0, isAuto: true },
+    { x: negativeBreathX3, y: negativeBreathY3, label: 0, isAuto: true },
+  ];
+  imagePrompts.val = imagePromptsMulti.val[selectedLayer.val];
+  segmented.val = true;
+  console.log("Done");
+}
+
+export function setRemoveBackgroundNode() {
+  const rmBgNodes = app.graph.findNodesByType(
+    "Image Rembg (Remove Background)"
+  );
+  if (!rmBgNodes?.length) {
+    alertDialog.val = {
+      text: "Remove background node not found. Please ensure the workflow is correct.",
+      time: 5000,
+    };
+    return;
+  }
+  rmBgNodes.forEach((node) => {
+    // node is bypassed if mode is 4
+    node.mode = enableBackgroundRemover.val ? 0 : 4;
+  });
+}
 
 export function updateImagePrompts() {
   if (selectedLayer.val !== "" && selectedLayer.val !== undefined) {
@@ -29,22 +313,59 @@ export function updateImagePrompts() {
     targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePromptsMulti.val);
 
-    const canvas = document.getElementById("mask-canvas");
-    const base64Image = canvas.toDataURL();
-    api.fetchApi("/segments", {
-      method: "POST",
-      body: JSON.stringify({
-        name: embeddingID.val,
-        segments: {
-          [selectedLayer.val]: base64Image,
-        },
-      }),
-    });
+    // const canvas = document.getElementById("mask-canvas");
+    // const base64Image = canvas.toDataURL();
+    // api.fetchApi("/segments", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     name: embeddingID.val,
+    //     segments: {
+    //       [selectedLayer.val]: base64Image,
+    //     },
+    //   }),
+    // });
   } else {
     targetNode.val.widgets.find((x) => x.name === "image_prompts_json").value =
       JSON.stringify(imagePrompts.val);
   }
   targetNode.val.graph.change();
+}
+
+export async function uploadSegments() {
+  const emptyLayers = [];
+  Object.entries(imagePromptsMulti.val).forEach(([key, value]) => {
+    if (value.length === 0) {
+      emptyLayers.push(key);
+    }
+  });
+  if (emptyLayers.length > 0) {
+    alertDialog.val = {
+      text: "The following layers have no segments: " + emptyLayers.join(", "),
+      time: 5000,
+    };
+    return false;
+  }
+
+  const segments = {};
+  for (const [layer, prompts] of Object.entries(imagePromptsMulti.val)) {
+    await drawSegment(getClicks(prompts), layer, false);
+    const canvas = document.getElementById("mask-canvas");
+    const base64Image = canvas.toDataURL();
+    segments[layer] = base64Image;
+    // download image
+    // const a = document.createElement("a");
+    // a.href = base64Image;
+    // a.download = layer + ".png";
+    // a.click();
+  }
+  await api.fetchApi("/segments", {
+    method: "POST",
+    body: JSON.stringify({
+      name: embeddingID.val,
+      segments,
+    }),
+  });
+  return true;
 }
 
 async function handleClick(e) {
@@ -59,9 +380,16 @@ async function handleClick(e) {
       imageSize.val.imgScale
   );
 
+  let label;
+  if (isMobileDevice()) {
+    label = positivePrompt.val ? 1 : 0;
+  } else {
+    label = e.isRight ? 0 : 1;
+  }
+
   imagePrompts.val = [
     ...imagePrompts.val,
-    { x: relativeX, y: relativeY, label: e.isRight ? 0 : 1 },
+    { x: relativeX, y: relativeY, label },
   ];
   await drawSegment(getClicks());
   updateImagePrompts();
@@ -87,15 +415,16 @@ function handleImageSize(image) {
   return { height: h, width: w, samScale, imgScale };
 }
 
-export function getClicks() {
-  return imagePrompts.val.map((point) => ({
+export function getClicks(prompts) {
+  return (prompts || imagePrompts.val).map((point) => ({
     x: point.x,
     y: point.y,
     clickType: point.label,
+    isAuto: point.isAuto,
   }));
 }
 
-export async function drawSegment(clicks) {
+export async function drawSegment(clicks, layer, drawBox = true) {
   const canvas = document.getElementById("mask-canvas");
   const ctx = canvas.getContext("2d");
   if (clicks.length === 0) {
@@ -103,16 +432,34 @@ export async function drawSegment(clicks) {
     return;
   }
   if (embeddings.val) {
-    const mask = await runONNX(clicks, embeddings.val);
+    const box = enableAutoSegment.val
+      ? boxesMulti.val[layer || selectedLayer.val]
+      : null;
+    const filteredClicks = enableAutoSegment.val
+      ? clicks
+      : clicks.filter((click) => !click.isAuto);
+    if (filteredClicks.length === 0) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    const mask = await runONNX(filteredClicks, embeddings.val, box);
     if (mask) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(mask, 0, 0);
+      if (box && drawBox) {
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1);
+      }
     }
   }
 }
 
 export function LayerEditor() {
   let realTimeSegment = true;
+
+  const showSidebar = van.state(true);
+
   document.addEventListener("keydown", (e) => {
     if (showImageEditor.val && e.code === "Tab") {
       e.preventDefault();
@@ -126,36 +473,97 @@ export function LayerEditor() {
   return div(
     {
       class: () =>
-        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto " +
+        "absolute flex bg-gray-900 bg-opacity-50 top-0 w-full h-full pointer-events-auto z-[1000] " +
         (showImageEditor.val ? "" : "hidden"),
     },
-    button(
+    div(
       {
-        class: () =>
-          "btn btn-circle flex flex-row btn-ghost normal-case absolute p-0 rounded-md left-2 top-0 z-[200] w-fit",
-        onclick: () => {
-          console.log("close");
-          showImageEditor.val = false;
-          api.fetchApi("/segments_order", {
-            method: "POST",
-            body: JSON.stringify({
-              name: embeddingID.val,
-              order: Object.keys(imagePromptsMulti.val),
-            }),
-          });
-        },
+        class:
+          "absolute top-4 left-4 right-0 flex w-full gap-2 justify-start z-[200]",
       },
-      span({
-        class: "iconify text-lg",
-        "data-icon": "ic:baseline-arrow-back",
-        "data-inline": "false",
-      }),
-      div("Back")
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: async () => {
+            console.log("close");
+            showImageEditor.val = false;
+            await uploadSegments();
+
+            const isEqual = allImagePrompts.val.map(
+              (x) =>
+                JSON.stringify(imagePromptsMulti.val) ===
+                JSON.stringify(x.prompt)
+            );
+            if (!isEqual.includes(true))
+              allImagePrompts.val = [
+                ...allImagePrompts.val,
+                {
+                  version: "v" + allImagePrompts.val.length,
+                  prompt: imagePromptsMulti.val,
+                },
+              ];
+
+            // api.fetchApi("/segments_order", {
+            //   method: "POST",
+            //   body: JSON.stringify({
+            //     name: embeddingID.val,
+            //     order: Object.keys(imagePromptsMulti.val),
+            //   }),
+            // });
+          },
+        },
+        span({
+          class: "iconify text-lg",
+          "data-icon": "ic:baseline-arrow-back",
+          "data-inline": "false",
+        }),
+        div("Back")
+      ),
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: () => (showSidebar.val = !showSidebar.val),
+        },
+        div(() => (showSidebar.val ? "Hide UI" : "Show UI"))
+      ),
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: () => {
+            enableAutoSegment.val = !enableAutoSegment.val;
+            drawSegment(getClicks());
+          },
+        },
+        () => (enableAutoSegment.val ? "Auto Segment On" : "Auto Segment Off")
+      ),
+      button(
+        {
+          class: () => "btn btn-neutral flex flex-row normal-case rounded-md",
+          onclick: () => {
+            enableBackgroundRemover.val = !enableBackgroundRemover.val;
+            setRemoveBackgroundNode();
+          },
+        },
+        () =>
+          enableBackgroundRemover.val
+            ? "Background Remover On"
+            : "Background Remover Off"
+      ),
+      button(
+        {
+          class: () =>
+            `btn btn-neutral flex flex-row normal-case rounded-md ${
+              isMobileDevice() ? "" : "hidden"
+            }`,
+          onclick: () => (positivePrompt.val = !positivePrompt.val),
+        },
+        div(() => (positivePrompt.val ? "Positive" : "Negative"))
+      )
     ),
     div(
       {
         class:
-          "hidden w-full flex justify-center absolute top-0 left-0 right-0 items-center",
+          "hidden w-full justify-center absolute top-0 left-0 right-0 items-center",
       },
       button(
         {
@@ -182,10 +590,11 @@ export function LayerEditor() {
         id: "image-container",
       },
       img({
+        id: "image",
         class:
           "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
         src: imageUrl,
-        onload: (e) => {
+        onload: async (e) => {
           imageSize.val = handleImageSize(e.target);
 
           document.getElementById("image-container").style.scale =
@@ -240,19 +649,25 @@ export function LayerEditor() {
           }
         },
       }),
-      canvas({
-        class:
-          "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80",
-        id: "mask-canvas",
-      }),
-      () => {
-        return div(
+      () =>
+        canvas({
+          class:
+            "pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-80",
+          style: () =>
+            `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
+          id: "mask-canvas",
+        }),
+      () =>
+        div(
           {
             class: "absolute w-full h-full pointer-events-none",
             style: () =>
               `width: ${imageContainerSize.val.width}px; height: ${imageContainerSize.val.height}px;`,
           },
-          ...imagePrompts.val?.map((point) => {
+          ...(enableAutoSegment.val
+            ? imagePrompts.val
+            : imagePrompts.val?.filter((click) => !click.isAuto)
+          ).map((point) => {
             return button({
               style: () =>
                 `left: ${
@@ -274,9 +689,8 @@ export function LayerEditor() {
               },
             });
           })
-        );
-      }
+        )
     ),
-    SideBar()
+    () => (showSidebar.val ? SideBar() : div())
   );
 }

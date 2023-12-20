@@ -43,7 +43,29 @@ def append_to_sys_path(path):
     if path not in sys.path:
         sys.path.append(path)
 
-folder_paths.folder_names_and_paths["sams"] = ([os.path.join(folder_paths.models_dir, "sams")], folder_paths.supported_pt_extensions)
+
+folder_paths.folder_names_and_paths["sams"] = (
+    [os.path.join(folder_paths.models_dir, "sams")],
+    folder_paths.supported_pt_extensions,
+)
+
+
+def download_model(url, save_path):
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
+    file_size = int(response.headers.get("Content-Length", 0))
+    chunk_size = 1024
+    num_bars = int(file_size / chunk_size)
+
+    with open(save_path, "wb") as f:
+        for chunk in tqdm(
+            response.iter_content(chunk_size=chunk_size),
+            total=num_bars,
+            unit="KB",
+            desc=url.split("/")[-1],
+        ):
+            f.write(chunk)
+
 
 def download_sam_model():
     model_dir = get_folder_paths("sams")[0]
@@ -56,23 +78,31 @@ def download_sam_model():
     if "sam_vit_h_4b8939.pth" not in files:
         print("Downloading sam model...")
         url = "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth"
-        response = requests.get(url, stream=True)
-        response.raise_for_status()
-        file_size = int(response.headers.get("Content-Length", 0))
-        chunk_size = 1024
-        num_bars = int(file_size / chunk_size)
-
-        with open(f"{model_dir}/sam_vit_h_4b8939.pth", "wb") as f:
-            for chunk in tqdm(
-                response.iter_content(chunk_size=chunk_size),
-                total=num_bars,
-                unit="KB",
-                desc=url.split("/")[-1],
-            ):
-                f.write(chunk)
+        download_model(url, f"{model_dir}/sam_vit_h_4b8939.pth")
 
 
 download_sam_model()
+
+
+def download_face_and_pose_landmarker():
+    model_dir = os.path.join(ag_path, "mediapipe_models")
+    if not os.path.isdir(model_dir):
+        os.makedirs(model_dir)
+
+    model_path = os.path.join(model_dir, "face_landmarker.task")
+    if not os.path.isfile(model_path):
+        print("Downloading face landmarker model...")
+        url = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task"
+        download_model(url, model_path)
+
+    model_path = os.path.join(model_dir, "pose_landmarker_full.task")
+    if not os.path.isfile(model_path):
+        print("Downloading pose landmarker model...")
+        url = "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/latest/pose_landmarker_full.task"
+        download_model(url, model_path)
+
+
+download_face_and_pose_landmarker()
 
 paths = ["blender", "sam"]
 files = []
