@@ -2739,6 +2739,10 @@ details.collapse summary::-webkit-details-marker{
   padding: 1rem;
 }
 
+.p-24{
+  padding: 6rem;
+}
+
 .\!px-0{
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -2757,6 +2761,11 @@ details.collapse summary::-webkit-details-marker{
 .py-2{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .text-start{
