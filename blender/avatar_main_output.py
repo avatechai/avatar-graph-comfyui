@@ -75,7 +75,7 @@ class AvatarMainOutput(blender_node.ObjectOps):
         return {
             "ui": {
                 "gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, 
-                "images": [{
+                "files": [{
                     "filename": filepath.replace(f"{self.output_dir}/", ""),
                     "type": "model/gltf+json",
                 },],
