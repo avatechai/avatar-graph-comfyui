@@ -72,4 +72,14 @@ class AvatarMainOutput(blender_node.ObjectOps):
         import global_bpy
         global_bpy.set_should_reset_scene(True)
 
-        return {"ui": {"gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, "SHAPE_FLOW": {SHAPE_FLOW}, "auto_save": {'true' if auto_save else 'false'},}}
+        return {
+            "ui": {
+                "gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, 
+                "images": [{
+                    "filename": filepath.replace(f"{self.output_dir}/", ""),
+                    "type": "model/gltf+json",
+                },],
+                "SHAPE_FLOW": {SHAPE_FLOW}, 
+                "auto_save": {'true' if auto_save else 'false'}, 
+            }
+        }
