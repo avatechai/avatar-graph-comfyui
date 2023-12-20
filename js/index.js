@@ -749,7 +749,7 @@ function injectUIComponentToComfyuimenu() {
     app.graphToPrompt().then(p=>{
       console.log('fkfk');
       let json = JSON.stringify(p.output, null, 2); // convert the data to a JSON string
-      json = json.replace(/"seed": (\d+)/g, `"seed": "SEED"`).replace(/"image": "(?!.*mask.*\.png).*"/g, '"image": "reference_image_avatech"').replace(/"embedding_id": "(\d+)"/g, '"embedding_id": "embedding_id_avatech"');
+      json = json.replace(/"seed": (\d+)/g, `"seed": "SEED"`).replace(/"image": "(?!.*mask.*\.png).*"/g, '"image": "reference_image_avatech"').replace(/"embedding_id": ".*"/g, '"embedding_id": "embedding_id_avatech"');
       const blob = new Blob([json], {type: "application/json"});
       const url = URL.createObjectURL(blob);
       a.href = url;
