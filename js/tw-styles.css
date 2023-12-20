@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
 
 /*
-! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -34,9 +34,11 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
 */
 
-html {
+html,
+:host {
   line-height: 1.5;
   /* 1 */
   -webkit-text-size-adjust: 100%;
@@ -46,12 +48,14 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
   font-variation-settings: normal;
   /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
 }
 
 /*
@@ -123,8 +127,10 @@ strong {
 }
 
 /*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
 */
 
 code,
@@ -133,8 +139,12 @@ samp,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* 1 */
-  font-size: 1em;
+  font-feature-settings: normal;
   /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
 }
 
 /*
@@ -501,7 +511,7 @@ html{
 :root{
   color-scheme: light;
   --in: 0.7206 0.191 231.6;
-  --su: 0.7441 0.213 164.75;
+  --su: 64.8% 0.150 160;
   --wa: 0.8471 0.199 83.87;
   --er: 0.7176 0.221 22.18;
   --pc: 0.89824 0.06192 275.75;
@@ -742,7 +752,7 @@ html{
   justify-content: center;
   border-radius: var(--rounded-btn, 0.5rem);
   border-color: transparent;
-  border-color: oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1));
+  border-color: oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity));
   padding-left: 1rem;
   padding-right: 1rem;
   text-align: center;
@@ -762,7 +772,9 @@ html{
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   outline-color: var(--fallback-bc,oklch(var(--bc)/1));
-  background-color: oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1));
+  background-color: oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 1;
+  --tw-border-opacity: 1;
 }
 
 .btn-disabled,
@@ -870,8 +882,7 @@ html{
   flex-grow: 1;
   --tw-content: '';
   content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
+  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
 }
 
 .dropdown{
@@ -959,18 +970,23 @@ html{
   .btn:hover{
     --tw-border-opacity: 1;
     border-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-border-opacity)));
-    border-color: color-mix(
-          in oklab,
-          oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%,
-          black
-        );
     --tw-bg-opacity: 1;
     background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
-    background-color: color-mix(
-          in oklab,
-          oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
-          black
-        );
+  }
+
+  @supports (color: color-mix(in oklab, black, black)){
+    .btn:hover{
+      background-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+            black
+          );
+      border-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%,
+            black
+          );
+    }
   }
 
   @supports not (color: oklch(0 0 0)){
@@ -1005,9 +1021,11 @@ html{
     --tw-text-opacity: 0.2;
   }
 
-  .btn:is(input[type="checkbox"]:checked):hover, .btn:is(input[type="radio"]:checked):hover{
-    background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
-    border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
+  @supports (color: color-mix(in oklab, black, black)){
+    .btn:is(input[type="checkbox"]:checked):hover, .btn:is(input[type="radio"]:checked):hover{
+      background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
+      border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
+    }
   }
 
   .dropdown.dropdown-hover:hover .dropdown-content{
@@ -1018,8 +1036,6 @@ html{
 
   :where(.menu li:not(.menu-title):not(.disabled) > *:not(ul):not(details):not(.menu-title)):not(.active):hover, :where(.menu li:not(.menu-title):not(.disabled) > details > summary:not(.menu-title)):not(.active):hover{
     cursor: pointer;
-    --tw-text-opacity: 1;
-    color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
@@ -1050,6 +1066,9 @@ html{
 
 .input{
   flex-shrink: 1;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   height: 3rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1152,10 +1171,8 @@ html{
 .menu :where(li ul){
   position: relative;
   white-space: nowrap;
-  -webkit-margin-start: 1rem;
-          margin-inline-start: 1rem;
-  -webkit-padding-start: 0.5rem;
-          padding-inline-start: 0.5rem;
+  margin-inline-start: 1rem;
+  padding-inline-start: 0.5rem;
 }
 
 .menu :where(li:not(.menu-title) > *:not(ul):not(details):not(.menu-title)),
@@ -1485,8 +1502,7 @@ details.collapse summary::-webkit-details-marker{
 :where(.collapse > input[type="radio"]){
   width: 100%;
   padding: 1rem;
-  -webkit-padding-end: 3rem;
-          padding-inline-end: 3rem;
+  padding-inline-end: 3rem;
   min-height: 3.75rem;
   transition: background-color 0.2s ease-out;
 }
@@ -1577,11 +1593,14 @@ details.collapse summary::-webkit-details-marker{
   --tw-placeholder-opacity: 0.2;
 }
 
+.input::-webkit-date-and-time-value{
+  text-align: inherit;
+}
+
 .join > :where(*:not(:first-child)){
   margin-top: 0px;
   margin-bottom: 0px;
-  -webkit-margin-start: -1px;
-          margin-inline-start: -1px;
+  margin-inline-start: -1px;
 }
 
 .link:focus{
@@ -1624,7 +1643,9 @@ details.collapse summary::-webkit-details-marker{
 }
 
 :where(.menu li:empty){
-  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
+  opacity: 0.1;
   margin: 0.5rem 1rem;
   height: 1px;
 }
@@ -1635,7 +1656,9 @@ details.collapse summary::-webkit-details-marker{
   inset-inline-start: 0px;
   top: 0.75rem;
   width: 1px;
-  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
+  opacity: 0.1;
   content: "";
 }
 
@@ -1760,7 +1783,7 @@ details.collapse summary::-webkit-details-marker{
 
 .modal:not(dialog:not(.modal-open)),
   .modal::backdrop{
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #0006;
   animation: modal-pop 0.2s ease-out;
 }
 
@@ -2083,8 +2106,7 @@ details.collapse summary::-webkit-details-marker{
 .join.join-horizontal > :where(*:not(:first-child)){
   margin-top: 0px;
   margin-bottom: 0px;
-  -webkit-margin-start: -1px;
-          margin-inline-start: -1px;
+  margin-inline-start: -1px;
 }
 
 .modal-top :where(.modal-box){
@@ -2172,10 +2194,6 @@ details.collapse summary::-webkit-details-marker{
 
 .left-1\/2{
   left: 50%;
-}
-
-.left-28{
-  left: 7rem;
 }
 
 .left-4{
@@ -2268,10 +2286,6 @@ details.collapse summary::-webkit-details-marker{
   margin-top: 0.5rem;
 }
 
-.mt-4{
-  margin-top: 1rem;
-}
-
 .mt-8{
   margin-top: 2rem;
 }
@@ -2304,17 +2318,41 @@ details.collapse summary::-webkit-details-marker{
   height: 394px;
 }
 
+.h-full{
+  height: 100%;
+}
+
 .h-fit{
   height: -moz-fit-content;
   height: fit-content;
 }
 
-.h-full{
-  height: 100%;
+.h-\[400px\]{
+  height: 400px;
+}
+
+.h-\[420px\]{
+  height: 420px;
+}
+
+.h-\[410px\]{
+  height: 410px;
+}
+
+.h-\[360px\]{
+  height: 360px;
 }
 
 .min-h-\[400px\]{
   min-height: 400px;
+}
+
+.min-h-\[380px\]{
+  min-height: 380px;
+}
+
+.min-h-\[350px\]{
+  min-height: 350px;
 }
 
 .w-20{
@@ -2350,8 +2388,40 @@ details.collapse summary::-webkit-details-marker{
   width: 100%;
 }
 
+.w-\[\]{
+  width: ;
+}
+
+.w-\[400px\]{
+  width: 400px;
+}
+
+.w-\[420px\]{
+  width: 420px;
+}
+
+.w-\[410px\]{
+  width: 410px;
+}
+
+.w-\[360px\]{
+  width: 360px;
+}
+
 .min-w-\[400px\]{
   min-width: 400px;
+}
+
+.min-w-\[380\]{
+  min-width: 380;
+}
+
+.min-w-\[380px\]{
+  min-width: 380px;
+}
+
+.min-w-\[350px\]{
+  min-width: 350px;
 }
 
 .max-w-\[100\%\]{
@@ -2404,10 +2474,6 @@ details.collapse summary::-webkit-details-marker{
   justify-content: space-between;
 }
 
-.justify-around{
-  justify-content: space-around;
-}
-
 .gap-2{
   gap: 0.5rem;
 }
@@ -2422,14 +2488,6 @@ details.collapse summary::-webkit-details-marker{
 
 .overflow-hidden{
   overflow: hidden;
-}
-
-.overflow-y-auto{
-  overflow-y: auto;
-}
-
-.overflow-x-hidden{
-  overflow-x: hidden;
 }
 
 .rounded{
@@ -2454,6 +2512,14 @@ details.collapse summary::-webkit-details-marker{
 
 .rounded-sm{
   border-radius: 0.125rem;
+}
+
+.rounded-2xl{
+  border-radius: 1rem;
+}
+
+.rounded-xl{
+  border-radius: 0.75rem;
 }
 
 .rounded-b-md{
@@ -2669,10 +2735,6 @@ details.collapse summary::-webkit-details-marker{
   padding: 0.5rem;
 }
 
-.p-24{
-  padding: 6rem;
-}
-
 .p-4{
   padding: 1rem;
 }
@@ -2690,11 +2752,6 @@ details.collapse summary::-webkit-details-marker{
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
-}
-
-.py-16{
-  padding-top: 4rem;
-  padding-bottom: 4rem;
 }
 
 .py-2{

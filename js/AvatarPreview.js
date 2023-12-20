@@ -173,10 +173,6 @@ async function prepareImageFromUrlRedirect(stage) {
 
 export function AvatarPreview() {
   console.log("getting workflow json now");
-  loadJSONWorkflow("default").then(() => {
-    console.log("done loading");
-    jsonWorkflowLoading.val = false;
-  });
 
   const loading = van.state(false);
   const shareLoading = van.state("share"); // share, loading, shared
@@ -465,7 +461,7 @@ export function AvatarPreview() {
       name: "avatech-viewer-iframe",
       allow: "cross-origin-isolated",
       class: () =>
-        "w-full h-full min-w-[400px] min-h-[400px] z-[100] pointer-events-auto flex border-none overflow-hidden" +
+        "w-full h-full min-w-[350px] min-h-[350px] z-[100] pointer-events-auto flex border-none overflow-hidden bg-transparent" +
         (showPreview.val ? "" : "hidden"),
       // src: "https://labs.avatech.ai/viewer/default",
       // src: "http://localhost:3000/viewer/default",
@@ -711,50 +707,11 @@ export function AvatarPreview() {
 
         return (
           (showPreview.val ? "" : "hidden ") +
-          "w-full h-full absolute left-0 top-0 z-[99] pointer-events-auto flex border-none bg-white"
+          "absolute w-[360px] h-[360px] rounded-xl overflow-hidden right-0 top-0 z-[99] pointer-events-auto flex border-none bg-transparent"
         );
       },
     },
-    div(
-      { class: "overflow-y-auto overflow-x-hidden w-full h-full" },
-      div(
-        {
-          class: "absolute top-4 left-4 flex flex-row gap-2",
-        },
-        renderCloseButton(),
-        renderRestartButton(),
-        renderChangeWorkflowButton()
-      ),
-      renderTwitter(),
-      () => {
-        if (isMobileDevice()) {
-          return div(
-            {
-              class: () =>
-                "flex flex-col w-full h-fit bg-white justify-center items-center py-16 px-4 gap-2" +
-                (showPreview.val ? "" : "hidden"),
-            },
-            renderIFrame(),
-            renderSteps(),
-            renderShareLink()
-          );
-        } else {
-          return div(
-            {
-              class: () =>
-                "flex w-full h-full bg-white justify-around items-center p-24" +
-                (showPreview.val ? "" : "hidden"),
-            },
-            renderSteps(),
-            div(
-              { class: () => "flex flex-col" },
-              renderIFrame(),
-              renderShareLink()
-            )
-          );
-        }
-      }
-    )
+    renderIFrame(),
   );
 }
 

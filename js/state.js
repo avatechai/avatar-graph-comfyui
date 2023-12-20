@@ -25,7 +25,7 @@ export const showEditor = van.state(false);
 // localStorage.getItem("showPreview") == 'true'
 export const showPreview = van.state(true);
 export const previewUrl = van.state(
-  "https://editor.avatech.ai/viewer?avatarId=default&debug=false&width=400&height=400&hideTrigger=true&voiceSelection=true&hideUI=true"
+  "https://editor.avatech.ai/viewer?avatarId=default&debug=true&width=350&height=350&hideTrigger=true&voiceSelection=true&hideUI=true"
 );
 export const previewImg = van.state("");
 export const previewImgLoading = van.state(false);

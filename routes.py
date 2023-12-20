@@ -125,7 +125,7 @@ async def post_sam_model(request):
                 }
                 json.dump(data, f)
         else:
-            sam = sam_model_registry[model_type](checkpoint=ckpt).to("cuda")
+            sam = sam_model_registry[model_type](checkpoint=ckpt)
             predictor = SamPredictor(sam)
 
             image_np = (image * 255).astype(np.uint8)
@@ -260,8 +260,6 @@ def load_workflow(workflow_name):
         return "\n".join(f.readlines())
 
 
-default_workflow = load_workflow("avatar_generation_mask_api_v11(FaceToon)")
-
 
 @server.PromptServer.instance.routes.post("/avatar_generation")
 async def post_prompt_block(request):
@@ -273,8 +271,6 @@ async def post_prompt_block(request):
         workflow = uploaded_workflow
     elif workflow_name is not None:
         workflow = load_workflow(workflow_name)
-    else:
-        workflow = default_workflow
 
     ref_image = post.get("ref_image")
     base_image = post.get("base_image")
