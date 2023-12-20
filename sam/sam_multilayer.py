@@ -280,7 +280,7 @@ class SAMMultiLayer:
         return imagePromptsMulti, boxesMulti
 
     def load_image(self, image, ckpt, embedding_id, image_prompts_json):
-        image_prompts = json.loads(image_prompts_json)
+        image_prompts = json.loads(image_prompts_json.replace("'", '"'))
 
         order_file = f"{self.output_dir}/segments_{embedding_id}/order.json"
         if os.path.exists(order_file):
@@ -337,7 +337,7 @@ class SAMMultiLayer:
 
             imagePromptsMulti, boxesMulti = self.detect_face(image[0].numpy())
 
-            image_prompts = json.loads(image_prompts_json)
+            image_prompts = json.loads(image_prompts_json.replace("'", '"'))
             result = [image_prompts]
 
             if isinstance(image_prompts, list):

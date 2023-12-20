@@ -299,18 +299,18 @@ async def post_prompt_block(request):
     api_prompt = json.loads(workflow)
 
     # skip generation part if base_image is provided
-    # if base_image is not None:
-    #     for value in api_prompt.values():
-    #         if (
-    #             value["class_type"] == "LoadImageFromRequest"
-    #             and value["inputs"]["name"] == image_path
-    #         ):
-    #             del value["inputs"]["image"]
-    #         elif (
-    #             value["class_type"] == "PreviewImage"
-    #             or value["class_type"] == "SaveImage"
-    #         ):
-    #             del value["inputs"]["images"]
+    if base_image is not None:
+        for value in api_prompt.values():
+            if (
+                value["class_type"] == "LoadImageFromRequest"
+                and value["inputs"]["name"] == image_path
+            ):
+                del value["inputs"]["image"]
+            elif (
+                value["class_type"] == "PreviewImage"
+                or value["class_type"] == "SaveImage"
+            ):
+                value["inputs"] = {}
 
     res = post_prompt({"prompt": api_prompt})
     prompt_id = json.loads(res.text)["prompt_id"]
