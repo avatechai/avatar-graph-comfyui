@@ -292,7 +292,7 @@ async def post_prompt_block(request):
         if key.startswith("mask_"):
             mask_name = image_name + "_" + key.replace("mask_", "") + image_ext
             mask_path = save_image(value, save_name=mask_name)
-            workflow = workflow.replace(key, mask_path)
+            workflow = workflow.replace(f'"{key}"', f'"{mask_path}"')
 
     workflow = workflow.replace("embedding_id_avatech", image_path)
     workflow = workflow.replace("SEED", str(randomSeed()))
