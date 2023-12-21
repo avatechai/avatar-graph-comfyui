@@ -3,7 +3,7 @@ numpy
 opencv-python
 opencv-contrib-python
 einops
-bpy
+bpy==3.6.0
 segment-anything
 tqdm
 python-dotenv
