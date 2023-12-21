@@ -77,7 +77,7 @@ class AvatarMainOutput(blender_node.ObjectOps):
                 "gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, 
                 "files": [{
                     "filename": filepath.replace(f"{self.output_dir}/", ""),
-                    "type": "model/gltf+json",
+                    "content_type": "model/gltf+json",
                 },],
                 "SHAPE_FLOW": {SHAPE_FLOW}, 
                 "auto_save": {'true' if auto_save else 'false'}, 
