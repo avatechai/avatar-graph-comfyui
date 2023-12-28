@@ -1,6 +1,9 @@
 import atexit
 import subprocess
 import os
+import folder_paths
+import requests
+import json
 
 def genreate_mesh_from_texture(bpy, image):
     import torch
@@ -246,3 +249,40 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metad
             filepath = new_filepath
 
     return filepath
+
+def get_avatar_file(outputs):
+    for node_id, output in outputs.items():
+        if "gltfFilename" in output:
+            avatar_filename = output["gltfFilename"][0]
+            with open(
+                f"{folder_paths.get_output_directory()}/{avatar_filename}", "rb"
+            ) as f:
+                return f.read()
+
+def upload_avatar_file(outputs):
+    file = get_avatar_file(outputs)
+    response = requests.get("https://labs.avatech.ai/api/share")
+    labData = response.json()
+    modelId = labData["modelId"]
+
+    # upload model
+    headers = {
+        "x-amz-acl": "public-read",
+        "Content-Type": "model/gltf-binary",
+        "Content-Length": str(len(file)),
+    }
+    requests.put(labData["url"], headers=headers, data=file)
+
+    # send notification
+    webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+    data = {
+        "username": "Avabot",
+        "avatar_url": "https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatechai.png",
+        "content": "[API Call] New register!",
+    }
+    headers = {
+        "Content-Type": "application/json",
+    }
+    response = requests.post(webhook_url, headers=headers, data=json.dumps(data))
+
+    return modelId

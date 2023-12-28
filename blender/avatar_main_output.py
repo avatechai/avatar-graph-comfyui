@@ -1,6 +1,6 @@
 import platform
 import blender_node
-from mesh_utils import assign_texture, open_in_blender as open_blender, export_gltf
+from mesh_utils import upload_avatar_file, open_in_blender as open_blender, export_gltf
 import folder_paths
 
 global_blender_path = ''
@@ -47,14 +47,16 @@ class AvatarMainOutput(blender_node.ObjectOps):
         }),
         "model_type": (["AVA","GLB", "GLTF_EMBEDDED"],),
         "write_mode": (["Overwrite", "Increment"],),
-
+        "upload_to_cloud": ("BOOLEAN", {
+            "default": False
+        }),
         "SHAPE_FLOW": ("SHAPE_FLOW",),
     }
 
     OUTPUT_NODE = True
     RETURN_TYPES = ()
 
-    def blender_process(self, bpy, BPY_OBJ=None, BPY_OBJS=None, open_in_blender=False, auto_save=False, blender_path_override='', filename='', model_type='', write_mode='', SHAPE_FLOW=''):
+    def blender_process(self, bpy, BPY_OBJ=None, BPY_OBJS=None, open_in_blender=False, auto_save=False, blender_path_override='', filename='', model_type='', write_mode='', SHAPE_FLOW='', upload_to_cloud=False):
         if open_in_blender:
             p = blender_path_override if blender_path_override else global_blender_path
             output_file = self.output_dir + '/tmp.blend'
@@ -72,7 +74,7 @@ class AvatarMainOutput(blender_node.ObjectOps):
         import global_bpy
         global_bpy.set_should_reset_scene(True)
 
-        return {
+        outputs = {
             "ui": {
                 "gltfFilename": {filepath.replace(f"{self.output_dir}/", "")}, 
                 "files": [{
@@ -83,3 +85,12 @@ class AvatarMainOutput(blender_node.ObjectOps):
                 "auto_save": {'true' if auto_save else 'false'}, 
             }
         }
+        if upload_to_cloud:
+            avatarId = upload_avatar_file(outputs)
+            return {
+                "ui": {
+                    **outputs["ui"],
+                    "avatarId": {avatarId},
+                },
+            }
+        return outputs
