@@ -63,7 +63,6 @@ export const imagePrompts = van.state([]);
 
 export const allImagePrompts = van.state([{}]);
 
-
 /** @type {State<Record<string, Point[]>>} */
 export const imagePromptsMulti = van.state({});
 
@@ -76,3 +75,7 @@ export const targetNode = van.state();
 export const imageSize = van.state({ width: 0, height: 0, samScale: 0 });
 export const embeddings = van.state();
 export const embeddingID = van.state("Test");
+
+/** @type {State<LGraphNode>} */
+export const combinePointsNode = van.state();
+export const samPrompts = van.state({});
