@@ -5,6 +5,7 @@ import {
   imageUrl,
   imagePrompts,
   targetNode,
+  combinePointsNode,
   fileName,
   embeddings,
   imagePromptsMulti,
@@ -389,6 +390,16 @@ const ext = {
           widget: btn,
         };
       },
+      COMBINE_POINTS(node, inputName, inputData, app) {
+        const btn = node.addWidget("button", "Edit points", "", () => {
+          console.log("Edit points");
+          combine_points_dialog.showModal();
+          combinePointsNode.val = node;
+        });
+        return {
+          widget: btn,
+        };
+      },
       BLENDSHAPES_CONFIG(node, inputName, inputData, app) {
         const btn = node.addWidget("button", "Edit Shape Flow", "", () => {
           targetNode.val = node;
@@ -684,6 +695,18 @@ const ext = {
           });
         });
         break;
+      case "Combine Points":
+        nodeData.input.required.sam = ["COMBINE_POINTS"];
+
+        addMenuHandler(nodeType, function (_, options) {
+          options.unshift({
+            content: "Open In Points Editor (Local)",
+            callback: () => {
+              showMyImageEditor(this);
+            },
+          });
+        });
+        break;
       case "CreateShapeFlow":
         nodeData.input.required.blendshape = ["BLENDSHAPES_CONFIG"];
         break;
@@ -746,11 +769,19 @@ function injectUIComponentToComfyuimenu() {
     if (!filename.toLowerCase().endsWith(".json")) {
       filename += ".json";
     }
-    app.graphToPrompt().then(p=>{
-      console.log('fkfk');
+    app.graphToPrompt().then((p) => {
       let json = JSON.stringify(p.output, null, 2); // convert the data to a JSON string
-      json = json.replace(/"seed": (\d+)/g, `"seed": "SEED"`).replace(/"image": "(?!.*mask.*\.png).*"/g, '"image": "reference_image_avatech"').replace(/"embedding_id": ".*"/g, '"embedding_id": "embedding_id_avatech"');
-      const blob = new Blob([json], {type: "application/json"});
+      json = json
+        .replace(/"seed": (\d+)/g, `"seed": "SEED"`)
+        .replace(
+          /"image": "(?!.*mask.*\.png).*"/g,
+          '"image": "reference_image_avatech"'
+        )
+        .replace(
+          /"embedding_id": ".*"/g,
+          '"embedding_id": "embedding_id_avatech"'
+        );
+      const blob = new Blob([json], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       a.href = url;
       a.download = filename;
