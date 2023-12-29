@@ -250,17 +250,15 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metad
 
     return filepath
 
-def get_avatar_file(outputs):
-    for node_id, output in outputs.items():
-        if "gltfFilename" in output:
-            avatar_filename = output["gltfFilename"][0]
-            with open(
-                f"{folder_paths.get_output_directory()}/{avatar_filename}", "rb"
-            ) as f:
-                return f.read()
+def get_avatar_file(output):
+    avatar_filename = output["gltfFilename"][0]
+    with open(
+        f"{folder_paths.get_output_directory()}/{avatar_filename}", "rb"
+    ) as f:
+        return f.read()
 
-def upload_avatar_file(outputs):
-    file = get_avatar_file(outputs)
+def upload_avatar_file(output):
+    file = get_avatar_file(output)
     response = requests.get("https://labs.avatech.ai/api/share")
     labData = response.json()
     modelId = labData["modelId"]

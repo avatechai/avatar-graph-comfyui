@@ -277,10 +277,12 @@ async def post_prompt_block(request):
         if history:
             # file = get_avatar_file(history[prompt_id]["outputs"])
             # return web.Response(body=file)
-
-            modelId = upload_avatar_file(history[prompt_id]["outputs"])
-            print("model id", modelId)
-            return web.json_response({"id": modelId}, status=200)
+            outputs = history[prompt_id]["outputs"]
+            for node_id, output in outputs.items():
+                if "gltfFilename" in output:
+                    modelId = upload_avatar_file(output)
+                    print("model id", modelId)
+                    return web.json_response({"id": modelId}, status=200)
         time.sleep(0.5)
 
 
