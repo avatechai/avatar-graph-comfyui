@@ -7,8 +7,7 @@ van.derive(() => {
     combinePointsNode.val != undefined &&
     combinePointsNode.val.type === "Combine Points"
   ) {
-    const inputNames =
-      combinePointsNode.val.inputs?.map((x) => x.name).slice(1) || [];
+    const inputNames = combinePointsNode.val.inputs?.map((x) => x.name) || [];
     const record = Object.keys(samPrompts.val);
 
     const missingDiff = record.filter((x) => !inputNames.includes(x));
