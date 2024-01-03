@@ -1,3 +1,4 @@
+import json
 
 class CombinePoints:
     @classmethod
@@ -7,7 +8,8 @@ class CombinePoints:
             },
         }
 
-    RETURN_TYPES = ("SAM_PROMPTS",)
+    RETURN_NAMES = ("SAM_PROMPTS",)
+    RETURN_TYPES = ("STRING",)
 
     FUNCTION = "run"
 
@@ -16,9 +18,8 @@ class CombinePoints:
     # OUTPUT_NODE = True
 
     def run(self, *args, **kwargs):
-        print("args", args)
-        print("kwargs", kwargs)
-        return ([])
+        sam_prompts = json.dumps(kwargs, default=str)
+        return (sam_prompts,)
 
 
 NODE_CLASS_MAPPINGS = {"Combine Points": CombinePoints}

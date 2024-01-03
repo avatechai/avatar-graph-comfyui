@@ -270,11 +270,17 @@ class SAMMultiLayer:
             image_format=mp.ImageFormat.SRGB, data=(np_image * 255).astype(np.uint8)
         )
         face_landmarks = face_landmarker.detect(mp_image).face_landmarks
-        face_landmarks = face_landmarks[0] if len(face_landmarks) > 0 else None
+        if len(face_landmarks) == 0:
+            print("Warning: no face detected")
+            return None, None
+
         pose_landmarks = pose_landmarker.detect(mp_image).pose_landmarks
-        pose_landmarks = pose_landmarks[0] if len(pose_landmarks) > 0 else None
+        if len(pose_landmarks) == 0:
+            print("Warning: no pose detected")
+            return None, None
+
         imagePromptsMulti, boxesMulti = self.auto_segment(
-            np_image, face_landmarks, pose_landmarks
+            np_image, face_landmarks[0], pose_landmarks[0]
         )
 
         return imagePromptsMulti, boxesMulti
@@ -338,7 +344,7 @@ class SAMMultiLayer:
             imagePromptsMulti, boxesMulti = self.detect_face(image[0].numpy())
 
             image_prompts = json.loads(image_prompts_json.replace("'", '"'))
-            result = [image_prompts]
+            result = [image_prompts]  # use imagePromptsMulti
 
             if isinstance(image_prompts, list):
                 pass
@@ -350,7 +356,9 @@ class SAMMultiLayer:
                         continue
 
                     points = (
-                        imagePromptsMulti[key] if key in imagePromptsMulti else item
+                        imagePromptsMulti[key]
+                        if imagePromptsMulti is not None and key in imagePromptsMulti
+                        else item
                     )
                     point_coords = np.array([[p["x"], p["y"]] for p in points])
                     point_labels = np.array([p["label"] for p in points])
@@ -358,7 +366,9 @@ class SAMMultiLayer:
                     masks, _, _ = global_predictor.predict(
                         point_coords=point_coords,
                         point_labels=point_labels,
-                        box=boxesMulti[key] if key in boxesMulti else None,
+                        box=boxesMulti[key]
+                        if boxesMulti is not None and key in boxesMulti
+                        else None,
                     )
                     masks = torch.from_numpy(masks)
                     masks = rearrange(masks[0], "h w -> 1 h w")

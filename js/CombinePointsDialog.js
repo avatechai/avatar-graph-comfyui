@@ -10,7 +10,17 @@ van.derive(() => {
     const inputNames = combinePointsNode.val.inputs?.map((x) => x.name) || [];
     const record = Object.keys(samPrompts.val);
 
+    const diff = inputNames.filter((x) => !record.includes(x));
     const missingDiff = record.filter((x) => !inputNames.includes(x));
+
+    if (diff.length > 0) {
+      diff.forEach((x) => {
+        combinePointsNode.val.removeInput(
+          combinePointsNode.val.findInputSlot(x)
+        );
+      });
+      combinePointsNode.val.graph.change();
+    }
 
     if (missingDiff.length > 0) {
       missingDiff.forEach((x) => {

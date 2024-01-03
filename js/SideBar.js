@@ -6,6 +6,7 @@ import {
   targetNode,
   showImageEditor,
   allImagePrompts,
+  samPrompts,
 } from "./state.js";
 import { van } from "./van.js";
 const {
@@ -24,6 +25,33 @@ const {
   span,
 } = van.tags;
 
+export const updateOutputs = () => {
+  const outputNames = targetNode.val.outputs.map((x) => x.name).slice(1);
+  const record = Object.keys(imagePromptsMulti.val);
+
+  const diff = outputNames.filter((x) => !record.includes(x));
+  const missingDiff = record.filter((x) => !outputNames.includes(x));
+
+  if (diff.length > 0) {
+    console.log("Cleaning up missing output slots", diff);
+    diff.forEach((x) => {
+      targetNode.val.removeOutput(targetNode.val.findOutputSlot(x));
+    });
+    targetNode.val.graph.change();
+  }
+
+  if (missingDiff.length > 0) {
+    console.log("Adding missing output slots", diff);
+    missingDiff.forEach((x) => {
+      targetNode.val.addOutput(
+        x,
+        targetNode.val.type === "SAM MultiLayer" ? "IMAGE" : "SAM_PROMPT"
+      );
+    });
+    targetNode.val.graph.change();
+  }
+};
+
 van.derive(() => {
   if (
     showImageEditor.val &&
@@ -31,30 +59,7 @@ van.derive(() => {
     targetNode.val.outputs &&
     targetNode.val.type === "SAM MultiLayer"
   ) {
-    const outputNames = targetNode.val.outputs.map((x) => x.name).slice(1);
-    const record = Object.keys(imagePromptsMulti.val);
-
-    const diff = outputNames.filter((x) => !record.includes(x));
-    const missingDiff = record.filter((x) => !outputNames.includes(x));
-
-    if (diff.length > 0) {
-      console.log("Cleaning up missing output slots", diff);
-      diff.forEach((x) => {
-        targetNode.val.removeOutput(targetNode.val.findOutputSlot(x));
-      });
-      targetNode.val.graph.change();
-    }
-
-    if (missingDiff.length > 0) {
-      console.log("Adding missing output slots", diff);
-      missingDiff.forEach((x) => {
-        targetNode.val.addOutput(
-          x,
-          targetNode.val.type === "SAM MultiLayer" ? "IMAGE" : "SAM_PROMPT"
-        );
-      });
-      targetNode.val.graph.change();
-    }
+    updateOutputs();
   }
 });
 

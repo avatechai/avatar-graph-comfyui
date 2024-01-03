@@ -18,6 +18,7 @@ import {
   previewModelId,
   embeddingID,
   enableAutoSegment,
+  samPrompts,
 } from "./state.js";
 import { van } from "./van.js";
 import { app } from "./app.js";
@@ -34,6 +35,7 @@ import {
 import { infoDialog } from "./dialog.js";
 import { sharedAvatarLink } from "./AvatarPreview.js";
 import { updateImagePrompts } from "./LayerEditor.js";
+import { updateOutputs } from "./SideBar.js";
 
 export const generatedImages = {};
 
@@ -358,7 +360,6 @@ function showMyImageEditor(node) {
           drawSegment(getClicks());
           updateImagePrompts();
         });
-        targetNode.val = node;
       })
       .catch((err) => {
         console.log(err);
@@ -386,6 +387,15 @@ const ext = {
           showMyImageEditor(node);
           btn.serialize = false;
         });
+
+        targetNode.val = node;
+        node.onConnectInput = (node, slot, targetSlot) => {
+          if (targetSlot.name === "SAM_PROMPTS") {
+            imagePromptsMulti.val = samPrompts.val;
+            updateOutputs();
+          }
+        };
+
         return {
           widget: btn,
         };
