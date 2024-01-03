@@ -6,11 +6,13 @@ import { modelData, onnxMaskToImage } from "./onnx_helper.js";
 ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/";
 
 export let model = null;
+let modelType = null;
 
 // Initialize the ONNX model
-export const initModel = async (modelType) => {
+export const initModel = async (type) => {
   try {
-    if (!model) {
+    if (!model || modelType !== type) {
+      modelType = type;
       model = await ort.InferenceSession.create(
         `${location.protocol}//${location.host}/sam_model?type=${modelType}`
       );
