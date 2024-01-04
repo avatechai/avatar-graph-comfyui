@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import re
 import json
+import uuid
 from segment_anything import sam_model_registry, SamPredictor
 from einops import rearrange, repeat
 from PIL import Image
@@ -126,7 +127,7 @@ class SAMMultiLayer:
         global global_predictor, face_landmarker, pose_landmarker
 
         ckpt = folder_paths.get_full_path("sams", ckpt)
-        sam = sam_model_registry[model_type](checkpoint=ckpt)  # .to("cuda")
+        sam = sam_model_registry[model_type](checkpoint=ckpt) # .to("cuda")
         global_predictor = SamPredictor(sam)
 
         face_landmarker_model_path = os.path.join(
@@ -286,6 +287,8 @@ class SAMMultiLayer:
         return imagePromptsMulti, boxesMulti
 
     def load_image(self, image, ckpt, embedding_id, image_prompts_json):
+        if 'COMFY_DEPLOY' in os.environ and os.getenv('COMFY_DEPLOY', 'FALSE') == "TRUE":
+            embedding_id = str(uuid.uuid4())
         image_prompts = json.loads(image_prompts_json.replace("'", '"'))
 
         order_file = f"{self.output_dir}/segments_{embedding_id}/order.json"
