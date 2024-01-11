@@ -18,7 +18,7 @@ class Mesh_SetShapeKeyValue(blender_node.ObjectOps):
         if BPY_OBJ.data.shape_keys:
             # Check if the specified shape key exists
             if shape_key_name in BPY_OBJ.data.shape_keys.key_blocks:
-                BPY_OBJ.data.shape_keys.key_blocks[shape_key_name].value = value
+                BPY_OBJ.data.shape_keys.key_blocks[shape_key_name].value = float(value)
             else:
                 print(f"The shape key {shape_key_name} does not exist on the object.")
         else:

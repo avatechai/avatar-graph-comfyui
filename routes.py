@@ -285,6 +285,52 @@ async def post_prompt_block(request):
                     return web.json_response({"id": modelId}, status=200)
         time.sleep(0.5)
 
+# TODO: refactor the code
+@server.PromptServer.instance.routes.post("/rendering_generation")
+async def post_data_generation(request):
+    prompt_server = server.PromptServer.instance
+    post = await request.json()
+    workflow_name = post.get("workflow_name")
+    workflow = load_workflow(workflow_name)
+    workflow = workflow.replace("SEED", str(randomSeed()))
+
+    inputs = post.get("inputs")
+
+    for key, value in inputs.items():
+        workflow = workflow.replace(f"{key}", str(value))
+
+    res = post_prompt({"prompt": json.loads(workflow)})
+    prompt_id = json.loads(res.text)["prompt_id"]
+    while True:
+        history = prompt_server.prompt_queue.get_history(prompt_id=prompt_id)
+        if history:
+            outputs = history[prompt_id]["outputs"]
+            for node_id, output in outputs.items():
+                if "images" in output:
+                    filename = output["images"][0]["filename"]
+                    if filename.startswith("rendered"):
+                        return web.json_response({"image": filename}, status=200)
+        time.sleep(0.5)
+
+@server.PromptServer.instance.routes.post("/avatar_generation")
+async def post_image_generation(request):
+    prompt_server = server.PromptServer.instance
+    workflow = load_workflow("generation")
+    workflow = workflow.replace("SEED", str(randomSeed()))
+
+    res = post_prompt({"prompt": json.loads(workflow)})
+    prompt_id = json.loads(res.text)["prompt_id"]
+    while True:
+        history = prompt_server.prompt_queue.get_history(prompt_id=prompt_id)
+        if history:
+            outputs = history[prompt_id]["outputs"]
+            for node_id, output in outputs.items():
+                if "images" in output:
+                    filename = output["images"][0]["filename"]
+                    if filename.startswith("avatar"):
+                        return web.json_response({"image": filename}, status=200)
+        time.sleep(0.5)
+
 
 # @server.PromptServer.instance.routes.get("/get_default_workflow")
 # async def get_default_workflow(request):
