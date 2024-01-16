@@ -297,7 +297,7 @@ async def post_data_generation(request):
     inputs = post.get("inputs")
 
     for key, value in inputs.items():
-        workflow = workflow.replace(f"{key}", str(value))
+        workflow = workflow.replace(f'"{key}"', f'"{str(value)}"')
 
     res = post_prompt({"prompt": json.loads(workflow)})
     prompt_id = json.loads(res.text)["prompt_id"]
@@ -312,7 +312,7 @@ async def post_data_generation(request):
                         return web.json_response({"image": filename}, status=200)
         time.sleep(0.5)
 
-@server.PromptServer.instance.routes.post("/avatar_generation")
+@server.PromptServer.instance.routes.post("/image_generation")
 async def post_image_generation(request):
     prompt_server = server.PromptServer.instance
     workflow = load_workflow("generation")

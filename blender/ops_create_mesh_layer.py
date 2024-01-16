@@ -41,7 +41,7 @@ class Object_CreateMeshLayer(blender_node.ObjectOps):
         bpy.ops.mesh.select_all(action='SELECT')
         bpy.ops.mesh.edge_face_add()
 
-        bpy.ops.transform.resize(value=(scale_x, scale_y, 1))
+        bpy.ops.transform.resize(value=(float(scale_x), float(scale_y), 1))
 
         bpy.context.object.vertex_groups.new(name=mesh_layer_name)
         bpy.ops.object.vertex_group_assign()
