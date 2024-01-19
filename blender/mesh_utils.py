@@ -272,15 +272,15 @@ def upload_avatar_file(output):
     requests.put(labData["url"], headers=headers, data=file)
 
     # send notification
-    webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
-    data = {
-        "username": "Avabot",
-        "avatar_url": "https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatechai.png",
-        "content": "[API Call] New register!",
-    }
-    headers = {
-        "Content-Type": "application/json",
-    }
-    response = requests.post(webhook_url, headers=headers, data=json.dumps(data))
+    # webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+    # data = {
+    #     "username": "Avabot",
+    #     "avatar_url": "https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatechai.png",
+    #     "content": "[API Call] New register!",
+    # }
+    # headers = {
+    #     "Content-Type": "application/json",
+    # }
+    # response = requests.post(webhook_url, headers=headers, data=json.dumps(data))
 
     return modelId
