@@ -259,7 +259,7 @@ def get_avatar_file(output):
 
 def upload_avatar_file(output):
     file = get_avatar_file(output)
-    response = requests.get("https://labs.avatech.ai/api/share")
+    response = requests.get("https://labs.avatech.ai/api/share?version=v2")
     labData = response.json()
     modelId = labData["modelId"]
 
