@@ -72,6 +72,9 @@ def compute_image_embedding(image, model_type="vit_h"):
     # if image.shape[3] == 4:
     #     image = image[:, :, :, :3]
 
+    if torch.is_tensor(image):
+        image = image.numpy()
+
     image_np = (image * 255).astype(np.uint8)
     predictor.set_image(image_np)
     emb = predictor.get_image_embedding().cpu().numpy()
