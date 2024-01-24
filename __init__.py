@@ -9,7 +9,6 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__)))
 
-import routes
 import inspect
 import sys
 import importlib
@@ -115,6 +114,7 @@ for path in paths:
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
 
+import routes
 import blender_node
 
 base_class = blender_node.ObjectOps

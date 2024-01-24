@@ -1,18 +1,19 @@
 from aiohttp import web
-from segment_anything import sam_model_registry, SamPredictor
-from PIL import Image, ImageOps
 from dotenv import load_dotenv
 from blender.mesh_utils import upload_avatar_file
+from sam_utils import (
+    sam_ckpt_to_type,
+    compute_image_embedding,
+    check_embedding_exists,
+    save_embedding,
+    load_image,
+)
 import os
 import requests
 import folder_paths
 import json
-import numpy as np
 import server
-import re
 import base64
-from PIL import Image
-import io
 import time
 import execution
 import random
@@ -67,80 +68,19 @@ async def get_sam_model(request):
     return web.FileResponse(filename)
 
 
-def load_image(image, is_generated_image):
-    if is_generated_image:
-        image_path = f"{folder_paths.get_output_directory()}/{image}"
-    else:
-        image_path = folder_paths.get_annotated_filepath(image)
-    i = Image.open(image_path)
-    i = ImageOps.exif_transpose(i)
-    image = i.convert("RGB")
-    image = np.array(image).astype(np.float32) / 255.0
-    return image
-
-
 @server.PromptServer.instance.routes.post("/sam_model")
 async def post_sam_model(request):
     post = await request.json()
     is_generated_image = post.get("isGeneratedImage")
     emb_id = post.get("embedding_id")
     ckpt = post.get("ckpt")
-    ckpt = folder_paths.get_full_path("sams", ckpt)
-    remote = post.get("remote")
-    model_type = re.findall(r"vit_[lbh]", ckpt)[0]
-    emb_filename = f"{folder_paths.get_output_directory()}/{emb_id}_{model_type}.npy"
-    output_json_filename = (
-        f"{folder_paths.get_output_directory()}/{emb_id}_{model_type}.json"
-    )
-    if not os.path.exists(emb_filename):
+    model_type = sam_ckpt_to_type[ckpt]
+    if not check_embedding_exists(emb_id, model_type):
         image = load_image(post.get("image"), is_generated_image)
-        if remote:
-            # Run embed in remote server
-            image = Image.fromarray((image * 255).astype(np.uint8))
-            buffered = io.BytesIO()
-            image.save(buffered, format="PNG")
-            image = base64.b64encode(buffered.getvalue()).decode()
-            res = requests.post(
-                "https://avatechgg--sam-embed.modal.run",
-                headers={
-                    "Content-type": "application/json",
-                    "Accept": "application/json",
-                },
-                data=json.dumps(
-                    {
-                        "image": image,
-                    }
-                ),
-            ).json()
-            emb, input_size, original_size = (
-                res["emb"],
-                res["input_size"],
-                res["original_size"],
-            )
-            emb = np.array(emb).astype(np.float32)
-            np.save(emb_filename, emb)
-            with open(output_json_filename, "w") as f:
-                data = {
-                    "input_size": input_size,
-                    "original_size": original_size,
-                }
-                json.dump(data, f)
-        else:
-            sam = sam_model_registry[model_type](checkpoint=ckpt)
-            predictor = SamPredictor(sam)
-
-            image_np = (image * 255).astype(np.uint8)
-            predictor.set_image(image_np)
-            emb = predictor.get_image_embedding().cpu().numpy()
-            np.save(emb_filename, emb)
-            with open(output_json_filename, "w") as f:
-                json.dump(
-                    {
-                        "input_size": predictor.input_size,
-                        "original_size": predictor.original_size,
-                    },
-                    f,
-                )
+        emb, img_model_input_size, img_original_size = compute_image_embedding(
+            image, model_type
+        )
+        save_embedding(emb_id, model_type, emb, img_model_input_size, img_original_size)
     print("Finished embedding")
     return web.json_response({})
 
@@ -222,7 +162,6 @@ def load_workflow(workflow_name):
         return "\n".join(f.readlines())
 
 
-
 @server.PromptServer.instance.routes.post("/avatar_generation")
 async def post_prompt_block(request):
     prompt_server = server.PromptServer.instance
@@ -285,6 +224,7 @@ async def post_prompt_block(request):
                     return web.json_response({"id": modelId}, status=200)
         time.sleep(0.5)
 
+
 # TODO: refactor the code
 @server.PromptServer.instance.routes.post("/rendering_generation")
 async def post_data_generation(request):
@@ -311,6 +251,7 @@ async def post_data_generation(request):
                     if filename.startswith("rendered"):
                         return web.json_response({"image": filename}, status=200)
         time.sleep(0.5)
+
 
 @server.PromptServer.instance.routes.post("/image_generation")
 async def post_image_generation(request):
