@@ -113,10 +113,10 @@ def load_mediapipe_models():
     return face_landmarker, pose_landmarker
 
 
-def auto_segment(image, face_landmarks, pose_landmarks):
+def auto_segment_face(image, face_landmarks):
     H, W, C = image.shape
-    imagePromptsMulti = {}
-    boxesMulti = {}
+    layer_points = {}
+    layer_bboxes = {}
 
     for key, value in layerMapping.items():
         positivePoints = []
@@ -143,7 +143,7 @@ def auto_segment(image, face_landmarks, pose_landmarks):
         middlePoints[0]["y"] /= len_indices
 
         if value["useMiddle"]:
-            imagePromptsMulti[key] = middlePoints
+            layer_points[key] = middlePoints
         else:
             for i, index in enumerate(value["indices"]):
                 start, end = index
@@ -192,7 +192,7 @@ def auto_segment(image, face_landmarks, pose_landmarks):
                     "label": 1,
                 }
 
-            imagePromptsMulti[key] = positivePoints + negativePoints
+            layer_points[key] = positivePoints + negativePoints
 
         points = negativePoints if len(negativePoints) > 0 else positivePoints
         box = np.array(
@@ -203,25 +203,30 @@ def auto_segment(image, face_landmarks, pose_landmarks):
                 max(x["y"] for x in points),
             ]
         )
-        boxesMulti[key] = box
+        layer_bboxes[key] = box
 
-        if pose_landmarks is not None:
-            positiveBreathX = ((pose_landmarks[11].x + pose_landmarks[12].x) / 2) * W
-            positiveBreathY = ((pose_landmarks[11].y + pose_landmarks[12].y) / 2) * H
-            negativeBreathX1 = pose_landmarks[0].x * W
-            negativeBreathY1 = pose_landmarks[0].y * H
-            negativeBreathX2 = pose_landmarks[9].x * W
-            negativeBreathY2 = pose_landmarks[9].y * H
-            negativeBreathX3 = pose_landmarks[10].x * W
-            negativeBreathY3 = pose_landmarks[10].y * H
-            imagePromptsMulti["breath"] = [
-                {"x": positiveBreathX, "y": positiveBreathY, "label": 1},
-                {"x": negativeBreathX1, "y": negativeBreathY1, "label": 0},
-                {"x": negativeBreathX2, "y": negativeBreathY2, "label": 0},
-                {"x": negativeBreathX3, "y": negativeBreathY3, "label": 0},
-            ]
+    return layer_points, layer_bboxes
 
-    return imagePromptsMulti, boxesMulti
+
+def auto_segment_pose(image, pose_landmarks):
+    H, W, C = image.shape
+    layer_points = {}
+    if pose_landmarks is not None:
+        positiveBreathX = ((pose_landmarks[11].x + pose_landmarks[12].x) / 2) * W
+        positiveBreathY = ((pose_landmarks[11].y + pose_landmarks[12].y) / 2) * H
+        negativeBreathX1 = pose_landmarks[0].x * W
+        negativeBreathY1 = pose_landmarks[0].y * H
+        negativeBreathX2 = pose_landmarks[9].x * W
+        negativeBreathY2 = pose_landmarks[9].y * H
+        negativeBreathX3 = pose_landmarks[10].x * W
+        negativeBreathY3 = pose_landmarks[10].y * H
+        layer_points["breath"] = [
+            {"x": positiveBreathX, "y": positiveBreathY, "label": 1},
+            {"x": negativeBreathX1, "y": negativeBreathY1, "label": 0},
+            {"x": negativeBreathX2, "y": negativeBreathY2, "label": 0},
+            {"x": negativeBreathX3, "y": negativeBreathY3, "label": 0},
+        ]
+    return layer_points
 
 
 def detect_face(np_image):
@@ -229,18 +234,21 @@ def detect_face(np_image):
     mp_image = mp.Image(
         image_format=mp.ImageFormat.SRGB, data=(np_image * 255).astype(np.uint8)
     )
+
     face_landmarks = face_landmarker.detect(mp_image).face_landmarks
-    if len(face_landmarks) == 0:
+    if len(face_landmarks) > 0:
+        face_points, face_bboxes = auto_segment_face(np_image, face_landmarks[0])
+    else:
+        face_points, face_bboxes = {}, {}
         print("Warning: no face detected")
-        return None, None
 
     pose_landmarks = pose_landmarker.detect(mp_image).pose_landmarks
-    if len(pose_landmarks) == 0:
+    if len(pose_landmarks) > 0:
+        pose_points = auto_segment_pose(np_image, pose_landmarks[0])
+    else:
+        pose_points = {}
         print("Warning: no pose detected")
-        return None, None
 
-    imagePromptsMulti, boxesMulti = auto_segment(
-        np_image, face_landmarks[0], pose_landmarks[0]
-    )
-
-    return imagePromptsMulti, boxesMulti
+    layer_points = {**face_points, **pose_points}
+    layer_bboxes = {**face_bboxes}
+    return layer_points, layer_bboxes
