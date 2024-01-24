@@ -19,11 +19,13 @@
  */
 
 import { van } from "./van.js";
-
 export const iframeSrc = van.state("https://editor.avatech.ai?comfyui=true");
 export const showEditor = van.state(false);
 // localStorage.getItem("showPreview") == 'true'
-export const showPreview = van.state(true);
+console.log(localStorage.getItem("showPreview"));
+if (localStorage.getItem("showPreview") == null)
+  localStorage.setItem("showPreview", 'true')
+export const showPreview = van.state(localStorage.getItem("showPreview") == 'true');
 export const previewUrl = van.state(
   "https://editor.avatech.ai/viewer?avatarId=default&debug=true&width=350&height=350&hideTrigger=true&voiceSelection=true&hideUI=true"
 );

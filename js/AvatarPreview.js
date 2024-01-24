@@ -706,7 +706,7 @@ export function AvatarPreview() {
         console.log(showPreview);
 
         return (
-          (showPreview.val ? "" : "hidden ") +
+          (showPreview.val && !showEditor.val ? "" : "hidden ") +
           "absolute w-[360px] h-[360px] rounded-xl overflow-hidden right-0 top-0 z-[99] pointer-events-auto flex border-none bg-transparent"
         );
       },
