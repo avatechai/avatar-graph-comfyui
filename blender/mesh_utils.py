@@ -3,7 +3,7 @@ import subprocess
 import os
 import folder_paths
 import requests
-import json
+
 
 def genreate_mesh_from_texture(bpy, image):
     import torch
@@ -14,11 +14,12 @@ def genreate_mesh_from_texture(bpy, image):
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     gray = (gray * 255).astype(np.uint8)
     # Find contours
-    contours, _ = cv2.findContours(
-        gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     if len(contours) == 0:
-        raise Exception("No contours found. Please ensure that the image has the correct segments (e.g. when you click on the mouth, it should display a proper blue area over the mouth region).")
+        print("Warning: No contours found. The image may have 0 segment.")
+        black_image = torch.zeros(1, *image.shape)
+        return (black_image, None)
 
     # Get the largest contour
     areas = [cv2.contourArea(contour) for contour in contours]
@@ -38,11 +39,12 @@ def genreate_mesh_from_texture(bpy, image):
     for contour in contours:
         normalized_contour = []
         for vertex in contour:
-            normalized_vertex = [normalize_vertices(
-                vertex[0][0], width), normalize_vertices(vertex[0][1], height) * -1]
+            normalized_vertex = [
+                normalize_vertices(vertex[0][0], width),
+                normalize_vertices(vertex[0][1], height) * -1,
+            ]
             normalized_contour.append(normalized_vertex)
-        normalized_contours.append(
-            np.array(normalized_contour, dtype=np.float32))
+        normalized_contours.append(np.array(normalized_contour, dtype=np.float32))
 
     meshes = []
     # print(len(normalized_contours))
@@ -63,12 +65,12 @@ def genreate_mesh_from_texture(bpy, image):
         mesh.from_pydata(ordered_vertices, [], [face])
 
         # Create a default shape key for the mesh
-        sk_basis = obj.shape_key_add(name='Basis')
+        sk_basis = obj.shape_key_add(name="Basis")
 
         meshes.append(obj)  # Add the object to the list of meshes
 
     # Draw contours on the original image
-    if not image.flags['C_CONTIGUOUS']:
+    if not image.flags["C_CONTIGUOUS"]:
         image = np.ascontiguousarray(image)
     cv2.drawContours(image, contours, -1, (0, 255, 0), 3)
 
@@ -80,7 +82,7 @@ def genreate_mesh_from_texture(bpy, image):
 def assign_texture(bpy, BPY_OBJ, texture, texture_name):
     import numpy as np
     import time
-    
+
     # Start the timer
     start_time = time.time()
 
@@ -92,7 +94,8 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
 
     # Create an image with the required dimensions
     img = bpy.data.images.new(
-        texture_name, width=texture.shape[1], height=texture.shape[0], alpha = True)
+        texture_name, width=texture.shape[1], height=texture.shape[0], alpha=True
+    )
 
     # If there is no alpha channel, append one full of 1's
     if texture.shape[2] == 3:
@@ -109,7 +112,7 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
     print(f"Time taken (texture.ravel) : {end_time - start_time} seconds")
 
     # End the timer and print the time taken
-  
+
     # Pack image to store it within .blend file
     img.pack()
 
@@ -124,28 +127,27 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
     # Create a material
     mat = bpy.data.materials.new("MaterialName")
     mat.use_nodes = True
-    mat.blend_method = 'BLEND'
+    mat.blend_method = "BLEND"
     nodes = mat.node_tree.nodes
     for node in nodes:
         nodes.remove(node)
 
     # Add a new texture node
-    texture_node = nodes.new(type='ShaderNodeTexImage')
+    texture_node = nodes.new(type="ShaderNodeTexImage")
     texture_node.image = img
 
     # Add a new BSDF node
-    bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
+    bsdf_node = nodes.new(type="ShaderNodeBsdfPrincipled")
 
     # Add a new output node
-    output_node = nodes.new(type='ShaderNodeOutputMaterial')
+    output_node = nodes.new(type="ShaderNodeOutputMaterial")
 
     # Link nodes together
     links = mat.node_tree.links
-    links.new(bsdf_node.inputs['Base Color'],
-              texture_node.outputs['Color'])
-    links.new(output_node.inputs['Surface'], bsdf_node.outputs['BSDF'])
+    links.new(bsdf_node.inputs["Base Color"], texture_node.outputs["Color"])
+    links.new(output_node.inputs["Surface"], bsdf_node.outputs["BSDF"])
 
-    links.new(bsdf_node.inputs['Alpha'], texture_node.outputs['Alpha'])
+    links.new(bsdf_node.inputs["Alpha"], texture_node.outputs["Alpha"])
 
     # Assign the material to the active object
     if obj.data.materials:
@@ -160,21 +162,30 @@ def assign_texture(bpy, BPY_OBJ, texture, texture_name):
 blender_process_global = []
 
 
-def open_in_blender(blender_process, blender_path, output_file, camera_location=(0, 0, 0), camera_rotation=(0, 0, 0), shading="Material"):
+def open_in_blender(
+    blender_process,
+    blender_path,
+    output_file,
+    camera_location=(0, 0, 0),
+    camera_rotation=(0, 0, 0),
+    shading="Material",
+):
     import global_bpy
     import mathutils
+
     bpy = global_bpy.get_bpy()
 
     # Change shading mode and viewport
     for area in bpy.context.screen.areas:
-        if area.type == 'VIEW_3D':
+        if area.type == "VIEW_3D":
             for space in area.spaces:
-                if space.type == 'VIEW_3D':
+                if space.type == "VIEW_3D":
                     space.shading.type = shading.upper()
                     rv3d = space.region_3d
                     rv3d.view_location = camera_location
                     rv3d.view_rotation = mathutils.Euler(
-                        camera_rotation).to_quaternion()
+                        camera_rotation
+                    ).to_quaternion()
 
     # Open blender
     if blender_process != None:
@@ -187,8 +198,8 @@ def open_in_blender(blender_process, blender_path, output_file, camera_location=
         os.remove(output_file)
     bpy.ops.wm.save_as_mainfile(filepath=output_file)
 
-    print('blender_path', blender_path)
-    print('output_file', output_file)
+    print("blender_path", blender_path)
+    print("output_file", output_file)
     blender_process = subprocess.Popen([blender_path, output_file])
     # append to global list so it doesn't get garbage collected
     blender_process_global.append(blender_process)
@@ -198,18 +209,20 @@ def open_in_blender(blender_process, blender_path, output_file, camera_location=
 
 # detects when the python process is killed, and kills the blender process
 
+
 @atexit.register
 def kill_blender_process():
-    print('blender_process_global', blender_process_global)
+    print("blender_process_global", blender_process_global)
     for process in blender_process_global:
         process.kill()
 
 
 def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metadata):
     import global_bpy
+
     bpy = global_bpy.get_bpy()
     # print(bpy, bpy_objects)
-    
+
     # deselect all objects
     override = bpy.context.copy()
     override["selected_objects"] = list(bpy_objects)
@@ -230,32 +243,47 @@ def export_gltf(output_dir, bpy_objects, filename, model_type, write_mode, metad
             return ".ava"
 
     ext = get_file_extension(model_type)
-    filepath = output_dir + "/" + filename + ext + (".glb" if model_type == "AVA" else "")
+    filepath = (
+        output_dir + "/" + filename + ext + (".glb" if model_type == "AVA" else "")
+    )
 
     if write_mode == "Increment":
         count = 0
         # while file exists, increment count
-        while os.path.exists(output_dir + "/" + filename + '_' + str(count) + ext):
+        while os.path.exists(output_dir + "/" + filename + "_" + str(count) + ext):
             count += 1
 
-        filepath = output_dir + "/" + filename + '_' + str(count) + ext + (".glb" if model_type == "AVA" else "")
-    
+        filepath = (
+            output_dir
+            + "/"
+            + filename
+            + "_"
+            + str(count)
+            + ext
+            + (".glb" if model_type == "AVA" else "")
+        )
+
     with bpy.context.temp_override(**override):
-        bpy.ops.export_scene.gltf(filepath=filepath, export_format="GLB" if model_type == "AVA" else model_type, use_selection=True, export_extras=True)
+        bpy.ops.export_scene.gltf(
+            filepath=filepath,
+            export_format="GLB" if model_type == "AVA" else model_type,
+            use_selection=True,
+            export_extras=True,
+        )
         # print(filepath)
-        if filepath.endswith('.ava.glb'):
-            new_filepath = filepath.replace('.ava.glb', '.ava')
+        if filepath.endswith(".ava.glb"):
+            new_filepath = filepath.replace(".ava.glb", ".ava")
             os.replace(filepath, new_filepath)
             filepath = new_filepath
 
     return filepath
 
+
 def get_avatar_file(output):
     avatar_filename = output["gltfFilename"][0]
-    with open(
-        f"{folder_paths.get_output_directory()}/{avatar_filename}", "rb"
-    ) as f:
+    with open(f"{folder_paths.get_output_directory()}/{avatar_filename}", "rb") as f:
         return f.read()
+
 
 def upload_avatar_file(output):
     file = get_avatar_file(output)

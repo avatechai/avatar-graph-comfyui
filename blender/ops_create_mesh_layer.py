@@ -24,6 +24,8 @@ class Object_CreateMeshLayer(blender_node.ObjectOps):
 
     def blender_process(self, bpy, image, convex_hull, shape_threshold, mesh_layer_name, scale_x,scale_y , extrude_x, extrude_y, seed):
         image, BPY_OBJ = genreate_mesh_from_texture(bpy, image)
+        if BPY_OBJ is None:
+            return (None, image)
 
         bpy.context.view_layer.objects.active = BPY_OBJ
 
