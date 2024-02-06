@@ -1,9 +1,9 @@
-import "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js";
+import "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.16.3/dist/ort.min.js";
 import npyjs from "https://esm.sh/npyjs";
 import { imageSize } from "./state.js";
 import { modelData, onnxMaskToImage } from "./onnx_helper.js";
 
-ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/";
+ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.16.3/dist/";
 
 export let model = null;
 let modelType = null;
